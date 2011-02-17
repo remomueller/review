@@ -3,7 +3,7 @@ class CreateAuthentications < ActiveRecord::Migration
     create_table :authentications do |t|
       t.integer :user_id
       t.string :provider
-      t.uid :string
+      t.string :uid
       
       t.timestamps
     end
