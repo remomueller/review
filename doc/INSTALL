@@ -27,6 +27,8 @@
     cd /usr/local/review
 
     git clone git@agile.dipr.partners.org:review.git .
+    
+    bundle install
 
 2) Finalize the Installation
 
