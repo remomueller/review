@@ -1,3 +1,84 @@
+/*************************************
+   WELCOME TO THE CUSTOM STYLESHEET
+--------------------------------------
+              foundation.css
+        BlueTrip CSS Framework
+    Put your custom styles in here.
+***************************************/
+
+/**************************************/
+/*           COLOR SCHEME             */
+/**************************************
+- black		#000
+- white		#fff
+- brigham logo blue        #0E7799  
+- brigham link blue       #057080
+- brigham link gray   
+
+- brigham dark blue   #094E63
+- brigham orange      #EB6C20
+***************************************/
+
+
+/**************************************/
+/*              GLOBALS               */
+/**************************************/
+
+a:link { color: #057080; }
+a:hover { color: #EB6C20; }
+
+/**************************************/
+/*              HEADER                */
+/**************************************/
+
+#header {
+	margin:0;
+	height:80px;
+	line-height:80px;
+	font-size:2.0em;
+	padding-left:15px;
+  border-bottom: 5px solid #0E7799; /* #FFCC66; */
+	color:#404040;
+	font-weight: bold;
+  font-variant: small-caps;
+	height: 100px;
+}
+
+
+/**************************************/
+/*             NAVIGATION             */
+/**************************************/
+
+#menu {
+	background:#404040;
+	padding:5px;
+	color: #fff;
+	font-variant: small-caps;
+	
+}
+
+#menu a {
+  color: #fff;
+  text-decoration: none;
+	padding:0 5px;
+}
+
+#menu a:hover {
+  color: #EB6C20;
+}
+
+/*#menu */
+
+/**************************************/
+/*            MAIN CONTENT            */
+/**************************************/
+
+body{ }
+
+.container{
+  background: #FFF url(/images/brigham.png) no-repeat scroll right top;
+}
+
 /* Authentication Styling */
 .authentications {
   margin-bottom: 30px;
@@ -59,3 +140,8 @@
   text-align: center;
   margin-bottom: 10px;
 }
+
+/**************************************/
+/*               FOOTER               */
+/**************************************/
+
