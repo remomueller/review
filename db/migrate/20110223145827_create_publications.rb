@@ -2,6 +2,7 @@ class CreatePublications < ActiveRecord::Migration
   def self.up
     create_table :publications do |t|
       t.integer :user_id
+      t.string :status, :default => 'proposed', :null => false
       t.string :centers
       t.date :proposal_submission_date
       t.string :publication_type
@@ -51,7 +52,7 @@ class CreatePublications < ActiveRecord::Migration
       t.date :approval_date
       t.date :committee_submission_date
       t.boolean :deleted, :default => false, :null => false
-
+      
       t.timestamps
     end
   end
