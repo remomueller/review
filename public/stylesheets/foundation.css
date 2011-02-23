@@ -139,7 +139,10 @@ div.menu_dropdown_left {
 /**************************************/
 
 .container{
-  background: #FFF url(/images/brigham.png) no-repeat scroll right top;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: top right;
+  background-color: #FFF;
 }
 
 /* Authentication Styling */
