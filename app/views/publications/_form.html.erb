@@ -1,209 +1,246 @@
 <%= form_for(@publication) do |f| %>
-  <% if @publication.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@publication.errors.count, "error") %> prohibited this publication from being saved:</h2>
+    <% if @publication.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@publication.errors.count, "error") %> prohibited this publication from being saved:</h2>
 
-      <ul>
-      <% @publication.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @publication.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+  <fieldset>
+    <legend>A. Administrative Information</legend>
+    
+    <div class="field">
+      <%= f.label :centers %><br />
+      <%= f.text_field :centers %>
     </div>
-  <% end %>
+    
+    <div class="field">
+      <%= f.label :proposal_submission_date %><br />
+      <%= f.date_select :proposal_submission_date %>
+    </div>
+    
+  </fieldset>
+  <fieldset>
+    <legend>B. Publication Information</legend>
+    <div class="field">
+      <%= f.label :publication_type %><br />
+      <%= f.text_field :publication_type %>
+    </div>
+    <div class="field">
+      <%= f.label :publication_type_specify %><br />
+      <%= f.text_field :publication_type_specify %>
+    </div>
 
-  <div class="field">
-    <%= f.label :centers %><br />
-    <%= f.text_field :centers %>
-  </div>
-  <div class="field">
-    <%= f.label :proposal_submission_date %><br />
-    <%= f.date_select :proposal_submission_date %>
-  </div>
-  <div class="field">
-    <%= f.label :publication_type %><br />
-    <%= f.text_field :publication_type %>
-  </div>
-  <div class="field">
-    <%= f.label :publication_type_specify %><br />
-    <%= f.text_field :publication_type_specify %>
-  </div>
-  <div class="field">
-    <%= f.label :dcc_resources_none %><br />
-    <%= f.check_box :dcc_resources_none %>
-  </div>
-  <div class="field">
-    <%= f.label :dcc_resources_staff %><br />
-    <%= f.check_box :dcc_resources_staff %>
-  </div>
-  <div class="field">
-    <%= f.label :dcc_resources_staff_specify %><br />
-    <%= f.text_field :dcc_resources_staff_specify %>
-  </div>
-  <div class="field">
-    <%= f.label :dcc_resources_other %><br />
-    <%= f.check_box :dcc_resources_other %>
-  </div>
-  <div class="field">
-    <%= f.label :dcc_resources_other_specify %><br />
-    <%= f.text_field :dcc_resources_other_specify %>
-  </div>
-  <div class="field">
-    <%= f.label :chat_data_none %><br />
-    <%= f.check_box :chat_data_none %>
-  </div>
-  <div class="field">
-    <%= f.label :chat_data_main_forms %><br />
-    <%= f.check_box :chat_data_main_forms %>
-  </div>
-  <div class="field">
-    <%= f.label :chat_data_main_forms_specify %><br />
-    <%= f.text_field :chat_data_main_forms_specify %>
-  </div>
-  <div class="field">
-    <%= f.label :chat_data_main_database %><br />
-    <%= f.check_box :chat_data_main_database %>
-  </div>
-  <div class="field">
-    <%= f.label :chat_data_main_database_specify %><br />
-    <%= f.text_field :chat_data_main_database_specify %>
-  </div>
-  <div class="field">
-    <%= f.label :chat_data_other %><br />
-    <%= f.check_box :chat_data_other %>
-  </div>
-  <div class="field">
-    <%= f.label :chat_data_other_specify %><br />
-    <%= f.text_field :chat_data_other_specify %>
-  </div>
-  <div class="field">
-    <%= f.label :manuscript_preparation_analysis_data %><br />
-    <%= f.check_box :manuscript_preparation_analysis_data %>
-  </div>
-  <div class="field">
-    <%= f.label :manuscript_preparation_analysis_ancillary_data %><br />
-    <%= f.check_box :manuscript_preparation_analysis_ancillary_data %>
-  </div>
-  <div class="field">
-    <%= f.label :manuscript_analysis_review %><br />
-    <%= f.check_box :manuscript_analysis_review %>
-  </div>
-  <div class="field">
-    <%= f.label :manuscript_preparation_other %><br />
-    <%= f.check_box :manuscript_preparation_other %>
-  </div>
-  <div class="field">
-    <%= f.label :manuscript_preparation_other_specify %><br />
-    <%= f.text_field :manuscript_preparation_other_specify %>
-  </div>
-  <div class="field">
-    <%= f.label :manuscript_preparation_none %><br />
-    <%= f.check_box :manuscript_preparation_none %>
-  </div>
-  <div class="field">
-    <%= f.label :attachment_chat_form %><br />
-    <%= f.text_field :attachment_chat_form %>
-  </div>
-  <div class="field">
-    <%= f.label :attachment_chat_variables %><br />
-    <%= f.text_field :attachment_chat_variables %>
-  </div>
-  <div class="field">
-    <%= f.label :attachment_ancillary_forms %><br />
-    <%= f.text_field :attachment_ancillary_forms %>
-  </div>
-  <div class="field">
-    <%= f.label :attachment_other %><br />
-    <%= f.text_field :attachment_other %>
-  </div>
-  <div class="field">
-    <%= f.label :full_title %><br />
-    <%= f.text_field :full_title %>
-  </div>
-  <div class="field">
-    <%= f.label :abbreviated_title %><br />
-    <%= f.text_field :abbreviated_title %>
-  </div>
-  <div class="field">
-    <%= f.label :keywords %><br />
-    <%= f.text_field :keywords %>
-  </div>
-  <div class="field">
-    <%= f.label :affiliation_id %><br />
-    <%= f.text_field :affiliation_id %>
-  </div>
-  <div class="field">
-    <%= f.label :sponsoring_pi %><br />
-    <%= f.text_field :sponsoring_pi %>
-  </div>
-  <div class="field">
-    <%= f.label :additional_coauthors %><br />
-    <%= f.text_field :additional_coauthors %>
-  </div>
-  <div class="field">
-    <%= f.label :lead_author %><br />
-    <%= f.text_field :lead_author %>
-  </div>
-  <div class="field">
-    <%= f.label :timeline %><br />
-    <%= f.text_area :timeline %>
-  </div>
-  <div class="field">
-    <%= f.label :rationale %><br />
-    <%= f.text_area :rationale %>
-  </div>
-  <div class="field">
-    <%= f.label :hypothesis %><br />
-    <%= f.text_area :hypothesis %>
-  </div>
-  <div class="field">
-    <%= f.label :data %><br />
-    <%= f.text_area :data %>
-  </div>
-  <div class="field">
-    <%= f.label :study_type %><br />
-    <%= f.text_field :study_type %>
-  </div>
-  <div class="field">
-    <%= f.label :target_journal %><br />
-    <%= f.text_field :target_journal %>
-  </div>
-  <div class="field">
-    <%= f.label :analysis_responsibility %><br />
-    <%= f.text_area :analysis_responsibility %>
-  </div>
-  <div class="field">
-    <%= f.label :analysis_plan %><br />
-    <%= f.text_area :analysis_plan %>
-  </div>
-  <div class="field">
-    <%= f.label :summary_section %><br />
-    <%= f.text_area :summary_section %>
-  </div>
-  <div class="field">
-    <%= f.label :writing_group_members %><br />
-    <%= f.text_field :writing_group_members %>
-  </div>
-  <div class="field">
-    <%= f.label :references %><br />
-    <%= f.text_area :references %>
-  </div>
-  <div class="field">
-    <%= f.label :author_assurance %><br />
-    <%= f.check_box :author_assurance %>
-  </div>
-  <div class="field">
-    <%= f.label :author_assurance_date %><br />
-    <%= f.datetime_select :author_assurance_date %>
-  </div>
-  <div class="field">
-    <%= f.label :approval_date %><br />
-    <%= f.date_select :approval_date %>
-  </div>
-  <div class="field">
-    <%= f.label :committee_submission_date %><br />
-    <%= f.date_select :committee_submission_date %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  </fieldset>
+  <fieldset>
+    <legend>C. CHAT Resources</legend>
+    
+    <div class="field">
+      <%= f.label :dcc_resources_none %><br />
+      <%= f.check_box :dcc_resources_none %>
+    </div>
+    <div class="field">
+      <%= f.label :dcc_resources_staff %><br />
+      <%= f.check_box :dcc_resources_staff %>
+    </div>
+    <div class="field">
+      <%= f.label :dcc_resources_staff_specify %><br />
+      <%= f.text_field :dcc_resources_staff_specify %>
+    </div>
+    <div class="field">
+      <%= f.label :dcc_resources_other %><br />
+      <%= f.check_box :dcc_resources_other %>
+    </div>
+    <div class="field">
+      <%= f.label :dcc_resources_other_specify %><br />
+      <%= f.text_field :dcc_resources_other_specify %>
+    </div>
+    <div class="field">
+      <%= f.label :chat_data_none %><br />
+      <%= f.check_box :chat_data_none %>
+    </div>
+    <div class="field">
+      <%= f.label :chat_data_main_forms %><br />
+      <%= f.check_box :chat_data_main_forms %>
+    </div>
+    <div class="field">
+      <%= f.label :chat_data_main_forms_specify %><br />
+      <%= f.text_field :chat_data_main_forms_specify %>
+    </div>
+    <div class="field">
+      <%= f.label :chat_data_main_database %><br />
+      <%= f.check_box :chat_data_main_database %>
+    </div>
+    <div class="field">
+      <%= f.label :chat_data_main_database_specify %><br />
+      <%= f.text_field :chat_data_main_database_specify %>
+    </div>
+    <div class="field">
+      <%= f.label :chat_data_other %><br />
+      <%= f.check_box :chat_data_other %>
+    </div>
+    <div class="field">
+      <%= f.label :chat_data_other_specify %><br />
+      <%= f.text_field :chat_data_other_specify %>
+    </div>
+    
+    
+  </fieldset>
+  <fieldset>
+    <legend>D. Data Analysis</legend>
+    
+    <div class="field">
+      <%= f.label :manuscript_preparation_analysis_data %><br />
+      <%= f.check_box :manuscript_preparation_analysis_data %>
+    </div>
+    <div class="field">
+      <%= f.label :manuscript_preparation_analysis_ancillary_data %><br />
+      <%= f.check_box :manuscript_preparation_analysis_ancillary_data %>
+    </div>
+    <div class="field">
+      <%= f.label :manuscript_analysis_review %><br />
+      <%= f.check_box :manuscript_analysis_review %>
+    </div>
+    <div class="field">
+      <%= f.label :manuscript_preparation_other %><br />
+      <%= f.check_box :manuscript_preparation_other %>
+    </div>
+    <div class="field">
+      <%= f.label :manuscript_preparation_other_specify %><br />
+      <%= f.text_field :manuscript_preparation_other_specify %>
+    </div>
+    <div class="field">
+      <%= f.label :manuscript_preparation_none %><br />
+      <%= f.check_box :manuscript_preparation_none %>
+    </div>
+    
+  </fieldset>
+  <fieldset>
+    <legend>E. Attachments</legend>
+    
+    <div class="field">
+      <%= f.label :attachment_chat_form %><br />
+      <%= f.text_field :attachment_chat_form %>
+    </div>
+    <div class="field">
+      <%= f.label :attachment_chat_variables %><br />
+      <%= f.text_field :attachment_chat_variables %>
+    </div>
+    <div class="field">
+      <%= f.label :attachment_ancillary_forms %><br />
+      <%= f.text_field :attachment_ancillary_forms %>
+    </div>
+    <div class="field">
+      <%= f.label :attachment_other %><br />
+      <%= f.text_field :attachment_other %>
+    </div>
+    
+    <div class="field">
+      <%= f.label :full_title %><br />
+      <%= f.text_field :full_title %>
+    </div>
+    <div class="field">
+      <%= f.label :abbreviated_title %><br />
+      <%= f.text_field :abbreviated_title %>
+    </div>
+    <div class="field">
+      <%= f.label :keywords %><br />
+      <%= f.text_field :keywords %>
+    </div>
+    <div class="field">
+      <%= f.label :affiliation_id %><br />
+      <%= f.text_field :affiliation_id %>
+    </div>
+    <div class="field">
+      <%= f.label :sponsoring_pi %><br />
+      <%= f.text_field :sponsoring_pi %>
+    </div>
+    <div class="field">
+      <%= f.label :additional_coauthors %><br />
+      <%= f.text_field :additional_coauthors %>
+    </div>
+    <div class="field">
+      <%= f.label :lead_author %><br />
+      <%= f.text_field :lead_author %>
+    </div>
+    <div class="field">
+      <%= f.label :timeline %><br />
+      <%= f.text_area :timeline, :cols => 75, :rows => 7 %>
+    </div>
+    <div class="field">
+      <%= f.label :rationale %><br />
+      <%= f.text_area :rationale %>
+    </div>
+    <div class="field">
+      <%= f.label :hypothesis %><br />
+      <%= f.text_area :hypothesis %>
+    </div>
+    <div class="field">
+      <%= f.label :data %><br />
+      <%= f.text_area :data %>
+    </div>
+    <div class="field">
+      <%= f.label :study_type %><br />
+      <%= f.text_field :study_type %>
+    </div>
+    <div class="field">
+      <%= f.label :target_journal %><br />
+      <%= f.text_field :target_journal %>
+    </div>
+    <div class="field">
+      <%= f.label :analysis_responsibility %><br />
+      <%= f.text_area :analysis_responsibility %>
+    </div>
+    <div class="field">
+      <%= f.label :analysis_plan %><br />
+      <%= f.text_area :analysis_plan %>
+    </div>
+    <div class="field">
+      <%= f.label :summary_section %><br />
+      <%= f.text_area :summary_section %>
+    </div>
+    <div class="field">
+      <%= f.label :writing_group_members %><br />
+      <%= f.text_field :writing_group_members %>
+    </div>
+    <div class="field">
+      <%= f.label :references %><br />
+      <%= f.text_area :references %>
+    </div>
+    
+  </fieldset>
+  <fieldset>
+    <legend>F. Author assurance and sign off</legend>
+
+    <div class="field">
+      <%= f.label :author_assurance %><br />
+      <%= f.check_box :author_assurance %>
+    </div>
+    <div class="field">
+      <%= f.label :author_assurance_date %><br />
+      <%= f.datetime_select :author_assurance_date %>
+    </div>
+    <div class="field">
+      <%= f.label :approval_date %><br />
+      <%= f.date_select :approval_date %>
+    </div>
+    <div class="field">
+      <%= f.label :committee_submission_date %><br />
+      <%= f.date_select :committee_submission_date %>
+    </div>
+    <div class="actions">
+      <%#= f.submit %>
+      <button class="positive">
+        <%= image_tag('icons/tick.png', :alt => '') %>
+        <%= @publication.new_record? ? "Create Publication" : "Update Publication" %>
+      </button>
+      <%= cancel %>
+  		<br />
+    </div>
+  </fieldset>
 <% end %>
