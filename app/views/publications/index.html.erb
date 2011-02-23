@@ -2,7 +2,9 @@
 
 <table>
   <tr>
+    <th>Full title</th>
     <th>User</th>
+    <th>Status</th>
     <th>Centers</th>
     <th>Proposal submission date</th>
     <th>Publication type</th>
@@ -14,9 +16,7 @@
     <th>Dcc resources other specify</th>
     <th>Chat data none</th>
     <th>Chat data main forms</th>
-    <th>Chat data main forms specify</th>
     <th>Chat data main database</th>
-    <th>Chat data main database specify</th>
     <th>Chat data other</th>
     <th>Chat data other specify</th>
     <th>Manuscript preparation analysis data</th>
@@ -26,10 +26,13 @@
     <th>Manuscript preparation other specify</th>
     <th>Manuscript preparation none</th>
     <th>Attachment chat form</th>
+    <th>Attachment chat form specify</th>
     <th>Attachment chat variables</th>
+    <th>Attachment chat variables specify</th>
     <th>Attachment ancillary forms</th>
+    <th>Attachment ancillary forms specify</th>
     <th>Attachment other</th>
-    <th>Full title</th>
+    <th>Attachment other specify</th>
     <th>Abbreviated title</th>
     <th>Keywords</th>
     <th>Affiliation</th>
@@ -58,7 +61,9 @@
 
 <% @publications.each do |publication| %>
   <tr>
-    <td><%= publication.user_id %></td>
+    <td><%= link_to publication.full_title.blank? ? '<span class="quiet">No Title</span>'.html_safe : publication.full_title, publication %></td>
+    <td><%= link_to publication.user.name, '#' %></td>
+    <td><%= publication.status %></td>
     <td><%= publication.centers %></td>
     <td><%= publication.proposal_submission_date %></td>
     <td><%= publication.publication_type %></td>
@@ -70,9 +75,7 @@
     <td><%= publication.dcc_resources_other_specify %></td>
     <td><%= publication.chat_data_none %></td>
     <td><%= publication.chat_data_main_forms %></td>
-    <td><%= publication.chat_data_main_forms_specify %></td>
     <td><%= publication.chat_data_main_database %></td>
-    <td><%= publication.chat_data_main_database_specify %></td>
     <td><%= publication.chat_data_other %></td>
     <td><%= publication.chat_data_other_specify %></td>
     <td><%= publication.manuscript_preparation_analysis_data %></td>
@@ -82,13 +85,16 @@
     <td><%= publication.manuscript_preparation_other_specify %></td>
     <td><%= publication.manuscript_preparation_none %></td>
     <td><%= publication.attachment_chat_form %></td>
+    <td><%= publication.attachment_chat_form_specify %></td>
     <td><%= publication.attachment_chat_variables %></td>
+    <td><%= publication.attachment_chat_variables_specify %></td>
     <td><%= publication.attachment_ancillary_forms %></td>
+    <td><%= publication.attachment_ancillary_forms_specify %></td>
     <td><%= publication.attachment_other %></td>
-    <td><%= publication.full_title %></td>
+    <td><%= publication.attachment_other_specify %></td>
     <td><%= publication.abbreviated_title %></td>
     <td><%= publication.keywords %></td>
-    <td><%= publication.affiliation_id %></td>
+    <td><%= publication.affiliation %></td>
     <td><%= publication.sponsoring_pi %></td>
     <td><%= publication.additional_coauthors %></td>
     <td><%= publication.lead_author %></td>

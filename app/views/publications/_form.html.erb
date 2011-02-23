@@ -21,7 +21,7 @@
     </div>
     
     <div class="field">
-      <%= f.label :centers, '2. Center(s)' %><br />
+      <%= f.label :centers, '2. Center(s):' %><br />
       <%= f.text_field :centers, :style => "width:#{width}" %>
     </div>
     
@@ -35,13 +35,13 @@
     <legend>B. Publication Information</legend>
     <div class="field">
       <label>4. Type of publication</label><br />
-      <%= f.radio_button(:publication_type, "a") %> CHAT primary or mainline paper (design or primary CHAT hypothesis)
+      <%= f.radio_button(:publication_type, "PP") %> <%= label 'publication_publication_type', 'pp', 'CHAT primary or mainline paper (design or primary CHAT hypothesis)' %>
     </div>
     <div class="field">
-      <%= f.radio_button(:publication_type, "b") %> CHAT secondary paper (non-primary hypothesis of CHAT or with data collected at more than one but not all of the investigative centers)
+      <%= f.radio_button(:publication_type, "SP") %> <%= label 'publication_publication_type', 'sp', 'CHAT secondary paper (non-primary hypothesis of CHAT or with data collected at more than one but not all of the investigative centers)' %>
     </div>
     <div class="field">
-      <%= f.radio_button(:publication_type, "c") %> Ancillary Paper (data collected only at one investigative center <i>specify ancillary study &amp; paper</i>)<br />
+      <%= f.radio_button(:publication_type, "AP") %> <%= label 'publication_publication_type', 'ap', 'Ancillary Paper (data collected only at one investigative center <em>specify ancillary study &amp; paper</em>):'.html_safe %><br />
       <%= f.text_field :publication_type_specify, :style => "width:#{width}" %>
     </div>
   </fieldset>
@@ -49,136 +49,95 @@
     <legend>C. CHAT Resources</legend>
     
     <div class="field">
-      <%= f.label :dcc_resources_none %><br />
-      <%= f.check_box :dcc_resources_none %>
+      <label>5. Does preparation of this publication require any DCC RESOURCES? (<em>check all that apply; specify resources in each category</em>)</label><br />
+      <br />
+      <%= f.check_box :dcc_resources_none %> <%= f.label :dcc_resources_none, 'None' %><br />
+      <%= f.check_box :dcc_resources_staff %> <%= f.label :dcc_resources_staff, 'Staff (specify):' %><br />      
+      <%= f.text_field :dcc_resources_staff_specify, :style => "width:#{width}" %><br />
+      <%= f.check_box :dcc_resources_other %> <%= f.label :dcc_resources_other, 'Other (specify):' %><br />
+      <%= f.text_field :dcc_resources_other_specify, :style => "width:#{width}" %><br />
     </div>
+
     <div class="field">
-      <%= f.label :dcc_resources_staff %><br />
-      <%= f.check_box :dcc_resources_staff %>
+      <label>6.  What CHAT data will be required to prepare this publication? <em>(check all that apply)</em></label><br />
+      <br />
+      <%= f.check_box :chat_data_none %> <%= f.label :chat_data_none, 'None' %><br />
+      <%= f.check_box :chat_data_main_forms %> <%= f.label :chat_data_main_forms, 'CHAT main forms database (<em>please attach copies of release forms with required items circled</em>)'.html_safe %><br />
+      <%= f.check_box :chat_data_main_database %> <%= f.label :chat_data_main_database, 'CHAT main sleep study database (<em>please attach a list of data items</em>)'.html_safe %><br />
+      <%= f.check_box :chat_data_other %> <%= f.label :chat_data_other, 'Other (<em>specify data and where the data are located</em>):'.html_safe %><br />
+      <%= f.text_field :chat_data_other_specify, :style => "width:#{width}" %>
     </div>
-    <div class="field">
-      <%= f.label :dcc_resources_staff_specify %><br />
-      <%= f.text_field :dcc_resources_staff_specify %>
-    </div>
-    <div class="field">
-      <%= f.label :dcc_resources_other %><br />
-      <%= f.check_box :dcc_resources_other %>
-    </div>
-    <div class="field">
-      <%= f.label :dcc_resources_other_specify %><br />
-      <%= f.text_field :dcc_resources_other_specify %>
-    </div>
-    <div class="field">
-      <%= f.label :chat_data_none %><br />
-      <%= f.check_box :chat_data_none %>
-    </div>
-    <div class="field">
-      <%= f.label :chat_data_main_forms %><br />
-      <%= f.check_box :chat_data_main_forms %>
-    </div>
-    <div class="field">
-      <%= f.label :chat_data_main_forms_specify %><br />
-      <%= f.text_field :chat_data_main_forms_specify %>
-    </div>
-    <div class="field">
-      <%= f.label :chat_data_main_database %><br />
-      <%= f.check_box :chat_data_main_database %>
-    </div>
-    <div class="field">
-      <%= f.label :chat_data_main_database_specify %><br />
-      <%= f.text_field :chat_data_main_database_specify %>
-    </div>
-    <div class="field">
-      <%= f.label :chat_data_other %><br />
-      <%= f.check_box :chat_data_other %>
-    </div>
-    <div class="field">
-      <%= f.label :chat_data_other_specify %><br />
-      <%= f.text_field :chat_data_other_specify %>
-    </div>
-    
-    
   </fieldset>
   <fieldset>
     <legend>D. Data Analysis</legend>
     
     <div class="field">
-      <%= f.label :manuscript_preparation_analysis_data %><br />
-      <%= f.check_box :manuscript_preparation_analysis_data %>
-    </div>
-    <div class="field">
-      <%= f.label :manuscript_preparation_analysis_ancillary_data %><br />
-      <%= f.check_box :manuscript_preparation_analysis_ancillary_data %>
-    </div>
-    <div class="field">
-      <%= f.label :manuscript_analysis_review %><br />
-      <%= f.check_box :manuscript_analysis_review %>
-    </div>
-    <div class="field">
-      <%= f.label :manuscript_preparation_other %><br />
-      <%= f.check_box :manuscript_preparation_other %>
-    </div>
-    <div class="field">
-      <%= f.label :manuscript_preparation_other_specify %><br />
-      <%= f.text_field :manuscript_preparation_other_specify %>
-    </div>
-    <div class="field">
-      <%= f.label :manuscript_preparation_none %><br />
-      <%= f.check_box :manuscript_preparation_none %>
+      <label>7. Which of the following is required for preparation of this manuscript? (<em>check all that apply</em>)</label><br />
+      <br />
+      <%= f.check_box :manuscript_preparation_analysis_data %> <%= f.label :manuscript_preparation_analysis_data, 'New analysis of CHAT data by DCC staff' %><br />
+      <%= f.check_box :manuscript_preparation_analysis_ancillary_data %> <%= f.label :manuscript_preparation_analysis_ancillary_data, 'New analysis of CHAT ancillary study data by DCC staff' %><br />
+      <%= f.check_box :manuscript_analysis_review %> <%= f.label :manuscript_analysis_review, 'Review of distributed analysis of CHAT data by DCC staff' %><br />
+      <%= f.check_box :manuscript_preparation_other %> <%= f.label :manuscript_preparation_other, 'Other (<em>specify</em>):'.html_safe %><br />
+      <%= f.text_field :manuscript_preparation_other_specify, :style => "width:#{width}" %><br />
+      <%= f.check_box :manuscript_preparation_none %> <%= f.label :manuscript_preparation_none, 'None' %>      
     </div>
     
+    <div class="field">
+      <label>8 . Briefly describe the proposed analysis</label><br />
+      <br />
+      ...
+    </div>
   </fieldset>
   <fieldset>
     <legend>E. Attachments</legend>
     
     <div class="field">
-      <%= f.label :attachment_chat_form %><br />
-      <%= f.text_field :attachment_chat_form %>
-    </div>
-    <div class="field">
-      <%= f.label :attachment_chat_variables %><br />
-      <%= f.text_field :attachment_chat_variables %>
-    </div>
-    <div class="field">
-      <%= f.label :attachment_ancillary_forms %><br />
-      <%= f.text_field :attachment_ancillary_forms %>
-    </div>
-    <div class="field">
-      <%= f.label :attachment_other %><br />
-      <%= f.text_field :attachment_other %>
+      <label>9.  Attachments to this form (<em>check all that apply</em>)</label><br />
+      <br />
+      <%= f.check_box :attachment_chat_form %> <%= f.label :attachment_chat_form, 'CHAT form with items marked to indicate variables intended for analysis:' %><br />
+      <%= f.text_field :attachment_chat_form_specify, :style => "width:#{width}" %><br />
+      <%= f.check_box :attachment_chat_variables %> <%= f.label :attachment_chat_variables, 'List of CHAT sleep study variables intended for analysis:' %><br />
+      <%= f.text_field :attachment_chat_variables_specify, :style => "width:#{width}" %><br />
+      <%= f.check_box :attachment_ancillary_forms %> <%= f.label :attachment_ancillary_forms,'CHAT ancillary study forms with items marked to indicate variables intended for analysis:' %><br />
+      <%= f.text_field :attachment_ancillary_forms_specify, :style => "width:#{width}" %><br />
+      <%= f.check_box :attachment_other %> <%= f.label :attachment_other, 'Other (<em>specify</em>):'.html_safe %><br />
+      <%= f.text_field :attachment_other_specify, :style => "width:#{width}" %>
     </div>
     
     <div class="field">
+      <label>10.  CHAT Publication Proposal Description<br />
+        <br />
+        Submit this description along with Completed Publication Proposal Form to:<br />
+        P&amp;P Committee,   c/o Anna Marie Kibler   (AKibler@partners.org)
+      </label>
+      <br />
+      <br />
       <%= f.label :full_title %><br />
       <%= f.text_field :full_title, :style => "width:#{width}" %>
     </div>
     <div class="field">
-      <%= f.label :abbreviated_title %><br />
+      <%= f.label :abbreviated_title, 'Abbreviated Title' %><br />
       <%= f.text_field :abbreviated_title, :maxlength => '40' %>
+    </div>
+    <div class="field">
+      <%= f.label :lead_author, 'Lead Author' %><br />
+      <%= f.text_field :lead_author %>
     </div>
     <div class="field">
       <%= f.label :keywords %><br />
       <%= f.text_field :keywords, :style => "width:#{width}" %>
     </div>
     <div class="field">
-      <%= f.label :affiliation_id %><br />
-      <%= f.text_field :affiliation_id %>
-    </div>
-    <div class="field">
-      <%= f.label :sponsoring_pi %><br />
-      <%= f.text_field :sponsoring_pi %>
-    </div>
-    <div class="field">
-      <%= f.label :additional_coauthors %><br />
-      <%= f.text_field :additional_coauthors, :style => "width:#{width}" %>
-    </div>
-    <div class="field">
-      <%= f.label :lead_author %><br />
-      <%= f.text_field :lead_author %>
+      <%= f.label :affiliation %><br />
+      <%= f.text_field :affiliation %>
     </div>
     <div class="field">
       <%= f.label :timeline %><br />
       <%= f.text_area :timeline, :rows => 7, :style => "width:#{width}" %>
+    </div>
+    <div class="field">
+      <%= f.label :sponsoring_pi, 'Sponsoring PI' %><br />
+      <%= f.text_field :sponsoring_pi %>
     </div>
     <div class="field">
       <%= f.label :rationale %><br />
@@ -189,32 +148,37 @@
       <%= f.text_area :hypothesis, :rows => 7, :style => "width:#{width}" %>
     </div>
     <div class="field">
-      <%= f.label :data %><br />
+      <%= f.label :data, 'Data (Study Design, Population, Variables of Interest)' %><br />
       <%= f.text_area :data, :rows => 7, :style => "width:#{width}" %>
     </div>
     <div class="field">
-      <%= f.label :study_type %><br />
+      <%= f.label :study_type, 'Type of Study' %><br />
       <%= f.text_field :study_type %>
     </div>
     <div class="field">
-      <%= f.label :target_journal %><br />
+      <%= f.label :target_journal, 'Target Journal' %><br />
       <%= f.text_field :target_journal %>
     </div>
     <div class="field">
-      <%= f.label :analysis_responsibility %><br />
+      <%= f.label :analysis_responsibility, 'Analysis Responsibility' %><br />
       <%= f.text_area :analysis_responsibility, :rows => 7, :style => "width:#{width}" %>
     </div>
     <div class="field">
-      <%= f.label :analysis_plan %><br />
+      <%= f.label :analysis_plan, 'Brief Analysis Plan' %><br />
       <%= f.text_area :analysis_plan, :rows => 7, :style => "width:#{width}" %>
     </div>
     <div class="field">
-      <%= f.label :summary_section %><br />
+      <%= f.label :summary_section, 'Summary Section' %><br />
       <%= f.text_area :summary_section, :rows => 7, :style => "width:#{width}" %>
     </div>
     <div class="field">
-      <%= f.label :writing_group_members %><br />
+      <%= f.label :writing_group_members, 'Writing Group Members' %><br />
       <%= f.text_field :writing_group_members, :style => "width:#{width}" %>
+    </div>
+    
+    <div class="field">
+      <%= f.label :additional_coauthors, 'Additional Co-Authors' %><br />
+      <%= f.text_field :additional_coauthors, :style => "width:#{width}" %>
     </div>
     <div class="field">
       <%= f.label :references %><br />
@@ -224,15 +188,20 @@
   </fieldset>
   <fieldset>
     <legend>F. Author assurance and sign off</legend>
+    <ul>
+      <li>I understand that any manuscripts resulting from this effort must be approved by the CHAT SC prior to submission to any journal</li>
+      <li>I understand that review of data analyses is required by the DCC prior to submission to any journal</li>
+      <li>I understand that the DCC is the archive for CHAT and that a copy of any draft circulated to any person or entity external to the CHAT Research Group must be sent to the DCC for its records</li>
+      <li>I understand that the SC will make the final decision regarding authorship format</li>
+      <li>I understand that reviewers will be appointed from the CHAT Research Group to provide internal review of this paper prior to submission to any journal</li>
+      <li>I will adhere to the confidentiality policies of CHAT and its IRB’s, which require that no identifying personal information may be included in any publication</li>
+    </ul>
 
     <div class="field">
-      <%= f.label :author_assurance %><br />
-      <%= f.check_box :author_assurance %>
+      <%= f.check_box :author_assurance %> <%= f.label :author_assurance, 'Please tick to confirm that you have read and understand the above text' %><br />
+      
     </div>
-    <div class="field">
-      <%= f.label :author_assurance_date %><br />
-      <%= f.datetime_select :author_assurance_date %>
-    </div>
+<% if false %>    
     <div class="field">
       <%= f.label :approval_date %><br />
       <%= f.date_select :approval_date %>
@@ -241,6 +210,7 @@
       <%= f.label :committee_submission_date %><br />
       <%= f.date_select :committee_submission_date %>
     </div>
+<% end %>
   </fieldset>
   <div class="actions">
     <button class="positive">

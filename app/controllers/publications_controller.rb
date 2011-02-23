@@ -21,7 +21,7 @@ class PublicationsController < ApplicationController
 
   def create
     @publication = current_user.publications.new(params[:publication])
-
+    @publication.author_assurance_date = Date.today
     if @publication.save
       redirect_to(@publication, :notice => 'Publication was successfully created.')
     else

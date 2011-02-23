@@ -1,9 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Full title:</b>
+  <%= @publication.full_title %>
+</p>
+
+<p>
   <b>User:</b>
   <%= @publication.user_id %>
 </p>
+
+<p>
+  <b>Status:</b>
+  <%= @publication.status %>
+</p>
+
 
 <p>
   <b>Centers:</b>
@@ -61,18 +72,8 @@
 </p>
 
 <p>
-  <b>Chat data main forms specify:</b>
-  <%= @publication.chat_data_main_forms_specify %>
-</p>
-
-<p>
   <b>Chat data main database:</b>
   <%= @publication.chat_data_main_database %>
-</p>
-
-<p>
-  <b>Chat data main database specify:</b>
-  <%= @publication.chat_data_main_database_specify %>
 </p>
 
 <p>
@@ -121,8 +122,18 @@
 </p>
 
 <p>
+  <b>Attachment chat form specify:</b>
+  <%= @publication.attachment_chat_form_specify %>
+</p>
+
+<p>
   <b>Attachment chat variables:</b>
   <%= @publication.attachment_chat_variables %>
+</p>
+
+<p>
+  <b>Attachment chat variables specify:</b>
+  <%= @publication.attachment_chat_variables_specify %>
 </p>
 
 <p>
@@ -131,13 +142,18 @@
 </p>
 
 <p>
+  <b>Attachment ancillary forms specify:</b>
+  <%= @publication.attachment_ancillary_forms_specify %>
+</p>
+
+<p>
   <b>Attachment other:</b>
   <%= @publication.attachment_other %>
 </p>
 
 <p>
-  <b>Full title:</b>
-  <%= @publication.full_title %>
+  <b>Attachment other specify:</b>
+  <%= @publication.attachment_other_specify %>
 </p>
 
 <p>
@@ -152,7 +168,7 @@
 
 <p>
   <b>Affiliation:</b>
-  <%= @publication.affiliation_id %>
+  <%= @publication.affiliation %>
 </p>
 
 <p>
