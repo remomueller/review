@@ -4,7 +4,7 @@
     <%= link_to_function current_user.name, "$('menu_user_settings').show();" %>
     <div style="position:relative">
       <div id="menu_user_settings" class="menu_dropdown_right" style="display:none">
-        <%= current_user.name %>
+        <div style="white-space:nowrap"><%= current_user.name %></div>
         <div class="quiet small"><%= current_user.email %></div>
         <div><%= link_to 'Settings', authentications_path %></div>
         <hr>
