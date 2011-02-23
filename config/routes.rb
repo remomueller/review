@@ -1,5 +1,7 @@
 Review::Application.routes.draw do
 
+  resources :publications
+
   match '/auth/:provider/callback' => 'authentications#create'
   match '/auth/failure' => 'authentications#failure'
 

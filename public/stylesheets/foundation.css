@@ -16,6 +16,7 @@
 - brigham link gray   
 
 - brigham dark blue   #094E63
+- brigham light blue  #CDEDF7
 - brigham orange      #EB6C20
 ***************************************/
 
@@ -24,8 +25,17 @@
 /*              GLOBALS               */
 /**************************************/
 
+body{ color: #404040; }
+
 a:link { color: #057080; }
 a:hover { color: #EB6C20; }
+hr { margin:0px; }
+
+#content {
+  padding: 4px;
+  background-color: #FFF;
+}
+
 
 /**************************************/
 /*              HEADER                */
@@ -38,7 +48,6 @@ a:hover { color: #EB6C20; }
 	font-size:2.0em;
 	padding-left:15px;
   border-bottom: 5px solid #0E7799; /* #FFCC66; */
-	color:#404040;
 	font-weight: bold;
   font-variant: small-caps;
 	height: 100px;
@@ -53,8 +62,13 @@ a:hover { color: #EB6C20; }
 	background:#404040;
 	padding:5px;
 	color: #fff;
-	font-variant: small-caps;
-	
+/*  font-variant: small-caps;*/	
+/*  border-bottom-left-radius: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  -webkit-border-radius-bottomleft: 8px;*/
+/*  border-bottom-right-radius: 8px;
+  -moz-border-radius-bottomright: 8px;
+  -webkit-border-radius-bottomright: 8px;*/
 }
 
 #menu a {
@@ -67,13 +81,62 @@ a:hover { color: #EB6C20; }
   color: #EB6C20;
 }
 
-/*#menu */
+div.menu_dropdown_right {
+  background-color: #fff;
+  position:absolute;
+  border: 2px solid #0E7799;
+  color: #404040;
+  border-top: 0px;
+  top:-2em;
+  padding:5px;
+  padding-right:8px;
+  right:-5px;
+  z-index:10;
+/*  min-width:212px;*/
+  text-align:right;
+}
+
+div.menu_dropdown_left {
+  background-color: #fff;
+  position:absolute;
+  border: 2px solid #0E7799;
+  color: #404040;
+  border-top: 0px;
+  top:-2em;
+  padding:5px;
+  padding-right:8px;
+  left:-5px;
+  z-index:10;
+/*  min-width:212px;*/
+  text-align: left;
+}
+
+#menu div.menu_dropdown_left a, #menu div.menu_dropdown_right a {
+  color: #057080;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#menu div.menu_dropdown_left a:hover, #menu div.menu_dropdown_right a:hover {
+  color: #EB6C20;
+}
+
+#menu, div.menu_dropdown_right {
+  border-bottom-right-radius: 8px;
+  -moz-border-radius-bottomright: 8px;
+  -webkit-border-radius-bottomright: 8px;
+}
+
+#menu, div.menu_dropdown_left {
+  border-bottom-left-radius: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  -webkit-border-radius-bottomleft: 8px;
+}
+
 
 /**************************************/
 /*            MAIN CONTENT            */
 /**************************************/
-
-body{ }
 
 .container{
   background: #FFF url(/images/brigham.png) no-repeat scroll right top;
@@ -144,4 +207,3 @@ body{ }
 /**************************************/
 /*               FOOTER               */
 /**************************************/
-

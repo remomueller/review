@@ -13,7 +13,21 @@ class User < ActiveRecord::Base
 
   # Model Relationships
   has_many :authentications
-    
+  has_many :publications, :conditions => { :deleted => false }
+  
+  def all_publications
+    @all_publications ||= begin
+      if self.system_admin?
+        Publication.current.order('name')
+      else
+        self.publications
+      end
+    end
+  end
+  
+  def system_admin?
+    false
+  end
 
   def name
     "#{first_name} #{last_name}"

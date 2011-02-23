@@ -21,7 +21,7 @@
       <div style="position:relative">
         <span style="position:absolute;top:18px;left:50px;font-size:0.5em;font-variant:normal">version <%= Review::VERSION::STRING %></span>
       </div>
-      Chat Publications
+      <span style="color:#D4002F">C</span><span style="color:#56DF00">H</span><span style="color:#D9DE00">A</span><span style="color:#23FFFF">T</span> <span style="color:#2F0C72">Publications</span>
     </div>
 
     <div id="message">
@@ -29,39 +29,8 @@
     </div>
 
     <div id="menu">
-      <% if user_signed_in? -%>
-        <span style="float:right">
-          <%#= link_to 'Logout', destroy_user_session_path %>
-          <%= link_to_function current_user.email, "$('user_links').show();" %> [<%= current_user.name %>]
-          <% if false %>
-          <div style="position:relative">
-            <div id="user_links" style="position:absolute" style="display:none;color:#404040;">
-              Something
-            </div>
-          </div>
-          <% end %>
-        </span>
-        <%= link_to 'Home', root_path %>
-        <%#= link_to 'Overview', overview_entries_path %>
-        <%#= link_to 'Accounts', accounts_path %>
-        <%#= link_to 'Charge Types', charge_types_path %>
-        <%#= link_to 'Entries', entries_path %>
-    	<% else %>
-    		<span style="float:right"><%= link_to 'Login', new_user_session_path %></span>
-    		<span style="float:right"><%= link_to 'Sign Up', new_user_registration_path %></span>
-    	&nbsp;		
-    	<% end %>
+      <%= render :partial => 'layouts/menu' %>
     </div>
-    
-    
-    
-    <% if user_signed_in? %>
-
-      | <%= link_to 'Logout', destroy_user_session_path %>
-    <% else %>
-  		<%= link_to 'Login', authentications_path %> | 
-  		<%= link_to 'Sign Up', new_user_registration_path %>
-  	<% end %>
   
     <% if false %>
       <div class="notice"><%= notice %></div>
@@ -69,7 +38,9 @@
       <div class="error"><%= alert %></div>
     <% end %>
   
-    <%= yield %>
+    <div id="content">
+      <%= yield %>
+    </div>
   </div>
 </body>
 </html>
