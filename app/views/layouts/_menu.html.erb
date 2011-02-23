@@ -6,7 +6,7 @@
       <div id="menu_user_settings" class="menu_dropdown_right" style="display:none">
         <%= current_user.name %>
         <div class="quiet small"><%= current_user.email %></div>
-        <div><%= link_to 'Settings', '#' %></div>
+        <div><%= link_to 'Settings', authentications_path %></div>
         <hr>
         <div><%= link_to 'Logout', destroy_user_session_path %></div>
       </div>
@@ -24,9 +24,20 @@
   <%#= link_to 'Accounts', accounts_path %>
   <%#= link_to 'Charge Types', charge_types_path %>
   <%#= link_to 'Entries', entries_path %>
-  <%= javascript_tag "hideOnMouseOut('menu_user_settings');hideOnMouseOut('menu_home');" %>
+  <%= javascript_tag "hideOnMouseOut('menu_home');" %>
 <% else %>
-	<span style="float:right"><%= link_to 'Login', new_user_session_path %></span>
-	<span style="float:right"><%= link_to 'Sign Up', new_user_registration_path %></span>
-&nbsp;		
+&nbsp;
+
+  <span style="float:right" onmouseover="$('menu_user_settings').show();">
+    <%= link_to_function 'Login', "$('menu_user_settings').show();" %>
+    <div style="position:relative">
+      <div id="menu_user_settings" class="menu_dropdown_right" style="display:none">
+        <div><%= link_to 'Login', new_user_session_path %></div>
+        <hr>
+        <div style="white-space:nowrap"><%= link_to 'Sign Up', new_user_registration_path %></div>
+      </div>
+    </div>
+  </span>
 <% end %>
+
+<%= javascript_tag "hideOnMouseOut('menu_user_settings');" %>
