@@ -37,8 +37,9 @@
     <th>Keywords</th>
     <th>Affiliation</th>
     <th>Sponsoring pi</th>
-    <th>Additional coauthors</th>
+<% if false %>    <th>Additional coauthors</th> <% end %>
     <th>Lead author</th>
+    <th>Writing group members</th>
     <th>Timeline</th>
     <th>Rationale</th>
     <th>Hypothesis</th>
@@ -48,7 +49,6 @@
     <th>Analysis responsibility</th>
     <th>Analysis plan</th>
     <th>Summary section</th>
-    <th>Writing group members</th>
     <th>References</th>
     <th>Author assurance</th>
     <th>Author assurance date</th>
@@ -96,8 +96,9 @@
     <td><%= publication.keywords %></td>
     <td><%= publication.affiliation %></td>
     <td><%= publication.sponsoring_pi %></td>
-    <td><%= publication.additional_coauthors %></td>
+<% if false %>    <td><%= publication.additional_coauthors %></td><% end %>
     <td><%= publication.lead_author %></td>
+    <td><%= publication.writing_group_members %></td>
     <td><%= publication.timeline %></td>
     <td><%= publication.rationale %></td>
     <td><%= publication.hypothesis %></td>
@@ -107,7 +108,6 @@
     <td><%= publication.analysis_responsibility %></td>
     <td><%= publication.analysis_plan %></td>
     <td><%= publication.summary_section %></td>
-    <td><%= publication.writing_group_members %></td>
     <td><%= publication.references %></td>
     <td><%= publication.author_assurance %></td>
     <td><%= publication.author_assurance_date %></td>

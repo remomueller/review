@@ -176,14 +176,21 @@
   <%= @publication.sponsoring_pi %>
 </p>
 
+<% if false %>
 <p>
   <b>Additional coauthors:</b>
   <%= @publication.additional_coauthors %>
 </p>
+<% end %>
 
 <p>
   <b>Lead author:</b>
   <%= @publication.lead_author %>
+</p>
+
+<p>
+  <b>Writing group members:</b>
+  <%= @publication.writing_group_members %>
 </p>
 
 <p>
@@ -229,11 +236,6 @@
 <p>
   <b>Summary section:</b>
   <%= @publication.summary_section %>
-</p>
-
-<p>
-  <b>Writing group members:</b>
-  <%= @publication.writing_group_members %>
 </p>
 
 <p>
