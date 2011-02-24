@@ -45,12 +45,8 @@
     </div>
   </div>
   <% end %>
-  <%#= link_to 'Overview', overview_entries_path %>
-  <%#= link_to 'Accounts', accounts_path %>
-  <%#= link_to 'Charge Types', charge_types_path %>
-  <%#= link_to 'Entries', entries_path %>
-  <%= javascript_tag "hideOnMouseOut('menu_home');" %>
-  <%#= javascript_tag "hideOnMouseOut('menu_home');hideOnMouseOut('menu_home2');hideOnMouseOut('menu_set2');" %>
+
+  <%= javascript_tag "hideOnMouseOut(['menu_user_settings', 'menu_home']);" %>
 <% else %>
   <div style="float:right" onmouseover="$('menu_user_settings').show();">
     <%= link_to_function 'Login', "$('menu_user_settings').show();" %>
@@ -62,8 +58,7 @@
       </div>
     </div>
   </div>
+  <%= javascript_tag "hideOnMouseOut(['menu_user_settings']);" %>
 <% end %>
 
 <div style="clear:both"></div>
-
-<%= javascript_tag "hideOnMouseOut('menu_user_settings');" %>

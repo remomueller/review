@@ -32,12 +32,6 @@
       <%= render :partial => 'layouts/menu' %>
     </div>
   
-    <% if false %>
-      <div class="notice"><%= notice %></div>
-      <div class="error"><%= flash[:warning].humanize if flash[:warning] %></div>
-      <div class="error"><%= alert %></div>
-    <% end %>
-  
     <div id="content">
       <%= yield %>
     </div>
