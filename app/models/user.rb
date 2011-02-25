@@ -7,6 +7,15 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
   
+  after_create :notify_system_admins
+
+  STATUS = ["active", "denied", "inactive", "pending"].collect{|i| [i,i]}
+  
+  # Named Scopes
+  scope :current, :conditions => { :deleted => false }
+  scope :status, lambda { |*args|  { :conditions => ["users.status IN (?)", args.first] } }
+  scope :system_admins, :conditions => { :system_admin => true }
+  
   # Model Validation
   validates_presence_of     :first_name
   validates_presence_of     :last_name
@@ -15,18 +24,26 @@ class User < ActiveRecord::Base
   has_many :authentications
   has_many :publications, :conditions => { :deleted => false }
   
+  # User Methods
+  
+  # Overriding Devise built-in active? method
+  def active?
+    super and self.status == 'active' and not self.deleted?
+  end
+  
+  def destroy
+    update_attribute :deleted, true
+    update_attribute :status, 'inactive'
+  end
+  
   def all_publications
     @all_publications ||= begin
       if self.system_admin?
-        Publication.current.order('name')
+        Publication.current.order('created_at')
       else
         self.publications
       end
     end
-  end
-  
-  def system_admin?
-    false
   end
 
   def name
@@ -48,5 +65,13 @@ class User < ActiveRecord::Base
 
   def password_required?
     (authentications.empty? || !password.blank?) && super
+  end
+  
+  private
+  
+  def notify_system_admins
+    User.current.system_admins.each do |system_admin|
+      UserMailer.notify_system_admin(system_admin, self).deliver
+    end
   end
 end

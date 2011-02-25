@@ -62,7 +62,7 @@
 <% @publications.each do |publication| %>
   <tr>
     <td><%= link_to publication.full_title.blank? ? '<span class="quiet">No Title</span>'.html_safe : publication.full_title, publication %></td>
-    <td><%= link_to publication.user.name, '#' %></td>
+    <td><%= link_to publication.user.name, publication.user %></td>
     <td><%= publication.status %></td>
     <td><%= publication.centers %></td>
     <td><%= publication.proposal_submission_date %></td>

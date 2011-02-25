@@ -8,4 +8,8 @@ class Publication < ActiveRecord::Base
   # Model Relationships
   belongs_to :user
 
+  def destroy
+    update_attribute :deleted, true
+  end
+
 end
