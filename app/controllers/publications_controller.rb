@@ -6,7 +6,7 @@ class PublicationsController < ApplicationController
   end
 
   def show
-    @publication = current_user.all_publications.find(params[:id])
+    @publication = current_user.all_publications.find_by_id(params[:id])
     redirect_to root_path unless @publication
   end
 
@@ -15,7 +15,7 @@ class PublicationsController < ApplicationController
   end
 
   def edit
-    @publication = current_user.all_publications.find(params[:id])
+    @publication = current_user.all_publications.find_by_id(params[:id])
     redirect_to root_path unless @publication
   end
 
@@ -30,7 +30,7 @@ class PublicationsController < ApplicationController
   end
 
   def update
-    @publication = current_user.all_publications.find(params[:id])
+    @publication = current_user.all_publications.find_by_id(params[:id])
     if @publication
       if @publication.update_attributes(params[:publication])
         redirect_to(@publication, :notice => 'Publication was successfully updated.')
@@ -43,7 +43,7 @@ class PublicationsController < ApplicationController
   end
 
   def destroy
-    @publication = current_user.all_publications.find(params[:id])
+    @publication = current_user.all_publications.find_by_id(params[:id])
     if @publication
       @publication.destroy
       redirect_to publications_path
