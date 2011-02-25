@@ -22,8 +22,10 @@
     <%= link_to '<span style="color:#D4002F">C</span><span style="color:#56DF00">H</span><span style="color:#D9DE00">A</span><span style="color:#23FFFF">T</span> <span style="color:#2F0C72">Publications</span>'.html_safe, root_path, :style => 'text-decoration:none;' %>
   </div>
 
-  <div id="message" class="container">
-    <%= render :partial => 'layouts/message' %>
+  <div class="container" style="position:relative">
+    <div id="message">
+      <%= render :partial => 'layouts/message' %>
+    </div>
   </div>
 
   <div id="menu" class="container">
