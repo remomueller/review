@@ -19,7 +19,7 @@
     <div style="position:relative">
       <span style="position:absolute;top:18px;left:50px;font-size:0.5em;font-variant:normal">version <%= Review::VERSION::STRING %></span>
     </div>
-    <span style="color:#D4002F">C</span><span style="color:#56DF00">H</span><span style="color:#D9DE00">A</span><span style="color:#23FFFF">T</span> <span style="color:#2F0C72">Publications</span>
+    <%= link_to '<span style="color:#D4002F">C</span><span style="color:#56DF00">H</span><span style="color:#D9DE00">A</span><span style="color:#23FFFF">T</span> <span style="color:#2F0C72">Publications</span>'.html_safe, root_path, :style => 'text-decoration:none;' %>
   </div>
 
   <div id="message" class="container">

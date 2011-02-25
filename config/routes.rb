@@ -5,7 +5,7 @@ Review::Application.routes.draw do
   match '/auth/:provider/callback' => 'authentications#create'
   match '/auth/failure' => 'authentications#failure'
 
-  devise_for :users, :controllers => {:registrations => 'registrations'}
+  devise_for :users, :controllers => {:registrations => 'registrations'}, :path_names => { :sign_up => 'register', :sign_in => 'login' }
   
   resources :users do
     collection do
@@ -14,6 +14,8 @@ Review::Application.routes.draw do
   end
   
   resources :authentications
+  
+  match "/about" => "sites#about", :as => :about
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -64,7 +66,7 @@ Review::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "sites#about"
+  root :to => "sites#dashboard"
 
   # See how all your routes lay out with "rake routes"
 

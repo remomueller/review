@@ -4,4 +4,8 @@ class SitesController < ApplicationController
   def about
     
   end
+  
+  def dashboard
+    
+  end
 end
