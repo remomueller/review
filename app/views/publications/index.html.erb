@@ -5,6 +5,7 @@
     <th>Full title</th>
     <th>User</th>
     <th>Status</th>
+    <th>Manuscript Number</th>
     <th>Centers</th>
     <th>Proposal submission date</th>
     <th>Publication type</th>
@@ -64,6 +65,7 @@
     <td><%= link_to publication.full_title.blank? ? '<span class="quiet">No Title</span>'.html_safe : publication.full_title, publication %></td>
     <td><%= link_to publication.user.name, publication.user %></td>
     <td><%= publication.status %></td>
+    <td><%= publication.manuscript_number %></td>
     <td><%= publication.centers %></td>
     <td><%= publication.proposal_submission_date %></td>
     <td><%= publication.publication_type %></td>
