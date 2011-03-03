@@ -1,0 +1,22 @@
+<%= form_tag pp_approval_publication_path(@publication), :method => :post do %>
+<div class="field">
+  <label>Publication Status</label><br />
+  <% Publication::PP_STATUS.each do |display, value| %>
+    <%= radio_button :publication, :status, value, :onchange => "", :checked => ((value == 'approved' and @publication.status == 'proposed') or value == @publication.status) %> <label><%= display %></label>
+  <% end %>
+</div>
+<div class="field">
+  <%= label :publication, :manuscript_number, 'Manuscript Number' %><br />
+  <%= text_field :publication, :manuscript_number %>
+</div>
+<div class="actions">
+  <button class="positive">
+    <%= image_tag('icons/tick.png', :alt => '') %>
+    <%= @publication.status == 'proposed' ? 'Submit' : 'Update' %> Subcommittee Decision
+  </button>
+  <% unless @publication.status == 'proposed' %>
+    <%= link_to image_tag('icons/cross.png', :alt => '') + 'cancel', '#', :onclick => remote_function(:url => show_subcommittee_decision_publication_path(@publication), :method => :post) + "; return false;", :class => 'button negative' %>
+  <% end %>
+	<br />
+</div>
+<% end %>

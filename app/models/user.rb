@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   scope :current, :conditions => { :deleted => false }
   scope :status, lambda { |*args|  { :conditions => ["users.status IN (?)", args.first] } }
   scope :system_admins, :conditions => { :system_admin => true }
+  scope :pp_committee_members, :conditions => { :pp_committee => true }
   
   # Model Validation
   validates_presence_of     :first_name
@@ -24,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :authentications
   has_many :comments, :conditions => {:deleted => false}, :order => 'created_at DESC'
   has_many :publications, :conditions => { :deleted => false }
+  has_many :user_publication_reviews
   
   # User Methods
   

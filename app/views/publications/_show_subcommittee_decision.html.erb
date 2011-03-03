@@ -1,0 +1,16 @@
+<form>
+<div class="field">
+  <label>Publication Status</label><br />
+  <% Publication::PP_STATUS.each do |display, value| %>
+    <%= radio_button :publication, :status, value, :checked => (value == @publication.status), :disabled => 'disabled' %> <label><%= display %></label>
+  <% end %>
+</div>
+<div class="field">
+  <%= label :publicatoin, :manuscript_number, 'Manuscript Number' %><br />
+  <%= text_field :publication, :manuscript_number, :disabled => 'disabled' %>
+</div>
+<div class="actions">
+  <%= link_to image_tag('icons/edit.png', :alt => '') + 'Edit Subcommittee Decision', '#', :onclick => remote_function(:url => edit_subcommittee_decision_publication_path(@publication), :method => :post) + "; return false;", :class => 'button' %>
+	<br />
+</div>
+</form>

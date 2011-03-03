@@ -1,0 +1,2 @@
+module UserPublicationReviewsHelper
+end

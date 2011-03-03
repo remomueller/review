@@ -18,4 +18,12 @@ module ApplicationHelper
     end
   end
 
+  def simple_time(past_time)
+    if past_time.to_date == Date.today
+      past_time.strftime("at %I:%M %p")
+    else
+      past_time.strftime("on %b %d, %Y at %I:%M %p")
+    end
+  end
+
 end

@@ -1,7 +1,7 @@
 class Publication < ActiveRecord::Base
 
-  STATUS = ["proposed", "approved", "denied", "nominated", "submitted", "published"].collect{|i| [i,i]}
-
+  STATUS = ["proposed", "approved", "not approved", "approved with comments", "nominated", "submitted", "published"].collect{|i| [i,i]}
+  PP_STATUS = ["approved", "approved with comments", "not approved"].collect{|i| [i,i]}
   # Currently 57 Total Attributes (Publication.first.attributes.size)
   # 52 of which are attr_accessible (Publication.attr_accessible.size)
   # 5 of which are not set using mass assignment.
@@ -29,6 +29,7 @@ class Publication < ActiveRecord::Base
 
   # Model Relationships
   belongs_to :user
+  has_many :user_publication_reviews
 
   def destroy
     update_attribute :deleted, true

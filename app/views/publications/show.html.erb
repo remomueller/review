@@ -1,5 +1,99 @@
-<%= link_to 'Edit', edit_publication_path(@publication) %> |
-<%= link_to 'Back', publications_path %>
+<% @title = "Publication: #{@publication.full_title}" %>
+<h1><%= @title %></h1>
+<%= link_to image_tag('icons/edit.png', :alt => '') + "Edit Publication", edit_publication_path(@publication), :class => 'button' if current_user.all_publications.include?(@publication) and @publication.status == 'proposed' %>
+<%= link_to image_tag('icons/mydocuments.png', :alt => '') + "View All Publications", publications_path, :class => 'button' %>
+<%#= link_to "#{image_tag('icons/eye.png', :alt => '')} View All Publications".html_safe, publications_path, :class => 'button' %>
+
+<div style="clear:both"></div><br />
+<p>
+  <b>Status:</b>
+  <%= @publication.status %>
+</p>
+
+<%#= link_to 'Edit', edit_publication_path(@publication) %>
+<%#= link_to 'Back', publications_path %>
+<div style="clear:both"></div>
+<% if false %>
+<% if current_user.pp_committee? and @publication.status == 'proposed' %>
+
+<fieldset>
+  <legend>Publication Review</legend>
+  <div id="publication_review_box">
+  <% @user_publication_review = current_user.user_publication_reviews.find_by_publication_id(@publication.id) %>
+  <% if @user_publication_review %>
+    <table>
+    <%= render :partial => 'user_publication_reviews/show' %>
+    </table>
+  <% else %>
+    <% @user_publication_review = current_user.user_publication_reviews.new(:publication_id => @publication.id) %>
+    <%= render :partial => 'user_publication_reviews/form' %>
+  <% end %>
+  </div>
+</fieldset>
+<% end %>
+<% end %>
+
+<% if (current_user.pp_committee? or current_user.pp_committee_secretary?) and ['proposed', 'not approved', 'approved with comments', 'approved'].include?(@publication.status) %>
+  <fieldset>
+    <legend>Publication Reviews</legend>
+    <table>
+      <tr>
+        <th>Committee Member</th>
+        <th>Time</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    <% User.current.pp_committee_members.each do |user| %>
+      <% @user_publication_review = user.user_publication_reviews.find_by_publication_id(@publication.id) %>
+      <tbody id="publication_review_box_user_<%= user.id %>">
+        <% if @user_publication_review %>
+          <%= render :partial => 'user_publication_reviews/show' %>
+        <% else %>
+          <tr>
+            <td style="vertical-align:middle"><%= link_to user.name, user %></td>
+            <td></td>
+            <td class="quiet" style="vertical-align:middle">not yet submitted</td>
+            <td>
+              <% if current_user == user %>
+                <%= link_to 'Create Review', '#', :onclick => remote_function(:url => new_user_publication_review_path(:publication_id => @publication.id), :method => :get) + "; return false;", :class => "button" %>
+              <% else %>
+                <%= link_to_function image_tag('icons/email.png', :alt => '') + 'Send Email Reminder', "alert('Not yet implemented, just a placeholder sorry!')", :class => 'button', :style => 'margin-bottom:0px' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% end %>
+    </table>
+    
+    <% if current_user.pp_committee_secretary? %>
+      <div id="subcommittee_decision_box">
+        <% if @publication.status == 'proposed' %>
+          <%= render :partial => 'publications/edit_subcommittee_decision' %>
+        <% else %>
+          <%= render :partial => 'publications/show_subcommittee_decision' %>
+        <% end %>
+      </div>
+    <% end %>
+    
+  </fieldset>
+  <% if false %>
+    The PP Committee Secretary will view the PP COMMITTEE's comments/approvals, and either<br />
+    a) send back to author, by marking as approved_with_modifications
+    b) send back to author as denied (do not approve)
+    c) send to steering committee as approved
+  <% end %>
+<% end %>
+
+<% if current_user == @publication.user and ['approved with comments'].include?(@publication.status) %>
+<fieldset>
+  <legend>Publications and Presentations Sub Committee Reviewer Comments</legend>
+  <% @publication.user_publication_reviews.each do |user_publication_review| %>
+    <%= user_publication_review.comment if user_publication_review.status == 'approved with comments' %>
+  <% end %>
+</fieldset>
+<% end %>
+
 
 <%= render :partial => 'publications/form', :locals => { :disabled => 'disabled' } %>
 

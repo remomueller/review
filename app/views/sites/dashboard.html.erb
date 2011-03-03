@@ -5,9 +5,14 @@
 <% if current_user.pp_committee? %>
   <h3>Publication Proposals Awaiting Review</h3>
   <% Publication.current.status('proposed').each do |publication| %>
-    <div><%= link_to publication.full_title, publication %></div>
+    <div>
+      <%= link_to publication.full_title, publication %>
+      <% if user_publication_review = current_user.user_publication_reviews.find_by_publication_id(publication.id) %>
+        Review Submitted <%= simple_time(user_publication_review.updated_at) %>
+      <% end %>
+    </div>
   <% end %>
 <% end %>
 
 <br /><br />
-<%= link_to 'Submit Manuscript or Publication for Review', new_publication_path, :class => 'button' %>
+<%= link_to image_tag('icons/addfile.png', :alt => '') + 'Submit Manuscript or Publication for Review', new_publication_path, :class => 'button' %>

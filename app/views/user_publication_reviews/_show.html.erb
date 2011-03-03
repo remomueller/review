@@ -1,0 +1,40 @@
+<tr>
+  <td style="vertical-align:middle"><%= link_to @user_publication_review.user.name, @user_publication_review.user %></td>
+  <td style="vertical-align:middle">reviewed <%= simple_time(@user_publication_review.updated_at) %></td>
+  <td style="vertical-align:middle"><strong><%= @user_publication_review.status %></strong></td>
+  <td>
+    <% if current_user == @user_publication_review.user and  @user_publication_review.publication.status == 'proposed' %>
+      <%= link_to "#{image_tag('icons/edit.png', :alt => '')} Edit Review".html_safe, '#', :onclick => remote_function(:url => edit_user_publication_review_path(@user_publication_review), :method => :get) + "; return false;", :class => 'button' %>
+    <% elsif current_user == @user_publication_review.user %>
+      No editing, review has been locked.
+    <% end %>
+  </td>
+</tr>
+
+<% if @user_publication_review.comment and @user_publication_review.status == 'approved with comments' %>
+<tr>
+  <td></td>
+  <td colspan="3"><em><%= @user_publication_review.comment %></em></td>
+</tr>
+<% end %>
+
+<% if false %>
+<p>
+  <b>User:</b>
+  <%= link_to @user_publication_review.user.name, @user_publication_review.user %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @user_publication_review.status %>
+</p>
+
+<p>
+  <b>Comment:</b>
+</p>
+<pre><%= @user_publication_review.comment %></pre>
+<br />
+
+
+<%= link_to 'Edit', edit_user_publication_review_path(@user_publication_review) %>
+<% end %>

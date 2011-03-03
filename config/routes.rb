@@ -1,8 +1,16 @@
 Review::Application.routes.draw do
 
+  resources :user_publication_reviews
+
   resources :comments
 
-  resources :publications
+  resources :publications do
+    member do
+       post :pp_approval
+       post :show_subcommittee_decision
+       post :edit_subcommittee_decision
+    end
+  end
 
   match '/auth/:provider/callback' => 'authentications#create'
   match '/auth/failure' => 'authentications#failure'
