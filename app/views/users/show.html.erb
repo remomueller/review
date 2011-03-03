@@ -20,18 +20,23 @@
     <%= @user.status %>
   </p>
   
-  <p><b>Committees:</b>
-    <% if not @user.steering_committee? and not @user.pp_committee? %>
-      None
-    <% else %>
-    <br />
-      <%= 'Steering Committee<br />'.html_safe if @user.steering_committee? %>
-      <%= 'Publications and Presentations Sub Committee' if @user.pp_committee? %>
-    <% end %>
+  <p><b>Steering Committee</b><br />
+      <b>Member: </b>
+      <%= check_box_tag :steering_committee, 'member', @user.steering_committee?, :disabled => true %> | 
+      <label>Secretary:</label>
+      <%= check_box_tag :steering_committee, 'secretary', @user.steering_committee_secretary?, :disabled => true %>
+  </p>
+  
+  <p><b>Publications and Presentations Sub Committee</b><br />
+    <b>Member: </b>
+    <%= check_box_tag :pp_committee, 'member', @user.pp_committee?, :disabled => true %> | 
+    <label>Secretary:</label>
+    <%= check_box_tag :pp_committee, 'secretary', @user.pp_committee_secretary?, :disabled => true %>
+    
   </p>
   
   <p>
     <b>System Admin:</b>
-    <%= @user.system_admin? %>
+    <%= check_box_tag :system, 'admin', @user.system_admin?, :disabled => true %>
   </p>
 <% end %>

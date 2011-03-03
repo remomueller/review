@@ -28,12 +28,18 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :steering_committee, 'Steering Committee' %><br />
-    <%= f.check_box :steering_committee %>
+    <label>Steering Committee</label><br />
+    <%= f.label :steering_committee, 'Member: ' %>
+    <%= f.check_box :steering_committee %> | 
+    <%= f.label :steering_committee_secretary, 'Secretary: ' %>
+    <%= f.check_box :steering_committee_secretary %>
   </div>
   <div class="field">
-    <%= f.label :pp_committee, 'Publications and Presentations Sub Committee' %><br />
-    <%= f.check_box :pp_committee %>
+    <label>Publications and Presentations Sub Committee</label><br />
+    <%= f.label :pp_committee, 'Member: ' %>
+    <%= f.check_box :pp_committee %> |
+    <%= f.label :pp_committee_secretary, 'Secretary: ' %>
+    <%= f.check_box :pp_committee_secretary %>
   </div>
   <div class="field">
     <%= f.label :system_admin %><br />

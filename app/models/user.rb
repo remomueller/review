@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
 
   # Model Relationships
   has_many :authentications
+  has_many :comments, :conditions => {:deleted => false}, :order => 'created_at DESC'
   has_many :publications, :conditions => { :deleted => false }
   
   # User Methods
@@ -42,6 +43,16 @@ class User < ActiveRecord::Base
         Publication.current.order('created_at')
       else
         self.publications
+      end
+    end
+  end
+  
+  def all_comments
+    @all_comments ||= begin
+      if self.system_admin?
+        Comment.current.order('created_at DESC')
+      else
+        self.comments
       end
     end
   end

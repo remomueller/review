@@ -1,4 +1,5 @@
 <% width = '914px' %>
+<% disabled = '' if defined?(disabled) == nil %>
 <%= form_for(@publication) do |f| %>
     <% if @publication.errors.any? %>
       <div id="error_explanation">
@@ -22,12 +23,12 @@
     
     <div class="field">
       <%= f.label :centers, '2. Center(s):' %><br />
-      <%= f.text_field :centers, :style => "width:#{width}" %>
+      <%= f.text_field :centers, :style => "width:#{width}", :disabled => disabled %>
     </div>
     
     <div class="field">
       <%= f.label :proposal_submission_date, '3. Date this publication was submitted to CHAT DCC' %><br />
-      <%= f.date_select :proposal_submission_date %>
+      <%= f.date_select :proposal_submission_date, :disabled => disabled %>
     </div>
     
   </fieldset>
@@ -35,14 +36,14 @@
     <legend>B. Publication Information</legend>
     <div class="field">
       <label>4. Type of publication</label><br />
-      <%= f.radio_button(:publication_type, "PP") %> <%= label 'publication_publication_type', 'pp', 'CHAT primary or mainline paper (design or primary CHAT hypothesis)' %>
+      <%= f.radio_button(:publication_type, "PP", :disabled => disabled) %> <%= label 'publication_publication_type', 'pp', 'CHAT primary or mainline paper (design or primary CHAT hypothesis)' %>
     </div>
     <div class="field">
-      <%= f.radio_button(:publication_type, "SP") %> <%= label 'publication_publication_type', 'sp', 'CHAT secondary paper (non-primary hypothesis of CHAT or with data collected at more than one but not all of the investigative centers)' %>
+      <%= f.radio_button(:publication_type, "SP", :disabled => disabled) %> <%= label 'publication_publication_type', 'sp', 'CHAT secondary paper (non-primary hypothesis of CHAT or with data collected at more than one but not all of the investigative centers)' %>
     </div>
     <div class="field">
-      <%= f.radio_button(:publication_type, "AP") %> <%= label 'publication_publication_type', 'ap', 'Ancillary Paper (data collected only at one investigative center <em>specify ancillary study &amp; paper</em>):'.html_safe %><br />
-      <%= f.text_field :publication_type_specify, :style => "width:#{width}" %>
+      <%= f.radio_button(:publication_type, "AP", :disabled => disabled) %> <%= label 'publication_publication_type', 'ap', 'Ancillary Paper (data collected only at one investigative center <em>specify ancillary study &amp; paper</em>):'.html_safe %><br />
+      <%= f.text_field :publication_type_specify, :style => "width:#{width}", :disabled => disabled %>
     </div>
   </fieldset>
   <fieldset>
@@ -51,21 +52,21 @@
     <div class="field">
       <label>5. Does preparation of this publication require any DCC RESOURCES? (<em>check all that apply; specify resources in each category</em>)</label><br />
       <br />
-      <%= f.check_box :dcc_resources_none %> <%= f.label :dcc_resources_none, 'None' %><br />
-      <%= f.check_box :dcc_resources_staff %> <%= f.label :dcc_resources_staff, 'Staff (specify):' %><br />      
-      <%= f.text_field :dcc_resources_staff_specify, :style => "width:#{width}" %><br />
-      <%= f.check_box :dcc_resources_other %> <%= f.label :dcc_resources_other, 'Other (specify):' %><br />
-      <%= f.text_field :dcc_resources_other_specify, :style => "width:#{width}" %><br />
+      <%= f.check_box :dcc_resources_none, :disabled => disabled %> <%= f.label :dcc_resources_none, 'None' %><br />
+      <%= f.check_box :dcc_resources_staff, :disabled => disabled %> <%= f.label :dcc_resources_staff, 'Staff (specify):' %><br />      
+      <%= f.text_field :dcc_resources_staff_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <%= f.check_box :dcc_resources_other, :disabled => disabled %> <%= f.label :dcc_resources_other, 'Other (specify):' %><br />
+      <%= f.text_field :dcc_resources_other_specify, :style => "width:#{width}", :disabled => disabled %><br />
     </div>
 
     <div class="field">
       <label>6.  What CHAT data will be required to prepare this publication? <em>(check all that apply)</em></label><br />
       <br />
-      <%= f.check_box :chat_data_none %> <%= f.label :chat_data_none, 'None' %><br />
-      <%= f.check_box :chat_data_main_forms %> <%= f.label :chat_data_main_forms, 'CHAT main forms database (<em>please attach copies of release forms with required items circled</em>)'.html_safe %><br />
-      <%= f.check_box :chat_data_main_database %> <%= f.label :chat_data_main_database, 'CHAT main sleep study database (<em>please attach a list of data items</em>)'.html_safe %><br />
-      <%= f.check_box :chat_data_other %> <%= f.label :chat_data_other, 'Other (<em>specify data and where the data are located</em>):'.html_safe %><br />
-      <%= f.text_field :chat_data_other_specify, :style => "width:#{width}" %>
+      <%= f.check_box :chat_data_none, :disabled => disabled %> <%= f.label :chat_data_none, 'None' %><br />
+      <%= f.check_box :chat_data_main_forms, :disabled => disabled %> <%= f.label :chat_data_main_forms, 'CHAT main forms database (<em>please attach copies of release forms with required items circled</em>)'.html_safe %><br />
+      <%= f.check_box :chat_data_main_database, :disabled => disabled %> <%= f.label :chat_data_main_database, 'CHAT main sleep study database (<em>please attach a list of data items</em>)'.html_safe %><br />
+      <%= f.check_box :chat_data_other, :disabled => disabled %> <%= f.label :chat_data_other, 'Other (<em>specify data and where the data are located</em>):'.html_safe %><br />
+      <%= f.text_field :chat_data_other_specify, :style => "width:#{width}", :disabled => disabled %>
     </div>
   </fieldset>
   <fieldset>
@@ -74,12 +75,12 @@
     <div class="field">
       <label>7. Which of the following is required for preparation of this manuscript? (<em>check all that apply</em>)</label><br />
       <br />
-      <%= f.check_box :manuscript_preparation_analysis_data %> <%= f.label :manuscript_preparation_analysis_data, 'New analysis of CHAT data by DCC staff' %><br />
-      <%= f.check_box :manuscript_preparation_analysis_ancillary_data %> <%= f.label :manuscript_preparation_analysis_ancillary_data, 'New analysis of CHAT ancillary study data by DCC staff' %><br />
-      <%= f.check_box :manuscript_analysis_review %> <%= f.label :manuscript_analysis_review, 'Review of distributed analysis of CHAT data by DCC staff' %><br />
-      <%= f.check_box :manuscript_preparation_other %> <%= f.label :manuscript_preparation_other, 'Other (<em>specify</em>):'.html_safe %><br />
-      <%= f.text_field :manuscript_preparation_other_specify, :style => "width:#{width}" %><br />
-      <%= f.check_box :manuscript_preparation_none %> <%= f.label :manuscript_preparation_none, 'None' %>      
+      <%= f.check_box :manuscript_preparation_analysis_data, :disabled => disabled %> <%= f.label :manuscript_preparation_analysis_data, 'New analysis of CHAT data by DCC staff' %><br />
+      <%= f.check_box :manuscript_preparation_analysis_ancillary_data, :disabled => disabled %> <%= f.label :manuscript_preparation_analysis_ancillary_data, 'New analysis of CHAT ancillary study data by DCC staff' %><br />
+      <%= f.check_box :manuscript_analysis_review, :disabled => disabled %> <%= f.label :manuscript_analysis_review, 'Review of distributed analysis of CHAT data by DCC staff' %><br />
+      <%= f.check_box :manuscript_preparation_other, :disabled => disabled %> <%= f.label :manuscript_preparation_other, 'Other (<em>specify</em>):'.html_safe %><br />
+      <%= f.text_field :manuscript_preparation_other_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <%= f.check_box :manuscript_preparation_none, :disabled => disabled %> <%= f.label :manuscript_preparation_none, 'None' %>
     </div>
     
     <div class="field">
@@ -94,14 +95,14 @@
     <div class="field">
       <label>9.  Attachments to this form (<em>check all that apply</em>)</label><br />
       <br />
-      <%= f.check_box :attachment_chat_form %> <%= f.label :attachment_chat_form, 'CHAT form with items marked to indicate variables intended for analysis:' %><br />
-      <%= f.text_field :attachment_chat_form_specify, :style => "width:#{width}" %><br />
-      <%= f.check_box :attachment_chat_variables %> <%= f.label :attachment_chat_variables, 'List of CHAT sleep study variables intended for analysis:' %><br />
-      <%= f.text_field :attachment_chat_variables_specify, :style => "width:#{width}" %><br />
-      <%= f.check_box :attachment_ancillary_forms %> <%= f.label :attachment_ancillary_forms,'CHAT ancillary study forms with items marked to indicate variables intended for analysis:' %><br />
-      <%= f.text_field :attachment_ancillary_forms_specify, :style => "width:#{width}" %><br />
-      <%= f.check_box :attachment_other %> <%= f.label :attachment_other, 'Other (<em>specify</em>):'.html_safe %><br />
-      <%= f.text_field :attachment_other_specify, :style => "width:#{width}" %>
+      <%= f.check_box :attachment_chat_form, :disabled => disabled %> <%= f.label :attachment_chat_form, 'CHAT form with items marked to indicate variables intended for analysis:' %><br />
+      <%= f.text_field :attachment_chat_form_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <%= f.check_box :attachment_chat_variables, :disabled => disabled %> <%= f.label :attachment_chat_variables, 'List of CHAT sleep study variables intended for analysis:' %><br />
+      <%= f.text_field :attachment_chat_variables_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <%= f.check_box :attachment_ancillary_forms, :disabled => disabled %> <%= f.label :attachment_ancillary_forms,'CHAT ancillary study forms with items marked to indicate variables intended for analysis:' %><br />
+      <%= f.text_field :attachment_ancillary_forms_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <%= f.check_box :attachment_other, :disabled => disabled %> <%= f.label :attachment_other, 'Other (<em>specify</em>):'.html_safe %><br />
+      <%= f.text_field :attachment_other_specify, :style => "width:#{width}", :disabled => disabled %>
     </div>
     
     <div class="field">
@@ -113,77 +114,77 @@
       <br />
       <br />
       <%= f.label :full_title %><br />
-      <%= f.text_field :full_title, :style => "width:#{width}" %>
+      <%= f.text_field :full_title, :style => "width:#{width}", :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :abbreviated_title, 'Abbreviated Title' %><br />
-      <%= f.text_field :abbreviated_title, :maxlength => '40' %>
+      <%= f.text_field :abbreviated_title, :maxlength => '40', :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :lead_author, 'Lead Author' %><br />
-      <%= f.text_field :lead_author %>
+      <%= f.text_field :lead_author, :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :writing_group_members, 'Writing Group Members' %><br />
-      <%= f.text_field :writing_group_members, :style => "width:#{width}" %>
+      <%= f.text_field :writing_group_members, :style => "width:#{width}", :disabled => disabled %>
     </div>
     <% if false %>
     <div class="field">
       <%= f.label :additional_coauthors, 'Additional Co-Authors' %><br />
-      <%= f.text_field :additional_coauthors, :style => "width:#{width}" %>
+      <%= f.text_field :additional_coauthors, :style => "width:#{width}", :disabled => disabled %>
     </div>
     <% end %>
     <div class="field">
       <%= f.label :keywords %><br />
-      <%= f.text_field :keywords, :style => "width:#{width}" %>
+      <%= f.text_field :keywords, :style => "width:#{width}", :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :affiliation %><br />
-      <%= f.text_field :affiliation %>
+      <%= f.text_field :affiliation, :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :timeline %><br />
-      <%= f.text_area :timeline, :rows => 7, :style => "width:#{width}" %>
+      <%= f.text_area :timeline, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :sponsoring_pi, 'Sponsoring PI' %><br />
-      <%= f.text_field :sponsoring_pi %>
+      <%= f.text_field :sponsoring_pi, :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :rationale %><br />
-      <%= f.text_area :rationale, :rows => 7, :style => "width:#{width}" %>
+      <%= f.text_area :rationale, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :hypothesis %><br />
-      <%= f.text_area :hypothesis, :rows => 7, :style => "width:#{width}" %>
+      <%= f.text_area :hypothesis, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :data, 'Data (Study Design, Population, Variables of Interest)' %><br />
-      <%= f.text_area :data, :rows => 7, :style => "width:#{width}" %>
+      <%= f.text_area :data, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :study_type, 'Type of Study' %><br />
-      <%= f.text_field :study_type %>
+      <%= f.text_field :study_type, :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :target_journal, 'Target Journal' %><br />
-      <%= f.text_field :target_journal %>
+      <%= f.text_field :target_journal, :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :analysis_responsibility, 'Analysis Responsibility' %><br />
-      <%= f.text_area :analysis_responsibility, :rows => 7, :style => "width:#{width}" %>
+      <%= f.text_area :analysis_responsibility, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :analysis_plan, 'Brief Analysis Plan' %><br />
-      <%= f.text_area :analysis_plan, :rows => 7, :style => "width:#{width}" %>
+      <%= f.text_area :analysis_plan, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :summary_section, 'Summary Section' %><br />
-      <%= f.text_area :summary_section, :rows => 7, :style => "width:#{width}" %>
+      <%= f.text_area :summary_section, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :references %><br />
-      <%= f.text_area :references, :rows => 7, :style => "width:#{width}" %>
+      <%= f.text_area :references, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
     </div>
     
   </fieldset>
@@ -199,7 +200,7 @@
     </ul>
 
     <div class="field">
-      <%= f.check_box :author_assurance %> <%= f.label :author_assurance, 'Please tick to confirm that you have read and understand the above text' %><br />
+      <%= f.check_box :author_assurance, :disabled => disabled %> <%= f.label :author_assurance, 'Please tick to confirm that you have read and understand the above text' %><br />
       
     </div>
 <% if false %>    
@@ -213,12 +214,14 @@
     </div>
 <% end %>
   </fieldset>
-  <div class="actions">
-    <button class="positive">
-      <%= image_tag('icons/tick.png', :alt => '') %>
-      <%= @publication.new_record? ? "Create Publication" : "Update Publication" %>
-    </button>
-    <%= cancel %>
-		<br />
-  </div>
+  <% if disabled.blank? %>
+    <div class="actions">
+      <button class="positive">
+        <%= image_tag('icons/tick.png', :alt => '') %>
+        <%= @publication.new_record? ? "Create Publication" : "Update Publication" %>
+      </button>
+      <%= cancel %>
+  		<br />
+    </div>
+  <% end %>
 <% end %>

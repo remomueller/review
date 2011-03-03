@@ -1,3 +1,10 @@
+<%= link_to 'Edit', edit_publication_path(@publication) %> |
+<%= link_to 'Back', publications_path %>
+
+<%= render :partial => 'publications/form', :locals => { :disabled => 'disabled' } %>
+
+
+<% if false %>
 <p>
   <b>Full title:</b>
   <%= @publication.full_title %>
@@ -265,6 +272,4 @@
   <%= @publication.committee_submission_date %>
 </p>
 
-
-<%= link_to 'Edit', edit_publication_path(@publication) %> |
-<%= link_to 'Back', publications_path %>
+<% end %>
