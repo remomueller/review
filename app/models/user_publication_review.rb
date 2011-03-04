@@ -1,6 +1,6 @@
 class UserPublicationReview < ActiveRecord::Base
 
-  STATUS = ["approved", "approved with comments", "not approved"].collect{|i| [i,i]}
+  STATUS = ["approved", "not approved"].collect{|i| [i,i]}
 
   # Named Scopes
   scope :current, :conditions => { }

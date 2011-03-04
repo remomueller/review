@@ -33,7 +33,7 @@
 <% end %>
 <% end %>
 
-<% if (current_user.pp_committee? or current_user.pp_committee_secretary?) and ['proposed', 'not approved', 'approved with comments', 'approved'].include?(@publication.status) %>
+<% if (current_user.pp_committee? or current_user.pp_committee_secretary?) and ['proposed', 'not approved', 'approved'].include?(@publication.status) %>
   <fieldset>
     <legend>Publication Reviews</legend>
     <table>
@@ -43,24 +43,29 @@
         <th>Status</th>
         <th></th>
       </tr>
-    <% User.current.pp_committee_members.each do |user| %>
-      <% @user_publication_review = user.user_publication_reviews.find_by_publication_id(@publication.id) %>
-      <tbody id="publication_review_box_user_<%= user.id %>">
-        <% if @user_publication_review %>
-          <%= render :partial => 'user_publication_reviews/show' %>
-        <% else %>
-          <tr>
-            <td style="vertical-align:middle"><%= link_to user.name, user %></td>
-            <td></td>
-            <td class="quiet" style="vertical-align:middle">not yet submitted</td>
-            <td>
-              <% if current_user == user %>
-                <%= link_to 'Create Review', '#', :onclick => remote_function(:url => new_user_publication_review_path(:publication_id => @publication.id), :method => :get) + "; return false;", :class => "button" %>
-              <% else %>
-                <%= link_to_function image_tag('icons/email.png', :alt => '') + 'Send Email Reminder', "alert('Not yet implemented, just a placeholder sorry!')", :class => 'button', :style => 'margin-bottom:0px' %>
-              <% end %>
-            </td>
-          </tr>
+    <% User.current.pp_committee_members.each do |@user| %>
+      <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
+      <tbody id="publication_review_box_user_<%= @user.id %>">
+        <%= render :partial => 'user_publication_reviews/show' %>
+          
+        <% if false %>
+          <% if @user_publication_review %>
+            <%= render :partial => 'user_publication_reviews/show' %>
+          
+          <% else %>
+            <tr>
+              <td style="vertical-align:middle"><%= link_to user.name, user %></td>
+              <td></td>
+              <td class="quiet" style="vertical-align:middle">not yet submitted</td>
+              <td>
+                <% if current_user == user %>
+                  <%= link_to 'Create Review', '#', :onclick => remote_function(:url => new_user_publication_review_path(:publication_id => @publication.id), :method => :get) + "; return false;", :class => "button" %>
+                <% else %>
+                  <%= link_to_function image_tag('icons/email.png', :alt => '') + 'Send Email Reminder', "alert('Not yet implemented, just a placeholder sorry!')", :class => 'button', :style => 'margin-bottom:0px' %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     <% end %>
@@ -85,11 +90,11 @@
   <% end %>
 <% end %>
 
-<% if current_user == @publication.user and ['approved with comments'].include?(@publication.status) %>
+<% if current_user == @publication.user and ['approved', 'not approved'].include?(@publication.status) %>
 <fieldset>
   <legend>Publications and Presentations Sub Committee Reviewer Comments</legend>
   <% @publication.user_publication_reviews.each do |user_publication_review| %>
-    <%= user_publication_review.comment if user_publication_review.status == 'approved with comments' %>
+    <%= user_publication_review.comment unless user_publication_review.comment.blank? %>
   <% end %>
 </fieldset>
 <% end %>

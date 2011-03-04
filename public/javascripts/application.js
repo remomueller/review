@@ -29,12 +29,3 @@ function hideOnMouseOut(elements){
     }
   });
 }
-
-function toggleReviewComment(){
-  if($('user_publication_review_status_approved_with_comments').checked)
-  {
-    $('review_comment_box').show()
-  }else{
-    $('review_comment_box').hide()
-  }
-}

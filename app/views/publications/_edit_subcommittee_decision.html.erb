@@ -2,7 +2,7 @@
 <div class="field">
   <label>Publication Status</label><br />
   <% Publication::PP_STATUS.each do |display, value| %>
-    <%= radio_button :publication, :status, value, :onchange => "", :checked => ((value == 'approved' and @publication.status == 'proposed') or value == @publication.status) %> <label><%= display %></label>
+    <%= radio_button :publication, :status, value, :checked => (value == @publication.status) %> <label><%= display %></label>
   <% end %>
 </div>
 <div class="field">

@@ -36,11 +36,11 @@ class PublicationsController < ApplicationController
   end
 
   def index
-    @publications = current_user.all_publications
+    @publications = current_user.all_viewable_publications
   end
 
   def show
-    @publication = current_user.all_publications.find_by_id(params[:id])
+    @publication = current_user.all_viewable_publications.find_by_id(params[:id])
     redirect_to root_path unless @publication
   end
 

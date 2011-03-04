@@ -49,6 +49,16 @@ class User < ActiveRecord::Base
     end
   end
   
+  def all_viewable_publications
+    @all_viewable_publications ||= begin
+      if self.system_admin? or self.pp_committee? or self.pp_committee_secretary?
+        Publication.current.order('created_at')
+      else
+        self.publications
+      end
+    end
+  end
+  
   def all_comments
     @all_comments ||= begin
       if self.system_admin?

@@ -18,7 +18,7 @@ class AuthenticationsController < ApplicationController
       if authentication.user.active?
         flash[:notice] = "Signed in successfully."
       else
-        flash[:warning] = "Your account has not yet been activated by a System Administrator."
+        # flash[:warning] = "Your account has not yet been activated by a System Administrator."
       end
       sign_in_and_redirect(:user, authentication.user)
     elsif current_user
@@ -32,7 +32,7 @@ class AuthenticationsController < ApplicationController
         if user.active?
           flash[:notice] = "Signed in successfully."
         else
-          flash[:warning] = "Your account has not yet been activated by a System Administrator."
+          # flash[:warning] = "Your account has not yet been activated by a System Administrator."
         end
         sign_in_and_redirect(:user, user)
       else
