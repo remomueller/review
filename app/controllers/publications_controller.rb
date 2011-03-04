@@ -50,13 +50,14 @@ class PublicationsController < ApplicationController
 
   def edit
     @publication = current_user.all_publications.find_by_id(params[:id])
-    redirect_to root_path unless @publication and @publication.status == 'proposed'
+    redirect_to root_path unless @publication and ['draft', 'not approved'].include?(@publication.status)
   end
 
   def create
     @publication = current_user.publications.new(params[:publication])
     @publication.author_assurance_date = Date.today
     if @publication.save
+      @publication.update_attribute :status, 'draft'
       redirect_to(@publication, :notice => 'Publication was successfully created.')
     else
       render :action => "new"
@@ -65,9 +66,10 @@ class PublicationsController < ApplicationController
 
   def update
     @publication = current_user.all_publications.find_by_id(params[:id])
-    if @publication
+    if @publication and ['draft', 'not approved'].include?(@publication.status)
       if @publication.update_attributes(params[:publication])
-        redirect_to(@publication, :notice => 'Publication was successfully updated.')
+        @publication.update_attribute :status, params[:publish] == '1' ? 'proposed' : 'draft'
+        redirect_to(@publication, :notice => params[:publish] == '1' ? 'Publication was successfully resubmitted for review.' : 'Draft was saved successfully.')
       else
         render :action => "edit"
       end

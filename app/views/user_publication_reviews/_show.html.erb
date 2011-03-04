@@ -21,9 +21,9 @@
       <% end %>
     <% elsif current_user == @user_publication_review.user %>
       No editing, review has been locked.
-    <% elsif @user_publication_review.publication.status == 'proposed' %>
+    <% elsif @user_publication_review.publication.status == 'proposed' and @user_publication_review.new_record? %>
       <%= link_to_function image_tag('icons/email.png', :alt => '') + 'Send Email Reminder', "alert('Not yet implemented, just a placeholder sorry!')", :class => 'button', :style => 'margin-bottom:0px' %>
-    <% else %>
+    <% elsif @user_publication_review.new_record? %>
       Review Locked (By Being Approved/Not Approved). No more email reminders for reviewer.
     <% end %>
   </td>

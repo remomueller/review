@@ -1,6 +1,6 @@
 <% @title = "Publication: #{@publication.full_title}" %>
 <h1><%= @title %></h1>
-<%= link_to image_tag('icons/edit.png', :alt => '') + "Edit Publication", edit_publication_path(@publication), :class => 'button' if current_user.all_publications.include?(@publication) and @publication.status == 'proposed' %>
+<%= link_to image_tag('icons/edit.png', :alt => '') + "Edit Publication", edit_publication_path(@publication), :class => 'button' if current_user.all_publications.include?(@publication) and ['draft', 'not approved'].include?(@publication.status) %>
 <%= link_to image_tag('icons/mydocuments.png', :alt => '') + "View All Publications", publications_path, :class => 'button' %>
 <%#= link_to "#{image_tag('icons/eye.png', :alt => '')} View All Publications".html_safe, publications_path, :class => 'button' %>
 
@@ -13,25 +13,6 @@
 <%#= link_to 'Edit', edit_publication_path(@publication) %>
 <%#= link_to 'Back', publications_path %>
 <div style="clear:both"></div>
-<% if false %>
-<% if current_user.pp_committee? and @publication.status == 'proposed' %>
-
-<fieldset>
-  <legend>Publication Review</legend>
-  <div id="publication_review_box">
-  <% @user_publication_review = current_user.user_publication_reviews.find_by_publication_id(@publication.id) %>
-  <% if @user_publication_review %>
-    <table>
-    <%= render :partial => 'user_publication_reviews/show' %>
-    </table>
-  <% else %>
-    <% @user_publication_review = current_user.user_publication_reviews.new(:publication_id => @publication.id) %>
-    <%= render :partial => 'user_publication_reviews/form' %>
-  <% end %>
-  </div>
-</fieldset>
-<% end %>
-<% end %>
 
 <% if (current_user.pp_committee? or current_user.pp_committee_secretary?) and ['proposed', 'not approved', 'approved'].include?(@publication.status) %>
   <fieldset>

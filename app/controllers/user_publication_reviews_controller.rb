@@ -50,9 +50,7 @@ class UserPublicationReviewsController < ApplicationController
   def create
     if current_user.pp_committee?
       @user_publication_review = current_user.user_publication_reviews.find_or_create_by_publication_id(params[:publication_id])
-      
       # @user_publication_review = current_user.user_publication_reviews.new(params[:user_publication_review])
-      logger.debug "MY VARS!: " + params[:user_publication_review].inspect
       if @user_publication_review.publication.status == 'proposed' and @user_publication_review.update_attributes(params[:user_publication_review]) # @user_publication_review.save
         render :update do |page|
           page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/show'

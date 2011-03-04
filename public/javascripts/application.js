@@ -29,3 +29,14 @@ function hideOnMouseOut(elements){
     }
   });
 }
+
+function authorAssuranceCheck(){
+  if(!$('publication_author_assurance').checked){
+    alert('Please read and check the Author Assurance and Sign Off');
+    return false;
+  }
+  if(!confirm('Submit publication for review? No more edits will be possible.')){
+    return false;
+  }
+  return true;
+}

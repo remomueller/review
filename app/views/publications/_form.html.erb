@@ -216,10 +216,21 @@
   </fieldset>
   <% if disabled.blank? %>
     <div class="actions">
-      <button class="positive">
-        <%= image_tag('icons/tick.png', :alt => '') %>
-        <%= @publication.new_record? ? "Create Publication" : "Update Publication" %>
+      <% form_name = @publication.new_record? ? 'new_publication' : "edit_publication_#{@publication.id}" %>
+      
+      <button name="publish" value="0">
+        <%= image_tag('icons/save.png', :alt => '') %>
+        <%= @publication.new_record? ? "Save Draft of Publication" : "Update Draft of Publication" %>
       </button>
+      
+      <%#= hidden_field_tag 'publish', '0' %>
+      <%#= link_to_function image_tag('icons/tick.png', :alt => '') + "Submit Publication for Review", "$('publish').value='1';$('#{form_name}').submit();", :class => "button positive" %>
+
+      <button class="positive" name="publish" value="1" onclick="if(authorAssuranceCheck() == false){return false;}">
+        <%= image_tag('icons/tick.png', :alt => '') %>
+        Submit Publication for Review
+      </button>
+
       <%= cancel %>
   		<br />
     </div>
