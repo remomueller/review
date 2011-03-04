@@ -1,17 +1,23 @@
-<% width = '914px' %>
-
+<%# width = '914px' %>
 <tr>
   <td style="vertical-align:middle"><%= link_to @user_publication_review.user.name, @user_publication_review.user %></td>
   <td></td>
   <td style="vertical-align:middle">
-  <% UserPublicationReview::STATUS.each do |label, value| %>
-    <%= radio_button :user_publication_review, :status, value %> <label><%= label %></label>
-  <% end %>
+    <div class="field">
+      <% UserPublicationReview::STATUS.each do |label, value| %>
+        <%= radio_button :user_publication_review, :status, value %> <label><%= label %></label>
+      <% end %>
+      <br /><br />
+    </div>
+    <div class="field">
+      <%= label :user_publication_review, :writing_group_nomination %><br />
+      <%= text_area :user_publication_review, :writing_group_nomination, :rows => 3 %>
+    </div>
   </td>
   <td>
     <% url = @user_publication_review.new_record? ? user_publication_reviews_path(:publication_id => @user_publication_review.publication_id, :committee => 'steering') : user_publication_review_path(@user_publication_review, :committee => 'steering') %>
     <% method = @user_publication_review.new_record? ? :post : :put %>
-    <% with = "'&' + $('user_publication_review_status_approved').serialize() + '&' + $('user_publication_review_status_not_approved').serialize() + '&' + $('user_publication_review_comment').serialize()" %>
+    <% with = "'&' + $('user_publication_review_status_approved').serialize() + '&' + $('user_publication_review_status_not_approved').serialize() + '&' + $('user_publication_review_writing_group_nomination').serialize() + '&' + $('user_publication_review_comment').serialize()" %>
     <%= link_to(image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Nomination" : "Update Nomination"), '#', :onclick => remote_function(:url => url, :method => method, :with => with) + "; return false;", :class => "button positive" )%>
     <% unless @user_publication_review.new_record? %>
       <%= link_to image_tag('icons/cross.png', :alt => '') + 'cancel', @user_publication_review.publication, :class => 'button negative' %>
@@ -21,7 +27,10 @@
 <tr>
   <td></td>
   <td colspan="3">
-    <%= text_area :user_publication_review, :comment, :rows => 7, :style => "width:#{width}" %>
+    <div class="field">
+      <%= label :user_publication_review, :comment %><br />
+      <%= text_area :user_publication_review, :comment, :rows => 7, :style => "width:588px" %>
+    </div>
   </td>
 </tr>
 

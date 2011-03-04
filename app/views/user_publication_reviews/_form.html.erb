@@ -1,5 +1,4 @@
-<% width = '914px' %>
-
+<%# width = '914px' %>
 <tr>
   <td style="vertical-align:middle"><%= link_to @user_publication_review.user.name, @user_publication_review.user %></td>
   <td></td>
@@ -21,7 +20,8 @@
 <tr>
   <td></td>
   <td colspan="3">
-    <%= text_area :user_publication_review, :comment, :rows => 7, :style => "width:#{width}" %>
+    <%= label :user_publication_review, :comment %><br />
+    <%= text_area :user_publication_review, :comment, :rows => 7, :style => "width:588px" %>
   </td>
 </tr>
 

@@ -17,7 +17,7 @@
       <% if @user_publication_review.new_record? %>
         <%= link_to 'Create Review', '#', :onclick => remote_function(:url => new_user_publication_review_path(:publication_id => @publication.id), :method => :get) + "; return false;", :class => "button" %>
       <% else %>
-        <%= link_to "#{image_tag('icons/edit.png', :alt => '')} Edit Review".html_safe, '#', :onclick => remote_function(:url => edit_user_publication_review_path(@user_publication_review), :method => :get) + "; return false;", :class => 'button' %>
+        <%= link_to image_tag('icons/edit.png', :alt => '') + 'Edit Review', '#', :onclick => remote_function(:url => edit_user_publication_review_path(@user_publication_review), :method => :get) + "; return false;", :class => 'button' %>
       <% end %>
     <% elsif current_user == @user_publication_review.user %>
       No editing, review has been locked.
