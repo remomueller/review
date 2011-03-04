@@ -2,6 +2,7 @@ class Publication < ActiveRecord::Base
 
   STATUS = ["draft", "proposed", "approved", "not approved", "nominated", "submitted", "published"].collect{|i| [i,i]}
   PP_STATUS = ["proposed", "approved", "not approved"].collect{|i| [i,i]}
+  SC_STATUS = ["approved", "nominated", "not approved"].collect{|i| [i,i]}
   # Currently 57 Total Attributes (Publication.first.attributes.size)
   # 52 of which are attr_accessible (Publication.attr_accessible.size)
   # 5 of which are not set using mass assignment.

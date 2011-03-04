@@ -7,8 +7,11 @@ Review::Application.routes.draw do
   resources :publications do
     member do
        post :pp_approval
+       post :sc_approval
        post :show_subcommittee_decision
        post :edit_subcommittee_decision
+       post :show_steering_committee_decision
+       post :edit_steering_committee_decision
     end
   end
 

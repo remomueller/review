@@ -31,16 +31,24 @@ class UserPublicationReviewsController < ApplicationController
     @user_publication_review = current_user.user_publication_reviews.new(:publication_id => params[:publication_id]) unless @user_publication_review
     
     render :update do |page|
-      page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/form'
+      if params[:committee] == 'steering'
+        page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/sc_form'
+      else
+        page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/form'
+      end
     end
     
   end
 
   def edit
     @user_publication_review = current_user.user_publication_reviews.find_by_id(params[:id])
-    if @user_publication_review and current_user.pp_committee? and @user_publication_review.publication.status == 'proposed'
+    if @user_publication_review and ((current_user.steering_committee? and @user_publication_review.publication.status == 'approved') or (current_user.pp_committee? and @user_publication_review.publication.status == 'proposed'))
       render :update do |page|
-        page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/form'
+        if params[:committee] == 'steering'
+          page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/sc_form'
+        else
+          page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/form'
+        end
       end
     else
       render :nothing => true
@@ -48,12 +56,16 @@ class UserPublicationReviewsController < ApplicationController
   end
   
   def create
-    if current_user.pp_committee?
+    if current_user.pp_committee? or current_user.sc_committee?
       @user_publication_review = current_user.user_publication_reviews.find_or_create_by_publication_id(params[:publication_id])
       # @user_publication_review = current_user.user_publication_reviews.new(params[:user_publication_review])
-      if @user_publication_review.publication.status == 'proposed' and @user_publication_review.update_attributes(params[:user_publication_review]) # @user_publication_review.save
+      if ((current_user.pp_committee? and @user_publication_review.publication.status == 'proposed') or (current_user.sc_committee? and @user_publication_review.publication.status == 'approved')) and @user_publication_review.update_attributes(params[:user_publication_review]) # @user_publication_review.save
         render :update do |page|
-          page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/show'
+          if params[:committee] == 'steering'
+            page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/sc_show'
+          else
+            page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/show'
+          end
         end
         # redirect_to(@user_publication_review.publication, :notice => 'Your review was submitted successfully.')
       else
@@ -68,12 +80,16 @@ class UserPublicationReviewsController < ApplicationController
   def update
     @user_publication_review = current_user.user_publication_reviews.find_by_id(params[:id])
     
-    if @user_publication_review and current_user.pp_committee? and @user_publication_review.publication.status == 'proposed'
+    if @user_publication_review and ((current_user.steering_committee? and @user_publication_review.publication.status == 'approved') or (current_user.pp_committee? and @user_publication_review.publication.status == 'proposed'))
   
       if @user_publication_review.update_attributes(params[:user_publication_review])
         # redirect_to(@user_publication_review.publication, :notice => 'Your review was successfully updated.')
         render :update do |page|
-          page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/show'
+          if params[:committee] == 'steering'
+            page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/sc_show'
+          else
+            page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/show'
+          end
         end
       else
         render :nothing => true

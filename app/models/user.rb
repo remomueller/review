@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   scope :status, lambda { |*args|  { :conditions => ["users.status IN (?)", args.first] } }
   scope :system_admins, :conditions => { :system_admin => true }
   scope :pp_committee_members, :conditions => { :pp_committee => true }
+  scope :steering_committee_members, :conditions => { :steering_committee => true }
   
   # Model Validation
   validates_presence_of     :first_name

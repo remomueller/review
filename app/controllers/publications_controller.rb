@@ -35,6 +35,40 @@ class PublicationsController < ApplicationController
     end
   end
 
+  def sc_approval
+    @publication = Publication.current.find_by_id(params[:id])
+    if @publication and current_user.steering_committee_secretary? and params[:publication]
+      [:status].each do |attribute|
+        @publication.update_attribute attribute, params[:publication][attribute]
+      end
+      redirect_to @publication
+    else
+      redirect_to root_path
+    end
+  end
+
+  def show_steering_committee_decision
+    @publication = Publication.current.find_by_id(params[:id])
+    if @publication and current_user.steering_committee_secretary?
+      render :update do |page|
+        page.replace_html 'steering_committee_decision_box', :partial => 'publications/show_steering_committee_decision'
+      end
+    else
+      render :nothing => true
+    end
+  end
+  
+  def edit_steering_committee_decision
+    @publication = Publication.current.find_by_id(params[:id])
+    if @publication and current_user.steering_committee_secretary?
+      render :update do |page|
+        page.replace_html 'steering_committee_decision_box', :partial => 'publications/edit_steering_committee_decision'
+      end
+    else
+      render :nothing => true
+    end
+  end
+
   def index
     @publications = current_user.all_viewable_publications
   end

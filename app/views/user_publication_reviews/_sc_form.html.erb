@@ -9,10 +9,10 @@
   <% end %>
   </td>
   <td>
-    <% url = @user_publication_review.new_record? ? user_publication_reviews_path(:publication_id => @user_publication_review.publication_id) : user_publication_review_path(@user_publication_review) %>
+    <% url = @user_publication_review.new_record? ? user_publication_reviews_path(:publication_id => @user_publication_review.publication_id, :committee => 'steering') : user_publication_review_path(@user_publication_review, :committee => 'steering') %>
     <% method = @user_publication_review.new_record? ? :post : :put %>
     <% with = "'&' + $('user_publication_review_status_approved').serialize() + '&' + $('user_publication_review_status_not_approved').serialize() + '&' + $('user_publication_review_comment').serialize()" %>
-    <%= link_to(image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), '#', :onclick => remote_function(:url => url, :method => method, :with => with) + "; return false;", :class => "button positive" )%>
+    <%= link_to(image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Nomination" : "Update Nomination"), '#', :onclick => remote_function(:url => url, :method => method, :with => with) + "; return false;", :class => "button positive" )%>
     <% unless @user_publication_review.new_record? %>
       <%= link_to image_tag('icons/cross.png', :alt => '') + 'cancel', @user_publication_review.publication, :class => 'button negative' %>
     <% end %>

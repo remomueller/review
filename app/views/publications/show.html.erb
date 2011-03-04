@@ -14,9 +14,39 @@
 <%#= link_to 'Back', publications_path %>
 <div style="clear:both"></div>
 
+<% if (current_user.steering_committee? or current_user.steering_committee_secretary?) and ['approved', 'nominated'].include?(@publication.status) %>
+  <fieldset>
+    <legend>Steering Committee: Publication Reviews</legend>
+    <table>
+      <tr>
+        <th>Committee Member</th>
+        <th>Time</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    <% User.current.steering_committee_members.each do |@user| %>
+      <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
+      <tbody id="publication_review_box_user_<%= @user.id %>"><%= render :partial => 'user_publication_reviews/sc_show' %></tbody>
+    <% end %>
+    </table>
+    
+    <% if current_user.steering_committee_secretary? %>
+      <div id="steering_committee_decision_box">
+        <% if @publication.status == 'approved' %>
+          <%= render :partial => 'publications/edit_steering_committee_decision' %>
+        <% else %>
+          <%= render :partial => 'publications/show_steering_committee_decision' %>
+        <% end %>
+      </div>
+    <% end %>
+    
+  </fieldset>
+<% end %>
+
+
 <% if (current_user.pp_committee? or current_user.pp_committee_secretary?) and ['proposed', 'not approved', 'approved'].include?(@publication.status) %>
   <fieldset>
-    <legend>Publication Reviews</legend>
+    <legend>P&amp;P Committee: Publication Reviews</legend>
     <table>
       <tr>
         <th>Committee Member</th>
@@ -26,29 +56,7 @@
       </tr>
     <% User.current.pp_committee_members.each do |@user| %>
       <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
-      <tbody id="publication_review_box_user_<%= @user.id %>">
-        <%= render :partial => 'user_publication_reviews/show' %>
-          
-        <% if false %>
-          <% if @user_publication_review %>
-            <%= render :partial => 'user_publication_reviews/show' %>
-          
-          <% else %>
-            <tr>
-              <td style="vertical-align:middle"><%= link_to user.name, user %></td>
-              <td></td>
-              <td class="quiet" style="vertical-align:middle">not yet submitted</td>
-              <td>
-                <% if current_user == user %>
-                  <%= link_to 'Create Review', '#', :onclick => remote_function(:url => new_user_publication_review_path(:publication_id => @publication.id), :method => :get) + "; return false;", :class => "button" %>
-                <% else %>
-                  <%= link_to_function image_tag('icons/email.png', :alt => '') + 'Send Email Reminder', "alert('Not yet implemented, just a placeholder sorry!')", :class => 'button', :style => 'margin-bottom:0px' %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        <% end %>
-      </tbody>
+      <tbody id="publication_review_box_user_<%= @user.id %>"><%= render :partial => 'user_publication_reviews/show' %></tbody>
     <% end %>
     </table>
     
@@ -63,12 +71,6 @@
     <% end %>
     
   </fieldset>
-  <% if false %>
-    The PP Committee Secretary will view the PP COMMITTEE's comments/approvals, and either<br />
-    a) send back to author, by marking as approved_with_modifications
-    b) send back to author as denied (do not approve)
-    c) send to steering committee as approved
-  <% end %>
 <% end %>
 
 <% if current_user == @publication.user and ['approved', 'not approved'].include?(@publication.status) %>

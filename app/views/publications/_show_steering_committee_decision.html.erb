@@ -1,7 +1,7 @@
 <form>
 <div class="field">
   <label>Publication Status</label><br />
-  <% Publication::PP_STATUS.each do |display, value| %>
+  <% Publication::SC_STATUS.each do |display, value| %>
     <%= radio_button :publication, :status, value, :checked => (value == @publication.status), :disabled => 'disabled' %> <label><%= display %></label>
   <% end %>
 </div>
@@ -10,7 +10,7 @@
   <%= text_field :publication, :manuscript_number, :disabled => 'disabled' %>
 </div>
 <div class="actions">
-  <%= link_to image_tag('icons/edit.png', :alt => '') + 'Edit Subcommittee Decision', '#', :onclick => remote_function(:url => edit_subcommittee_decision_publication_path(@publication), :method => :post) + "; return false;", :class => 'button' %>
+  <%= link_to image_tag('icons/edit.png', :alt => '') + 'Edit Steering Committee Decision', '#', :onclick => remote_function(:url => edit_steering_committee_decision_publication_path(@publication), :method => :post) + "; return false;", :class => 'button' %>
 	<br />
 </div>
 </form>
