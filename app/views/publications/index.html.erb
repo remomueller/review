@@ -1,7 +1,17 @@
-<h1>Listing publications</h1>
+<h1>Publication Matrix</h1>
 
 <table>
   <tr>
+    <th></th><%# Manuscript Number %>
+    <th>Full Title</th>
+    <th>Lead Author and Writing Committee</th>
+    <th>Paper Type</th>
+    <th>Status and Notes</th>
+    <th>Dataset Requested Analyst</th>
+    <th>Targeted Start Date</th>
+    <th>Action Items</th>
+    
+    <% if false %>
     <th>Full title</th>
     <th>User</th>
     <th>Status</th>
@@ -58,10 +68,36 @@
     <th></th>
     <th></th>
     <th></th>
+    <% end %>
   </tr>
 
 <% @publications.each do |publication| %>
   <tr>
+    
+    <td><%= publication.manuscript_number %></td><%# Manuscript Number %>
+    <td><%= link_to publication.full_title, publication %></td>
+    <td><%= link_to publication.user.name, publication.user %> <%= publication.writing_group_members %></td>
+    <td><%= publication.publication_type %> <%= publication.publication_type_specify unless publication.publication_type_specify.blank? %></td>
+    <td><%= publication.status %></td>
+    <td>???</td>
+    <td>???</td>
+    <td>
+      <% case publication.status when 'draft' %>
+        <span class="quiet">Author has not submitted publication.</span>
+      <% when 'proposed' %>
+        P&amp;P Committee needs to review.
+      <% when 'approved' %>
+        Steering Committee needs to review and nominate.
+      <% when 'nominated' %>
+        Author needs to submit paper to journal.
+      <% when 'submitted' %>
+        Waiting for publication in journal.
+      <% when 'published' %>
+        Paper Published!
+      <% end %>
+    </td>
+    
+    <% if false %>
     <td><%= link_to publication.full_title.blank? ? '<span class="quiet">No Title</span>'.html_safe : publication.full_title, publication %></td>
     <td><%= link_to publication.user.name, publication.user %></td>
     <td><%= publication.status %></td>
@@ -118,6 +154,7 @@
     <td><%= link_to 'Show', publication %></td>
     <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
     <td><%= link_to 'Destroy', publication, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
