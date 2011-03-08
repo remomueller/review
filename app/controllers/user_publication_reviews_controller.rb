@@ -56,10 +56,10 @@ class UserPublicationReviewsController < ApplicationController
   end
   
   def create
-    if current_user.pp_committee? or current_user.sc_committee?
+    if current_user.pp_committee? or current_user.steering_committee?
       @user_publication_review = current_user.user_publication_reviews.find_or_create_by_publication_id(params[:publication_id])
       # @user_publication_review = current_user.user_publication_reviews.new(params[:user_publication_review])
-      if ((current_user.pp_committee? and @user_publication_review.publication.status == 'proposed') or (current_user.sc_committee? and @user_publication_review.publication.status == 'approved')) and @user_publication_review.update_attributes(params[:user_publication_review]) # @user_publication_review.save
+      if ((current_user.pp_committee? and @user_publication_review.publication.status == 'proposed') or (current_user.steering_committee? and @user_publication_review.publication.status == 'approved')) and @user_publication_review.update_attributes(params[:user_publication_review]) # @user_publication_review.save
         render :update do |page|
           if params[:committee] == 'steering'
             page.replace_html "publication_review_box_user_#{current_user.id}", :partial => 'user_publication_reviews/sc_show'
