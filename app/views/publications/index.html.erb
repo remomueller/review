@@ -9,7 +9,7 @@
     <th>Status and Notes</th>
     <th>Dataset Requested Analyst</th>
     <th>Targeted Start Date</th>
-    <th>Action Items</th>
+    <th>Action Items and Secretary Notes</th>
     
     <% if false %>
     <th>Full title</th>
@@ -80,7 +80,7 @@
     <td><%= publication.publication_type %> <%= publication.publication_type_specify unless publication.publication_type_specify.blank? %></td>
     <td><%= publication.status %></td>
     <td>???</td>
-    <td>???</td>
+    <td><%= publication.targeted_start_date %></td>
     <td>
       <% case publication.status when 'draft' %>
         <span class="quiet">Author has not submitted publication.</span>
@@ -95,6 +95,8 @@
       <% when 'published' %>
         Paper Published!
       <% end %>
+      <br />
+      <%= publication.secretary_notes %>
     </td>
     
     <% if false %>

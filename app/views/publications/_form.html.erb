@@ -75,18 +75,18 @@
     <div class="field">
       <label>7. Which of the following is required for preparation of this manuscript? (<em>check all that apply</em>)</label><br />
       <br />
+      <%= f.check_box :manuscript_preparation_none, :disabled => disabled %> <%= f.label :manuscript_preparation_none, 'None' %><br />
       <%= f.check_box :manuscript_preparation_analysis_data, :disabled => disabled %> <%= f.label :manuscript_preparation_analysis_data, 'New analysis of CHAT data by DCC staff' %><br />
       <%= f.check_box :manuscript_preparation_analysis_ancillary_data, :disabled => disabled %> <%= f.label :manuscript_preparation_analysis_ancillary_data, 'New analysis of CHAT ancillary study data by DCC staff' %><br />
       <%= f.check_box :manuscript_analysis_review, :disabled => disabled %> <%= f.label :manuscript_analysis_review, 'Review of distributed analysis of CHAT data by DCC staff' %><br />
       <%= f.check_box :manuscript_preparation_other, :disabled => disabled %> <%= f.label :manuscript_preparation_other, 'Other (<em>specify</em>):'.html_safe %><br />
-      <%= f.text_field :manuscript_preparation_other_specify, :style => "width:#{width}", :disabled => disabled %><br />
-      <%= f.check_box :manuscript_preparation_none, :disabled => disabled %> <%= f.label :manuscript_preparation_none, 'None' %>
+      <%= f.text_field :manuscript_preparation_other_specify, :style => "width:#{width}", :disabled => disabled %>
     </div>
     
     <div class="field">
       <label>8 . Briefly describe the proposed analysis</label><br />
       <br />
-      ...
+      <%= f.text_area :proposed_analysis, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
     </div>
   </fieldset>
   <fieldset>
