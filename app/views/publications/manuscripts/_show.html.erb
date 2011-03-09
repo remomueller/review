@@ -1,0 +1,9 @@
+<div class="field">
+  <%= link_to @publication.manuscript_url.split('/').last, @publication.manuscript_url %><br /><br />
+  
+  <div class="actions">
+    <% if current_user == @publication.user %>
+      <%= link_to image_tag('icons/addfile.png', :alt => '') + 'Upload a Revised Manuscript', '#', :onclick => remote_function(:url => edit_manuscript_publication_path(@publication), :method => :post) + "; return false;", :class => "button" %>
+    <% end %>
+  </div>
+</div>

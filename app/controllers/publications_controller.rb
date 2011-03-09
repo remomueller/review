@@ -1,11 +1,35 @@
 class PublicationsController < ApplicationController
   before_filter :authenticate_user!
 
-  def upload_manuscript
+  def edit_manuscript
     @publication = current_user.all_publications.find_by_id(params[:id])
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status)
-      @publication.update_attribute :manuscript, params[:publication][:manuscript]
+      render :update do |page|
+        page.replace_html 'manuscript_container', :partial => 'publications/manuscripts/edit'
+      end
+    else
+      render :nothing => true
+    end
+  end
+  
+  def show_manuscript
+    @publication = current_user.all_viewable_publications.find_by_id(params[:id])
+    if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status)
+      render :update do |page|
+        page.replace_html 'manuscript_container', :partial => 'publications/manuscripts/show'
+      end
+    else
+      render :nothing => true
+    end
+  end
+
+  def upload_manuscript
+    @publication = current_user.all_publications.find_by_id(params[:id])
+    if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status) and params[:publication] and params[:publication][:manuscript]
+      @publication.update_attributes(:manuscript => params[:publication][:manuscript], :manuscript_uploaded_at => Time.now)
       redirect_to @publication
+    elsif @publication
+      redirect_to @publication, :notice => 'Please specify a file to upload.'
     else
       redirect_to root_path
     end

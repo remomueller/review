@@ -73,21 +73,21 @@
   </fieldset>
 <% end %>
 
-<% if current_user == @publication.user and ['nominated', 'submitted', 'published'].include?(@publication.status) %>
-  <%= form_tag upload_manuscript_publication_path(@publication), :method => :post, :multipart => true do  %>
-    <fieldset>
-      <legend>Manuscript Upload</legend>
-      <div class="field">
-        <%= label :publication, :manuscript, 'Manuscript (PDF, Word)' %>
-        <%= file_field :publication, :manuscript %>         <%= submit_tag "Upload" %>
-      </div>
-      <% if false %>
-      <div class="actions">
-      </div>
-      <% end %>
-    </fieldset>
-  <% end %>
+<% if ['nominated', 'submitted', 'published'].include?(@publication.status) %>
+<fieldset>
+  <legend>Manuscript</legend>
+  <div id="manuscript_container">
+    <% if @publication.manuscript_url.blank? and current_user == @publication.user %>
+      <%= render :partial => 'publications/manuscripts/edit' %>
+    <% elsif not @publication.manuscript_url.blank? %>
+      <%= render :partial => 'publications/manuscripts/show' %>
+    <% else %>
+      The author has not uploaded any manuscripts.
+    <% end %>
+  </div>
+</fieldset>
 <% end %>
+
 
 <% if current_user == @publication.user and ['nominated'].include?(@publication.status) %>
 <fieldset>
