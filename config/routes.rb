@@ -16,6 +16,7 @@ Review::Application.routes.draw do
        post :edit_manuscript
        post :show_manuscript
        post :destroy_manuscript
+       post :send_reminder
     end
   end
 

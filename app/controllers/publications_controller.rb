@@ -1,6 +1,19 @@
 class PublicationsController < ApplicationController
   before_filter :authenticate_user!
 
+  def send_reminder
+    @publication = Publication.current.find_by_id(params[:id])
+    reviewer = User.current.find_by_id(params[:reviewer_id])
+    if @publication and reviewer and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?)
+      UserMailer.publication_approval_reminder(@publication, reviewer).deliver
+      render :update do |page|
+        page.replace_html "user_#{reviewer.id}_notified", '<span class="quiet">User Notified by Email</span>'
+      end
+    else
+      render :nothing => true
+    end
+  end
+
   def edit_manuscript
     @publication = current_user.all_publications.find_by_id(params[:id])
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status)

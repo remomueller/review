@@ -1,0 +1,11 @@
+Hello <%= @reviewer.first_name %>,<br />
+<br />
+<%= @publication.user.name %> [<%= @publication.user.email %>] has submitted a publication proposal <%= @publication.created_at.strftime("on %b %d, %Y at %I:%M %p") %>.<br />
+<br />
+</em><%= @publication.full_title %></em><br />
+<br />
+Please follow the link <%= link_to "#{SITE_URL}/publications/#{@publication.id}", "#{SITE_URL}/publications/#{@publication.id}" %> to approve or deny the proposal.<br />
+<br />
+Thank you!<br />
+<br />
+<%= DEFAULT_APP_NAME %> System Mailer
