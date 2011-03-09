@@ -10,6 +10,7 @@
     <th>Dataset Requested Analyst</th>
     <th>Targeted Start Date</th>
     <th>Action Items and Secretary Notes</th>
+    <th>Manuscript</th>
     
     <% if false %>
     <th>Full title</th>
@@ -97,6 +98,16 @@
       <% end %>
       <br />
       <%= publication.secretary_notes %>
+    </td>
+    <td>
+      <% unless publication.manuscript_url.blank? %>
+        <%= link_to image_tag('icons/download.png', :alt => '', :style => 'vertical-align:middle'), publication.manuscript_url, :target => '_blank' %>
+        <% if false %>
+        <br />
+        <span class="quiet"><%= simple_time(publication.manuscript_uploaded_at) %></span><br />
+        <%= print_byte_size(publication.manuscript.size) %>
+        <% end %>
+      <% end %>
     </td>
     
     <% if false %>
