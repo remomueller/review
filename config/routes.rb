@@ -15,6 +15,7 @@ Review::Application.routes.draw do
        post :upload_manuscript
        post :edit_manuscript
        post :show_manuscript
+       post :destroy_manuscript
     end
   end
 

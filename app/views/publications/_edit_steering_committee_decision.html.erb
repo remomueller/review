@@ -24,7 +24,7 @@
   
   
   <% unless @publication.status == 'proposed' %>
-    <%= link_to image_tag('icons/cross.png', :alt => '') + 'cancel', '#', :onclick => remote_function(:url => show_steering_committee_decision_publication_path(@publication), :method => :post) + "; return false;", :class => 'button negative' %>
+    <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', '#', :onclick => remote_function(:url => show_steering_committee_decision_publication_path(@publication), :method => :post) + "; return false;", :class => 'button negative' %>
   <% end %>
 	<br />
 </div>

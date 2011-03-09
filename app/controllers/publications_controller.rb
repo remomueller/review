@@ -26,12 +26,30 @@ class PublicationsController < ApplicationController
   def upload_manuscript
     @publication = current_user.all_publications.find_by_id(params[:id])
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status) and params[:publication] and params[:publication][:manuscript]
+      # Remove any existing manuscripts!
+      @publication.remove_manuscript!
+      
       @publication.update_attributes(:manuscript => params[:publication][:manuscript], :manuscript_uploaded_at => Time.now)
-      redirect_to @publication
+      extension = params[:publication][:manuscript].original_filename.downcase.split('.').last
+      message = ManuscriptUploader.new.extension_white_list.include?(extension) ? nil : "Not a valid document type: #{extension}"
+      redirect_to @publication, :alert => message
     elsif @publication
       redirect_to @publication, :notice => 'Please specify a file to upload.'
     else
       redirect_to root_path
+    end
+  end
+  
+  def destroy_manuscript
+    @publication = current_user.all_publications.find_by_id(params[:id])
+    if @publication
+      @publication.remove_manuscript!
+      @publication.update_attribute :remove_manuscript, true
+      render :update do |page|
+        page.replace_html 'manuscript_container', :partial => 'publications/manuscripts/edit'
+      end
+    else
+      render :nothing => true
     end
   end
 
