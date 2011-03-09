@@ -101,7 +101,7 @@
     </td>
     <td>
       <% unless publication.manuscript_url.blank? %>
-        <%= link_to image_tag('icons/download.png', :alt => '', :style => 'vertical-align:middle'), publication.manuscript_url, :target => '_blank' %>
+        <%= link_to image_tag('icons/download.png', :alt => '', :style => 'vertical-align:middle'), SITE_URL + publication.manuscript_url, :target => '_blank' %>
         <% if false %>
         <br />
         <span class="quiet"><%= simple_time(publication.manuscript_uploaded_at) %></span><br />

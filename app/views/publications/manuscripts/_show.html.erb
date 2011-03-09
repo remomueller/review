@@ -1,6 +1,6 @@
 <div class="field">
   <%#= link_to image_tag('icons/download.png', :alt => '') + 'Download', @publication.manuscript_url, :target => '_blank', :class => 'button' %>
-  <%= link_to @publication.manuscript_url.split('/').last, @publication.manuscript_url, :target => '_blank' %>
+  <%= link_to @publication.manuscript_url.split('/').last, SITE_URL + @publication.manuscript_url, :target => '_blank' %>
   <%= image_tag('icons/download.png', :alt => '', :style => 'vertical-align:middle') %>
   <span class="quiet">uploaded <%= simple_time(@publication.manuscript_uploaded_at) %></span>
   -- <%= print_byte_size(@publication.manuscript.size) %>
