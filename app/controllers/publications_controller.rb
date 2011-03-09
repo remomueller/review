@@ -1,6 +1,16 @@
 class PublicationsController < ApplicationController
   before_filter :authenticate_user!
 
+  def upload_manuscript
+    @publication = current_user.all_publications.find_by_id(params[:id])
+    if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status)
+      @publication.update_attribute :manuscript, params[:publication][:manuscript]
+      redirect_to @publication
+    else
+      redirect_to root_path
+    end
+  end
+
   def pp_approval
     @publication = Publication.current.find_by_id(params[:id])
     if @publication and current_user.pp_committee_secretary? and params[:publication]

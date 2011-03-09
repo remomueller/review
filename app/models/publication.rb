@@ -10,6 +10,8 @@ class Publication < ActiveRecord::Base
   
   attr_protected :user_id, :deleted, :status, :manuscript_number, :secretary_notes, :targeted_start_date
   
+  mount_uploader :manuscript, ManuscriptUploader
+  
   # attr_accessible :full_title, :centers, :proposal_submission_date, :publication_type, :publication_type_specify, :dcc_resources_none, :dcc_resources_staff,
   #   :dcc_resources_staff_specify, :dcc_resources_other, :dcc_resources_other_specify, :chat_data_none, :chat_data_main_forms, :chat_data_main_database,
   #   :chat_data_other, :chat_data_other_specify, :manuscript_preparation_analysis_data, :manuscript_preparation_analysis_ancillary_data,
@@ -18,7 +20,7 @@ class Publication < ActiveRecord::Base
   #   :attachment_ancillary_forms_specify, :attachment_other, :attachment_other_specify, :abbreviated_title, :keywords, :affiliation, :sponsoring_pi,
   #   :additional_coauthors, :lead_author, :timeline, :rationale, :hypothesis, :data, :study_type, :target_journal, :analysis_responsibility, :analysis_plan,
   #   :summary_section, :writing_group_members, :references, :author_assurance, :author_assurance_date,
-  #   :approval_date, :committee_submission_date
+  #   :approval_date, :committee_submission_date, :manuscript
 
 
   # Named Scopes

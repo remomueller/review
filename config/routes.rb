@@ -12,6 +12,7 @@ Review::Application.routes.draw do
        post :edit_subcommittee_decision
        post :show_steering_committee_decision
        post :edit_steering_committee_decision
+       post :upload_manuscript
     end
   end
 

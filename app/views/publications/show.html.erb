@@ -73,15 +73,40 @@
   </fieldset>
 <% end %>
 
-<% if current_user == @publication.user and ['approved', 'not approved'].include?(@publication.status) %>
+<% if current_user == @publication.user and ['nominated', 'submitted', 'published'].include?(@publication.status) %>
+  <%= form_tag upload_manuscript_publication_path(@publication), :method => :post, :multipart => true do  %>
+    <fieldset>
+      <legend>Manuscript Upload</legend>
+      <div class="field">
+        <%= label :publication, :manuscript, 'Manuscript (PDF, Word)' %>
+        <%= file_field :publication, :manuscript %>         <%= submit_tag "Upload" %>
+      </div>
+      <% if false %>
+      <div class="actions">
+      </div>
+      <% end %>
+    </fieldset>
+  <% end %>
+<% end %>
+
+<% if current_user == @publication.user and ['nominated'].include?(@publication.status) %>
 <fieldset>
-  <legend>Publications and Presentations Sub Committee Reviewer Comments</legend>
+  <legend>Steering Committee Reviewer Comments and Nominations</legend>
   <% @publication.user_publication_reviews.each do |user_publication_review| %>
-    <%= user_publication_review.comment unless user_publication_review.comment.blank? %>
+    <% unless user_publication_review.comment.blank? %><div><%= user_publication_review.comment  %></div><% end %>
+    <% unless user_publication_review.writing_group_nomination.blank? %><div>Nomination: <%= user_publication_review.writing_group_nomination %></div><% end %>
   <% end %>
 </fieldset>
 <% end %>
 
+<% if current_user == @publication.user and ['approved', 'not approved'].include?(@publication.status) %>
+<fieldset>
+  <legend>Publications and Presentations Sub Committee Reviewer Comments</legend>
+  <% @publication.user_publication_reviews.each do |user_publication_review| %>
+    <% unless user_publication_review.comment.blank? %><div><%= user_publication_review.comment %></div><% end %>
+  <% end %>
+</fieldset>
+<% end %>
 
 <%= render :partial => 'publications/form', :locals => { :disabled => 'disabled' } %>
 
