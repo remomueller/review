@@ -1,9 +1,13 @@
 <% width = '914px' %>
 <% disabled = '' if defined?(disabled) == nil %>
 <%= form_for(@publication) do |f| %>
+
+<% if false %>
     <% if @publication.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@publication.errors.count, "error") %> prohibited this publication from being saved:</h2>
+
+  <%= @publication.errors.inspect %>
 
         <ul>
         <% @publication.errors.full_messages.each do |msg| %>
@@ -12,6 +16,7 @@
         </ul>
       </div>
     <% end %>
+<% end %>
 
   <fieldset>
     <legend>A. Administrative Information</legend>

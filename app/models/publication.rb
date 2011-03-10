@@ -29,6 +29,12 @@ class Publication < ActiveRecord::Base
 
   # Model Validation
   validates_presence_of :full_title
+  
+  validates_presence_of :centers, :proposed_analysis
+  
+  validates_presence_of :abbreviated_title, :lead_author, :writing_group_members, :keywords, :affiliation, :timeline, :sponsoring_pi,
+                        :rationale, :hypothesis, :data, :study_type, :target_journal, :analysis_responsibility, :analysis_plan, :summary_section,
+                        :references
 
   # Model Relationships
   belongs_to :user

@@ -159,6 +159,7 @@ class PublicationsController < ApplicationController
       @publication.update_attribute :status, 'draft'
       redirect_to(@publication, :notice => 'Publication was successfully created.')
     else
+      flash[:alert] = "#{@publication.errors.count} error#{ 's' unless @publication.errors.count == 1} prohibited this publication from being saved." if @publication.errors.any?
       render :action => "new"
     end
   end
