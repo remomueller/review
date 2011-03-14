@@ -1,8 +1,18 @@
 class Publication < ActiveRecord::Base
 
-  STATUS = ["draft", "proposed", "approved", "not approved", "nominated", "submitted", "published"].collect{|i| [i,i]}
-  PP_STATUS = ["proposed", "approved", "not approved"].collect{|i| [i,i]}
-  SC_STATUS = ["approved", "nominated", "not approved"].collect{|i| [i,i]}
+  # STATUS = ["draft", "proposed", "approved", "not approved", "nominated", "submitted", "published"].collect{|i| [i,i]}
+  STATUS = [["Draft", "draft"], ["Proposed", "proposed"], ["P&P Approved", "approved"],
+            ["Not Approved", "not approved"], ["SC Approved", "nominated"], ["Submitted", "submitted"], ["Published", "published"]]
+  
+  # PP_STATUS = ["proposed", "approved", "not approved"].collect{|i| [i,i]}
+  PP_STATUS = [["Proposed","proposed"], ["P&P Approved", "approved"], ["Not Approved", "not approved"]]
+  # SC_STATUS = ["approved", "nominated", "not approved"].collect{|i| [i,i]}
+  SC_STATUS = [["P&P Approved", "approved"], ["SC Approved", "nominated"], ["Not Approved", "not approved"]]
+
+  FINAL_STATUS = [['SC Approved', 'nominated'], ['Submitted', 'submitted'], ['Published', 'published']]
+
+
+
   # Currently 59 Total Attributes (Publication.first.attributes.size)
   # 52 of which are attr_accessible (Publication.attr_accessible.size)
   # 7 of which are not set using mass assignment. (Publication.attr_protected.size)
@@ -40,6 +50,16 @@ class Publication < ActiveRecord::Base
   # Model Relationships
   belongs_to :user
   has_many :user_publication_reviews
+
+  def human_status
+    statuses = Publication::STATUS.select{|a| a[1] == self.status}
+    puts statuses.inspect
+    if statuses.size > 0
+      statuses.first.first
+    else
+      ''
+    end
+  end
 
   def destroy
     update_attribute :deleted, true

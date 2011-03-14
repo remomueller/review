@@ -4,7 +4,7 @@
   <td><%= link_to @publication.full_title, @publication %></td>
   <td><%= link_to @publication.user.name, @publication.user %><br /><%= @publication.writing_group_members %></td>
   <td><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
-  <td><%= @publication.status %></td>
+  <td style="white-space:nowrap"><%= @publication.human_status %></td>
   <td>???</td>
   <td><%= @publication.targeted_start_date %></td>
   <td>
@@ -35,9 +35,13 @@
     <% end %>
   </td>
   <% if current_user.pp_committee_secretary? or current_user.steering_committee_secretary? %>
-  <td style="white-space:nowrap">
-    <%= link_to image_tag('icons/edit.png', :alt => '') + 'Edit', '#', :onclick => remote_function(:url => inline_edit_publication_path(@publication), :method => :post) + "; return false;", :class => "button" %>
-  </td>
+    <% if ['draft'].include?(@publication.status) %>
+      <td></td>
+    <% else %>
+      <td style="white-space:nowrap">
+        <%= link_to image_tag('icons/edit.png', :alt => '') + 'Edit', '#', :onclick => remote_function(:url => inline_edit_publication_path(@publication), :method => :post) + "; return false;", :class => "button" %>
+      </td>
+    <% end %>
   <% end %>
 </tr>
 <% if not @publication.secretary_notes.blank? and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary? or current_user.pp_committee? or current_user.steering_committee?) %>
