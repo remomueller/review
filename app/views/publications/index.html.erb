@@ -11,8 +11,25 @@
     <th>Targeted Start Date</th>
     <th>Action Items and Secretary Notes</th>
     <th>Manuscript</th>
+    <% if current_user.pp_committee_secretary? or current_user.steering_committee_secretary? %>
+      <th></th>
+    <% end %>
     
-    <% if false %>
+  </tr>
+
+  <% @publications.each do |@publication| %>
+    <tbody id="publication_<%= @publication.id %>_container">
+      <%= render :partial => 'publications/inline_show' %>
+    </tbody>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Publication', new_publication_path %>
+
+
+<% if false %>
     <th>Full title</th>
     <th>User</th>
     <th>Status</th>
@@ -69,48 +86,10 @@
     <th></th>
     <th></th>
     <th></th>
-    <% end %>
-  </tr>
+<% end %>
 
-<% @publications.each do |publication| %>
-  <tr>
-    
-    <td><%= publication.manuscript_number %></td><%# Manuscript Number %>
-    <td><%= link_to publication.full_title, publication %></td>
-    <td><%= link_to publication.user.name, publication.user %><br /><%= publication.writing_group_members %></td>
-    <td><%= publication.publication_type %> <%= publication.publication_type_specify unless publication.publication_type_specify.blank? %></td>
-    <td><%= publication.status %></td>
-    <td>???</td>
-    <td><%= publication.targeted_start_date %></td>
-    <td>
-      <% case publication.status when 'draft' %>
-        <span class="quiet">Author has not submitted publication.</span>
-      <% when 'proposed' %>
-        P&amp;P Committee needs to review.
-      <% when 'approved' %>
-        Steering Committee needs to review and nominate.
-      <% when 'nominated' %>
-        Author needs to submit paper to journal.
-      <% when 'submitted' %>
-        Waiting for publication in journal.
-      <% when 'published' %>
-        Paper Published!
-      <% end %>
-      <br />
-      <%= publication.secretary_notes %>
-    </td>
-    <td>
-      <% unless publication.manuscript_url.blank? %>
-        <%= link_to image_tag('icons/download.png', :alt => '', :style => 'vertical-align:middle'), SITE_URL + publication.manuscript_url, :target => '_blank' %>
-        <% if false %>
-        <br />
-        <span class="quiet"><%= simple_time(publication.manuscript_uploaded_at) %></span><br />
-        <%= print_byte_size(publication.manuscript.size) %>
-        <% end %>
-      <% end %>
-    </td>
-    
-    <% if false %>
+
+<% if false %>
     <td><%= link_to publication.full_title.blank? ? '<span class="quiet">No Title</span>'.html_safe : publication.full_title, publication %></td>
     <td><%= link_to publication.user.name, publication.user %></td>
     <td><%= publication.status %></td>
@@ -167,11 +146,4 @@
     <td><%= link_to 'Show', publication %></td>
     <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
     <td><%= link_to 'Destroy', publication, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end %>
-  </tr>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Publication', new_publication_path %>

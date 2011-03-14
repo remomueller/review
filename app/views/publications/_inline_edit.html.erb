@@ -1,0 +1,64 @@
+<tr>
+
+  <td><%= text_field_tag "publication[#{@publication.id}][manuscript_number]", @publication.manuscript_number %></td><%# Manuscript Number %>
+  <td><%= link_to @publication.full_title, @publication %></td>
+  <td><%= link_to @publication.user.name, @publication.user %><br /><%= @publication.writing_group_members %></td>
+  <td><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
+  <td>
+    <% if ['nominated', 'submitted', 'published'].include?(@publication.status) %>
+      <%= select_tag "publication[#{@publication.id}][status]", options_for_select(['nominated', 'submitted', 'published'].collect{|i| [i,i]}, @publication.status) %>
+    <% else %>
+      <%= @publication.status %>
+    <% end %>
+  </td>
+  <td>???</td>
+  <td>
+    <%= date_select "publication[#{@publication.id}][targeted_start_date]", '', :default => @publication.targeted_start_date %>
+  </td>
+  <td>
+    <% if false %>
+    <% case @publication.status when 'draft' %>
+      <span class="quiet">Author has not submitted publication.</span>
+    <% when 'proposed' %>
+      P&amp;P Committee needs to review.
+    <% when 'approved' %>
+      Steering Committee needs to review and nominate.
+    <% when 'nominated' %>
+      Author needs to submit paper to journal.
+    <% when 'submitted' %>
+      Waiting for publication in journal.
+    <% when 'published' %>
+      Paper Published!
+    <% end %>
+    <br />
+    <% end %>
+  </td>
+  <td>
+    <% unless @publication.manuscript_url.blank? %>
+      <%= link_to image_tag('icons/download.png', :alt => '', :style => 'vertical-align:middle'), SITE_URL + @publication.manuscript_url, :target => '_blank' %>
+      <% if false %>
+      <br />
+      <span class="quiet"><%= simple_time(@publication.manuscript_uploaded_at) %></span><br />
+      <%= print_byte_size(@publication.manuscript.size) %>
+      <% end %>
+    <% end %>
+  </td>
+  <td style="white-space:nowrap">
+    <%= link_to image_tag('icons/tick.png', :alt => '') + 'Update', '#', :onclick => remote_function(
+        :url => inline_update_publication_path(@publication), :method => :post,
+        :with => "'&'+$('publication_#{@publication.id}_secretary_notes').serialize()+
+                  '&'+$('publication_#{@publication.id}_manuscript_number').serialize()+
+                  '&'+$('publication_#{@publication.id}_targeted_start_date__1i').serialize()+
+                  '&'+$('publication_#{@publication.id}_targeted_start_date__2i').serialize()+
+                  '&'+$('publication_#{@publication.id}_targeted_start_date__3i').serialize()+
+                  '&'+$('publication_#{@publication.id}_status').serialize()"
+      ) + "; return false;", :class => "button positive" %>
+    <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', '#', :onclick => remote_function(:url => inline_show_publication_path(@publication), :method => :post) + "; return false;", :class => "button negative" %>
+  </td>
+</tr>
+<tr>
+  <td></td>
+  <td colspan="9">
+    <%= text_area_tag "publication[#{@publication.id}][secretary_notes]", @publication.secretary_notes, :cols => 100, :rows => 3 %>
+  </td>
+</tr>

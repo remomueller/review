@@ -151,6 +151,55 @@ class PublicationsController < ApplicationController
     @publication = current_user.all_publications.find_by_id(params[:id])
     redirect_to root_path unless @publication and ['draft', 'not approved'].include?(@publication.status)
   end
+  
+  def inline_edit
+    if current_user.pp_committee_secretary? or current_user.steering_committee_secretary?
+      @publication = Publication.current.find_by_id(params[:id])
+    end
+    
+    if @publication
+      render :update do |page|
+        page.replace_html "publication_#{@publication.id}_container", :partial => "publications/inline_edit"
+      end
+    else
+      render :nothing => true
+    end
+  end
+  
+  def inline_update
+    if current_user.pp_committee_secretary? or current_user.steering_committee_secretary?
+      @publication = Publication.current.find_by_id(params[:id])
+    end
+    
+    if @publication and params[:publication][params[:id]]
+      [:manuscript_number, :secretary_notes, :status].each do |attribute|
+        @publication.update_attribute attribute, params[:publication][params[:id]][attribute]
+      end
+      
+      day = params[:publication][params[:id]][:targeted_start_date]
+      @publication.update_attribute :targeted_start_date, Date.parse([day['(1i)'], day['(2i)'], day['(3i)']].join('.'))
+      
+      render :update do |page|
+        page.replace_html "publication_#{@publication.id}_container", :partial => "publications/inline_show"
+      end
+    else
+      render :nothing => true
+    end    
+  end
+  
+  def inline_show
+    if current_user.pp_committee_secretary? or current_user.steering_committee_secretary?
+      @publication = Publication.current.find_by_id(params[:id])
+    end
+    
+    if @publication
+      render :update do |page|
+        page.replace_html "publication_#{@publication.id}_container", :partial => "publications/inline_show"
+      end
+    else
+      render :nothing => true
+    end
+  end
 
   def create
     @publication = current_user.publications.new(params[:publication])
