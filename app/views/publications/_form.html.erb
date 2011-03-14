@@ -124,11 +124,11 @@
     </div>
     <div class="field">
       <%= f.label :abbreviated_title, 'Abbreviated Title' %><br />
-      <%= f.text_field :abbreviated_title, :maxlength => '40', :disabled => disabled %>
+      <%= f.text_field :abbreviated_title, :style => "width:#{width}", :maxlength => '40', :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :lead_author, 'Lead Author' %><br />
-      <%= f.text_field :lead_author, :disabled => disabled %>
+      <%= f.text_field :lead_author, :style => "width:#{width}", :disabled => disabled %>
     </div>
     <div class="field">
       <%= f.label :writing_group_members, 'Writing Group Members' %><br />
@@ -146,7 +146,7 @@
     </div>
     <div class="field">
       <%= f.label :affiliation %><br />
-      <%= f.text_field :affiliation, :disabled => disabled %>
+      <%= f.text_field :affiliation, :disabled => disabled, :style => "width:#{width}" %>
     </div>
     <div class="field">
       <%= f.label :timeline %><br />
@@ -154,7 +154,7 @@
     </div>
     <div class="field">
       <%= f.label :sponsoring_pi, 'Sponsoring PI' %><br />
-      <%= f.text_field :sponsoring_pi, :disabled => disabled %>
+      <%= f.text_field :sponsoring_pi, :disabled => disabled, :style => "width:#{width}" %>
     </div>
     <div class="field">
       <%= f.label :rationale %><br />
@@ -170,11 +170,11 @@
     </div>
     <div class="field">
       <%= f.label :study_type, 'Type of Study' %><br />
-      <%= f.text_field :study_type, :disabled => disabled %>
+      <%= f.text_field :study_type, :disabled => disabled, :style => "width:#{width}" %>
     </div>
     <div class="field">
       <%= f.label :target_journal, 'Target Journal' %><br />
-      <%= f.text_field :target_journal, :disabled => disabled %>
+      <%= f.text_field :target_journal, :disabled => disabled, :style => "width:#{width}" %>
     </div>
     <div class="field">
       <%= f.label :analysis_responsibility, 'Analysis Responsibility' %><br />
