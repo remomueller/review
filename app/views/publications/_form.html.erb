@@ -100,6 +100,7 @@
     <div class="field">
       <label>9.  Attachments to this form (<em>check all that apply</em>)</label><br />
       <br />
+      <%= f.check_box :attachment_none, :disabled => disabled %> <%= f.label :attachment_none, 'None' %><br />
       <%= f.check_box :attachment_chat_form, :disabled => disabled %> <%= f.label :attachment_chat_form, 'CHAT form with items marked to indicate variables intended for analysis:' %><br />
       <%= f.text_field :attachment_chat_form_specify, :style => "width:#{width}", :disabled => disabled %><br />
       <%= f.check_box :attachment_chat_variables, :disabled => disabled %> <%= f.label :attachment_chat_variables, 'List of CHAT sleep study variables intended for analysis:' %><br />
