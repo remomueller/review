@@ -7,9 +7,9 @@
     <th>Recent Activity</th>
     <% if current_user.system_admin? %>
       <th>Status</th>
-      <th>PP Committee</th>
+      <th>P&amp;P Committee</th>
       <th>Steering Committee</th>
-      <th>PP Secretary</th>
+      <th>P&amp;P Secretary</th>
       <th>SC Secretary</th>      
       <th>System Admin</th>
       <th></th>
@@ -24,11 +24,11 @@
     <td><%= recent_activity(user.current_sign_in_at) %></td>
     <% if current_user.system_admin? %>
       <td><%= user.status %></td>
-      <td><%= user.pp_committee? %></td>
-      <td><%= user.steering_committee? %></td>
-      <td><%= user.pp_committee_secretary? %></td>
-      <td><%= user.steering_committee_secretary? %></td>
-      <td><%= user.system_admin? %></td>
+      <td style="text-align:center"><%= check_box_tag 'user', 'pp_committee', user.pp_committee?, :disabled => true %></td>
+      <td style="text-align:center"><%= check_box_tag 'user', 'steering_committee', user.steering_committee?, :disabled => true %></td>
+      <td style="text-align:center"><%= check_box_tag 'user', 'pp_committee_secretary', user.pp_committee_secretary?, :disabled => true %></td>
+      <td style="text-align:center"><%= check_box_tag 'user', 'steering_committee_secretary', user.steering_committee_secretary?, :disabled => true %></td>
+      <td style="text-align:center"><%= check_box_tag 'user', 'system_admin', user.system_admin?, :disabled => true %></td>
       <td><%= link_to 'Edit', edit_user_path(user) %></td>
       <td>
         <% unless current_user == user %>
