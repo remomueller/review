@@ -9,6 +9,7 @@
       <%= select_tag "publication[#{@publication.id}][status]", options_for_select(['nominated', 'submitted', 'published'].collect{|i| [i,i]}, @publication.status) %>
     <% else %>
       <%= @publication.status %>
+      <%= hidden_field_tag "publication[#{@publication.id}][status]", @publication.status %>
     <% end %>
   </td>
   <td>???</td>
@@ -47,11 +48,11 @@
     <%= link_to image_tag('icons/tick.png', :alt => '') + 'Update', '#', :onclick => remote_function(
         :url => inline_update_publication_path(@publication), :method => :post,
         :with => "'&'+$('publication_#{@publication.id}_secretary_notes').serialize()+
+                  '&'+$('publication_#{@publication.id}_status').serialize()+
                   '&'+$('publication_#{@publication.id}_manuscript_number').serialize()+
                   '&'+$('publication_#{@publication.id}_targeted_start_date__1i').serialize()+
                   '&'+$('publication_#{@publication.id}_targeted_start_date__2i').serialize()+
-                  '&'+$('publication_#{@publication.id}_targeted_start_date__3i').serialize()+
-                  '&'+$('publication_#{@publication.id}_status').serialize()"
+                  '&'+$('publication_#{@publication.id}_targeted_start_date__3i').serialize()"
       ) + "; return false;", :class => "button positive" %>
     <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', '#', :onclick => remote_function(:url => inline_show_publication_path(@publication), :method => :post) + "; return false;", :class => "button negative" %>
   </td>
