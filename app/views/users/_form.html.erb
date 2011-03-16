@@ -11,41 +11,48 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.select :status, User::STATUS %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <label>Steering Committee</label><br />
-    <%= f.label :steering_committee, 'Member: ' %>
-    <%= f.check_box :steering_committee %> | 
-    <%= f.label :steering_committee_secretary, 'Secretary: ' %>
-    <%= f.check_box :steering_committee_secretary %>
-  </div>
-  <div class="field">
-    <label>Publications and Presentations Sub Committee</label><br />
-    <%= f.label :pp_committee, 'Member: ' %>
-    <%= f.check_box :pp_committee %> |
-    <%= f.label :pp_committee_secretary, 'Secretary: ' %>
-    <%= f.check_box :pp_committee_secretary %>
-  </div>
-  <div class="field">
-    <%= f.label :system_admin %><br />
-    <%= f.check_box :system_admin %>
-  </div>
+  <fieldset>
+    <legend><%= @title %></legend>
+    <div class="field">
+      <%= f.label :first_name %><br />
+      <%= f.text_field :first_name %>
+    </div>
+    <div class="field">
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name %>
+    </div>
+    <div class="field">
+      <%= f.label :status %><br />
+      <%= f.select :status, User::STATUS %>
+    </div>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.text_field :email %>
+    </div>
+    <div class="field">
+      <label>Steering Committee</label><br />
+      <%= f.label :steering_committee, 'Member: ' %>
+      <%= f.check_box :steering_committee %> | 
+      <%= f.label :steering_committee_secretary, 'Secretary: ' %>
+      <%= f.check_box :steering_committee_secretary %>
+    </div>
+    <div class="field">
+      <label>Publications and Presentations Sub Committee</label><br />
+      <%= f.label :pp_committee, 'Member: ' %>
+      <%= f.check_box :pp_committee %> |
+      <%= f.label :pp_committee_secretary, 'Secretary: ' %>
+      <%= f.check_box :pp_committee_secretary %>
+    </div>
+    <div class="field">
+      <%= f.label :system_admin %><br />
+      <%= f.check_box :system_admin %>
+    </div>
+  </fieldset>  
+
   <div class="actions">
-    <%= f.submit %>
+    <% form_name = @user.new_record? ? 'new_user' : "edit_user_#{@user.id}" %>
+    <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@user.new_record? ? "Create User" : "Update User"), "$('#{form_name}').submit();", :class => "button positive" %>
+    <%= cancel %>
+		<br />
   </div>
 <% end %>
