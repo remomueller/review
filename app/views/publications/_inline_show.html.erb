@@ -1,7 +1,7 @@
 <tr>
 
   <td><%= @publication.manuscript_number %></td><%# Manuscript Number %>
-  <td><%= link_to @publication.full_title, @publication %></td>
+  <td><%= link_to @publication.abbreviated_title, @publication %></td>
   <td><%= link_to @publication.user.name, @publication.user %><br /><%= @publication.writing_group_members %></td>
   <td><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
   <td style="white-space:nowrap"><%= @publication.human_status %></td>
