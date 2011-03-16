@@ -203,10 +203,10 @@ class PublicationsController < ApplicationController
 
   def create
     @publication = current_user.publications.new(params[:publication])
-    @publication.author_assurance_date = Date.today
     if @publication.save
-      @publication.update_attribute :status, 'draft'
-      redirect_to(@publication, :notice => 'Publication was successfully created.')
+      @publication.update_attribute :status, params[:publish] == '1' ? 'proposed' : 'draft'
+      @publication.update_attribute :author_assurance_date, Date.today if params[:publish] == '1'
+      redirect_to(@publication, :notice => params[:publish] == '1' ? 'Publication was successfully submitted for review.' : 'Publication draft was successfully created.')
     else
       flash[:alert] = "#{@publication.errors.count} error#{ 's' unless @publication.errors.count == 1} prohibited this publication from being saved." if @publication.errors.any?
       render :action => "new"
@@ -218,8 +218,10 @@ class PublicationsController < ApplicationController
     if @publication and ['draft', 'not approved'].include?(@publication.status)
       if @publication.update_attributes(params[:publication])
         @publication.update_attribute :status, params[:publish] == '1' ? 'proposed' : 'draft'
-        redirect_to(@publication, :notice => params[:publish] == '1' ? 'Publication was successfully resubmitted for review.' : 'Draft was saved successfully.')
+        @publication.update_attribute :author_assurance_date, Date.today if params[:publish] == '1'
+        redirect_to(@publication, :notice => params[:publish] == '1' ? 'Publication was successfully resubmitted for review.' : 'Publication draft was saved successfully.')
       else
+        flash[:alert] = "#{@publication.errors.count} error#{ 's' unless @publication.errors.count == 1} prohibited this publication from being updated." if @publication.errors.any?
         render :action => "edit"
       end
     else
