@@ -7,7 +7,7 @@
       <div id="error_explanation">
         <h2><%= pluralize(@publication.errors.count, "error") %> prohibited this publication from being saved:</h2>
 
-  <%= @publication.errors.inspect %>
+  <%#= @publication.errors.inspect %>
 
         <ul>
         <% @publication.errors.full_messages.each do |msg| %>
@@ -37,7 +37,8 @@
     </div>
     
   </fieldset>
-  <fieldset>
+  
+  <fieldset class="<%= 'fieldset_with_errors' if @publication.errors.keys.include?(:publication_type) %>">
     <legend>B. Publication Information</legend>
     <div class="field">
       <label>4. Type of publication</label><br />
@@ -51,7 +52,8 @@
       <%= f.text_field :publication_type_specify, :style => "width:#{width}", :disabled => disabled %>
     </div>
   </fieldset>
-  <fieldset>
+  
+  <fieldset class="<%= 'fieldset_with_errors' if @publication.errors.keys.include?(:dcc_resources_none) or @publication.errors.keys.include?(:chat_data_none) %>">
     <legend>C. CHAT Resources</legend>
     
     <div class="field">
@@ -74,7 +76,7 @@
       <%= f.text_field :chat_data_other_specify, :style => "width:#{width}", :disabled => disabled %>
     </div>
   </fieldset>
-  <fieldset>
+  <fieldset class="<%= 'fieldset_with_errors' if @publication.errors.keys.include?(:manuscript_preparation_none) %>">
     <legend>D. Data Analysis</legend>
     
     <div class="field">
@@ -94,7 +96,7 @@
       <%= f.text_area :proposed_analysis, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
     </div>
   </fieldset>
-  <fieldset>
+  <fieldset class="<%= 'fieldset_with_errors' if @publication.errors.keys.include?(:attachment_none) %>">
     <legend>E. Attachments</legend>
     
     <div class="field">
