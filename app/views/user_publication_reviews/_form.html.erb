@@ -57,7 +57,7 @@
     
     <% form_name = @user_publication_review.new_record? ? 'new_user_publication_review' : "edit_user_publication_review_#{@user_publication_review.id}" %>
     
-    <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('#{form_name}').submit();", :class => "button positive" %>
+    <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('##{form_name}').submit();", :class => "button positive" %>
 
 <% if false %>    
     <button class="positive">

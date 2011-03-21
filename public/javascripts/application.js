@@ -20,14 +20,18 @@ $(function(){
     return false;
   });
   
+  // $("input[type='text']").change( function() {
+  //   // check input ($(this).val()) for validity here
+  // });
+  
   $(".field_with_errors input, .field_with_errors_cleared input, .field_with_errors textarea, .field_with_errors_cleared textarea").change(function() {
-    var el = this;
-    if(el.value != '' && el.value != null){
-      el.parentNode.removeClass('field_with_errors');
-      el.parentNode.addClass('field_with_errors_cleared');
+    var el = $(this);
+    if(el.val() != '' && el.val() != null){
+      $(el).parent().removeClass('field_with_errors');
+      $(el).parent().addClass('field_with_errors_cleared');
     }else{
-      el.parentNode.removeClass('field_with_errors_cleared');
-      el.parentNode.addClass('field_with_errors');
+      $(el).parent().removeClass('field_with_errors_cleared');
+      $(el).parent().addClass('field_with_errors');
     }
         
     // $.get($("#comments_search").attr("action"), $("#comments_search").serialize(), null, "script");
@@ -103,7 +107,7 @@ function showMessage(elements){
 }
 
 function authorAssuranceCheck(){
-  if(!$("#publication_author_assurance").checked){
+  if(!$('#publication_author_assurance').is(':checked')){
     alert('Please read and check the Author Assurance and Sign Off');
     return false;
   }
