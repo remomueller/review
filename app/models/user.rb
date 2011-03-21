@@ -1,13 +1,14 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable, :lockable and :timeoutable
-  devise :database_authenticatable, :registerable,
+  # :token_authenticatable, :confirmable, and :lockable
+  devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
   
   after_create :notify_system_admins
+  before_update :status_activated
 
   STATUS = ["active", "denied", "inactive", "pending"].collect{|i| [i,i]}
   
@@ -96,6 +97,14 @@ class User < ActiveRecord::Base
   def notify_system_admins
     User.current.system_admins.each do |system_admin|
       UserMailer.notify_system_admin(system_admin, self).deliver
+    end
+  end
+  
+  def status_activated
+    unless self.new_record? or self.changes.blank?
+      if self.changes['status'] and self.changes['status'][1] == 'active'
+        UserMailer.status_activated(self).deliver
+      end
     end
   end
 end
