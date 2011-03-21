@@ -6,10 +6,10 @@ function createSpinner() {
 }
 
 $(function(){
-  $("#project_start_date").datepicker();
-  $("#project_end_date").datepicker();
-  $("#sticky_start_date").datepicker();
-  $("#sticky_end_date").datepicker();
+  // $("#project_start_date").datepicker();
+  // $("#project_end_date").datepicker();
+  // $("#sticky_start_date").datepicker();
+  // $("#sticky_end_date").datepicker();
   
   $("#ui-datepicker-div").hide();
   
@@ -39,38 +39,6 @@ $(function(){
   });
   
 });
-
-
-// document.observe("dom:loaded", function() {
-//   // the element in which we will observe all clicks and capture
-//   // ones originating from pagination links
-//   var container = $(document.body);
-// 
-//   if(container) {
-//     // container.observe('click', function(e) {
-//     //   var el = e.element();
-//     //   if (el.match('.pagination a')) {
-//     //     el.up('.pagination').insert(createSpinner());
-//     //     var ajax_request = new Ajax.Request(el.href, { method: 'post', parameters: $('search-form').serialize()  + '&authenticity_token=' + encodeURIComponent(auth_token)  });
-//     //     e.stop();
-//     //   }
-//     // });
-//     
-//     container.observe('change', function(e) {
-//       var el = e.element();
-//       if (el.match('.field_with_errors input') || el.match('.field_with_errors_cleared input')
-//         || el.match('.field_with_errors textarea') || el.match('.field_with_errors_cleared textarea')){
-//         if(el.value != '' && el.value != null){
-//           el.parentNode.removeClassName('field_with_errors');
-//           el.parentNode.addClassName('field_with_errors_cleared');
-//         }else{
-//           el.parentNode.removeClassName('field_with_errors_cleared');
-//           el.parentNode.addClassName('field_with_errors');
-//         }
-//       }
-//     })
-//   }
-// });
 
 /* Mouse Out Functions to Show and Hide Divs */
 
