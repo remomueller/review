@@ -13,18 +13,11 @@
 <% end %>
 <div class="actions">
   
-  <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@publication.status == 'approved' ? 'Submit' : 'Update') + " Steering Committee Decision", "$('steering_committee_decision_form').submit();", :class => "button positive" %>
-  
-  <% if false %>
-  <button class="positive">
-    <%= image_tag('icons/tick.png', :alt => '') %>
-    <%= @publication.status == 'proposed' ? 'Submit' : 'Update' %> Steering Committee Decision
-  </button>
-  <% end %>
+  <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@publication.status == 'approved' ? 'Submit' : 'Update') + " Steering Committee Decision", "$('#steering_committee_decision_form').submit();", :class => "button positive" %>
   
   
-  <% unless @publication.status == 'proposed' %>
-    <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', '#', :onclick => remote_function(:url => show_steering_committee_decision_publication_path(@publication), :method => :post) + "; return false;", :class => 'button negative' %>
+  <% unless @publication.status == 'approved' %>
+    <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', show_steering_committee_decision_publication_path(@publication), :method => :post, :remote => true, :class => 'button negative' %>
   <% end %>
 	<br />
 </div>

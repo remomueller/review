@@ -14,7 +14,7 @@
     
     <%= form_tag url, :method => method, :remote => true, :id => form_name do %>
       <%= hidden_field_tag "user_publication_review[status]" %>
-      <%= hidden_field_tag 'user_publication_review[comment]' %>    
+      <%= hidden_field_tag 'user_publication_review[comment]' %>
       <% with = "if($('#user_publication_review_display_status_approved').is(':checked')){ $('#user_publication_review_status').val('approved'); }
                  else if($('#user_publication_review_display_status_not_approved').is(':checked')){ $('#user_publication_review_status').val('not approved'); }
                  else{ $('#user_publication_review_status').val(''); }
@@ -32,6 +32,7 @@
 <tr>
   <td></td>
   <td colspan="3">
+    <%= label :user_publication_review_display, :comment %><br />
     <%= text_area_tag 'user_publication_review_display[comment]', @user_publication_review.comment, :rows => 7, :style => "width:588px" %>
   </td>
 </tr>

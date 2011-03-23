@@ -1,4 +1,5 @@
-<form>
+<% form_name = "steering_committee_decision_form" %>
+<%= form_tag edit_steering_committee_decision_publication_path(@publication), :method => :post, :remote => true, :id => form_name do %>
 <div class="field">
   <label>Publication Status</label><br />
   <% Publication::SC_STATUS.each do |display, value| %>
@@ -10,7 +11,8 @@
   <%= text_field :publication, :manuscript_number, :disabled => 'disabled' %>
 </div>
 <div class="actions">
-  <%= link_to image_tag('icons/edit.png', :alt => '') + 'Edit Steering Committee Decision', '#', :onclick => remote_function(:url => edit_steering_committee_decision_publication_path(@publication), :method => :post) + "; return false;", :class => 'button' %>
+  <%#= link_to image_tag('icons/edit.png', :alt => '') + 'Edit Steering Committee Decision', '#', :onclick => remote_function(:url => edit_steering_committee_decision_publication_path(@publication), :method => :post) + "; return false;", :class => 'button' %>
+  <%= link_to_function image_tag('icons/edit.png', :alt => '') + 'Edit Steering Committee Decision', "$('##{form_name}').submit();", :class => 'button' %>
 	<br />
 </div>
-</form>
+<% end %>

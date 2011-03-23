@@ -77,24 +77,12 @@ class PublicationsController < ApplicationController
 
   def show_subcommittee_decision
     @publication = Publication.current.find_by_id(params[:id])
-    if @publication and current_user.pp_committee_secretary?
-      render :update do |page|
-        page.replace_html 'subcommittee_decision_box', :partial => 'publications/show_subcommittee_decision'
-      end
-    else
-      render :nothing => true
-    end
+    render :nothing => true unless @publication and current_user.pp_committee_secretary?
   end
   
   def edit_subcommittee_decision
     @publication = Publication.current.find_by_id(params[:id])
-    if @publication and current_user.pp_committee_secretary?
-      render :update do |page|
-        page.replace_html 'subcommittee_decision_box', :partial => 'publications/edit_subcommittee_decision'
-      end
-    else
-      render :nothing => true
-    end
+    render :nothing => true unless @publication and current_user.pp_committee_secretary?
   end
 
   def sc_approval
@@ -111,24 +99,12 @@ class PublicationsController < ApplicationController
 
   def show_steering_committee_decision
     @publication = Publication.current.find_by_id(params[:id])
-    if @publication and current_user.steering_committee_secretary?
-      render :update do |page|
-        page.replace_html 'steering_committee_decision_box', :partial => 'publications/show_steering_committee_decision'
-      end
-    else
-      render :nothing => true
-    end
+    render :nothing => true unless @publication and current_user.steering_committee_secretary?
   end
   
   def edit_steering_committee_decision
     @publication = Publication.current.find_by_id(params[:id])
-    if @publication and current_user.steering_committee_secretary?
-      render :update do |page|
-        page.replace_html 'steering_committee_decision_box', :partial => 'publications/edit_steering_committee_decision'
-      end
-    else
-      render :nothing => true
-    end
+    render :nothing => true unless @publication and current_user.steering_committee_secretary?
   end
 
   def index
