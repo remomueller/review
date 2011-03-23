@@ -1,6 +1,5 @@
-<h1>Editing publication</h1>
+<% @title = "Edit Publication: #{@publication.abbreviated_title}" %>
+
+<h1><%= @title %></h1>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @publication %> |
-<%= link_to 'Back', publications_path %>

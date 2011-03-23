@@ -3,12 +3,9 @@ class PublicationsController < ApplicationController
 
   def send_reminder
     @publication = Publication.current.find_by_id(params[:id])
-    reviewer = User.current.find_by_id(params[:reviewer_id])
-    if @publication and reviewer and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?)
-      UserMailer.publication_approval_reminder(@publication, reviewer).deliver
-      render :update do |page|
-        page.replace_html "user_#{reviewer.id}_notified", '<span class="quiet">User Notified by Email</span>'
-      end
+    @reviewer = User.current.find_by_id(params[:reviewer_id])
+    if @publication and @reviewer and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?)
+      UserMailer.publication_approval_reminder(@publication, @reviewer).deliver
     else
       render :nothing => true
     end

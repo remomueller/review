@@ -224,25 +224,10 @@
   </fieldset>
   <% if disabled.blank? %>
     <div class="actions">
-      <% form_name = @publication.new_record? ? 'new_publication' : "edit_publication_#{@publication.id}" %>
-      
       <%= hidden_field_tag 'publish', '0' %>
-      
-      <%= link_to_function image_tag('icons/save.png', :alt => '') + (@publication.new_record? ? "Save Draft of Publication" : "Update Draft of Publication"), "$('#publish').value='0';$('##{form_name}').submit();", :class => "button" %>
-<% if false %>      
-      <button name="publish" value="0">
-        <%= image_tag('icons/save.png', :alt => '') %>
-        <%= @publication.new_record? ? "Save Draft of Publication" : "Update Draft of Publication" %>
-      </button>
-<% end %>
-      <%= link_to_function image_tag('icons/tick.png', :alt => '') + "Submit Publication for Review", "if(authorAssuranceCheck() == false){return false;};$('#publish').value='1';$('##{form_name}').submit();", :class => "button positive" %>
-
-<% if false %>
-      <button class="positive" name="publish" value="1" onclick="if(authorAssuranceCheck() == false){return false;}">
-        <%= image_tag('icons/tick.png', :alt => '') %>
-        Submit Publication for Review
-      </button>
-<% end %>
+      <% form_name = @publication.new_record? ? 'new_publication' : "edit_publication_#{@publication.id}" %>
+      <%= link_to_function image_tag('icons/save.png', :alt => '') + (@publication.new_record? ? "Save Draft of Publication" : "Update Draft of Publication"), "$('#publish').val('0');$('##{form_name}').submit();", :class => "button" %>
+      <%= link_to_function image_tag('icons/tick.png', :alt => '') + "Submit Publication for Review", "if(authorAssuranceCheck() == false){return false;};$('#publish').val('1');$('##{form_name}').submit();", :class => "button positive" %>
       <%= cancel %>
   		<br />
     </div>

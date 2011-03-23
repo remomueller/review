@@ -4,24 +4,35 @@
   <td></td>
   <td style="vertical-align:middle">
   <% UserPublicationReview::STATUS.each do |label, value| %>
-    <%= radio_button :user_publication_review, :status, value %> <label><%= label %></label>
+    <%= radio_button_tag "user_publication_review_display[status]", value, (@user_publication_review.status == value) %> <label><%= label %></label>
   <% end %>
   </td>
   <td>
     <% url = @user_publication_review.new_record? ? user_publication_reviews_path(:publication_id => @user_publication_review.publication_id) : user_publication_review_path(@user_publication_review) %>
     <% method = @user_publication_review.new_record? ? :post : :put %>
-    <% with = "'&' + $('user_publication_review_status_approved').serialize() + '&' + $('user_publication_review_status_not_approved').serialize() + '&' + $('user_publication_review_comment').serialize()" %>
-    <%= link_to(image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), '#', :onclick => remote_function(:url => url, :method => method, :with => with) + "; return false;", :class => "button positive" )%>
-    <% unless @user_publication_review.new_record? %>
-      <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', @user_publication_review.publication, :class => 'button negative' %>
+    <% form_name = "upr_form_#{@user_publication_review.user_id}" %>
+    
+    <%= form_tag url, :method => method, :remote => true, :id => form_name do %>
+      <%= hidden_field_tag "user_publication_review[status]" %>
+      <%= hidden_field_tag 'user_publication_review[comment]' %>    
+      <% with = "if($('#user_publication_review_display_status_approved').is(':checked')){ $('#user_publication_review_status').val('approved'); }
+                 else if($('#user_publication_review_display_status_not_approved').is(':checked')){ $('#user_publication_review_status').val('not approved'); }
+                 else{ $('#user_publication_review_status').val(''); }
+                 $('#user_publication_review_comment').val($('#user_publication_review_display_comment').val());" %>
+    
+      <%#= link_to(image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), '#', :onclick => remote_function(:url => url, :method => method, :with => with) + "; return false;", :class => "button positive" )%>
+      <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "#{with};$('##{form_name}').submit();", :class => "button positive" %>
+      <% unless @user_publication_review.new_record? %>
+        <%#= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', @user_publication_review.publication, :class => 'button negative' %>
+        <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', @user_publication_review, :remote => true, :class => 'button negative' %>
+      <% end %>
     <% end %>
   </td>
 </tr>
 <tr>
   <td></td>
   <td colspan="3">
-    <%= label :user_publication_review, :comment %><br />
-    <%= text_area :user_publication_review, :comment, :rows => 7, :style => "width:588px" %>
+    <%= text_area_tag 'user_publication_review_display[comment]', @user_publication_review.comment, :rows => 7, :style => "width:588px" %>
   </td>
 </tr>
 
@@ -53,18 +64,11 @@
     <%= f.label :comment %><br />
     <%= f.text_area :comment, :rows => 7, :style => "width:#{width}" %>
   </div>
-  <div class="actions">
-    
+  <div class="actions">    
     <% form_name = @user_publication_review.new_record? ? 'new_user_publication_review' : "edit_user_publication_review_#{@user_publication_review.id}" %>
     
     <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('##{form_name}').submit();", :class => "button positive" %>
 
-<% if false %>    
-    <button class="positive">
-      <%= image_tag('icons/tick.png', :alt => '') %>
-      <%= @user_publication_review.new_record? ? "Submit Review" : "Update Review" %>
-    </button>
-<% end %>
     <% unless @user_publication_review.new_record? %>
       <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', @user_publication_review.publication, :class => 'button negative' %>
     <% end %>
