@@ -14,9 +14,7 @@ class PublicationsController < ApplicationController
   def edit_manuscript
     @publication = current_user.all_publications.find_by_id(params[:id])
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status)
-      render :update do |page|
-        page.replace_html 'manuscript_container', :partial => 'publications/manuscripts/edit'
-      end
+      render 'publications/manuscripts/edit_manuscript'
     else
       render :nothing => true
     end
@@ -25,9 +23,7 @@ class PublicationsController < ApplicationController
   def show_manuscript
     @publication = current_user.all_viewable_publications.find_by_id(params[:id])
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status)
-      render :update do |page|
-        page.replace_html 'manuscript_container', :partial => 'publications/manuscripts/show'
-      end
+      render 'publications/manuscripts/show_manuscript'
     else
       render :nothing => true
     end
@@ -55,9 +51,7 @@ class PublicationsController < ApplicationController
     if @publication
       @publication.remove_manuscript!
       @publication.update_attribute :remove_manuscript, true
-      render :update do |page|
-        page.replace_html 'manuscript_container', :partial => 'publications/manuscripts/edit'
-      end
+      render 'publications/manuscripts/edit_manuscript'
     else
       render :nothing => true
     end
@@ -126,17 +120,8 @@ class PublicationsController < ApplicationController
   end
   
   def inline_edit
-    if current_user.pp_committee_secretary? or current_user.steering_committee_secretary?
-      @publication = Publication.current.find_by_id(params[:id])
-    end
-    
-    if @publication
-      render :update do |page|
-        page.replace_html "publication_#{@publication.id}_container", :partial => "publications/inline_edit"
-      end
-    else
-      render :nothing => true
-    end
+    @publication = Publication.current.find_by_id(params[:id]) if current_user.pp_committee_secretary? or current_user.steering_committee_secretary?
+    render :nothing => true unless @publication
   end
   
   def inline_update
@@ -149,12 +134,13 @@ class PublicationsController < ApplicationController
         @publication.update_attribute attribute, params[:publication][params[:id]][attribute]
       end
       
-      day = params[:publication][params[:id]][:targeted_start_date]
-      @publication.update_attribute :targeted_start_date, Date.parse([day['(1i)'], day['(2i)'], day['(3i)']].join('.'))
-      
-      render :update do |page|
-        page.replace_html "publication_#{@publication.id}_container", :partial => "publications/inline_show"
+      begin
+        @publication.update_attribute :targeted_start_date, Date.parse(params[:publication][params[:id]][:targeted_start_date])
+      rescue ArgumentError
+        @publication.update_attribute :targeted_start_date, nil  
       end
+      
+      render 'inline_show'
     else
       render :nothing => true
     end    
@@ -166,9 +152,7 @@ class PublicationsController < ApplicationController
     end
     
     if @publication
-      render :update do |page|
-        page.replace_html "publication_#{@publication.id}_container", :partial => "publications/inline_show"
-      end
+      render 'inline_show'
     else
       render :nothing => true
     end

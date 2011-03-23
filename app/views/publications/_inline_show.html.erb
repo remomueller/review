@@ -39,7 +39,7 @@
       <td></td>
     <% else %>
       <td style="white-space:nowrap">
-        <%= link_to image_tag('icons/edit.png', :alt => '') + 'Edit', '#', :onclick => remote_function(:url => inline_edit_publication_path(@publication), :method => :post) + "; return false;", :class => "button" %>
+        <%= link_to image_tag('icons/edit.png', :alt => '') + 'Edit', inline_edit_publication_path(@publication), :method => :post, :remote => true, :class => "button" %>
       </td>
     <% end %>
   <% end %>

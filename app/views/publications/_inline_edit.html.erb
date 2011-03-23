@@ -1,12 +1,12 @@
 <tr>
 
-  <td><%= text_field_tag "publication[#{@publication.id}][manuscript_number]", @publication.manuscript_number %></td><%# Manuscript Number %>
+  <td><%= text_field_tag "publication_display[#{@publication.id}][manuscript_number]", @publication.manuscript_number %></td><%# Manuscript Number %>
   <td><%= link_to @publication.abbreviated_title, @publication %></td>
   <td><%= link_to @publication.user.name, @publication.user %><br /><%= @publication.writing_group_members %></td>
   <td><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
   <td style="white-space:nowrap">
     <% if ['nominated', 'submitted', 'published'].include?(@publication.status) %>
-      <%= select_tag "publication[#{@publication.id}][status]", options_for_select(Publication::FINAL_STATUS, @publication.status) %>
+      <%= select_tag "publication_display[#{@publication.id}][status]", options_for_select(Publication::FINAL_STATUS, @publication.status) %>
     <% else %>
       <%= @publication.human_status %>
       <%= hidden_field_tag "publication[#{@publication.id}][status]", @publication.status %>
@@ -14,7 +14,8 @@
   </td>
   <td>???</td>
   <td>
-    <%= date_select "publication[#{@publication.id}][targeted_start_date]", '', :default => @publication.targeted_start_date %>
+    <%= text_field_tag "publication_display[#{@publication.id}][targeted_start_date]", @publication.targeted_start_date ? @publication.targeted_start_date.strftime('%m/%d/%Y') : '' %>
+    <%= javascript_tag "$('#publication_display_#{@publication.id}_targeted_start_date').datepicker();" %>
   </td>
   <td>
     <% if false %>
@@ -45,21 +46,35 @@
     <% end %>
   </td>
   <td style="white-space:nowrap">
-    <%= link_to image_tag('icons/tick.png', :alt => '') + 'Update', '#', :onclick => remote_function(
-        :url => inline_update_publication_path(@publication), :method => :post,
-        :with => "'&'+$('publication_#{@publication.id}_secretary_notes').serialize()+
-                  '&'+$('publication_#{@publication.id}_status').serialize()+
-                  '&'+$('publication_#{@publication.id}_manuscript_number').serialize()+
-                  '&'+$('publication_#{@publication.id}_targeted_start_date__1i').serialize()+
-                  '&'+$('publication_#{@publication.id}_targeted_start_date__2i').serialize()+
-                  '&'+$('publication_#{@publication.id}_targeted_start_date__3i').serialize()"
-      ) + "; return false;", :class => "button positive" %>
-    <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', '#', :onclick => remote_function(:url => inline_show_publication_path(@publication), :method => :post) + "; return false;", :class => "button negative" %>
+    <% with = "$('#publication_#{@publication.id}_manuscript_number').val($('#publication_display_#{@publication.id}_manuscript_number').val());
+               $('#publication_#{@publication.id}_status').val($('#publication_display_#{@publication.id}_status').val());
+               $('#publication_#{@publication.id}_targeted_start_date').val($('#publication_display_#{@publication.id}_targeted_start_date').val());
+               $('#publication_#{@publication.id}_secretary_notes').val($('#publication_display_#{@publication.id}_secretary_notes').val());" %>
+
+    <% form_name = "publication_#{@publication.id}_form" %>
+    <%= form_tag inline_update_publication_path(@publication), :method => :post, :remote => true, :id => form_name do %>
+      <%= hidden_field_tag "publication[#{@publication.id}][manuscript_number]" %>
+      <%= hidden_field_tag "publication[#{@publication.id}][status]" %>
+      <%= hidden_field_tag "publication[#{@publication.id}][targeted_start_date]" %>
+      <%= hidden_field_tag "publication[#{@publication.id}][secretary_notes]" %>
+    
+      <%= link_to_function image_tag('icons/tick.png', :alt => '') + 'Update', "#{with};$('##{form_name}').submit();", :class => "button positive" %>
+      <%#= link_to image_tag('icons/tick.png', :alt => '') + 'Update', '#', :onclick => remote_function(
+          :url => inline_update_publication_path(@publication), :method => :post,
+          :with => "'&'+$('publication_#{@publication.id}_secretary_notes').serialize()+
+                    '&'+$('publication_#{@publication.id}_status').serialize()+
+                    '&'+$('publication_#{@publication.id}_manuscript_number').serialize()+
+                    '&'+$('publication_#{@publication.id}_targeted_start_date__1i').serialize()+
+                    '&'+$('publication_#{@publication.id}_targeted_start_date__2i').serialize()+
+                    '&'+$('publication_#{@publication.id}_targeted_start_date__3i').serialize()"
+        ) + "; return false;", :class => "button positive" %>
+      <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', inline_show_publication_path(@publication), :method => :post, :remote => true, :class => "button negative" %>
+    <% end %>
   </td>
 </tr>
 <tr>
   <td></td>
   <td colspan="9">
-    <%= text_area_tag "publication[#{@publication.id}][secretary_notes]", @publication.secretary_notes, :cols => 100, :rows => 3 %>
+    <%= text_area_tag "publication_display[#{@publication.id}][secretary_notes]", @publication.secretary_notes, :cols => 100, :rows => 3 %>
   </td>
 </tr>

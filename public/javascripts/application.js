@@ -6,7 +6,7 @@ function createSpinner() {
 }
 
 $(function(){
-  // $("#project_start_date").datepicker();
+  // $(".jquery_date").datepicker();
   // $("#project_end_date").datepicker();
   // $("#sticky_start_date").datepicker();
   // $("#sticky_end_date").datepicker();

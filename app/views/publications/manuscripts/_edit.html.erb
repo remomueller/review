@@ -4,10 +4,10 @@
     <%= file_field :publication, :manuscript %>
   </div>
   <div class="actions">
-    <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@publication.manuscript_url.blank? ? "Upload Manuscript" : "Replace Existing Manuscript"), "$('manuscript_form').submit();", :class => "button positive" %>
+    <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@publication.manuscript_url.blank? ? "Upload Manuscript" : "Replace Existing Manuscript"), "$('#manuscript_form').submit();", :class => "button positive" %>
       
     <% unless @publication.manuscript_url.blank? %>
-      <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', '#', :onclick => remote_function(:url => show_manuscript_publication_path(@publication), :method => :post) + "; return false;", :class => "button negative" %>
+      <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', show_manuscript_publication_path(@publication), :method => :post, :remote => true, :class => "button negative" %>
     <% end %>
   </div>
 <% end %>
