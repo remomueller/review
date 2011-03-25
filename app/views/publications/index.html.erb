@@ -17,7 +17,8 @@
     
   </tr>
 
-  <% @publications.each do |@publication| %>
+  <% @publications.each do |publication| %>
+    <% @publication = publication %>
     <tbody id="publication_<%= @publication.id %>_container">
       <%= render :partial => 'publications/inline_show' %>
     </tbody>

@@ -24,7 +24,8 @@
         <th>Status</th>
         <th></th>
       </tr>
-    <% User.current.steering_committee_members.each do |@user| %>
+    <% User.current.steering_committee_members.each do |user| %>
+      <% @user = user %>
       <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
       <tbody id="publication_review_box_user_<%= @user.id %>"><%= render :partial => 'user_publication_reviews/sc_show' %></tbody>
     <% end %>
@@ -54,7 +55,8 @@
         <th>Status</th>
         <th></th>
       </tr>
-    <% User.current.pp_committee_members.each do |@user| %>
+    <% User.current.pp_committee_members.each do |user| %>
+      <% @user = user %>
       <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
       <tbody id="publication_review_box_user_<%= @user.id %>"><%= render :partial => 'user_publication_reviews/show' %></tbody>
     <% end %>
