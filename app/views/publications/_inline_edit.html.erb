@@ -9,7 +9,7 @@
       <%= select_tag "publication_display[#{@publication.id}][status]", options_for_select(Publication::FINAL_STATUS, @publication.status) %>
     <% else %>
       <%= @publication.human_status %>
-      <%= hidden_field_tag "publication[#{@publication.id}][status]", @publication.status %>
+      <%= hidden_field_tag "publication_display[#{@publication.id}][status]", @publication.status %>
     <% end %>
   </td>
   <td>???</td>
