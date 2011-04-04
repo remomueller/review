@@ -102,7 +102,7 @@ class PublicationsController < ApplicationController
   end
 
   def index
-    @publications = current_user.all_viewable_publications
+    @publications = current_user.all_viewable_publications.order('manuscript_number, abbreviated_title')
   end
 
   def show
