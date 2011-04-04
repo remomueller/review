@@ -18,7 +18,7 @@ class Publication < ActiveRecord::Base
   # 7 of which are not set using mass assignment. (Publication.attr_protected.size)
   # :id, :created_at, :updated_at, :user_id, :deleted, :status, :manuscript_number, :secretary_notes
   
-  attr_protected :user_id, :deleted, :status, :manuscript_number, :secretary_notes, :targeted_start_date
+  attr_protected :user_id, :deleted, :manuscript_number, :secretary_notes, :targeted_start_date # , :status
   
   mount_uploader :manuscript, ManuscriptUploader
   
@@ -39,50 +39,49 @@ class Publication < ActiveRecord::Base
   scope :status, lambda { |*args|  { :conditions => ["publications.status IN (?)", args.first] } }
 
   # Model Validation
-  validates_presence_of :full_title
+  validates_presence_of :full_title, :abbreviated_title
   
-  validates_presence_of :centers, :proposed_analysis
+  validates_presence_of :centers, :proposed_analysis, :if => :no_longer_draft?
   
-  validates_presence_of :abbreviated_title, :lead_author, :writing_group_members, :keywords, :affiliation, :timeline, :sponsoring_pi,
-                        :rationale, :hypothesis, :data, :study_type, :target_journal, :analysis_responsibility, :analysis_plan, :summary_section,
-                        :references
+  validates_presence_of :lead_author, :writing_group_members, :keywords, :affiliation, :timeline, :sponsoring_pi, :rationale, :hypothesis, 
+                        :data, :study_type, :target_journal, :analysis_responsibility, :analysis_plan, :summary_section, :references, :if => :no_longer_draft?
 
-  validates_presence_of :publication_type
+  validates_presence_of :publication_type, :if => :no_longer_draft?
   
-  validates_presence_of :publication_type_specify, :if => :should_validate_publication_type?
+  validates_presence_of :publication_type_specify, :if => [:should_validate_publication_type?, :no_longer_draft?]
   
-  validates_acceptance_of :dcc_resources_none, :message => 'select at least one', :unless => :dcc_resources_selected?
-  validates_acceptance_of :dcc_resources_staff, :message => 'select at least one', :unless => :dcc_resources_selected?
-  validates_acceptance_of :dcc_resources_other, :message => 'select at least one', :unless => :dcc_resources_selected?
+  validates_acceptance_of :dcc_resources_none, :message => 'select at least one', :if => [:dcc_resources_not_selected?, :no_longer_draft?]
+  validates_acceptance_of :dcc_resources_staff, :message => 'select at least one', :if => [:dcc_resources_not_selected?, :no_longer_draft?]
+  validates_acceptance_of :dcc_resources_other, :message => 'select at least one', :if => [:dcc_resources_not_selected?, :no_longer_draft?]
 
-  validates_presence_of :dcc_resources_staff_specify, :if => :should_validate_dcc_resources_staff_specify?
-  validates_presence_of :dcc_resources_other_specify, :if => :should_validate_dcc_resources_other_specify?
+  validates_presence_of :dcc_resources_staff_specify, :if => [:should_validate_dcc_resources_staff_specify?, :no_longer_draft?]
+  validates_presence_of :dcc_resources_other_specify, :if => [:should_validate_dcc_resources_other_specify?, :no_longer_draft?]
 
-  validates_acceptance_of :chat_data_none, :message => 'select at least one', :unless => :chat_data_selected?
-  validates_acceptance_of :chat_data_main_forms, :message => 'select at least one', :unless => :chat_data_selected?
-  validates_acceptance_of :chat_data_main_database, :message => 'select at least one', :unless => :chat_data_selected?
-  validates_acceptance_of :chat_data_other, :message => 'select at least one', :unless => :chat_data_selected?
+  validates_acceptance_of :chat_data_none, :message => 'select at least one', :if => [:chat_data_not_selected?, :no_longer_draft?]
+  validates_acceptance_of :chat_data_main_forms, :message => 'select at least one', :if => [:chat_data_not_selected?, :no_longer_draft?]
+  validates_acceptance_of :chat_data_main_database, :message => 'select at least one', :if => [:chat_data_not_selected?, :no_longer_draft?]
+  validates_acceptance_of :chat_data_other, :message => 'select at least one', :if => [:chat_data_not_selected?, :no_longer_draft?]
 
-  validates_presence_of :chat_data_other_specify, :if => :should_validate_chat_data_other_specify?
+  validates_presence_of :chat_data_other_specify, :if => [:should_validate_chat_data_other_specify?, :no_longer_draft?]
   
-  validates_acceptance_of :manuscript_preparation_none, :message => 'select at least one', :unless => :manuscript_preparation_selected?
-  validates_acceptance_of :manuscript_preparation_analysis_data, :message => 'select at least one', :unless => :manuscript_preparation_selected?
-  validates_acceptance_of :manuscript_preparation_analysis_ancillary_data, :message => 'select at least one', :unless => :manuscript_preparation_selected?
-  validates_acceptance_of :manuscript_analysis_review, :message => 'select at least one', :unless => :manuscript_preparation_selected?
-  validates_acceptance_of :manuscript_preparation_other, :message => 'select at least one', :unless => :manuscript_preparation_selected?
+  validates_acceptance_of :manuscript_preparation_none, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
+  validates_acceptance_of :manuscript_preparation_analysis_data, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
+  validates_acceptance_of :manuscript_preparation_analysis_ancillary_data, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
+  validates_acceptance_of :manuscript_analysis_review, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
+  validates_acceptance_of :manuscript_preparation_other, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
   
-  validates_presence_of :manuscript_preparation_other_specify, :if => :should_validate_manuscript_preparation_other_specify?
+  validates_presence_of :manuscript_preparation_other_specify, :if => [:should_validate_manuscript_preparation_other_specify?, :no_longer_draft?]
   
-  validates_acceptance_of :attachment_none, :message => 'select at least one', :unless => :attachment_selected?
-  validates_acceptance_of :attachment_chat_form, :message => 'select at least one', :unless => :attachment_selected?
-  validates_acceptance_of :attachment_chat_variables, :message => 'select at least one', :unless => :attachment_selected?
-  validates_acceptance_of :attachment_ancillary_forms, :message => 'select at least one', :unless => :attachment_selected?
-  validates_acceptance_of :attachment_other, :message => 'select at least one', :unless => :attachment_selected?
+  validates_acceptance_of :attachment_none, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
+  validates_acceptance_of :attachment_chat_form, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
+  validates_acceptance_of :attachment_chat_variables, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
+  validates_acceptance_of :attachment_ancillary_forms, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
+  validates_acceptance_of :attachment_other, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
   
-  validates_presence_of :attachment_chat_form_specify, :if => :should_validate_attachment_chat_form_specify?
-  validates_presence_of :attachment_chat_variables_specify, :if => :should_validate_attachment_chat_variables_specify?
-  validates_presence_of :attachment_ancillary_forms_specify, :if => :should_validate_attachment_ancillary_forms_specify?
-  validates_presence_of :attachment_other_specify, :if => :should_validate_attachment_other_specify?
+  validates_presence_of :attachment_chat_form_specify, :if => [:should_validate_attachment_chat_form_specify?, :no_longer_draft?]
+  validates_presence_of :attachment_chat_variables_specify, :if => [:should_validate_attachment_chat_variables_specify?, :no_longer_draft?]
+  validates_presence_of :attachment_ancillary_forms_specify, :if => [:should_validate_attachment_ancillary_forms_specify?, :no_longer_draft?]
+  validates_presence_of :attachment_other_specify, :if => [:should_validate_attachment_other_specify?, :no_longer_draft?]
   
 
   # Model Relationships
@@ -109,8 +108,8 @@ class Publication < ActiveRecord::Base
     self.publication_type == 'AP'
   end
 
-  def dcc_resources_selected?
-    self.dcc_resources_none? || self.dcc_resources_staff? || self.dcc_resources_other?
+  def dcc_resources_not_selected?
+    !(self.dcc_resources_none? || self.dcc_resources_staff? || self.dcc_resources_other?)
   end
 
   def should_validate_dcc_resources_staff_specify?
@@ -121,24 +120,24 @@ class Publication < ActiveRecord::Base
     self.dcc_resources_other?
   end
 
-  def chat_data_selected?
-    self.chat_data_none? || self.chat_data_main_forms? || self.chat_data_main_database? || self.chat_data_other?
+  def chat_data_not_selected?
+    !(self.chat_data_none? || self.chat_data_main_forms? || self.chat_data_main_database? || self.chat_data_other?)
   end
   
   def should_validate_chat_data_other_specify?
     self.chat_data_other?
   end
   
-  def manuscript_preparation_selected?
-    self.manuscript_preparation_none? || self.manuscript_preparation_analysis_data? || self.manuscript_preparation_analysis_ancillary_data? || self.manuscript_analysis_review? || self.manuscript_preparation_other?
+  def manuscript_preparation_not_selected?
+    !(self.manuscript_preparation_none? || self.manuscript_preparation_analysis_data? || self.manuscript_preparation_analysis_ancillary_data? || self.manuscript_analysis_review? || self.manuscript_preparation_other?)
   end
   
   def should_validate_manuscript_preparation_other_specify?
     self.manuscript_preparation_other?    
   end
   
-  def attachment_selected?
-    self.attachment_none? || self.attachment_chat_form? || self.attachment_chat_variables? || self.attachment_ancillary_forms? || self.attachment_other?
+  def attachment_not_selected?
+    !(self.attachment_none? || self.attachment_chat_form? || self.attachment_chat_variables? || self.attachment_ancillary_forms? || self.attachment_other?)
   end
 
   def should_validate_attachment_chat_form_specify?
@@ -155,6 +154,10 @@ class Publication < ActiveRecord::Base
 
   def should_validate_attachment_other_specify?
     self.attachment_other?
+  end
+
+  def no_longer_draft?
+    self.status != 'draft'
   end
 
 end
