@@ -6,32 +6,36 @@
 <div style="clear:both"></div>
 <% proposed_publications = Publication.current.status('proposed') %>
 <% if (current_user.pp_committee? or current_user.pp_committee_secretary?) and proposed_publications.size > 0 %>
-  <h3>P&amp;P Committee</h3>
-  <h4>Publication Proposals Awaiting Review</h4>
-  <ul>
+  <h3>P&amp;P Committee: Proposals to Review</h3>
+  <table>
   <% proposed_publications.each do |publication| %>
-    <li>
-      <%= link_to publication.full_title, publication %>
-      <% if user_publication_review = current_user.user_publication_reviews.find_by_publication_id(publication.id) %>
-        Review Submitted <%= simple_time(user_publication_review.updated_at) %>
-      <% end %>
-    </li>
+    <tr>
+      <td><%= publication.manuscript_number unless publication.manuscript_number.blank? %></td>
+      <td><%= link_to publication.full_title, publication %></td>
+      <td>
+        <% if user_publication_review = current_user.user_publication_reviews.find_by_publication_id(publication.id) %>
+          Review Submitted <%= simple_time(user_publication_review.updated_at) %>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
-  </ul>
+  </table>
 <% end %>
 <br />
 <% approved_publications = Publication.current.status('approved') %>
 <% if (current_user.steering_committee? or current_user.steering_committee_secretary?) and approved_publications.size > 0 %>
-  <h3>Steering Committee</h3>
-  <h4>Publication Proposals Awaiting Review</h4>
-  <ul>
+  <h3>Steering Committee: Proposals to Review</h3>
+  <table>
   <% approved_publications.each do |publication| %>
-    <li>
-      <%= link_to publication.full_title, publication %>
-      <% if user_publication_review = current_user.user_publication_reviews.find_by_publication_id(publication.id) %>
-        Review Submitted <%= simple_time(user_publication_review.updated_at) %>
-      <% end %>
-    </li>
+    <tr>
+      <td><%= publication.manuscript_number unless publication.manuscript_number.blank? %></td>
+      <td><%= link_to publication.full_title, publication %></td>
+      <td>
+        <% if user_publication_review = current_user.user_publication_reviews.find_by_publication_id(publication.id) %>
+          Review Submitted <%= simple_time(user_publication_review.updated_at) %>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
-  </ul>
+  </table>
 <% end %>
