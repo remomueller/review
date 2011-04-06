@@ -43,18 +43,14 @@ class User < ActiveRecord::Base
   
   def all_publications
     @all_publications ||= begin
-      if self.system_admin?
-        Publication.current.order('created_at')
-      else
-        self.publications
-      end
+      self.publications
     end
   end
   
   def all_viewable_publications
     @all_viewable_publications ||= begin
-      if self.system_admin? or self.pp_committee? or self.pp_committee_secretary?
-        Publication.current.order('created_at')
+      if self.pp_committee? or self.pp_committee_secretary?
+        Publication.current
       else
         self.publications
       end
