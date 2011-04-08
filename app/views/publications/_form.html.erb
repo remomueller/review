@@ -23,7 +23,11 @@
     
     <div class="field">
       <label>1. Proposing Investigator</label><br />
-      <%= @publication.user.name %>
+      <% if @publication.user %>
+        <%= @publication.user.name %>
+      <% else %>
+        <span class="quiet">No Lead Author</span>
+      <% end %>
     </div>
     
     <div class="field">

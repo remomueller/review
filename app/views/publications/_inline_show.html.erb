@@ -3,7 +3,11 @@
   <td><%= @publication.manuscript_number %></td><%# Manuscript Number %>
   <td><%= link_to @publication.abbreviated_title, @publication %></td>
   <td>
-    <%= link_to @publication.user.name, @publication.user %>
+    <% if @publication.user %>
+      <%= link_to @publication.user.name, @publication.user %>
+    <% else %>
+      <span class="quiet">No Lead Author</span>
+    <% end %>
     <% unless @publication.writing_group_members.blank? %><br /><%= @publication.writing_group_members %><% end %>
     <% @publication.user_publication_reviews.each do |upr| %>
       <% unless upr.writing_group_nomination.blank? %>

@@ -2,7 +2,11 @@
 
   <td><%= text_field_tag "publication_display[#{@publication.id}][manuscript_number]", @publication.manuscript_number %></td><%# Manuscript Number %>
   <td><%= link_to @publication.abbreviated_title, @publication %></td>
-  <td><%= link_to @publication.user.name, @publication.user %><br /><%= @publication.writing_group_members %></td>
+  <td>
+    <%= select_tag "publication_display[#{@publication.id}][user_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.user_id) %>
+    <%#= link_to @publication.user.name, @publication.user %><br />
+    <%= @publication.writing_group_members %>
+  </td>
   <td><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
   <td style="white-space:nowrap">
     <% if ['nominated', 'submitted', 'published'].include?(@publication.status) %>
@@ -47,6 +51,7 @@
   </td>
   <td style="white-space:nowrap">
     <% with = "$('#publication_#{@publication.id}_manuscript_number').val($('#publication_display_#{@publication.id}_manuscript_number').val());
+               $('#publication_#{@publication.id}_user_id').val($('#publication_display_#{@publication.id}_user_id').val());
                $('#publication_#{@publication.id}_status').val($('#publication_display_#{@publication.id}_status').val());
                $('#publication_#{@publication.id}_targeted_start_date').val($('#publication_display_#{@publication.id}_targeted_start_date').val());
                $('#publication_#{@publication.id}_secretary_notes').val($('#publication_display_#{@publication.id}_secretary_notes').val());" %>
@@ -54,6 +59,7 @@
     <% form_name = "publication_#{@publication.id}_form" %>
     <%= form_tag inline_update_publication_path(@publication), :method => :post, :remote => true, :id => form_name do %>
       <%= hidden_field_tag "publication[#{@publication.id}][manuscript_number]" %>
+      <%= hidden_field_tag "publication[#{@publication.id}][user_id]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][status]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][targeted_start_date]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][secretary_notes]" %>
