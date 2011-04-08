@@ -32,12 +32,20 @@
     
     <div class="field">
       <%= f.label :centers, '2. Center(s):' %><br />
-      <%= f.text_field :centers, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_field :centers, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.centers %></pre>
+      <% end %>
     </div>
     
     <div class="field">
       <%= f.label :proposal_submission_date, '3. Date this publication was submitted to CHAT DCC' %><br />
-      <%= f.date_select :proposal_submission_date, :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.date_select :proposal_submission_date, :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.proposal_submission_date %></pre>
+      <% end %>
     </div>
     
   </fieldset>
@@ -53,7 +61,11 @@
     </div>
     <div class="field">
       <%= f.radio_button(:publication_type, "AP", :disabled => disabled) %> <%= label 'publication_publication_type', 'ap', 'Ancillary Paper (data collected only at one investigative center <em>specify ancillary study &amp; paper</em>):'.html_safe %><br />
-      <%= f.text_field :publication_type_specify, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_field :publication_type_specify, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.publication_type_specify %></pre>
+      <% end %>
     </div>
   </fieldset>
   
@@ -64,12 +76,20 @@
       <label>5. Does preparation of this publication require any DCC RESOURCES? (<em>check all that apply; specify resources in each category</em>)</label><br />
       <br />
       <%= f.check_box :dcc_resources_none, :disabled => disabled %> <%= f.label :dcc_resources_none, 'None' %><br />
-      <%= f.check_box :dcc_resources_staff, :disabled => disabled %> <%= f.label :dcc_resources_staff, 'Staff (specify):' %><br />      
-      <%= f.text_field :dcc_resources_staff_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <%= f.check_box :dcc_resources_staff, :disabled => disabled %> <%= f.label :dcc_resources_staff, 'Staff (specify):' %><br />
+      <% if disabled.blank? %>
+        <%= f.text_field :dcc_resources_staff_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <% else %>
+        <pre class="disabled"><%= @publication.dcc_resources_staff_specify %></pre>
+      <% end %>
       <%= f.check_box :dcc_resources_other, :disabled => disabled %> <%= f.label :dcc_resources_other, 'Other (specify):' %><br />
-      <%= f.text_field :dcc_resources_other_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <% if disabled.blank? %>
+        <%= f.text_field :dcc_resources_other_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <% else %>
+        <pre class="disabled"><%= @publication.dcc_resources_other_specify %></pre>
+      <% end %>
     </div>
-
+    <br />
     <div class="field">
       <label>6.  What CHAT data will be required to prepare this publication? <em>(check all that apply)</em></label><br />
       <br />
@@ -85,7 +105,11 @@
       <%= render :partial => 'publications/download_link' %>
       <br />
       <%= f.check_box :chat_data_other, :disabled => disabled %> <%= f.label :chat_data_other, 'Other (<em>specify data and where the data are located</em>):'.html_safe %><br />
-      <%= f.text_field :chat_data_other_specify, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_field :chat_data_other_specify, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.chat_data_other_specify %></pre>
+      <% end %>
     </div>
   </fieldset>
   <fieldset class="<%= 'fieldset_with_errors' if @publication.errors.keys.include?(:manuscript_preparation_none) %>">
@@ -99,13 +123,20 @@
       <%= f.check_box :manuscript_preparation_analysis_ancillary_data, :disabled => disabled %> <%= f.label :manuscript_preparation_analysis_ancillary_data, 'New analysis of CHAT ancillary study data by DCC staff' %><br />
       <%= f.check_box :manuscript_analysis_review, :disabled => disabled %> <%= f.label :manuscript_analysis_review, 'Review of distributed analysis of CHAT data by DCC staff' %><br />
       <%= f.check_box :manuscript_preparation_other, :disabled => disabled %> <%= f.label :manuscript_preparation_other, 'Other (<em>specify</em>):'.html_safe %><br />
-      <%= f.text_field :manuscript_preparation_other_specify, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_field :manuscript_preparation_other_specify, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.manuscript_preparation_other_specify %></pre>
+      <% end %>
     </div>
-    
+    <br />
     <div class="field">
       <label>8 . Briefly describe the proposed analysis</label><br />
-      <br />
-      <%= f.text_area :proposed_analysis, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_area :proposed_analysis, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.proposed_analysis %></pre>
+      <% end %>
     </div>
   </fieldset>
   <fieldset class="<%= 'fieldset_with_errors' if @publication.errors.keys.include?(:attachment_none) %>">
@@ -119,95 +150,183 @@
       <% @attribute = 'attachment_chat_form'; @disabled = disabled %>
       <%= render :partial => 'publications/download_link' %>
       <br />
-      <%= f.text_field :attachment_chat_form_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <% if disabled.blank? %>
+        <%= f.text_field :attachment_chat_form_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <% else %>
+        <pre class="disabled"><%= @publication.attachment_chat_form_specify %></pre>
+      <% end %>
       <%= f.check_box :attachment_chat_variables, :disabled => disabled %> <%= f.label :attachment_chat_variables, 'List of CHAT sleep study variables intended for analysis:' %><br />
-      <%= f.text_field :attachment_chat_variables_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <% if disabled.blank? %>
+        <%= f.text_field :attachment_chat_variables_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <% else %>
+        <pre class="disabled"><%= @publication.attachment_chat_variables_specify %></pre>
+      <% end %>
       <%= f.check_box :attachment_ancillary_forms, :disabled => disabled %> <%= f.label :attachment_ancillary_forms,'CHAT ancillary study forms with items marked to indicate variables intended for analysis:' %><br />
-      <%= f.text_field :attachment_ancillary_forms_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <% if disabled.blank? %>
+        <%= f.text_field :attachment_ancillary_forms_specify, :style => "width:#{width}", :disabled => disabled %><br />
+      <% else %>
+        <pre class="disabled"><%= @publication.attachment_ancillary_forms_specify %></pre>
+      <% end %>
       <%= f.check_box :attachment_other, :disabled => disabled %> <%= f.label :attachment_other, 'Other (<em>specify</em>):'.html_safe %><br />
-      <%= f.text_field :attachment_other_specify, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_field :attachment_other_specify, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.attachment_other_specify %></pre>
+      <% end %>
     </div>
-    
+    <br />
     <div class="field">
-      <label>10.  CHAT Publication Proposal Description<br />
+      <label>10.  CHAT Publication Proposal Description<% if false %><br />
         <br />
         Submit this description along with Completed Publication Proposal Form to:<br />
-        P&amp;P Committee,   c/o Anna Marie Kibler   (AKibler@partners.org)
+        P&amp;P Committee,   c/o Anna Marie Kibler   (AKibler@partners.org)<% end %>
       </label>
       <br />
       <br />
       <%= f.label :full_title %><br />
-      <%= f.text_field :full_title, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+          <%= f.text_field :full_title, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.full_title %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :abbreviated_title, 'Abbreviated Title' %><br />
-      <%= f.text_field :abbreviated_title, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_field :abbreviated_title, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.abbreviated_title %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :lead_author, 'Lead Author' %><br />
-      <%= f.text_field :lead_author, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_field :lead_author, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.lead_author %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :writing_group_members, 'Writing Group Members' %><br />
-      <%= f.text_field :writing_group_members, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_field :writing_group_members, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.writing_group_members %></pre>
+      <% end %>
     </div>
     <% if false %>
     <div class="field">
       <%= f.label :additional_coauthors, 'Additional Co-Authors' %><br />
-      <%= f.text_field :additional_coauthors, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_field :additional_coauthors, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.additional_coauthors %></pre>
+      <% end %>
     </div>
     <% end %>
     <div class="field">
       <%= f.label :keywords %><br />
-      <%= f.text_field :keywords, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_field :keywords, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.keywords %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :affiliation %><br />
-      <%= f.text_field :affiliation, :disabled => disabled, :style => "width:#{width}" %>
+      <% if disabled.blank? %>
+        <%= f.text_field :affiliation, :disabled => disabled, :style => "width:#{width}" %>
+      <% else %>
+        <pre class="disabled"><%= @publication.affiliation %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :timeline %><br />
-      <%= f.text_area :timeline, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_area :timeline, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.timeline %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :sponsoring_pi, 'Sponsoring PI' %><br />
-      <%= f.text_field :sponsoring_pi, :disabled => disabled, :style => "width:#{width}" %>
+      <% if disabled.blank? %>
+        <%= f.text_field :sponsoring_pi, :disabled => disabled, :style => "width:#{width}" %>
+      <% else %>
+        <pre class="disabled"><%= @publication.sponsoring_pi %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :rationale %><br />
-      <%= f.text_area :rationale, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_area :rationale, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.rationale %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :hypothesis %><br />
-      <%= f.text_area :hypothesis, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_area :hypothesis, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.hypothesis %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :data, 'Data (Study Design, Population, Variables of Interest)' %><br />
-      <%= f.text_area :data, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_area :data, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.data %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :study_type, 'Type of Study' %><br />
-      <%= f.text_field :study_type, :disabled => disabled, :style => "width:#{width}" %>
+      <% if disabled.blank? %>
+        <%= f.text_field :study_type, :disabled => disabled, :style => "width:#{width}" %>
+      <% else %>
+        <pre class="disabled"><%= @publication.study_type %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :target_journal, 'Target Journal' %><br />
-      <%= f.text_field :target_journal, :disabled => disabled, :style => "width:#{width}" %>
+      <% if disabled.blank? %>
+        <%= f.text_field :target_journal, :disabled => disabled, :style => "width:#{width}" %>
+      <% else %>
+        <pre class="disabled"><%= @publication.target_journal %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :analysis_responsibility, 'Analysis Responsibility' %><br />
-      <%= f.text_area :analysis_responsibility, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_area :analysis_responsibility, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.analysis_responsibility %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :analysis_plan, 'Brief Analysis Plan' %><br />
-      <%= f.text_area :analysis_plan, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_area :analysis_plan, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.analysis_plan %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :summary_section, 'Summary Section' %><br />
-      <%= f.text_area :summary_section, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_area :summary_section, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.summary_section %></pre>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :references %><br />
-      <%= f.text_area :references, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% if disabled.blank? %>
+        <%= f.text_area :references, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.references %></pre>
+      <% end %>
     </div>
     
   </fieldset>

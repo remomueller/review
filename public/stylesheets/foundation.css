@@ -52,7 +52,7 @@ pre {
   margin: 0px;
 }
 
-textarea[disabled='disabled'], input[disabled='disabled'], select[disabled='disabled'] { color: #0E7799; }
+textarea[disabled='disabled'], input[disabled='disabled'], select[disabled='disabled'], .disabled { color: #0E7799; }
 
 /**************************************/
 /*              HEADER                */
