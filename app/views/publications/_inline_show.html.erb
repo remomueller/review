@@ -1,7 +1,7 @@
 <tr>
 
   <td><%= @publication.manuscript_number %></td><%# Manuscript Number %>
-  <td><%= link_to @publication.abbreviated_title, @publication %></td>
+  <td><%= link_to @publication.abbreviated_title, @publication, :title => @publication.full_title %></td>
   <td>
     <% if @publication.user %>
       <%= link_to @publication.user.name, @publication.user %>

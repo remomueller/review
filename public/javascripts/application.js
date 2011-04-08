@@ -6,11 +6,7 @@ function createSpinner() {
 }
 
 $(function(){
-  // $(".jquery_date").datepicker();
-  // $("#project_end_date").datepicker();
-  // $("#sticky_start_date").datepicker();
-  // $("#sticky_end_date").datepicker();
-  
+  $(".datepicker").datepicker({ showOtherMonths: true, selectOtherMonths: true, changeMonth: true, changeYear: true });
   $("#ui-datepicker-div").hide();
   
   $(".pagination a").live("click", function() {

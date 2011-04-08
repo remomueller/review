@@ -3,31 +3,19 @@
 <%= link_to image_tag('icons/addfile.png', :alt => '') + "Create New Publication", new_publication_path, :class => 'button positive' %>
 <div style="clear:both"></div>
 
-<table>
-  <tr>
-    <th></th><%# Manuscript Number %>
-    <th>Abbreviated Title</th>
-    <th>Lead Author and Writing Committee</th>
-    <th>Paper Type</th>
-    <th>Status and Notes</th>
-    <th>Dataset Requested Analyst</th>
-    <th>Targeted Start Date</th>
-    <th>Action Items and Secretary Notes</th>
-    <th>Manuscript</th>
-    <% if current_user.pp_committee_secretary? or current_user.steering_committee_secretary? %>
-      <th></th>
-    <% end %>
-    
-  </tr>
+<%= form_tag publications_path, :method => :get, :id => "search_form" do %>
+  <%= hidden_field_tag :order, params[:order] %>
+  Search <%= text_field_tag 'search', params[:search] %> <%= information %>
+<% end %>
+<div id="publications"></div>
 
-  <% @publications.each do |publication| %>
-    <% @publication = publication %>
-    <tbody id="publication_<%= @publication.id %>_container">
-      <%= render :partial => 'publications/inline_show' %>
-    </tbody>
+<% content_for :script do %>
+  <%= javascript_tag do %>
+    $(function(){
+      $.get($("#search_form").attr("action"), $("#search_form").serialize(), null, "script");
+    });
   <% end %>
-</table>
-
+<% end %>
 
 <% if false %>
     <th>Full title</th>

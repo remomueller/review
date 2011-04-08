@@ -102,7 +102,17 @@ class PublicationsController < ApplicationController
   end
 
   def index
-    @publications = current_user.all_viewable_publications.order('manuscript_number DESC, abbreviated_title')
+    # @publications = current_user.all_viewable_publications.order('manuscript_number DESC, abbreviated_title')
+    @order = ['manuscript_number', 'abbreviated_title', 'status'].include?(params[:order].to_s.split(' ').first) ? params[:order] : 'manuscript_number DESC'
+    # @order = params[:order].blank? ? 'manuscript_number' : params[:order]
+    logger.debug "ORDER: #{@order}"
+    
+    publications_scope = current_user.all_viewable_publications #.order('manuscript_number DESC, abbreviated_title')
+    @search_terms = params[:search].to_s.gsub(/[^0-9a-zA-Z]/, ' ').split(' ')
+    @search_terms.each{|search_term| publications_scope = publications_scope.search(search_term) }
+    publications_scope = publications_scope.order(@order)
+    @publications = publications_scope.page(params[:page]).per(10)
+    
   end
 
   def show

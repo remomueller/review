@@ -5,6 +5,9 @@ Review::Application.routes.draw do
   resources :comments
 
   resources :publications do
+    collection do
+      get :search
+    end
     member do
        post :pp_approval
        post :sc_approval
