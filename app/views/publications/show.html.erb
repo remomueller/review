@@ -105,7 +105,7 @@
 <fieldset>
   <legend>Publications and Presentations Sub Committee Reviewer Comments</legend>
   <% @publication.user_publication_reviews.each do |user_publication_review| %>
-    <% unless user_publication_review.comment.blank? %><div><%= user_publication_review.comment %></div><% end %>
+    <% unless user_publication_review.comment.blank? %><div><pre><%= user_publication_review.comment %></pre></div><% end %>
   <% end %>
 </fieldset>
 <% end %>

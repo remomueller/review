@@ -84,3 +84,13 @@ function authorAssuranceCheck(){
   }
   return true;
 }
+
+function toggleAttachment(element_id){
+  var checkbox_element = $(element_id);
+  var file_container = $(element_id + '_container');
+  if(checkbox_element.is(':checked')){
+    file_container.show();
+  }else{
+    file_container.hide();
+  }
+}

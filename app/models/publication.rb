@@ -21,6 +21,9 @@ class Publication < ActiveRecord::Base
   attr_protected :user_id, :deleted, :manuscript_number, :secretary_notes, :targeted_start_date # , :status
   
   mount_uploader :manuscript, ManuscriptUploader
+  mount_uploader :chat_data_main_forms_attachment, ManuscriptUploader
+  mount_uploader :chat_data_main_database_attachment, ManuscriptUploader
+  mount_uploader :attachment_chat_form_attachment, ManuscriptUploader
   
   # attr_accessible :full_title, :centers, :proposal_submission_date, :publication_type, :publication_type_specify, :dcc_resources_none, :dcc_resources_staff,
   #   :dcc_resources_staff_specify, :dcc_resources_other, :dcc_resources_other_specify, :chat_data_none, :chat_data_main_forms, :chat_data_main_database,
@@ -63,6 +66,9 @@ class Publication < ActiveRecord::Base
   validates_acceptance_of :chat_data_other, :message => 'select at least one', :if => [:chat_data_not_selected?, :no_longer_draft?]
 
   validates_presence_of :chat_data_other_specify, :if => [:should_validate_chat_data_other_specify?, :no_longer_draft?]
+
+  validates_presence_of :chat_data_main_forms_attachment, :if => [:chat_data_main_forms_selected?]
+  validates_presence_of :chat_data_main_database_attachment, :if => [:chat_data_main_database_selected?]
   
   validates_acceptance_of :manuscript_preparation_none, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
   validates_acceptance_of :manuscript_preparation_analysis_data, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
@@ -77,6 +83,8 @@ class Publication < ActiveRecord::Base
   validates_acceptance_of :attachment_chat_variables, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
   validates_acceptance_of :attachment_ancillary_forms, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
   validates_acceptance_of :attachment_other, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
+  
+  validates_presence_of :attachment_chat_form_attachment, :if => [:attachment_chat_form_selected?]
   
   validates_presence_of :attachment_chat_form_specify, :if => [:should_validate_attachment_chat_form_specify?, :no_longer_draft?]
   validates_presence_of :attachment_chat_variables_specify, :if => [:should_validate_attachment_chat_variables_specify?, :no_longer_draft?]
@@ -128,6 +136,14 @@ class Publication < ActiveRecord::Base
     self.chat_data_other?
   end
   
+  def chat_data_main_forms_selected?
+    self.chat_data_main_forms?
+  end
+  
+  def chat_data_main_database_selected?
+    self.chat_data_main_database?
+  end
+  
   def manuscript_preparation_not_selected?
     !(self.manuscript_preparation_none? || self.manuscript_preparation_analysis_data? || self.manuscript_preparation_analysis_ancillary_data? || self.manuscript_analysis_review? || self.manuscript_preparation_other?)
   end
@@ -154,6 +170,10 @@ class Publication < ActiveRecord::Base
 
   def should_validate_attachment_other_specify?
     self.attachment_other?
+  end
+
+  def attachment_chat_form_selected?
+    self.attachment_chat_form?
   end
 
   def no_longer_draft?

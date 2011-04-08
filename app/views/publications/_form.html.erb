@@ -1,6 +1,6 @@
 <% width = '914px' %>
 <% disabled = '' if defined?(disabled) == nil %>
-<%= form_for(@publication) do |f| %>
+<%= form_for(@publication, :html => {:multipart => true}) do |f| %>
 
 <% if false %>
     <% if @publication.errors.any? %>
@@ -74,8 +74,16 @@
       <label>6.  What CHAT data will be required to prepare this publication? <em>(check all that apply)</em></label><br />
       <br />
       <%= f.check_box :chat_data_none, :disabled => disabled %> <%= f.label :chat_data_none, 'None' %><br />
-      <%= f.check_box :chat_data_main_forms, :disabled => disabled %> <%= f.label :chat_data_main_forms, 'CHAT main forms database (<em>please attach copies of release forms with required items circled</em>)'.html_safe %><br />
-      <%= f.check_box :chat_data_main_database, :disabled => disabled %> <%= f.label :chat_data_main_database, 'CHAT main sleep study database (<em>please attach a list of data items</em>)'.html_safe %><br />
+      
+      <%= f.check_box :chat_data_main_forms, :disabled => disabled, :onclick => "toggleAttachment('#publication_chat_data_main_forms');" %> <%= f.label :chat_data_main_forms, 'CHAT main forms database (<em>please attach copies of release forms with required items circled</em>)'.html_safe %>
+      <% @attribute = 'chat_data_main_forms'; @disabled = disabled %>
+      <%= render :partial => 'publications/download_link' %>
+      <br />
+      
+      <%= f.check_box :chat_data_main_database, :disabled => disabled, :onclick => "toggleAttachment('#publication_chat_data_main_database');" %> <%= f.label :chat_data_main_database, 'CHAT main sleep study database (<em>please attach a list of data items</em>)'.html_safe %>
+      <% @attribute = 'chat_data_main_database'; @disabled = disabled %>
+      <%= render :partial => 'publications/download_link' %>
+      <br />
       <%= f.check_box :chat_data_other, :disabled => disabled %> <%= f.label :chat_data_other, 'Other (<em>specify data and where the data are located</em>):'.html_safe %><br />
       <%= f.text_field :chat_data_other_specify, :style => "width:#{width}", :disabled => disabled %>
     </div>
@@ -107,7 +115,10 @@
       <label>9.  Attachments to this form (<em>check all that apply</em>)</label><br />
       <br />
       <%= f.check_box :attachment_none, :disabled => disabled %> <%= f.label :attachment_none, 'None' %><br />
-      <%= f.check_box :attachment_chat_form, :disabled => disabled %> <%= f.label :attachment_chat_form, 'CHAT form with items marked to indicate variables intended for analysis:' %><br />
+      <%= f.check_box :attachment_chat_form, :disabled => disabled, :onclick => "toggleAttachment('#publication_attachment_chat_form');" %> <%= f.label :attachment_chat_form, 'CHAT form with items marked to indicate variables intended for analysis:' %>
+      <% @attribute = 'attachment_chat_form'; @disabled = disabled %>
+      <%= render :partial => 'publications/download_link' %>
+      <br />
       <%= f.text_field :attachment_chat_form_specify, :style => "width:#{width}", :disabled => disabled %><br />
       <%= f.check_box :attachment_chat_variables, :disabled => disabled %> <%= f.label :attachment_chat_variables, 'List of CHAT sleep study variables intended for analysis:' %><br />
       <%= f.text_field :attachment_chat_variables_specify, :style => "width:#{width}", :disabled => disabled %><br />

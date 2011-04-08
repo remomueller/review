@@ -162,6 +162,14 @@ class PublicationsController < ApplicationController
     params[:publication][:status] = (params[:publish] == '1') ? 'proposed' : 'draft'
     params[:publication][:author_assurance_date] = Date.today if params[:publish] == '1'
     @publication = current_user.publications.new(params[:publication])
+    
+    # @publication.remove_manuscript!
+    
+    # @publication.update_attributes(:manuscript => params[:publication][:manuscript], :manuscript_uploaded_at => Time.now)
+    # extension = params[:publication][:manuscript].original_filename.downcase.split('.').last
+    # message = ManuscriptUploader.new.extension_white_list.include?(extension) ? nil : "Not a valid document type: #{extension}"
+    
+    
     if @publication.save
       @publication.update_attribute :status, params[:publish] == '1' ? 'proposed' : 'draft'
       redirect_to(@publication, :notice => params[:publish] == '1' ? 'Publication was successfully submitted for review.' : 'Publication draft was successfully created.')
