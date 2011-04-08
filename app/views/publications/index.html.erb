@@ -1,5 +1,8 @@
 <h1>Publication Matrix</h1>
 
+<%= link_to image_tag('icons/addfile.png', :alt => '') + "Create New Publication", new_publication_path, :class => 'button positive' %>
+<div style="clear:both"></div>
+
 <table>
   <tr>
     <th></th><%# Manuscript Number %>
@@ -24,10 +27,6 @@
     </tbody>
   <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Publication', new_publication_path %>
 
 
 <% if false %>
