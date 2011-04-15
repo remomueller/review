@@ -4,9 +4,13 @@
   <td><%= link_to @publication.abbreviated_title, @publication, :title => @publication.full_title %></td>
   <td>
     <% if @publication.user %>
-      <%= link_to @publication.user.name, @publication.user %>
+      <span style="white-space:nowrap">Lead Author: <%= link_to @publication.user.name, @publication.user %></span>
     <% else %>
-      <span class="quiet">No Lead Author</span>
+      <span class="quiet" style="white-space:nowrap">No Lead Author</span>
+    <% end %>
+    <br />
+    <% if @publication.co_lead_author %>
+      <span style="white-space:nowrap">Co-Lead Author: <%= link_to @publication.co_lead_author.name, @publication.co_lead_author %><br /></span>
     <% end %>
     <% unless @publication.writing_group_members.blank? %><br /><%= @publication.writing_group_members %><% end %>
     <% @publication.user_publication_reviews.each do |upr| %>

@@ -3,7 +3,8 @@
   <td><%= text_field_tag "publication_display[#{@publication.id}][manuscript_number]", @publication.manuscript_number %></td><%# Manuscript Number %>
   <td><%= link_to @publication.abbreviated_title, @publication %></td>
   <td>
-    <%= select_tag "publication_display[#{@publication.id}][user_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.user_id) %>
+    <span style="white-space:nowrap">Lead Author: <%= select_tag "publication_display[#{@publication.id}][user_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.user_id) %></span>
+    <span style="white-space:nowrap">Co-Lead Author: <%= select_tag "publication_display[#{@publication.id}][co_lead_author_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.co_lead_author_id) %></span>
     <%#= link_to @publication.user.name, @publication.user %><br />
     <%= @publication.writing_group_members %>
   </td>
@@ -54,6 +55,7 @@
   <td style="white-space:nowrap">
     <% with = "$('#publication_#{@publication.id}_manuscript_number').val($('#publication_display_#{@publication.id}_manuscript_number').val());
                $('#publication_#{@publication.id}_user_id').val($('#publication_display_#{@publication.id}_user_id').val());
+               $('#publication_#{@publication.id}_co_lead_author_id').val($('#publication_display_#{@publication.id}_co_lead_author_id').val());
                $('#publication_#{@publication.id}_status').val($('#publication_display_#{@publication.id}_status').val());
                $('#publication_#{@publication.id}_dataset_requested_analyst').val($('#publication_display_#{@publication.id}_dataset_requested_analyst').val());
                $('#publication_#{@publication.id}_targeted_start_date').val($('#publication_display_#{@publication.id}_targeted_start_date').val());
@@ -63,6 +65,7 @@
     <%= form_tag inline_update_publication_path(@publication), :method => :post, :remote => true, :id => form_name do %>
       <%= hidden_field_tag "publication[#{@publication.id}][manuscript_number]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][user_id]" %>
+      <%= hidden_field_tag "publication[#{@publication.id}][co_lead_author_id]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][status]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][dataset_requested_analyst]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][targeted_start_date]" %>

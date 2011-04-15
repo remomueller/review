@@ -22,7 +22,7 @@
     <legend>A. Administrative Information</legend>
     
     <div class="field">
-      <label>1. Proposing Investigator</label><br />
+      <label>1. Lead Author</label><br />
       <% if @publication.user %>
         <%= @publication.user.name %>
       <% else %>
@@ -199,12 +199,11 @@
       <% end %>
     </div>
     <div class="field">
-      <%= f.label :lead_author, 'Lead Author' %><br />
-      <% if disabled.blank? %>
-        <%= f.text_field :lead_author, :style => "width:#{width}", :disabled => disabled %>
-        <%= f.select :lead_author_id, options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.lead_author_id) %>
+      <label>Lead Author</label><br />
+      <% if @publication.user %>
+        <pre class="disabled"><%= link_to @publication.user.name, @publication.user %></pre>
       <% else %>
-        <pre class="disabled"><%= @publication.lead_author %><br />ID: <%= @publication.lead_author_id %></pre>
+        <pre class="disabled"><span class="quiet">No Lead Author</span></pre>
       <% end %>
     </div>
     <div class="field">
@@ -213,7 +212,7 @@
         <%= f.select :co_lead_author_id, options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.co_lead_author_id) %>
         <%#= f.text_field :co_lead_author, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled">ID: <%= @publication.co_lead_author_id %></pre>
+        <pre class="disabled"><%= link_to @publication.co_lead_author.name, @publication.co_lead_author if @publication.co_lead_author  %></pre>
       <% end %>
     </div>
     <div class="field">
