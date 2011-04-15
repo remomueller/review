@@ -16,7 +16,9 @@
       <%= hidden_field_tag "publication_display[#{@publication.id}][status]", @publication.status %>
     <% end %>
   </td>
-  <td>???</td>
+  <td>
+    <%= text_area_tag "publication_display[#{@publication.id}][dataset_requested_analyst]", @publication.dataset_requested_analyst, :cols => 20, :rows => 3 %>
+  </td>
   <td>
     <%= text_field_tag "publication_display[#{@publication.id}][targeted_start_date]", @publication.targeted_start_date ? @publication.targeted_start_date.strftime('%m/%d/%Y') : '' %>
     <%= javascript_tag "$('#publication_display_#{@publication.id}_targeted_start_date').datepicker();" %>
@@ -53,6 +55,7 @@
     <% with = "$('#publication_#{@publication.id}_manuscript_number').val($('#publication_display_#{@publication.id}_manuscript_number').val());
                $('#publication_#{@publication.id}_user_id').val($('#publication_display_#{@publication.id}_user_id').val());
                $('#publication_#{@publication.id}_status').val($('#publication_display_#{@publication.id}_status').val());
+               $('#publication_#{@publication.id}_dataset_requested_analyst').val($('#publication_display_#{@publication.id}_dataset_requested_analyst').val());
                $('#publication_#{@publication.id}_targeted_start_date').val($('#publication_display_#{@publication.id}_targeted_start_date').val());
                $('#publication_#{@publication.id}_secretary_notes').val($('#publication_display_#{@publication.id}_secretary_notes').val());" %>
 
@@ -61,6 +64,7 @@
       <%= hidden_field_tag "publication[#{@publication.id}][manuscript_number]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][user_id]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][status]" %>
+      <%= hidden_field_tag "publication[#{@publication.id}][dataset_requested_analyst]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][targeted_start_date]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][secretary_notes]" %>
     
