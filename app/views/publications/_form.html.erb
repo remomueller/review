@@ -202,8 +202,18 @@
       <%= f.label :lead_author, 'Lead Author' %><br />
       <% if disabled.blank? %>
         <%= f.text_field :lead_author, :style => "width:#{width}", :disabled => disabled %>
+        <%= f.select :lead_author_id, options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.lead_author_id) %>
       <% else %>
-        <pre class="disabled"><%= @publication.lead_author %></pre>
+        <pre class="disabled"><%= @publication.lead_author %><br />ID: <%= @publication.lead_author_id %></pre>
+      <% end %>
+    </div>
+    <div class="field">
+      <%= f.label :co_lead_author, 'Co-Lead Author' %><br />
+      <% if disabled.blank? %>
+        <%= f.select :co_lead_author_id, options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.co_lead_author_id) %>
+        <%#= f.text_field :co_lead_author, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled">ID: <%= @publication.co_lead_author_id %></pre>
       <% end %>
     </div>
     <div class="field">

@@ -47,7 +47,7 @@ class Publication < ActiveRecord::Base
   
   validates_presence_of :centers, :proposed_analysis, :if => :no_longer_draft?
   
-  validates_presence_of :lead_author, :writing_group_members, :keywords, :affiliation, :timeline, :sponsoring_pi, :rationale, :hypothesis, 
+  validates_presence_of :lead_author, :lead_author_id, :writing_group_members, :keywords, :affiliation, :timeline, :sponsoring_pi, :rationale, :hypothesis, 
                         :data, :study_type, :target_journal, :analysis_responsibility, :analysis_plan, :summary_section, :references, :if => :no_longer_draft?
 
   validates_presence_of :publication_type, :if => :no_longer_draft?

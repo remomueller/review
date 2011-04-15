@@ -20,7 +20,7 @@ $(function(){
   //   // check input ($(this).val()) for validity here
   // });
   
-  $(".field_with_errors input, .field_with_errors_cleared input, .field_with_errors textarea, .field_with_errors_cleared textarea").change(function() {
+  $(".field_with_errors input, .field_with_errors_cleared input, .field_with_errors textarea, .field_with_errors_cleared textarea, .field_with_errors select, .field_with_errors_cleared select").change(function() {
     var el = $(this);
     if(el.val() != '' && el.val() != null){
       $(el).parent().removeClass('field_with_errors');
