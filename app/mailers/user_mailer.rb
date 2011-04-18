@@ -27,7 +27,7 @@ class UserMailer < ActionMailer::Base
 #         :reply_to => user.email)
   end
   
-  def publication_approval(publication, pp_committee)
+  def publication_approval(publication, pp_committee, secretary)
     setup_email
     @publication = publication
     @user = publication.user
@@ -42,7 +42,8 @@ class UserMailer < ActionMailer::Base
       @approval_status = 'denied by the Steering Committee'
     end
     mail(:to => @user.email,
-         :subject => @subject + "Publication Proposal for #{@publication.abbreviated_title} has been #{@approval_status}")
+         :subject => @subject + "Publication Proposal for #{@publication.abbreviated_title} has been #{@approval_status}",
+         :reply_to => secretary.email)
   end
   
   protected

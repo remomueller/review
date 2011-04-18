@@ -72,7 +72,7 @@ class PublicationsController < ApplicationController
       [:status, :manuscript_number].each do |attribute|
         @publication.update_attribute attribute, params[:publication][attribute]
       end
-      UserMailer.publication_approval(@publication, true).deliver if @publication.status != 'proposed' and @publication.user and Rails.env.production?
+      UserMailer.publication_approval(@publication, true, current_user).deliver if @publication.status != 'proposed' and @publication.user and Rails.env.production?
       redirect_to @publication
     else
       redirect_to root_path
@@ -95,7 +95,7 @@ class PublicationsController < ApplicationController
       [:status].each do |attribute|
         @publication.update_attribute attribute, params[:publication][attribute]
       end
-      UserMailer.publication_approval(@publication, false).deliver if @publication.status != 'approved' and @publication.user and Rails.env.production?
+      UserMailer.publication_approval(@publication, false, current_user).deliver if @publication.status != 'approved' and @publication.user and Rails.env.production?
       redirect_to @publication
     else
       redirect_to root_path
