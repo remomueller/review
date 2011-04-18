@@ -1,0 +1,15 @@
+Hello <%= @user.first_name %>,<br />
+<br />
+Your publication proposal <%= @publication.full_title %> has been <%= @approval_status %>.<br />
+<br />
+<% if @publication.status == 'not approved' %>
+After reviewing the comments left by the committee, you can edit and resubmit your proposal here: 
+<% else %>
+You can view the publication here:
+<% end %>
+<br /><br />
+<%= link_to "#{SITE_URL}/publications/#{@publication.id}", "#{SITE_URL}/publications/#{@publication.id}" %>.<br />
+<br />
+Thanks,<br />
+<br />
+<%= DEFAULT_APP_NAME %> System Mailer

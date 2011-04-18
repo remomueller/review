@@ -14,7 +14,7 @@ class PublicationsController < ApplicationController
     @publication = Publication.current.find_by_id(params[:id])
     @reviewer = User.current.find_by_id(params[:reviewer_id])
     if @publication and @reviewer and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?)
-      UserMailer.publication_approval_reminder(@publication, @reviewer).deliver
+      UserMailer.publication_approval_reminder(@publication, @reviewer).deliver if Rails.env.production?
     else
       render :nothing => true
     end
@@ -72,6 +72,7 @@ class PublicationsController < ApplicationController
       [:status, :manuscript_number].each do |attribute|
         @publication.update_attribute attribute, params[:publication][attribute]
       end
+      UserMailer.publication_approval(@publication, true).deliver if @publication.status != 'proposed' and @publication.user and Rails.env.production?
       redirect_to @publication
     else
       redirect_to root_path
@@ -94,6 +95,7 @@ class PublicationsController < ApplicationController
       [:status].each do |attribute|
         @publication.update_attribute attribute, params[:publication][attribute]
       end
+      UserMailer.publication_approval(@publication, false).deliver if @publication.status != 'approved' and @publication.user and Rails.env.production?
       redirect_to @publication
     else
       redirect_to root_path

@@ -27,6 +27,24 @@ class UserMailer < ActionMailer::Base
 #         :reply_to => user.email)
   end
   
+  def publication_approval(publication, pp_committee)
+    setup_email
+    @publication = publication
+    @user = publication.user
+    @approval_status = ''
+    if @publication.status == 'approved'
+      @approval_status = 'approved by the P&P Committee'
+    elsif @publication.status == 'nominated'
+      @approval_status = 'approved by the Steering Committee'
+    elsif @publication.status == 'not approved' and pp_committee
+      @approval_status = 'denied by the P&P Committee'
+    elsif @publication.status == 'not approved' and not pp_committee
+      @approval_status = 'denied by the Steering Committee'
+    end
+    mail(:to => @user.email,
+         :subject => @subject + "Publication Proposal for #{@publication.abbreviated_title} has been #{@approval_status}")
+  end
+  
   protected
   
   def setup_email

@@ -30,7 +30,7 @@ class Comment < ActiveRecord::Base
     @object = self.object_model.constantize.find_by_id(self.object_id)
     all_users = (@object.comments.collect{|c| c.user} + [@object.user]).uniq - [self.user]
     all_users.each do |user_to_email|
-      UserMailer.comment_by_mail(self, @object, user_to_email).deliver if user_to_email.active?
+      UserMailer.comment_by_mail(self, @object, user_to_email).deliver if user_to_email.active? and Rails.env.production?
     end
   end
   
