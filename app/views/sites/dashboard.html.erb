@@ -4,7 +4,7 @@
 <br />
 <%= link_to image_tag('icons/addfile.png', :alt => '') + 'Submit Manuscript or Publication for Review', new_publication_path, :class => 'button' %>
 <div style="clear:both"></div>
-<% proposed_publications = Publication.current.status('proposed').order('manuscript_number, full_title') %>
+<% proposed_publications = Publication.current.important.status('proposed').order('manuscript_number, full_title') %>
 <% if (current_user.pp_committee? or current_user.pp_committee_secretary?) and proposed_publications.size > 0 %>
   <h3>P&amp;P Committee: Proposals to Review</h3>
   <table>
@@ -22,7 +22,7 @@
   </table>
 <% end %>
 <br />
-<% approved_publications = Publication.current.status('approved').order('manuscript_number, full_title') %>
+<% approved_publications = Publication.current.important.status('approved').order('manuscript_number, full_title') %>
 <% if (current_user.steering_committee? or current_user.steering_committee_secretary?) and approved_publications.size > 0 %>
   <h3>Steering Committee: Proposals to Review</h3>
   <table>

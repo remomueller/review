@@ -1,6 +1,15 @@
 class PublicationsController < ApplicationController
   before_filter :authenticate_user!
 
+  def important
+    @publication = Publication.current.find_by_id(params[:id])
+    if @publication and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?)
+      @publication.update_attribute :important, (params[:important] == '1')
+    else
+      render :nothing => true
+    end
+  end
+
   def send_reminder
     @publication = Publication.current.find_by_id(params[:id])
     @reviewer = User.current.find_by_id(params[:reviewer_id])
@@ -110,7 +119,7 @@ class PublicationsController < ApplicationController
     publications_scope = current_user.all_viewable_publications #.order('manuscript_number DESC, abbreviated_title')
     @search_terms = params[:search].to_s.gsub(/[^0-9a-zA-Z]/, ' ').split(' ')
     @search_terms.each{|search_term| publications_scope = publications_scope.search(search_term) }
-    publications_scope = publications_scope.order(@order)
+    publications_scope = publications_scope.order('(important = 1) DESC, ' + @order)
     @publications = publications_scope.page(params[:page]).per(10)
     
   end

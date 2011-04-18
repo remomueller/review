@@ -1,6 +1,9 @@
 <tr>
 
-  <td><%= @publication.manuscript_number %></td><%# Manuscript Number %>
+  <td style="white-space:nowrap">
+    <span id="publication_<%= @publication.id %>_important_link"><%= render :partial => 'publications/important' %></span>
+    <%= @publication.manuscript_number %>
+  </td>
   <td><%= link_to @publication.abbreviated_title, @publication, :title => @publication.full_title %></td>
   <td>
     <% if @publication.user %>
