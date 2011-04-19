@@ -40,7 +40,7 @@ module ApplicationHelper
   end
 
   def display_status(status)
-    result = '<table class="status-table" width="100%"><tr>'
+    result = '<table class="status-table"><tr>'
     case status when 'published'
       result << "<td><div class=\"status_marked draft\" title=\"Draft\">D</div></td><td><div class=\"status_marked proposed\" title=\"Proposed\">P</div></td><td><div class=\"status_marked approved\" title=\"P&amp;P Approved\">A</div></td><td><div class=\"status_marked nominated\" title=\"SC Approved\">N</div></td><td><div class=\"status_marked submitted\" title=\"Submitted for Publication\">S</div></td><td><div class=\"status_marked published\" title=\"Published\">P</div></td>"
     when 'submitted'

@@ -5,10 +5,9 @@
 <%#= link_to "#{image_tag('icons/eye.png', :alt => '')} View All Publications".html_safe, publications_path, :class => 'button' %>
 
 <div style="clear:both"></div><br />
-<p>
-  <b>Status:</b>
-  <%= @publication.human_status %>
-</p>
+<table style="border-collapse:collapse;border:0px;margin:0px;padding:0px">
+  <tr style="border:0px;margin:0px;padding:0px"><td style="border:0px;margin:0px;padding:0px"><b>Status:</b></td><td style="border:0px;margin:0px;"><%= display_status(@publication.status) %></td><td style="border:0px;margin:0px;"><%= @publication.human_status %></td></tr>
+</table>
 
 <%#= link_to 'Edit', edit_publication_path(@publication) %>
 <%#= link_to 'Back', publications_path %>
