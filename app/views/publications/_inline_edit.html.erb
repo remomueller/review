@@ -6,7 +6,20 @@
     <span style="white-space:nowrap">Lead Author: <%= select_tag "publication_display[#{@publication.id}][user_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.user_id) %></span>
     <span style="white-space:nowrap">Co-Lead Author: <%= select_tag "publication_display[#{@publication.id}][co_lead_author_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.co_lead_author_id) %></span>
     <%#= link_to @publication.user.name, @publication.user %><br />
-    <%= @publication.writing_group_members %>
+    <%#= @publication.writing_group_members %>
+    <br />
+    Writing Group Members:
+    <%= text_area_tag "publication_display[#{@publication.id}][writing_group_members]", @publication.writing_group_members, :cols => 20, :rows => 3 %><br />
+    
+    Committee Nominations:
+    <% nominations = @publication.user_publication_reviews.where('writing_group_nomination IS NOT NULL and writing_group_nomination != ""') %>
+    <% if nominations.size > 0 %>
+      <% nominations.each do |upr| %>
+        <br /><%= upr.writing_group_nomination %>
+      <% end %>
+    <% else %>
+      <br /><span class="quiet">None</span>
+    <% end %>
   </td>
   <td><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
   <td style="white-space:nowrap">
@@ -56,6 +69,7 @@
     <% with = "$('#publication_#{@publication.id}_manuscript_number').val($('#publication_display_#{@publication.id}_manuscript_number').val());
                $('#publication_#{@publication.id}_user_id').val($('#publication_display_#{@publication.id}_user_id').val());
                $('#publication_#{@publication.id}_co_lead_author_id').val($('#publication_display_#{@publication.id}_co_lead_author_id').val());
+               $('#publication_#{@publication.id}_writing_group_members').val($('#publication_display_#{@publication.id}_writing_group_members').val());
                $('#publication_#{@publication.id}_status').val($('#publication_display_#{@publication.id}_status').val());
                $('#publication_#{@publication.id}_dataset_requested_analyst').val($('#publication_display_#{@publication.id}_dataset_requested_analyst').val());
                $('#publication_#{@publication.id}_targeted_start_date').val($('#publication_display_#{@publication.id}_targeted_start_date').val());
@@ -66,6 +80,7 @@
       <%= hidden_field_tag "publication[#{@publication.id}][manuscript_number]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][user_id]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][co_lead_author_id]" %>
+      <%= hidden_field_tag "publication[#{@publication.id}][writing_group_members]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][status]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][dataset_requested_analyst]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][targeted_start_date]" %>

@@ -151,7 +151,7 @@ class PublicationsController < ApplicationController
     end
     
     if @publication and params[:publication][params[:id]]
-      [:user_id, :co_lead_author_id, :manuscript_number, :secretary_notes, :status, :dataset_requested_analyst].each do |attribute|
+      [:user_id, :co_lead_author_id, :writing_group_members, :manuscript_number, :secretary_notes, :status, :dataset_requested_analyst].each do |attribute|
         @publication.update_attribute attribute, params[:publication][params[:id]][attribute]
       end
       

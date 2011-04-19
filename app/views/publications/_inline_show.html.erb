@@ -16,12 +16,6 @@
       <span style="white-space:nowrap">Co-Lead Author: <%= link_to @publication.co_lead_author.name, @publication.co_lead_author %><br /></span>
     <% end %>
     <% unless @publication.writing_group_members.blank? %><br /><%= @publication.writing_group_members %><% end %>
-    <% @publication.user_publication_reviews.each do |upr| %>
-      <% unless upr.writing_group_nomination.blank? %>
-        <br />
-        <%= upr.writing_group_nomination %>
-      <% end %>
-    <% end %>
   </td>
   <td><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
   <td style="white-space:nowrap"><%= @publication.human_status %></td>
