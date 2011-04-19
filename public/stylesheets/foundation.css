@@ -264,6 +264,14 @@ div.menu_dropdown_left, div.menu_dropdown_left_center {
 /*  background-color: #66FF66;*/
 }
 
+.odd {
+  background-color: #FCF6F1;
+}
+
+.even {
+  background-color: white;
+}
+
 /**************************************/
 /*               FOOTER               */
 /**************************************/

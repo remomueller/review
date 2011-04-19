@@ -4,7 +4,7 @@
     <th style="white-space:nowrap"><%== sort_field_helper(@order, 'abbreviated_title', 'Abbreviated Title') %></th>
     <th>Lead Author and Writing Committee</th>
     <th><%== sort_field_helper(@order, 'publication_type', 'Paper Type') %></th>
-    <th style="white-space:nowrap"><%== sort_field_helper(@order, 'status', 'Status and Notes') %></th>
+    <th style="white-space:nowrap"><%== sort_field_helper(@order, 'status', 'Status') %></th>
     <th>Dataset Requested Analyst</th>
     <th><%== sort_field_helper(@order, 'targeted_start_date', 'Targeted Start Date') %></th>
     <% if current_user.pp_committee_secretary? or current_user.steering_committee_secretary? %>
@@ -14,7 +14,7 @@
 
   <% @publications.each do |publication| %>
     <% @publication = publication %>
-    <tbody id="publication_<%= @publication.id %>_container">
+    <tbody id="publication_<%= @publication.id %>_container" class="<%= cycle('odd', 'even') %>">
       <%= render :partial => 'publications/inline_show' %>
     </tbody>
   <% end %>
