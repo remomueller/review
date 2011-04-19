@@ -1,6 +1,16 @@
 <tr>
-
-  <td><%= text_field_tag "publication_display[#{@publication.id}][manuscript_number]", @publication.manuscript_number %></td><%# Manuscript Number %>
+  <td>
+    <%= text_field_tag "publication_display[#{@publication.id}][manuscript_number]", @publication.manuscript_number %>
+    <% unless @publication.manuscript_url.blank? %>
+      <br />
+      <span style="margin-left:20px"><%= link_to image_tag('icons/download.png', :alt => '', :style => 'vertical-align:middle'), SITE_URL + @publication.manuscript_url, :target => '_blank' %></span>
+      <% if false %>
+      <br />
+      <span class="quiet"><%= simple_time(@publication.manuscript_uploaded_at) %></span><br />
+      <%= print_byte_size(@publication.manuscript.size) %>
+      <% end %>
+    <% end %>
+  </td>
   <td><%= link_to @publication.abbreviated_title, @publication %></td>
   <td>
     <span style="white-space:nowrap">Lead Author: <%= select_tag "publication_display[#{@publication.id}][user_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.user_id) %></span>
