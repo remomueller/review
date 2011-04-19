@@ -26,7 +26,10 @@
     <% unless @publication.writing_group_members.blank? %><br /><%= @publication.writing_group_members %><% end %>
   </td>
   <td><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
-  <td style="white-space:nowrap"><%= @publication.human_status %></td>
+  <td style="white-space:nowrap">
+    <%= display_status(@publication.status) %>
+    <div style="margin-top:4px"><%= @publication.human_status %></div>
+  </td>
   <td><pre style="padding-left:0;margin-bottom:0"><%= @publication.dataset_requested_analyst %></pre></td>
   <td><%= @publication.targeted_start_date_pretty %></td>
   <% if current_user.pp_committee_secretary? or current_user.steering_committee_secretary? %>

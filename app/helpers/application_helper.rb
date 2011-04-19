@@ -39,6 +39,27 @@ module ApplicationHelper
     end
   end
 
+  def display_status(status)
+    result = '<table class="status-table" width="100%"><tr>'
+    case status when 'published'
+      result << "<td><div class=\"status_marked draft\" title=\"Draft\">D</div></td><td><div class=\"status_marked proposed\" title=\"Proposed\">P</div></td><td><div class=\"status_marked approved\" title=\"P&amp;P Approved\">A</div></td><td><div class=\"status_marked nominated\" title=\"SC Approved\">N</div></td><td><div class=\"status_marked submitted\" title=\"Submitted for Publication\">S</div></td><td><div class=\"status_marked published\" title=\"Published\">P</div></td>"
+    when 'submitted'
+      result << "<td><div class=\"status_marked draft\" title=\"Draft\">D</div></td><td><div class=\"status_marked proposed\" title=\"Proposed\">P</div></td><td><div class=\"status_marked approved\" title=\"P&amp;P Approved\">A</div></td><td><div class=\"status_marked nominated\" title=\"SC Approved\">N</div></td><td><div class=\"status_marked submitted\" title=\"Submitted for Publication\">S</div></td><td><div class=\"status_unmarked\" title=\"Published\">P</div></td>"
+    when 'nominated'
+      result << "<td><div class=\"status_marked draft\" title=\"Draft\">D</div></td><td><div class=\"status_marked proposed\" title=\"Proposed\">P</div></td><td><div class=\"status_marked approved\" title=\"P&amp;P Approved\">A</div></td><td><div class=\"status_marked nominated\" title=\"SC Approved\">N</div></td><td><div class=\"status_unmarked\" title=\"Submitted for Publication\">S</div></td><td><div class=\"status_unmarked\" title=\"Published\">P</div></td>"
+    when 'approved'
+      result << "<td><div class=\"status_marked draft\" title=\"Draft\">D</div></td><td><div class=\"status_marked proposed\" title=\"Proposed\">P</div></td><td><div class=\"status_marked approved\" title=\"P&amp;P Approved\">A</div></td><td><div class=\"status_unmarked\" title=\"SC Approved\">N</div></td><td><div class=\"status_unmarked\" title=\"Submitted for Publication\">S</div></td><td><div class=\"status_unmarked\" title=\"Published\">P</div></td>"
+    when 'proposed'
+      result << "<td><div class=\"status_marked draft\" title=\"Draft\">D</div></td><td><div class=\"status_marked proposed\" title=\"Proposed\">P</div></td><td><div class=\"status_unmarked\" title=\"P&amp;P Approved\">A</div></td><td><div class=\"status_unmarked\" title=\"SC Approved\">N</div></td><td><div class=\"status_unmarked\" title=\"Submitted for Publication\">S</div></td><td><div class=\"status_unmarked\" title=\"Published\">P</div></td>"
+    when 'draft'
+      result << "<td><div class=\"status_marked draft\" title=\"Draft\">D</div></td><td><div class=\"status_unmarked\" title=\"Proposed\">P</div></td><td><div class=\"status_unmarked\" title=\"P&amp;P Approved\">A</div></td><td><div class=\"status_unmarked\" title=\"SC Approved\">N</div></td><td><div class=\"status_unmarked\" title=\"Submitted for Publication\">S</div></td><td><div class=\"status_unmarked\" title=\"Published\">P</div></td>"
+    when 'not approved'
+      result << "<td><div class=\"status_marked not_approved\" title=\"Not Approved\">-</div></td>"
+    end
+    result << '</tr></table>'
+    result.html_safe
+  end
+
   def sort_field_helper(order, sort_field, display_name)
     result = ''
     if order == sort_field
