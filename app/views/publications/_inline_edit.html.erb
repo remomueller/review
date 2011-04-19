@@ -55,16 +55,6 @@
     <br />
     <% end %>
   </td>
-  <td>
-    <% unless @publication.manuscript_url.blank? %>
-      <%= link_to image_tag('icons/download.png', :alt => '', :style => 'vertical-align:middle'), SITE_URL + @publication.manuscript_url, :target => '_blank' %>
-      <% if false %>
-      <br />
-      <span class="quiet"><%= simple_time(@publication.manuscript_uploaded_at) %></span><br />
-      <%= print_byte_size(@publication.manuscript.size) %>
-      <% end %>
-    <% end %>
-  </td>
   <td style="white-space:nowrap">
     <% with = "$('#publication_#{@publication.id}_manuscript_number').val($('#publication_display_#{@publication.id}_manuscript_number').val());
                $('#publication_#{@publication.id}_user_id').val($('#publication_display_#{@publication.id}_user_id').val());
@@ -102,7 +92,7 @@
 </tr>
 <tr>
   <td></td>
-  <td colspan="9">
+  <td colspan="8">
     <%= text_area_tag "publication_display[#{@publication.id}][secretary_notes]", @publication.secretary_notes, :cols => 100, :rows => 3 %>
   </td>
 </tr>

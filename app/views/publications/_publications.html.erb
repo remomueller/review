@@ -8,7 +8,6 @@
     <th>Dataset Requested Analyst</th>
     <th><%== sort_field_helper(@order, 'targeted_start_date', 'Targeted Start Date') %></th>
     <th>Action Items and Secretary Notes</th>
-    <th>Manuscript</th>
     <% if current_user.pp_committee_secretary? or current_user.steering_committee_secretary? %>
       <th></th>
     <% end %>
