@@ -29,9 +29,24 @@
   <td style="white-space:nowrap"><%= @publication.human_status %></td>
   <td><pre style="padding-left:0;margin-bottom:0"><%= @publication.dataset_requested_analyst %></pre></td>
   <td><%= @publication.targeted_start_date_pretty %></td>
-  <td>
+  <% if current_user.pp_committee_secretary? or current_user.steering_committee_secretary? %>
+    <% if ['draft'].include?(@publication.status) %>
+      <td></td>
+    <% else %>
+      <td style="white-space:nowrap">
+        <%= link_to image_tag('icons/edit.png', :alt => ''), inline_edit_publication_path(@publication), :method => :post, :remote => true %>
+      </td>
+    <% end %>
+  <% end %>
+</tr>
+<tr style="border-bottom: 2px solid #777">
+  <td></td>
+  <td colspan="<%= (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?) ? 8 : 7 %>">
+    <span class="quiet"><strong>Action Items:</strong> 
     <% case @publication.status when 'draft' %>
-      <span class="quiet">Author has not submitted publication.</span>
+      Author has not submitted publication.
+    <% when 'not approved' %>
+      Author needs to resubmit after reviewing committee comments.
     <% when 'proposed' %>
       P&amp;P Committee needs to review.
     <% when 'approved' %>
@@ -43,24 +58,11 @@
     <% when 'published' %>
       Paper Published!
     <% end %>
-    <br />
-    <%#= @publication.secretary_notes %>
-  </td>
-  <% if current_user.pp_committee_secretary? or current_user.steering_committee_secretary? %>
-    <% if ['draft'].include?(@publication.status) %>
-      <td></td>
-    <% else %>
-      <td style="white-space:nowrap">
-        <%= link_to image_tag('icons/edit.png', :alt => '') + 'Edit', inline_edit_publication_path(@publication), :method => :post, :remote => true, :class => "button" %>
-      </td>
+    </span>
+    <% if not @publication.secretary_notes.blank? and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary? or current_user.pp_committee? or current_user.steering_committee?) %>
+      <br />
+      <strong>Secretary Notes:</strong>
+      <%= @publication.secretary_notes %>
     <% end %>
-  <% end %>
-</tr>
-<% if not @publication.secretary_notes.blank? and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary? or current_user.pp_committee? or current_user.steering_committee?) %>
-<tr>
-  <td></td>
-  <td colspan="<%= (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?) ? 8 : 7 %>">
-    <%= @publication.secretary_notes %>
   </td>
 </tr>
-<% end %>

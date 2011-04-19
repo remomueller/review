@@ -1,5 +1,5 @@
 <table>
-  <tr>
+  <tr style="border-bottom: 2px solid #777">
     <th style="white-space:nowrap"><%== sort_field_helper(@order, 'manuscript_number', 'MS#') %></th><%# Manuscript Number %>
     <th style="white-space:nowrap"><%== sort_field_helper(@order, 'abbreviated_title', 'Abbreviated Title') %></th>
     <th>Lead Author and Writing Committee</th>
@@ -7,11 +7,9 @@
     <th style="white-space:nowrap"><%== sort_field_helper(@order, 'status', 'Status and Notes') %></th>
     <th>Dataset Requested Analyst</th>
     <th><%== sort_field_helper(@order, 'targeted_start_date', 'Targeted Start Date') %></th>
-    <th>Action Items and Secretary Notes</th>
     <% if current_user.pp_committee_secretary? or current_user.steering_committee_secretary? %>
       <th></th>
     <% end %>
-    
   </tr>
 
   <% @publications.each do |publication| %>

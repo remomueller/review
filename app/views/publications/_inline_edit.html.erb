@@ -1,5 +1,5 @@
 <tr>
-  <td>
+  <td style="vertical-align:top">
     <%= text_field_tag "publication_display[#{@publication.id}][manuscript_number]", @publication.manuscript_number %>
     <% unless @publication.manuscript_url.blank? %>
       <br />
@@ -11,10 +11,16 @@
       <% end %>
     <% end %>
   </td>
-  <td><%= link_to @publication.abbreviated_title, @publication %></td>
-  <td>
-    <span style="white-space:nowrap">Lead Author: <%= select_tag "publication_display[#{@publication.id}][user_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.user_id) %></span>
-    <span style="white-space:nowrap">Co-Lead Author: <%= select_tag "publication_display[#{@publication.id}][co_lead_author_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.co_lead_author_id) %></span>
+  <td style="vertical-align:top"><%= link_to @publication.abbreviated_title, @publication %></td>
+  <td style="vertical-align:top">
+    <span style="white-space:nowrap">
+      Lead Author:<br />
+      <%= select_tag "publication_display[#{@publication.id}][user_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.user_id) %>
+    </span>
+    <span style="white-space:nowrap">
+      Co-Lead Author:<br />
+      <%= select_tag "publication_display[#{@publication.id}][co_lead_author_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.co_lead_author_id) %>
+    </span>
     <%#= link_to @publication.user.name, @publication.user %><br />
     <%#= @publication.writing_group_members %>
     <br />
@@ -31,8 +37,8 @@
       <br /><span class="quiet">None</span>
     <% end %>
   </td>
-  <td><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
-  <td style="white-space:nowrap">
+  <td style="vertical-align:top"><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
+  <td style="vertical-align:top;white-space:nowrap">
     <% if ['nominated', 'submitted', 'published'].include?(@publication.status) %>
       <%= select_tag "publication_display[#{@publication.id}][status]", options_for_select(Publication::FINAL_STATUS, @publication.status) %>
     <% else %>
@@ -40,32 +46,14 @@
       <%= hidden_field_tag "publication_display[#{@publication.id}][status]", @publication.status %>
     <% end %>
   </td>
-  <td>
+  <td style="vertical-align:top">
     <%= text_area_tag "publication_display[#{@publication.id}][dataset_requested_analyst]", @publication.dataset_requested_analyst, :cols => 20, :rows => 3 %>
   </td>
-  <td>
-    <%= text_field_tag "publication_display[#{@publication.id}][targeted_start_date]", @publication.targeted_start_date ? @publication.targeted_start_date.strftime('%m/%d/%Y') : '' %>
+  <td style="vertical-align:top">
+    <%= text_field_tag "publication_display[#{@publication.id}][targeted_start_date]", (@publication.targeted_start_date ? @publication.targeted_start_date.strftime('%m/%d/%Y') : ''), :size => '10' %>
     <%= javascript_tag "$('#publication_display_#{@publication.id}_targeted_start_date').datepicker();" %>
   </td>
-  <td>
-    <% if false %>
-    <% case @publication.status when 'draft' %>
-      <span class="quiet">Author has not submitted publication.</span>
-    <% when 'proposed' %>
-      P&amp;P Committee needs to review.
-    <% when 'approved' %>
-      Steering Committee needs to review and nominate.
-    <% when 'nominated' %>
-      Author needs to submit paper to journal.
-    <% when 'submitted' %>
-      Waiting for publication in journal.
-    <% when 'published' %>
-      Paper Published!
-    <% end %>
-    <br />
-    <% end %>
-  </td>
-  <td style="white-space:nowrap">
+  <td style="vertical-align:top;white-space:nowrap">
     <% with = "$('#publication_#{@publication.id}_manuscript_number').val($('#publication_display_#{@publication.id}_manuscript_number').val());
                $('#publication_#{@publication.id}_user_id').val($('#publication_display_#{@publication.id}_user_id').val());
                $('#publication_#{@publication.id}_co_lead_author_id').val($('#publication_display_#{@publication.id}_co_lead_author_id').val());
@@ -103,6 +91,25 @@
 <tr>
   <td></td>
   <td colspan="8">
+    <span class="quiet"><strong>Action Items:</strong> 
+    <% case @publication.status when 'draft' %>
+      Author has not submitted publication.
+    <% when 'not approved' %>
+      Author needs to resubmit after reviewing committee comments.
+    <% when 'proposed' %>
+      P&amp;P Committee needs to review.
+    <% when 'approved' %>
+      Steering Committee needs to review and nominate.
+    <% when 'nominated' %>
+      Author needs to submit paper to journal.
+    <% when 'submitted' %>
+      Waiting for publication in journal.
+    <% when 'published' %>
+      Paper Published!
+    <% end %>
+    </span>
+    <br />
+    <strong>Secretary Notes:</strong><br />
     <%= text_area_tag "publication_display[#{@publication.id}][secretary_notes]", @publication.secretary_notes, :cols => 100, :rows => 3 %>
   </td>
 </tr>
