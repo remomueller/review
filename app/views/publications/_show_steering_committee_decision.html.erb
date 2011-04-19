@@ -26,7 +26,11 @@
 <% end %>
 
 <div id="sc_email" style="display:none">
-  <%== UserMailer.publication_approval(@publication, false, current_user).html_part %>
-  <hr>
-  <pre><%== UserMailer.publication_approval(@publication, false, current_user).text_part %></pre>
+  <% if @publication.user %>
+    <%== UserMailer.publication_approval(@publication, false, current_user).html_part %>
+    <hr>
+    <pre><%== UserMailer.publication_approval(@publication, false, current_user).text_part %></pre>
+  <% else %>
+    <strong>No email will be sent since the publication does not have a lead author!</strong>
+  <% end %>
 </div>
