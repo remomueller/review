@@ -1,3 +1,4 @@
+<% width = '914px' %>
 <%= form_tag pp_approval_publication_path(@publication), :method => :post, :id => 'subcommittee_decision_form' do %>
 <div class="field">
   <label>Publication Status</label><br />
@@ -8,6 +9,10 @@
 <div class="field">
   <%= label :publication, :manuscript_number, 'Manuscript Number' %><br />
   <%= text_field :publication, :manuscript_number %>
+</div>
+<div class="field">
+  <%= label :publication, :additional_ppcommittee_instructions, 'Additional Instructions to Email to Lead Author' %><br />
+  <%= text_area :publication, :additional_ppcommittee_instructions, :rows => 7, :style => "width:#{width}" %>
 </div>
 <div class="actions">
   

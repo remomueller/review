@@ -1,3 +1,4 @@
+<% width = '914px' %>
 <%= form_tag sc_approval_publication_path(@publication), :method => :post, :id => 'steering_committee_decision_form' do %>
 <div class="field">
   <label>Publication Status</label><br />
@@ -11,6 +12,10 @@
   <%= text_field :publication, :manuscript_number %>
 </div>
 <% end %>
+<div class="field">
+  <%= label :publication, :additional_sccommittee_instructions, 'Additional Instructions to Email to Lead Author' %><br />
+  <%= text_area :publication, :additional_sccommittee_instructions, :rows => 7, :style => "width:#{width}" %>
+</div>
 <div class="actions">
   
   <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@publication.status == 'approved' ? 'Submit' : 'Update') + " Steering Committee Decision", "$('#steering_committee_decision_form').submit();", :class => "button positive" %>

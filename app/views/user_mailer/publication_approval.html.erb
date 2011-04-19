@@ -1,15 +1,41 @@
-Hello <%= @user.first_name %>,<br />
+Dear <%= @user.first_name %>,<br />
 <br />
-Your publication proposal <%= @publication.full_title %> has been <%= @approval_status %>.<br />
+Your publication proposal <em><%= @publication.full_title %></em> has been <strong><%= @approval_status %></strong>.<br />
 <br />
 <% if @publication.status == 'not approved' %>
 After reviewing the comments left by the committee, you can edit and resubmit your proposal here: 
 <% else %>
 You can view the publication here:
 <% end %>
-<br /><br />
 <%= link_to "#{SITE_URL}/publications/#{@publication.id}", "#{SITE_URL}/publications/#{@publication.id}" %>.<br />
 <br />
+<% if @pp_committee %>
+  <strong>P&amp;P Committee Comments:</strong><br />
+  <% @publication.user_publication_reviews.each do |user_publication_review| %>
+    <% unless user_publication_review.comment.blank? %><div><pre><%= user_publication_review.comment %></pre></div><% end %>
+  <% end %>
+  <br />
+<% else %>
+  <strong>Steering Committee Comments:</strong><br />
+  <% @publication.user_publication_reviews.each do |user_publication_review| %>
+    <% unless user_publication_review.comment.blank? %><div><pre><%= user_publication_review.comment %></pre></div><% end %>
+  <% end %>
+  <br />
+  <strong>Steering Committee Nominations:</strong>
+  <% @publication.user_publication_reviews.each do |user_publication_review| %>
+    <ul>
+      <% unless user_publication_review.writing_group_nomination.blank? %><li><%= user_publication_review.writing_group_nomination %></li><% end %>
+    </ul>
+  <% end %>
+<% end %>
+<% if @pp_committee and not @publication.additional_ppcommittee_instructions.blank? %>
+<strong>Additional Instructions:</strong><br />
+<pre><%= @publication.additional_ppcommittee_instructions %></pre>
+<% elsif not @pp_committee and not @publication.additional_sccommittee_instructions.blank? %>
+<strong>Additional Instructions:</strong><br />
+<pre><%= @publication.additional_sccommittee_instructions %></pre>
+<% end %>
+<br /><br />
 Thanks,<br />
 <br />
 <%= DEFAULT_APP_NAME %> System Mailer

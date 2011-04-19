@@ -10,9 +10,23 @@
   <%= label :publication, :manuscript_number, 'Manuscript Number' %><br />
   <%= text_field :publication, :manuscript_number, :disabled => 'disabled' %>
 </div>
+<div class="field">
+  <%= label :publication, :additional_sccommittee_instructions, 'Additional Instructions to Email to Lead Author' %> <%= link_to_function 'Preview', "$('#sc_email').toggle();" %><br />
+  <% if @publication.additional_sccommittee_instructions.blank? %>
+    <pre class="quiet">None</pre>
+  <% else %>
+    <pre class="disabled"><%= @publication.additional_sccommittee_instructions %></pre>
+  <% end %>
+</div>
 <div class="actions">
   <%#= link_to image_tag('icons/edit.png', :alt => '') + 'Edit Steering Committee Decision', '#', :onclick => remote_function(:url => edit_steering_committee_decision_publication_path(@publication), :method => :post) + "; return false;", :class => 'button' %>
   <%= link_to_function image_tag('icons/edit.png', :alt => '') + 'Edit Steering Committee Decision', "$('##{form_name}').submit();", :class => 'button' %>
 	<br />
 </div>
 <% end %>
+
+<div id="sc_email" style="display:none">
+  <%== UserMailer.publication_approval(@publication, false, current_user).html_part %>
+  <hr>
+  <pre><%== UserMailer.publication_approval(@publication, false, current_user).text_part %></pre>
+</div>

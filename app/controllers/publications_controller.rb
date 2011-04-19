@@ -69,7 +69,7 @@ class PublicationsController < ApplicationController
   def pp_approval
     @publication = Publication.current.find_by_id(params[:id])
     if @publication and current_user.pp_committee_secretary? and params[:publication]
-      [:status, :manuscript_number].each do |attribute|
+      [:status, :manuscript_number, :additional_ppcommittee_instructions].each do |attribute|
         @publication.update_attribute attribute, params[:publication][attribute]
       end
       UserMailer.publication_approval(@publication, true, current_user).deliver if @publication.status != 'proposed' and @publication.user and Rails.env.production?
@@ -92,7 +92,7 @@ class PublicationsController < ApplicationController
   def sc_approval
     @publication = Publication.current.find_by_id(params[:id])
     if @publication and current_user.steering_committee_secretary? and params[:publication]
-      [:status].each do |attribute|
+      [:status, :additional_sccommittee_instructions].each do |attribute|
         @publication.update_attribute attribute, params[:publication][attribute]
       end
       UserMailer.publication_approval(@publication, false, current_user).deliver if @publication.status != 'approved' and @publication.user and Rails.env.production?

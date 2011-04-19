@@ -18,7 +18,7 @@ class Publication < ActiveRecord::Base
   # 7 of which are not set using mass assignment. (Publication.attr_protected.size)
   # :id, :created_at, :updated_at, :user_id, :deleted, :status, :manuscript_number, :secretary_notes
   
-  attr_protected :user_id, :deleted, :manuscript_number, :secretary_notes, :targeted_start_date, :dataset_requested_analyst, :important # , :status
+  attr_protected :user_id, :deleted, :manuscript_number, :secretary_notes, :targeted_start_date, :dataset_requested_analyst, :important, :additional_ppcommittee_instructions, :additional_sccommittee_instructions # , :status
   
   mount_uploader :manuscript, ManuscriptUploader
   mount_uploader :chat_data_main_forms_attachment, ManuscriptUploader

@@ -10,8 +10,22 @@
     <%= label :publication, :manuscript_number, 'Manuscript Number' %><br />
     <%= text_field :publication, :manuscript_number, :disabled => 'disabled' %>
   </div>
+  <div class="field">
+    <%= label :publication, :additional_ppcommittee_instructions, 'Additional Instructions to Email to Lead Author' %> <%= link_to_function 'Preview', "$('#pp_email').toggle();" %><br />
+    <% if @publication.additional_ppcommittee_instructions.blank? %>
+      <pre class="quiet">None</pre>
+    <% else %>
+      <pre class="disabled"><%= @publication.additional_ppcommittee_instructions %></pre>
+    <% end %>
+  </div>
   <div class="actions">
     <%= link_to_function image_tag('icons/edit.png', :alt => '') + 'Edit Subcommittee Decision', "$('##{form_name}').submit();", :class => 'button' %>
   	<br />
   </div>
 <% end %>
+
+<div id="pp_email" style="display:none">
+  <%== UserMailer.publication_approval(@publication, true, current_user).html_part %>
+  <hr>
+  <pre><%== UserMailer.publication_approval(@publication, true, current_user).text_part %></pre>
+</div>

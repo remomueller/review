@@ -31,6 +31,7 @@ class UserMailer < ActionMailer::Base
     setup_email
     @publication = publication
     @user = publication.user
+    @pp_committee = pp_committee
     @approval_status = ''
     if @publication.status == 'approved'
       @approval_status = 'approved by the P&P Committee'
