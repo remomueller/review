@@ -20,7 +20,7 @@
   <td><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
   <td style="white-space:nowrap"><%= @publication.human_status %></td>
   <td><pre style="padding-left:0;margin-bottom:0"><%= @publication.dataset_requested_analyst %></pre></td>
-  <td><%= @publication.targeted_start_date %></td>
+  <td><%= @publication.targeted_start_date_pretty %></td>
   <td>
     <% case @publication.status when 'draft' %>
       <span class="quiet">Author has not submitted publication.</span>

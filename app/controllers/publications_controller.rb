@@ -114,7 +114,7 @@ class PublicationsController < ApplicationController
 
   def index
     # @publications = current_user.all_viewable_publications.order('manuscript_number DESC, abbreviated_title')
-    @order = ['manuscript_number', 'abbreviated_title', 'status'].include?(params[:order].to_s.split(' ').first) ? params[:order] : 'manuscript_number DESC'
+    @order = ['manuscript_number', 'abbreviated_title', 'status', 'publication_type', 'targeted_start_date'].include?(params[:order].to_s.split(' ').first) ? params[:order] : 'manuscript_number DESC'
     # @order = params[:order].blank? ? 'manuscript_number' : params[:order]
     logger.debug "ORDER: #{@order}"
     
@@ -151,15 +151,18 @@ class PublicationsController < ApplicationController
     end
     
     if @publication and params[:publication][params[:id]]
-      [:user_id, :co_lead_author_id, :writing_group_members, :manuscript_number, :secretary_notes, :status, :dataset_requested_analyst].each do |attribute|
+      
+      params[:publication][params[:id]][:targeted_start_date] = Date.strptime(params[:publication][params[:id]][:targeted_start_date], "%m/%d/%Y") unless params[:publication][params[:id]][:targeted_start_date].blank?
+      
+      params[:publication][params[:id]].keys.each do |attribute|
         @publication.update_attribute attribute, params[:publication][params[:id]][attribute]
       end
       
-      begin
-        @publication.update_attribute :targeted_start_date, Date.parse(params[:publication][params[:id]][:targeted_start_date])
-      rescue ArgumentError
-        @publication.update_attribute :targeted_start_date, nil  
-      end
+      # begin
+      #   @publication.update_attribute :targeted_start_date, Date.parse(params[:publication][params[:id]][:targeted_start_date])
+      # rescue ArgumentError
+      #   @publication.update_attribute :targeted_start_date, nil  
+      # end
       
       render 'inline_show'
     else

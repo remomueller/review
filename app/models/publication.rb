@@ -99,6 +99,18 @@ class Publication < ActiveRecord::Base
   has_many :user_publication_reviews
   belongs_to :co_lead_author, :class_name => 'User'
 
+  def targeted_start_date_pretty
+    result = ''
+    unless self.targeted_start_date.blank?
+      if self.targeted_start_date.year == Date.today.year
+        result << self.targeted_start_date.strftime('%b %d (%a)')
+      else
+        result << self.targeted_start_date.strftime('%b %d, %Y (%a)')
+      end
+    end
+    result
+  end
+  
   def human_status
     statuses = Publication::STATUS.select{|a| a[1] == self.status}
     puts statuses.inspect
