@@ -1,24 +1,16 @@
 class Publication < ActiveRecord::Base
 
-  # STATUS = ["draft", "proposed", "approved", "not approved", "nominated", "submitted", "published"].collect{|i| [i,i]}
   STATUS = [["Draft", "draft"], ["Proposed", "proposed"], ["P&P Approved", "approved"],
             ["Not Approved", "not approved"], ["SC Approved", "nominated"], ["Submitted", "submitted"], ["Published", "published"]]
   
-  # PP_STATUS = ["proposed", "approved", "not approved"].collect{|i| [i,i]}
   PP_STATUS = [["Proposed","proposed"], ["P&P Approved", "approved"], ["Not Approved", "not approved"]]
-  # SC_STATUS = ["approved", "nominated", "not approved"].collect{|i| [i,i]}
   SC_STATUS = [["P&P Approved", "approved"], ["SC Approved", "nominated"], ["Not Approved", "not approved"]]
 
   FINAL_STATUS = [['SC Approved', 'nominated'], ['Submitted', 'submitted'], ['Published', 'published']]
 
-
-
-  # Currently 59 Total Attributes (Publication.first.attributes.size)
-  # 52 of which are attr_accessible (Publication.attr_accessible.size)
-  # 7 of which are not set using mass assignment. (Publication.attr_protected.size)
-  # :id, :created_at, :updated_at, :user_id, :deleted, :status, :manuscript_number, :secretary_notes
-  
-  attr_protected :user_id, :deleted, :manuscript_number, :secretary_notes, :targeted_start_date, :dataset_requested_analyst, :important, :additional_ppcommittee_instructions, :additional_sccommittee_instructions # , :status
+  attr_protected :user_id, :deleted, :manuscript_number, :secretary_notes, :targeted_start_date, :dataset_requested_analyst,
+                 :important, :additional_ppcommittee_instructions, :additional_sccommittee_instructions,
+                 :tagged_for_pp_review, :tagged_for_sc_review
   
   mount_uploader :manuscript, ManuscriptUploader
   mount_uploader :chat_data_main_forms_attachment, ManuscriptUploader
@@ -41,7 +33,7 @@ class Publication < ActiveRecord::Base
   scope :current, :conditions => { :deleted => false }
   scope :status, lambda { |*args|  { :conditions => ["publications.status IN (?)", args.first] } }
   scope :search, lambda { |*args| {:conditions => [ 'LOWER(manuscript_number) LIKE ? or LOWER(full_title) LIKE ? or LOWER(abbreviated_title) LIKE ?', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%' ] } }
-  scope :important, :conditions => {:important => true}
+  # scope :important, :conditions => {:important => true}
 
   # Model Validation
   validates_presence_of :full_title, :abbreviated_title

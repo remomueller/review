@@ -1,5 +1,10 @@
 <h1>Publication Matrix</h1>
 
+<div style="float:right">
+  <%= image_tag 'icons/tag_green.png', :alt => '' %> Marked for P&amp;P Committee Review<br />
+  <%= image_tag 'icons/tag_blue.png', :alt => '' %> Marked for Steering Committee Review
+</div>
+
 <%= link_to image_tag('icons/addfile.png', :alt => '') + "Create New Publication", new_publication_path, :class => 'button positive' %>
 
 <%= form_tag publications_path, :method => :get, :id => "search_form" do %>

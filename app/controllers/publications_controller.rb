@@ -1,14 +1,26 @@
 class PublicationsController < ApplicationController
   before_filter :authenticate_user!
 
-  def important
+  def tag_for_review
+    @committee = params[:committee]
     @publication = Publication.current.find_by_id(params[:id])
-    if @publication and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?)
-      @publication.update_attribute :important, (params[:important] == '1')
+    if @publication and current_user.pp_committee_secretary? and params[:committee] == 'pp'
+      @publication.update_attribute :tagged_for_pp_review, (params[:tagged] == '1')
+    elsif @publication and current_user.steering_committee_secretary? and params[:committee] == 'sc'
+      @publication.update_attribute :tagged_for_sc_review, (params[:tagged] == '1')
     else
       render :nothing => true
-    end
+    end    
   end
+
+  # def important
+  #   @publication = Publication.current.find_by_id(params[:id])
+  #   if @publication and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?)
+  #     @publication.update_attribute :important, (params[:important] == '1')
+  #   else
+  #     render :nothing => true
+  #   end
+  # end
 
   def send_reminder
     @publication = Publication.current.find_by_id(params[:id])
@@ -113,15 +125,21 @@ class PublicationsController < ApplicationController
   end
 
   def index
-    # @publications = current_user.all_viewable_publications.order('manuscript_number DESC, abbreviated_title')
     @order = ['manuscript_number', 'abbreviated_title', 'status', 'publication_type', 'targeted_start_date'].include?(params[:order].to_s.split(' ').first) ? params[:order] : 'manuscript_number DESC'
-    # @order = params[:order].blank? ? 'manuscript_number' : params[:order]
-    logger.debug "ORDER: #{@order}"
-    
+
     publications_scope = current_user.all_viewable_publications #.order('manuscript_number DESC, abbreviated_title')
     @search_terms = params[:search].to_s.gsub(/[^0-9a-zA-Z]/, ' ').split(' ')
     @search_terms.each{|search_term| publications_scope = publications_scope.search(search_term) }
-    publications_scope = publications_scope.order('(important = 1) DESC, ' + @order)
+    if (current_user.pp_committee? or current_user.pp_committee_secretary?) and (current_user.steering_committee? or current_user.steering_committee_secretary?)
+      publications_scope = publications_scope.order('(tagged_for_pp_review = 1) DESC, (tagged_for_sc_review = 1) DESC, ' + @order)
+    elsif (current_user.pp_committee? or current_user.pp_committee_secretary?)
+      publications_scope = publications_scope.order('(tagged_for_pp_review = 1) DESC, ' + @order)
+    elsif (current_user.steering_committee? or current_user.steering_committee_secretary?)
+      publications_scope = publications_scope.order('(tagged_for_sc_review = 1) DESC, ' + @order)
+    else
+      publications_scope = publications_scope.order(@order)  
+    end
+    
     @publications = publications_scope.page(params[:page]).per(10)
     
   end
