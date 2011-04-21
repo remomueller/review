@@ -23,7 +23,6 @@ Review::Application.routes.draw do
        post :inline_edit
        post :inline_update
        post :inline_show
-       post :important
        post :tag_for_review
     end
   end

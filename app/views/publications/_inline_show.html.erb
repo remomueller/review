@@ -1,6 +1,5 @@
 <tr>
   <td style="white-space:nowrap">
-<% if false %>    <span id="publication_<%= @publication.id %>_important_link"><%= render :partial => 'publications/important' %></span><% end %>
     <span id="publication_<%= @publication.id %>_tag_pp_link"><%= @committee = 'pp'; render :partial => 'publications/tag_for_review' %></span>
     <span id="publication_<%= @publication.id %>_tag_sc_link"><%= @committee = 'sc';  render :partial => 'publications/tag_for_review' %></span>
     <%= @publication.manuscript_number %>

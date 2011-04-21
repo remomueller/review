@@ -77,8 +77,8 @@
 <% if ['nominated', 'submitted', 'published'].include?(@publication.status) %>
 <fieldset>
   <legend>Manuscript</legend>
-  <div id="manuscript_container">
-    <% if @publication.manuscript_url.blank? and current_user == @publication.user %>
+  <div id="publication_<%= @publication.id %>_manuscript_container">
+    <% if @publication.manuscript_url.blank? and (current_user == @publication.user or current_user.secretary?) %>
       <%= render :partial => 'publications/manuscripts/edit' %>
     <% elsif not @publication.manuscript_url.blank? %>
       <%= render :partial => 'publications/manuscripts/show' %>

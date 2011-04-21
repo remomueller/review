@@ -13,19 +13,10 @@ class PublicationsController < ApplicationController
     end    
   end
 
-  # def important
-  #   @publication = Publication.current.find_by_id(params[:id])
-  #   if @publication and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?)
-  #     @publication.update_attribute :important, (params[:important] == '1')
-  #   else
-  #     render :nothing => true
-  #   end
-  # end
-
   def send_reminder
     @publication = Publication.current.find_by_id(params[:id])
     @reviewer = User.current.find_by_id(params[:reviewer_id])
-    if @publication and @reviewer and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?)
+    if @publication and @reviewer and current_user.secretary?
       UserMailer.publication_approval_reminder(@publication, @reviewer).deliver if Rails.env.production?
     else
       render :nothing => true
@@ -50,6 +41,7 @@ class PublicationsController < ApplicationController
     end
   end
 
+  # Unfortunately a Remote Multipart Form submission isn't a built-in HTML feature...
   def upload_manuscript
     @publication = current_user.all_publications.find_by_id(params[:id])
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status) and params[:publication] and params[:publication][:manuscript]
@@ -60,10 +52,13 @@ class PublicationsController < ApplicationController
       extension = params[:publication][:manuscript].original_filename.downcase.split('.').last
       message = ManuscriptUploader.new.extension_white_list.include?(extension) ? nil : "Not a valid document type: #{extension}"
       redirect_to @publication, :alert => message
+      # render 'publications/manuscripts/show_manuscript'
     elsif @publication
       redirect_to @publication, :notice => 'Please specify a file to upload.'
+      # render 'publications/manuscripts/edit_manuscript'
     else
       redirect_to root_path
+      # render :nothing => true
     end
   end
   
@@ -164,7 +159,7 @@ class PublicationsController < ApplicationController
   end
   
   def inline_update
-    if current_user.pp_committee_secretary? or current_user.steering_committee_secretary?
+    if current_user.secretary?
       @publication = Publication.current.find_by_id(params[:id])
     end
     
@@ -189,7 +184,7 @@ class PublicationsController < ApplicationController
   end
   
   def inline_show
-    if current_user.pp_committee_secretary? or current_user.steering_committee_secretary?
+    if current_user.secretary?
       @publication = Publication.current.find_by_id(params[:id])
     end
     

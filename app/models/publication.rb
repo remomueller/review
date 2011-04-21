@@ -9,7 +9,7 @@ class Publication < ActiveRecord::Base
   FINAL_STATUS = [['SC Approved', 'nominated'], ['Submitted', 'submitted'], ['Published', 'published']]
 
   attr_protected :user_id, :deleted, :manuscript_number, :secretary_notes, :targeted_start_date, :dataset_requested_analyst,
-                 :important, :additional_ppcommittee_instructions, :additional_sccommittee_instructions,
+                 :additional_ppcommittee_instructions, :additional_sccommittee_instructions,
                  :tagged_for_pp_review, :tagged_for_sc_review
   
   mount_uploader :manuscript, ManuscriptUploader
@@ -33,7 +33,6 @@ class Publication < ActiveRecord::Base
   scope :current, :conditions => { :deleted => false }
   scope :status, lambda { |*args|  { :conditions => ["publications.status IN (?)", args.first] } }
   scope :search, lambda { |*args| {:conditions => [ 'LOWER(manuscript_number) LIKE ? or LOWER(full_title) LIKE ? or LOWER(abbreviated_title) LIKE ?', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%' ] } }
-  # scope :important, :conditions => {:important => true}
 
   # Model Validation
   validates_presence_of :full_title, :abbreviated_title

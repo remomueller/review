@@ -41,6 +41,14 @@ class User < ActiveRecord::Base
     update_attribute :status, 'inactive'
   end
   
+  def secretary?
+    self.steering_committee_secretary? || self.pp_committee_secretary?
+  end
+  
+  def committee_member?
+    self.pp_committee? or self.steering_committee?
+  end
+  
   def all_publications
     @all_publications ||= begin
       self.publications
@@ -49,7 +57,7 @@ class User < ActiveRecord::Base
   
   def all_viewable_publications
     @all_viewable_publications ||= begin
-      if self.pp_committee? or self.pp_committee_secretary?
+      if self.committee_member? or self.secretary?
         Publication.current
       else
         self.publications

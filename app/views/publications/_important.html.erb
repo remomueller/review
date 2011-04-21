@@ -1,1 +1,0 @@
-<%= link_to_if (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?), image_tag("icons/favorite_#{@publication.important? ? 'yes' : 'no'}.png", :alt => ''), important_publication_path(@publication, :important => @publication.important? ? '0' : '1'), :remote => true, :method => :post %>&nbsp;
