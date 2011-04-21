@@ -10,7 +10,7 @@ The CHAT Publications website is used primarily to create and track publication 
 <h2><span style="border:2px solid #D4002F; padding:3px 4px 1px 4px;">1</span> Login and Registration</h2>
 If you have not signed up yet click the link that says "Sign Up", and enter your name, email, and a password.  This will notify the system admin to approve your registration request within the system.  Once the system admin has approved your request, you can go to the login screen, type in your email, and enter the password you used when you signed up.<br />
 <br />
-If you are already in the system but don't know your password, you can click the <%= link_to_unless user_signed_in?, "Forgot your password?", new_password_path('user') %> to reset your password.  The website will then ask you for your email address, which you can enter.  An email will be sent to you instructing you how to reset your password.<br />
+If you are already in the system but don't know your password, you can click <%= link_to_unless user_signed_in?, "Forgot your password?", new_password_path('user') %> to reset your password.  The website will then ask you for your email address, which you can enter.  An email will be sent to you instructing you how to reset your password.<br />
 
 <h2><span style="border:2px solid #56DF00; padding:3px 4px 1px 4px;">2</span> The Publication Matrix</h2>
 Once in the system you will see a list of publications that have been entered into the system.  Publications that require your attention will be flagged with a blue or green tag an be near the top of the list.  You can view further details on each publication by clicking the publications title.  The publication title will link you to the publication details.<br />

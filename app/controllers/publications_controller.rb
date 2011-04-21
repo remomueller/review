@@ -24,7 +24,7 @@ class PublicationsController < ApplicationController
   end
 
   def edit_manuscript
-    @publication = current_user.all_publications.find_by_id(params[:id])
+    @publication = current_user.secretary? ? Publication.current.find_by_id(params[:id]) : current_user.all_publications.find_by_id(params[:id])
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status)
       render 'publications/manuscripts/edit_manuscript'
     else
@@ -43,7 +43,7 @@ class PublicationsController < ApplicationController
 
   # Unfortunately a Remote Multipart Form submission isn't a built-in HTML feature...
   def upload_manuscript
-    @publication = current_user.all_publications.find_by_id(params[:id])
+    @publication = current_user.secretary? ? Publication.current.find_by_id(params[:id]) : current_user.all_publications.find_by_id(params[:id])
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status) and params[:publication] and params[:publication][:manuscript]
       # Remove any existing manuscripts!
       @publication.remove_manuscript!
@@ -63,7 +63,7 @@ class PublicationsController < ApplicationController
   end
   
   def destroy_manuscript
-    @publication = current_user.all_publications.find_by_id(params[:id])
+    @publication = current_user.secretary? ? Publication.current.find_by_id(params[:id]) : current_user.all_publications.find_by_id(params[:id])
     if @publication
       @publication.remove_manuscript!
       @publication.update_attribute :remove_manuscript, true
