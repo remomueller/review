@@ -12,11 +12,19 @@
     <% end %>
   </tr>
 
-  <% @publications.each do |publication| %>
-    <% @publication = publication %>
-    <tbody id="publication_<%= @publication.id %>_container" class="<%= cycle('odd', 'even') %>">
-      <%= render :partial => 'publications/inline_show' %>
-    </tbody>
+  <% if @publications.size > 0 %>
+    <% @publications.each do |publication| %>
+      <% @publication = publication %>
+      <tbody id="publication_<%= @publication.id %>_container" class="<%= cycle('odd', 'even') %>">
+        <%= render :partial => 'publications/inline_show' %>
+      </tbody>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="<%= (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?) ? '8' : '7' %>" class="<%= cycle('odd', 'even') %> quiet" style="text-align:center">
+        <%= image_tag("icons/search.png", :alt => '', :style => 'vertical-align:text-bottom') %> No Publications Found Matching Your Search Criteria
+      </td>
+    </tr>
   <% end %>
 </table>
 
