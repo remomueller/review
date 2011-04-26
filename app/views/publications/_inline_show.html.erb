@@ -46,25 +46,26 @@
 <tr style="border-bottom: 2px solid #777">
   <td></td>
   <td colspan="<%= (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?) ? 8 : 7 %>">
-    <span class="quiet"><strong>Action Items:</strong> 
-    <% case @publication.status when 'draft' %>
-      Author has not submitted publication.
-    <% when 'not approved' %>
-      Author needs to resubmit after reviewing committee comments.
-    <% when 'proposed' %>
-      P&amp;P Committee needs to review.
-    <% when 'approved' %>
-      Steering Committee needs to review and nominate.
-    <% when 'nominated' %>
-      Author needs to submit paper to journal.
-    <% when 'submitted' %>
-      Waiting for publication in journal.
-    <% when 'published' %>
-      Paper Published!
-    <% end %>
-    </span>
-    <% if not @publication.secretary_notes.blank? and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary? or current_user.pp_committee? or current_user.steering_committee?) %>
+    <% if @publication.status != 'published' %>
+      <span class="quiet">
+        <strong>Action Items:</strong> 
+        <% case @publication.status when 'draft' %>
+          Author has not submitted publication.
+        <% when 'not approved' %>
+          Author needs to resubmit after reviewing committee comments.
+        <% when 'proposed' %>
+          P&amp;P Committee needs to review.
+        <% when 'approved' %>
+          Steering Committee needs to review and nominate.
+        <% when 'nominated' %>
+          Author needs to submit paper to journal.
+        <% when 'submitted' %>
+          Waiting for publication in journal.
+        <% end %>
+      </span>
       <br />
+    <% end %>
+    <% if not @publication.secretary_notes.blank? and (current_user.pp_committee_secretary? or current_user.steering_committee_secretary? or current_user.pp_committee? or current_user.steering_committee?) %>
       <strong>Secretary Notes:</strong>
       <%= @publication.secretary_notes %>
     <% end %>

@@ -91,24 +91,25 @@
 <tr style="border-bottom: 2px solid #777">
   <td></td>
   <td colspan="8">
-    <span class="quiet"><strong>Action Items:</strong> 
-    <% case @publication.status when 'draft' %>
-      Author has not submitted publication.
-    <% when 'not approved' %>
-      Author needs to resubmit after reviewing committee comments.
-    <% when 'proposed' %>
-      P&amp;P Committee needs to review.
-    <% when 'approved' %>
-      Steering Committee needs to review and nominate.
-    <% when 'nominated' %>
-      Author needs to submit paper to journal.
-    <% when 'submitted' %>
-      Waiting for publication in journal.
-    <% when 'published' %>
-      Paper Published!
+    <% if @publication.status != 'published' %>
+      <span class="quiet">
+        <strong>Action Items:</strong> 
+        <% case @publication.status when 'draft' %>
+          Author has not submitted publication.
+        <% when 'not approved' %>
+          Author needs to resubmit after reviewing committee comments.
+        <% when 'proposed' %>
+          P&amp;P Committee needs to review.
+        <% when 'approved' %>
+          Steering Committee needs to review and nominate.
+        <% when 'nominated' %>
+          Author needs to submit paper to journal.
+        <% when 'submitted' %>
+          Waiting for publication in journal.
+        <% end %>
+      </span>
+      <br />
     <% end %>
-    </span>
-    <br />
     <strong>Secretary Notes:</strong><br />
     <%= text_area_tag "publication_display[#{@publication.id}][secretary_notes]", @publication.secretary_notes, :cols => 100, :rows => 3 %>
   </td>
