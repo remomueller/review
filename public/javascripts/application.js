@@ -9,9 +9,8 @@ $(function(){
   $(".datepicker").datepicker({ showOtherMonths: true, selectOtherMonths: true, changeMonth: true, changeYear: true });
   $("#ui-datepicker-div").hide();
   
-  $(".pagination a").live("click", function() {
+  $(".pagination a, .page a").live("click", function() {
     // $(".pagination").html(createSpinner()); //.html("Page is loading...");
-    // $.getScript(this.href);
     $.get(this.href, null, null, "script")
     return false;
   });
