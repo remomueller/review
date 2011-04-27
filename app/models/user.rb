@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   # Named Scopes
   scope :current, :conditions => { :deleted => false }
   scope :status, lambda { |*args|  { :conditions => ["users.status IN (?)", args.first] } }
+  scope :search, lambda { |*args| {:conditions => [ 'LOWER(first_name) LIKE ? or LOWER(last_name) LIKE ? or LOWER(email) LIKE ?', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%' ] } }
   scope :system_admins, :conditions => { :system_admin => true }
   scope :pp_committee_members, :conditions => { :pp_committee => true }
   scope :steering_committee_members, :conditions => { :steering_committee => true }

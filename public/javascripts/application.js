@@ -15,9 +15,11 @@ $(function(){
     return false;
   });
   
-  // $("input[type='text']").change( function() {
-  //   // check input ($(this).val()) for validity here
-  // });
+  $(".per_page a").live("click", function() {
+    object_class = $(this).data('object')
+    $.get($("#"+object_class+"_search").attr("action"), $("#"+object_class+"_search").serialize() + "&"+object_class+"_per_page="+ $(this).data('count'), null, "script");
+    return false;
+  });
   
   $(".field_with_errors input, .field_with_errors_cleared input, .field_with_errors textarea, .field_with_errors_cleared textarea, .field_with_errors select, .field_with_errors_cleared select").change(function() {
     var el = $(this);
@@ -28,9 +30,6 @@ $(function(){
       $(el).parent().removeClass('field_with_errors_cleared');
       $(el).parent().addClass('field_with_errors');
     }
-        
-    // $.get($("#comments_search").attr("action"), $("#comments_search").serialize(), null, "script");
-    // return false;
   });
   
 });
