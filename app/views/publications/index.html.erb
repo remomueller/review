@@ -10,7 +10,7 @@
 
 <%= form_tag publications_path, :method => :get, :remote => true, :id => "search_form" do %>
   <%= hidden_field_tag :order, params[:order] %>
-  Search <%= text_field_tag 'search', params[:search] %> <%= information %>
+  Search <%= text_field_tag 'search', params[:search] %> <%= information("Press Enter to Search by <b>Title</b> or <b>Author</b>") %>
 <% end %>
 
 <div style="clear:both"></div>
