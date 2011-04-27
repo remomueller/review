@@ -104,7 +104,10 @@
       <% @attribute = 'chat_data_main_database'; @disabled = disabled %>
       <%= render :partial => 'publications/download_link' %>
       <br />
-      <%= f.check_box :chat_data_other, :disabled => disabled %> <%= f.label :chat_data_other, 'Other (<em>specify data and where the data are located</em>):'.html_safe %><br />
+      <%= f.check_box :chat_data_other, :disabled => disabled, :onclick => "toggleAttachment('#publication_chat_data_other');" %> <%= f.label :chat_data_other, 'Other (<em>specify data and where the data are located</em>):'.html_safe %>
+      <% @attribute = 'chat_data_other'; @disabled = disabled %>
+      <%= render :partial => 'publications/download_link' %>
+      <br />
       <% if disabled.blank? %>
         <%= f.text_field :chat_data_other_specify, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
@@ -155,19 +158,28 @@
       <% else %>
         <pre class="disabled"><%= @publication.attachment_chat_form_specify %></pre>
       <% end %>
-      <%= f.check_box :attachment_chat_variables, :disabled => disabled %> <%= f.label :attachment_chat_variables, 'List of CHAT sleep study variables intended for analysis:' %><br />
+      <%= f.check_box :attachment_chat_variables, :disabled => disabled, :onclick => "toggleAttachment('#publication_attachment_chat_variables');" %> <%= f.label :attachment_chat_variables, 'List of CHAT sleep study variables intended for analysis:' %>
+      <% @attribute = 'attachment_chat_variables'; @disabled = disabled %>
+      <%= render :partial => 'publications/download_link' %>
+      <br />
       <% if disabled.blank? %>
         <%= f.text_field :attachment_chat_variables_specify, :style => "width:#{width}", :disabled => disabled %><br />
       <% else %>
         <pre class="disabled"><%= @publication.attachment_chat_variables_specify %></pre>
       <% end %>
-      <%= f.check_box :attachment_ancillary_forms, :disabled => disabled %> <%= f.label :attachment_ancillary_forms,'CHAT ancillary study forms with items marked to indicate variables intended for analysis:' %><br />
+      <%= f.check_box :attachment_ancillary_forms, :disabled => disabled, :onclick => "toggleAttachment('#publication_attachment_ancillary_forms');" %> <%= f.label :attachment_ancillary_forms,'CHAT ancillary study forms with items marked to indicate variables intended for analysis:' %>
+      <% @attribute = 'attachment_ancillary_forms'; @disabled = disabled %>
+      <%= render :partial => 'publications/download_link' %>
+      <br />
       <% if disabled.blank? %>
         <%= f.text_field :attachment_ancillary_forms_specify, :style => "width:#{width}", :disabled => disabled %><br />
       <% else %>
         <pre class="disabled"><%= @publication.attachment_ancillary_forms_specify %></pre>
       <% end %>
-      <%= f.check_box :attachment_other, :disabled => disabled %> <%= f.label :attachment_other, 'Other (<em>specify</em>):'.html_safe %><br />
+      <%= f.check_box :attachment_other, :disabled => disabled, :onclick => "toggleAttachment('#publication_attachment_other');" %> <%= f.label :attachment_other, 'Other (<em>specify</em>):'.html_safe %>
+      <% @attribute = 'attachment_other'; @disabled = disabled %>
+      <%= render :partial => 'publications/download_link' %>
+      <br />
       <% if disabled.blank? %>
         <%= f.text_field :attachment_other_specify, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
