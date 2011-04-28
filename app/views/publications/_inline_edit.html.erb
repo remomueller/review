@@ -7,7 +7,7 @@
       <% if false %>
       <br />
       <span class="quiet"><%= simple_time(@publication.manuscript_uploaded_at) %></span><br />
-      <%= print_byte_size(@publication.manuscript.size) %>
+      <%= number_to_human_size(@publication.manuscript.size) %>
       <% end %>
     <% end %>
   </td>
