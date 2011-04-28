@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   scope :pp_committee_members, :conditions => { :pp_committee => true }
   scope :steering_committee_members, :conditions => { :steering_committee => true }
   
+  scope :pp_secretaries, :conditions => { :pp_committee_secretary => true }
+  scope :sc_secretaries, :conditions => { :steering_committee_secretary => true }
+  
+  
   # Model Validation
   validates_presence_of     :first_name
   validates_presence_of     :last_name

@@ -125,6 +125,18 @@ class Publication < ActiveRecord::Base
     update_attribute :deleted, true
   end
 
+  def send_reminders
+    reviewers = []
+    if self.status == 'proposed'
+      reviewers = (User.current.pp_committee_members | User.current.pp_secretaries)
+    elsif self.status == 'approved'
+      reviewers = (User.current.steering_committee_members | User.current.sc_secretaries)
+    end
+    reviewers.uniq.each do |reviewer|
+      UserMailer.publication_approval_reminder(self, reviewer).deliver if Rails.env.production?
+    end
+  end
+
   # Validations
 
   def should_validate_publication_type?

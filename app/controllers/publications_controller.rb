@@ -80,6 +80,7 @@ class PublicationsController < ApplicationController
         @publication.update_attribute attribute, params[:publication][attribute]
       end
       UserMailer.publication_approval(@publication, true, current_user).deliver if @publication.status != 'proposed' and @publication.user and Rails.env.production?
+      @publication.send_reminders if @publication.status == 'approved'
       redirect_to @publication
     else
       redirect_to root_path
@@ -209,6 +210,7 @@ class PublicationsController < ApplicationController
     
     if @publication.save
       @publication.update_attribute :status, params[:publish] == '1' ? 'proposed' : 'draft'
+      @publication.send_reminders if params[:publish] == '1'
       redirect_to(@publication, :notice => params[:publish] == '1' ? 'Publication was successfully submitted for review.' : 'Publication draft was successfully created.')
     else
       flash[:alert] = "#{@publication.errors.count} error#{ 's' unless @publication.errors.count == 1} prohibited this publication from being saved." if @publication.errors.any?
@@ -223,6 +225,7 @@ class PublicationsController < ApplicationController
       params[:publication][:author_assurance_date] = Date.today if params[:publish] == '1'
       if @publication.update_attributes(params[:publication])
         @publication.update_attribute :status, params[:publish] == '1' ? 'proposed' : 'draft'
+        @publication.send_reminders if params[:publish] == '1'
         redirect_to(@publication, :notice => params[:publish] == '1' ? 'Publication was successfully resubmitted for review.' : 'Publication draft was saved successfully.')
       else
         flash[:alert] = "#{@publication.errors.count} error#{ 's' unless @publication.errors.count == 1} prohibited this publication from being updated." if @publication.errors.any?
