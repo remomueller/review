@@ -67,7 +67,7 @@ class Publication < ActiveRecord::Base
 
   validates_presence_of :chat_data_main_forms_attachment, :if => [:chat_data_main_forms_selected?]
   validates_presence_of :chat_data_main_database_attachment, :if => [:chat_data_main_database_selected?]
-  validates_presence_of :chat_data_other_attachment, :if => [:chat_data_other_selected?]
+#  validates_presence_of :chat_data_other_attachment, :if => [:chat_data_other_selected?]
   
   validates_acceptance_of :manuscript_preparation_none, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
   validates_acceptance_of :manuscript_preparation_analysis_data, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
@@ -84,9 +84,9 @@ class Publication < ActiveRecord::Base
   validates_acceptance_of :attachment_other, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
   
   validates_presence_of :attachment_chat_form_attachment, :if => [:attachment_chat_form_selected?]
-  validates_presence_of :attachment_chat_variables_attachment, :if => [:attachment_chat_variables_selected?]
+#  validates_presence_of :attachment_chat_variables_attachment, :if => [:attachment_chat_variables_selected?]
   validates_presence_of :attachment_ancillary_forms_attachment, :if => [:attachment_ancillary_forms_selected?]
-  validates_presence_of :attachment_other_attachment, :if => [:attachment_other_selected?]
+#  validates_presence_of :attachment_other_attachment, :if => [:attachment_other_selected?]
   
   validates_presence_of :attachment_chat_form_specify, :if => [:should_validate_attachment_chat_form_specify?, :no_longer_draft?]
   validates_presence_of :attachment_chat_variables_specify, :if => [:should_validate_attachment_chat_variables_specify?, :no_longer_draft?]
