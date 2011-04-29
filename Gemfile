@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.7'
 
 # Database Adapter
-gem 'mysql2'
+gem 'mysql2', '0.2.7'
 
 # Gems used by project
 gem 'carrierwave'         # File Uploads
