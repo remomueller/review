@@ -1,4 +1,6 @@
 <tr>
+  <td><span id="publication_<%= @publication.id %>_tag_pp_link"><%= @committee = 'pp'; render :partial => 'publications/tag_for_review' %></span></td>
+  <td><span id="publication_<%= @publication.id %>_tag_sc_link"><%= @committee = 'sc';  render :partial => 'publications/tag_for_review' %></span></td>
   <td style="vertical-align:top">
     <%= text_field_tag "publication_display[#{@publication.id}][manuscript_number]", @publication.manuscript_number %>
     <% unless @publication.manuscript_url.blank? %>
@@ -28,7 +30,7 @@
     <%= text_area_tag "publication_display[#{@publication.id}][writing_group_members]", @publication.writing_group_members, :cols => 20, :rows => 3 %><br />
     
     Committee Nominations:
-    <% nominations = @publication.user_publication_reviews.where('writing_group_nomination IS NOT NULL and writing_group_nomination != ""') %>
+    <% nominations = @publication.user_publication_reviews.where('writing_group_nomination IS NOT NULL') %> <%# and writing_group_nomination != "" was removed (TODO CLEANUP) %>
     <% if nominations.size > 0 %>
       <% nominations.each do |upr| %>
         <br /><%= upr.writing_group_nomination %>
@@ -90,7 +92,7 @@
 </tr>
 <tr style="border-bottom: 2px solid #777">
   <td></td>
-  <td colspan="8">
+  <td colspan="10">
     <% if @publication.status != 'published' %>
       <span class="quiet">
         <strong>Action Items:</strong> 
