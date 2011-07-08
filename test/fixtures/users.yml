@@ -139,3 +139,32 @@ deleted:
   unlock_token: UnlockTokenFive
   locked_at: MyDate
   authentication_token: MyString
+
+pp_committee:
+  id: 6
+  first_name: MyString
+  last_name: MyString
+  status: active
+  deleted: false
+  system_admin: false
+  # email_notifications: {}
+  users_per_page: 10
+  email: pp_committee@example.com
+  encrypted_password: MyString
+  password_salt: MyString
+  reset_password_token: ResetTokenSix
+  remember_token: MyString
+  remember_created_at: MyDate
+  sign_in_count: 0
+  current_sign_in_at: MyDate
+  last_sign_in_at: MyDate
+  current_sign_in_ip: MyString
+  last_sign_in_ip: MyString
+  confirmation_token: ConfirmationTokenSix
+  confirmed_at: MyDate
+  confirmation_sent_at: MyDate
+  failed_attempts: 0
+  unlock_token: UnlockTokenSix
+  locked_at: MyDate
+  authentication_token: MyString
+  pp_committee: true

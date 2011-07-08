@@ -3,7 +3,8 @@ require 'test_helper'
 class PublicationsControllerTest < ActionController::TestCase
   setup do
     login(users(:valid))
-    @publication = publications(:one)
+    @proposed = publications(:proposed)
+    @draft = publications(:draft)
   end
 
   test "should get index" do
@@ -19,30 +20,35 @@ class PublicationsControllerTest < ActionController::TestCase
 
   test "should create publication" do
     assert_difference('Publication.count') do
-      post :create, :publication => @publication.attributes
+      post :create, :publication => @draft.attributes
     end
 
     assert_redirected_to publication_path(assigns(:publication))
   end
 
   test "should show publication" do
-    get :show, :id => @publication.to_param
+    get :show, :id => @proposed.to_param
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, :id => @publication.to_param
+  test "should get edit if publication is a draft" do
+    get :edit, :id => @draft.to_param
     assert_response :success
+  end
+
+  test "should not get edit if publication is proposed" do
+    get :edit, :id => @proposed.to_param
+    assert_redirected_to root_path
   end
 
   test "should update publication" do
-    put :update, :id => @publication.to_param, :publication => @publication.attributes
+    put :update, :id => @draft.to_param, :publication => @proposed.attributes
     assert_redirected_to publication_path(assigns(:publication))
   end
 
   test "should destroy publication" do
-    assert_difference('Publication.count', -1) do
-      delete :destroy, :id => @publication.to_param
+    assert_difference('Publication.current.count', -1) do
+      delete :destroy, :id => @draft.to_param
     end
 
     assert_redirected_to publications_path

@@ -1,13 +1,17 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  user_id: 1
+  id: 1
+  user_id: 6
   publication_id: 1
-  status: MyString
-  comment: MyText
+  status: approved
+  comment: "This is a good proposal."
+  writing_group_nomination: MyString
 
 two:
-  user_id: 1
+  id: 2
+  user_id: 2
   publication_id: 1
-  status: MyString
-  comment: MyText
+  status: "not approved"
+  comment: "This is not a good proposal.  Back to the drawing board."
+  writing_group_nomination: MyString
