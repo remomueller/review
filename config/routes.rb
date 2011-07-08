@@ -2,8 +2,6 @@ Review::Application.routes.draw do
 
   resources :user_publication_reviews
 
-  resources :comments
-
   resources :publications do
     collection do
       get :search

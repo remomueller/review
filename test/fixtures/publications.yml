@@ -2,6 +2,7 @@
 
 one:
   user_id: 1
+  status: proposed
   centers: MyString
   proposal_submission_date: 2011-02-23
   publication_type: MyString
@@ -13,9 +14,7 @@ one:
   dcc_resources_other_specify: MyString
   chat_data_none: false
   chat_data_main_forms: false
-  chat_data_main_forms_specify: MyString
   chat_data_main_database: false
-  chat_data_main_database_specify: MyString
   chat_data_other: false
   chat_data_other_specify: MyString
   manuscript_preparation_analysis_data: false
@@ -25,16 +24,19 @@ one:
   manuscript_preparation_other_specify: MyString
   manuscript_preparation_none: false
   attachment_chat_form: MyString
+  attachment_chat_form_specify: MyString
   attachment_chat_variables: MyString
+  attachment_chat_variables_specify: MyString
   attachment_ancillary_forms: MyString
+  attachment_ancillary_forms_specify: MyString
   attachment_other: MyString
+  attachment_other_specify: MyString
   full_title: MyString
   abbreviated_title: MyString
   keywords: MyString
-  affiliation_id: 1
+  affiliation: MyString
   sponsoring_pi: MyString
   additional_coauthors: MyString
-  lead_author: MyString
   timeline: MyText
   rationale: MyText
   hypothesis: MyText
@@ -50,9 +52,31 @@ one:
   author_assurance_date: 2011-02-23 09:58:27
   approval_date: 2011-02-23
   committee_submission_date: 2011-02-23
+  deleted: false
+  manuscript_number: MyString
+  proposed_analysis: MyString
+  secretary_notes: MyString
+  targeted_start_date: 2011-02-23
+  manuscript: MyString
+  manuscript_uploaded_at: 2011-02-23 09:58:27
+  attachment_none: false
+  chat_data_main_forms_attachment: MyString
+  chat_data_main_database_attachment: MyString
+  attachment_chat_form_attachment: MyString
+  co_lead_author_id: 1
+  dataset_requested_analyst: MyString
+  additional_ppcommittee_instructions: MyString
+  additional_sccommittee_instructions: MyString
+  tagged_for_pp_review: false
+  tagged_for_sc_review: false
+  chat_data_other_attachment: MyString
+  attachment_chat_variables_attachment: MyString
+  attachment_ancillary_forms_attachment: MyString
+  attachment_other_attachment: MyString
 
 two:
   user_id: 1
+  status: proposed
   centers: MyString
   proposal_submission_date: 2011-02-23
   publication_type: MyString
@@ -64,9 +88,7 @@ two:
   dcc_resources_other_specify: MyString
   chat_data_none: false
   chat_data_main_forms: false
-  chat_data_main_forms_specify: MyString
   chat_data_main_database: false
-  chat_data_main_database_specify: MyString
   chat_data_other: false
   chat_data_other_specify: MyString
   manuscript_preparation_analysis_data: false
@@ -76,16 +98,19 @@ two:
   manuscript_preparation_other_specify: MyString
   manuscript_preparation_none: false
   attachment_chat_form: MyString
+  attachment_chat_form_specify: MyString
   attachment_chat_variables: MyString
+  attachment_chat_variables_specify: MyString
   attachment_ancillary_forms: MyString
+  attachment_ancillary_forms_specify: MyString
   attachment_other: MyString
+  attachment_other_specify: MyString
   full_title: MyString
   abbreviated_title: MyString
   keywords: MyString
-  affiliation_id: 1
+  affiliation: MyString
   sponsoring_pi: MyString
   additional_coauthors: MyString
-  lead_author: MyString
   timeline: MyText
   rationale: MyText
   hypothesis: MyText
@@ -101,3 +126,26 @@ two:
   author_assurance_date: 2011-02-23 09:58:27
   approval_date: 2011-02-23
   committee_submission_date: 2011-02-23
+  deleted: false
+  manuscript_number: MyString
+  proposed_analysis: MyString
+  secretary_notes: MyString
+  targeted_start_date: 2011-02-23
+  manuscript: MyString
+  manuscript_uploaded_at: 2011-02-23 09:58:27
+  attachment_none: false
+  chat_data_main_forms_attachment: MyString
+  chat_data_main_database_attachment: MyString
+  attachment_chat_form_attachment: MyString
+  co_lead_author_id: 1
+  dataset_requested_analyst: MyString
+  additional_ppcommittee_instructions: MyString
+  additional_sccommittee_instructions: MyString
+  tagged_for_pp_review: false
+  tagged_for_sc_review: false
+  chat_data_other_attachment: MyString
+  attachment_chat_variables_attachment: MyString
+  attachment_ancillary_forms_attachment: MyString
+  attachment_other_attachment: MyString
+
+

@@ -2,6 +2,7 @@ require 'test_helper'
 
 class PublicationsControllerTest < ActionController::TestCase
   setup do
+    login(users(:valid))
     @publication = publications(:one)
   end
 
