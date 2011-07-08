@@ -12,6 +12,12 @@ gem 'kaminari'            # Pagination
 gem 'mail'                # Emails
 gem 'omniauth', '0.1.6'   # User Multi-Authentication
 
+group :test do
+  # Pretty printed test output
+  gem 'win32console', :platforms => [:mingw]
+  gem 'turn', :require => false
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
