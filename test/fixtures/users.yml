@@ -14,18 +14,18 @@ valid:
   password_salt: MyString
   reset_password_token: ResetTokenOne
   remember_token: MyString
-  remember_created_at: MyDate
+  remember_created_at: 2011-02-23
   sign_in_count: 0
-  current_sign_in_at: MyDate
-  last_sign_in_at: MyDate
+  current_sign_in_at: 2011-02-23
+  last_sign_in_at: 2011-02-23
   current_sign_in_ip: MyString
   last_sign_in_ip: MyString
   confirmation_token: ConfirmationTokenOne
-  confirmed_at: MyDate
-  confirmation_sent_at: MyDate
+  confirmed_at: 2011-02-23
+  confirmation_sent_at: 2011-02-23
   failed_attempts: 0
   unlock_token: UnlockTokenOne
-  locked_at: MyDate
+  locked_at: 2011-02-23
   authentication_token: MyString
 
 two:
@@ -42,18 +42,18 @@ two:
   password_salt: MyString
   reset_password_token: ResetTokenTwo
   remember_token: MyString
-  remember_created_at: MyDate
+  remember_created_at: 2011-02-23
   sign_in_count: 0
-  current_sign_in_at: MyDate
-  last_sign_in_at: MyDate
+  current_sign_in_at: 2011-02-23
+  last_sign_in_at: 2011-02-23
   current_sign_in_ip: MyString
   last_sign_in_ip: MyString
   confirmation_token: ConfirmationTokenTwo
-  confirmed_at: MyDate
-  confirmation_sent_at: MyDate
+  confirmed_at: 2011-02-23
+  confirmation_sent_at: 2011-02-23
   failed_attempts: 0
   unlock_token: UnlockTokenTwo
-  locked_at: MyDate
+  locked_at: 2011-02-23
   authentication_token: MyString
   
 admin:
@@ -70,18 +70,18 @@ admin:
   password_salt: MyString
   reset_password_token: ResetTokenThree
   remember_token: MyString
-  remember_created_at: MyDate
+  remember_created_at: 2011-02-23
   sign_in_count: 0
-  current_sign_in_at: MyDate
-  last_sign_in_at: MyDate
+  current_sign_in_at: 2011-02-23
+  last_sign_in_at: 2011-02-23
   current_sign_in_ip: MyString
   last_sign_in_ip: MyString
   confirmation_token: ConfirmationTokenThree
-  confirmed_at: MyDate
-  confirmation_sent_at: MyDate
+  confirmed_at: 2011-02-23
+  confirmation_sent_at: 2011-02-23
   failed_attempts: 0
   unlock_token: UnlockTokenThree
-  locked_at: MyDate
+  locked_at: 2011-02-23
   authentication_token: MyString
 
 pending:
@@ -98,18 +98,18 @@ pending:
   password_salt: MyString
   reset_password_token: ResetTokenFour
   remember_token: MyString
-  remember_created_at: MyDate
+  remember_created_at: 2011-02-23
   sign_in_count: 0
-  current_sign_in_at: MyDate
-  last_sign_in_at: MyDate
+  current_sign_in_at: 2011-02-23
+  last_sign_in_at: 2011-02-23
   current_sign_in_ip: MyString
   last_sign_in_ip: MyString
   confirmation_token: ConfirmationTokenFour
-  confirmed_at: MyDate
-  confirmation_sent_at: MyDate
+  confirmed_at: 2011-02-23
+  confirmation_sent_at: 2011-02-23
   failed_attempts: 0
   unlock_token: UnlockTokenFour
-  locked_at: MyDate
+  locked_at: 2011-02-23
   authentication_token: MyString
 
 deleted:
@@ -126,18 +126,18 @@ deleted:
   password_salt: MyString
   reset_password_token: ResetTokenFive
   remember_token: MyString
-  remember_created_at: MyDate
+  remember_created_at: 2011-02-23
   sign_in_count: 0
-  current_sign_in_at: MyDate
-  last_sign_in_at: MyDate
+  current_sign_in_at: 2011-02-23
+  last_sign_in_at: 2011-02-23
   current_sign_in_ip: MyString
   last_sign_in_ip: MyString
   confirmation_token: ConfirmationTokenFive
-  confirmed_at: MyDate
-  confirmation_sent_at: MyDate
+  confirmed_at: 2011-02-23
+  confirmation_sent_at: 2011-02-23
   failed_attempts: 0
   unlock_token: UnlockTokenFive
-  locked_at: MyDate
+  locked_at: 2011-02-23
   authentication_token: MyString
 
 pp_committee:
@@ -154,17 +154,17 @@ pp_committee:
   password_salt: MyString
   reset_password_token: ResetTokenSix
   remember_token: MyString
-  remember_created_at: MyDate
+  remember_created_at: 2011-02-23
   sign_in_count: 0
-  current_sign_in_at: MyDate
-  last_sign_in_at: MyDate
+  current_sign_in_at: 2011-02-23
+  last_sign_in_at: 2011-02-23
   current_sign_in_ip: MyString
   last_sign_in_ip: MyString
   confirmation_token: ConfirmationTokenSix
-  confirmed_at: MyDate
-  confirmation_sent_at: MyDate
+  confirmed_at: 2011-02-23
+  confirmation_sent_at: 2011-02-23
   failed_attempts: 0
   unlock_token: UnlockTokenSix
-  locked_at: MyDate
+  locked_at: 2011-02-23
   authentication_token: MyString
   pp_committee: true
