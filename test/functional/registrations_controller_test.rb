@@ -1,16 +1,14 @@
 require 'test_helper'
 
 class RegistrationsControllerTest < ActionController::TestCase
-  tests Devise::RegistrationsController
-  # include Devise::TestHelpers
-  
   setup do
     login(users(:admin))
+    request.env["devise.mapping"] = Devise.mappings[:user]
   end
   
-  test "should create user" do
+  test "an admin should be able to create new user" do
     assert_difference('User.count') do
-      post :create, :user => {:first_name => 'First Name', :last_name => 'Last Name', :status => 'active', :steering_committee => true}
+      post :create, :user => {:first_name => 'First Name', :last_name => 'Last Name', :status => 'active', :email => 'new_registration@example.com', :steering_committee => true}
     end
   
     assert_redirected_to user_path(assigns(:user))
