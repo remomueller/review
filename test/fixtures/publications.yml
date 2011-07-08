@@ -24,13 +24,13 @@ proposed:
   manuscript_preparation_other: false
   manuscript_preparation_other_specify: MyString
   manuscript_preparation_none: false
-  attachment_chat_form: MyString
+  attachment_chat_form: false
   attachment_chat_form_specify: MyString
-  attachment_chat_variables: MyString
+  attachment_chat_variables: false
   attachment_chat_variables_specify: MyString
-  attachment_ancillary_forms: MyString
+  attachment_ancillary_forms: false
   attachment_ancillary_forms_specify: MyString
-  attachment_other: MyString
+  attachment_other: false
   attachment_other_specify: MyString
   full_title: MyString
   abbreviated_title: MyString
@@ -99,13 +99,13 @@ draft:
   manuscript_preparation_other: false
   manuscript_preparation_other_specify: MyString
   manuscript_preparation_none: false
-  attachment_chat_form: MyString
+  attachment_chat_form: false
   attachment_chat_form_specify: MyString
-  attachment_chat_variables: MyString
+  attachment_chat_variables: false
   attachment_chat_variables_specify: MyString
-  attachment_ancillary_forms: MyString
+  attachment_ancillary_forms: false
   attachment_ancillary_forms_specify: MyString
-  attachment_other: MyString
+  attachment_other: false
   attachment_other_specify: MyString
   full_title: MyString
   abbreviated_title: MyString
@@ -174,13 +174,13 @@ three:
   manuscript_preparation_other: false
   manuscript_preparation_other_specify: MyString
   manuscript_preparation_none: false
-  attachment_chat_form: MyString
+  attachment_chat_form: false
   attachment_chat_form_specify: MyString
-  attachment_chat_variables: MyString
+  attachment_chat_variables: false
   attachment_chat_variables_specify: MyString
-  attachment_ancillary_forms: MyString
+  attachment_ancillary_forms: false
   attachment_ancillary_forms_specify: MyString
-  attachment_other: MyString
+  attachment_other: false
   attachment_other_specify: MyString
   full_title: MyString
   abbreviated_title: MyString
