@@ -1,6 +1,6 @@
 Hello <%= @user.first_name %>,
 
-Your publication proposal <%= @publication.full_title %> has been <%= @approval_status %>.
+Your publication proposal <%= @publication.manuscript_number unless @publication.manuscript_number.blank? %> <%= @publication.full_title %> has been <%= @approval_status %>.
 
 <% if @publication.status == 'not approved' %>
 After reviewing the comments left by the committee, you can edit and resubmit your proposal here: 
