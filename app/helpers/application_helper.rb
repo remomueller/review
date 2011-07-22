@@ -60,4 +60,9 @@ module ApplicationHelper
     end
     result
   end
+  
+  def sort_field_helper_desc_only(order, sort_field, display_name, search_form_id  = 'search_form')
+    "<span class='selected' #{'style="color:#DD6767;"' if order.split(',').flatten.include?(sort_field + ' DESC')}>#{display_name} #{ link_to_function('&raquo;'.html_safe, "$('#order').val('#{sort_field} DESC');$('##{search_form_id}').submit();", :style => 'text-decoration:none')}</span>"
+  end
+  
 end

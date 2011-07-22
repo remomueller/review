@@ -13,6 +13,41 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:publications)
   end
 
+  test "should sort marked for P&P review to top in index if user P&P Secretary" do
+    assert_not_nil nil
+    # get :index
+    # assert_response :success
+    # assert_not_nil assigns(:publications)
+  end
+  
+  test "should sort marked for P&P review to top in index if user P&P Member" do
+    assert_not_nil nil
+    # get :index
+    # assert_response :success
+    # assert_not_nil assigns(:publications)
+  end
+  
+  test "should sort marked for SC review to top in index if user SC Secretary" do
+    assert_not_nil nil
+    # get :index
+    # assert_response :success
+    # assert_not_nil assigns(:publications)
+  end
+  
+  test "should sort marked for SC review to top in index if user SC Member" do
+    assert_not_nil nil
+    # get :index
+    # assert_response :success
+    # assert_not_nil assigns(:publications)
+  end
+  
+  test "should sort marked for P&P review followed by SC review to top in index if user is in both P&P and SC committees" do
+    assert_not_nil nil
+    # get :index
+    # assert_response :success
+    # assert_not_nil assigns(:publications)
+  end
+
   test "should get new" do
     get :new
     assert_response :success

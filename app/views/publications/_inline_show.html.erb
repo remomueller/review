@@ -1,6 +1,6 @@
 <tr>
-  <td><span id="publication_<%= @publication.id %>_tag_pp_link"><%= @committee = 'pp'; render :partial => 'publications/tag_for_review' %></span></td>
-  <td><span id="publication_<%= @publication.id %>_tag_sc_link"><%= @committee = 'sc';  render :partial => 'publications/tag_for_review' %></span></td>
+  <td><span id="publication_<%= @publication.id %>_tag_pp_link"><%= @committee = 'pp'; render :partial => 'publications/tag_for_review' %></span>
+    <span id="publication_<%= @publication.id %>_tag_sc_link"><%= @committee = 'sc';  render :partial => 'publications/tag_for_review' %></span></td>
   <td style="white-space:nowrap">
     <%= @publication.manuscript_number %>
     <% unless @publication.manuscript_url.blank? %>
@@ -45,7 +45,7 @@
 </tr>
 <tr style="border-bottom: 2px solid #777">
   <td></td>
-  <td colspan="<%= (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?) ? 10 : 9 %>">
+  <td colspan="<%= (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?) ? 9 : 8 %>">
     <% if @publication.status != 'published' %>
       <span class="quiet">
         <strong>Action Items:</strong> 

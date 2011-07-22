@@ -1,7 +1,11 @@
 <table style="width:100%"><col width="1px"/><col width="1px"/>
   <tr style="border-bottom: 2px solid #777">
-    <th style="white-space:nowrap"><%== sort_field_helper(@order, 'tagged_for_pp_review', 'P&P') %></th>
-    <th style="white-space:nowrap"><%== sort_field_helper(@order, 'tagged_for_sc_review', 'SC') %></th>
+    <th style="white-space:nowrap">
+      <%#== sort_field_helper(@order, 'tagged_for_pp_review', 'P&P') %>
+      <%== sort_field_helper_desc_only(@order, 'tagged_for_pp_review', 'P&P')  %><br />
+      <%#== sort_field_helper(@order, 'tagged_for_sc_review', 'SC') %>
+      <%== sort_field_helper_desc_only(@order, 'tagged_for_sc_review', 'SC') %>
+    </th>
     <th style="white-space:nowrap"><%== sort_field_helper(@order, 'manuscript_number', 'MS#') %></th>
     <th style="white-space:nowrap"><%== sort_field_helper(@order, 'abbreviated_title', 'Abbreviated Title') %></th>
     <th>Lead Author and Writing Committee</th>
@@ -23,7 +27,7 @@
     <% end %>
   <% else %>
     <tr>
-      <td colspan="<%= (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?) ? '10' : '9' %>" class="<%= cycle('odd', 'even') %> quiet" style="text-align:center">
+      <td colspan="<%= (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?) ? '9' : '8' %>" class="<%= cycle('odd', 'even') %> quiet" style="text-align:center">
         <%= image_tag("icons/search.png", :alt => '', :style => 'vertical-align:text-bottom') %> No Publications Found Matching Your Search Criteria
       </td>
     </tr>
