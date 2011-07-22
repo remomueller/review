@@ -1,16 +1,22 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.1.0.rc4'
 
 # Database Adapter
-gem 'mysql2', '0.2.7'
+gem 'mysql2', '0.3.2'
 
 # Gems used by project
 gem 'carrierwave'         # File Uploads
-gem 'devise', '1.1.7'     # User Authorization
+gem 'devise', '~> 1.3.4'  # User Authorization
 gem 'kaminari'            # Pagination
 gem 'mail'                # Emails
-gem 'omniauth', '0.1.6'   # User Multi-Authentication
+gem 'omniauth', '0.2.6'   # User Multi-Authentication
+
+# Asset template engines
+gem 'coffee-script'               # Compiles JavaScript
+gem 'jquery-rails'                # JavaScript Engine
+gem 'sass-rails', '~> 3.1.0.rc'   # Compiles CSS
+gem 'uglifier'                    # Minimizes and obscures JS and CSS
 
 group :test do
   # Pretty printed test output
