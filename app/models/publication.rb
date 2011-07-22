@@ -103,6 +103,14 @@ class Publication < ActiveRecord::Base
   has_many :user_publication_reviews
   belongs_to :co_lead_author, :class_name => 'User'
 
+  def abbreviated_title_and_ms
+    "#{"#{self.manuscript_number} " unless self.manuscript_number.blank?}#{self.abbreviated_title}"
+  end
+
+  def full_title_and_ms
+    "#{"#{self.manuscript_number} " unless self.manuscript_number.blank?}#{self.full_title}"
+  end
+
   def targeted_start_date_pretty
     result = ''
     unless self.targeted_start_date.blank?

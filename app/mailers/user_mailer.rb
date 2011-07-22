@@ -15,7 +15,7 @@ class UserMailer < ActionMailer::Base
     @publication = publication
     @reviewer = reviewer
     mail(:to => reviewer.email,
-         :subject => @subject + "New Publication Awaiting Approval: #{publication.abbreviated_title}",
+         :subject => @subject + "New Publication Awaiting Approval: #{publication.abbreviated_title_and_ms}",
          :reply_to => publication.user.email)
   end
   
@@ -43,7 +43,7 @@ class UserMailer < ActionMailer::Base
       @approval_status = 'denied by the Steering Committee'
     end
     mail(:to => @user.email,
-         :subject => @subject + "Publication Proposal for #{@publication.abbreviated_title} has been #{@approval_status}",
+         :subject => @subject + "Publication Proposal for #{@publication.abbreviated_title_and_ms} has been #{@approval_status}",
          :reply_to => secretary.email)
   end
   
