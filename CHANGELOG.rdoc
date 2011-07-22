@@ -1,0 +1,23 @@
+== Planned
+
+* Enhancements
+
+* Refactoring
+
+* Test Coverage
+
+== 0.6.0
+
+* Enhancements
+  * Manuscript Number is now included in Publication Approval emails and Publication Approval Reminder emails
+  * Publications Index is now easier to sort by Marked for SC review and Marked for P&P review
+    * P&P committee members and secretaries will have Marked for P&P review filtered to top when they first load the page
+    * SC committee members and secretaries will have Marked for SC review filtered to top when they first load the page
+    * Members of both will have Marked for P&P at top followed by Marked for SC at top of page
+  
+* Test Coverage
+  * Created initial test coverage for all unit and functional tests
+
+== 0.5.0
+
+* Fill In
