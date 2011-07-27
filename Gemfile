@@ -21,6 +21,7 @@ gem 'sass-rails', '~> 3.1.0.rc'    # Compiles CSS
 gem 'uglifier'                     # Minimizes and obscures JS and CSS
 gem 'sprockets', '= 2.0.0.beta.10' # Newer versions of sprockets appear to cause errors
 
+# Testing
 group :test do
   # Pretty printed test output
   gem 'win32console', :platforms => [:mswin, :mingw]
