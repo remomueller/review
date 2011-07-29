@@ -34,6 +34,7 @@
   </div>
 
   <%= javascript_tag "hideOnMouseOut(['#menu_user_settings', '#menu_home', '#menu_users']);" %>
+
 <% else %>
   <div style="float:right">
     <%= link_to_function 'Login', "$('#menu_user_settings').show();", :onmouseover => "$('#menu_user_settings').show();" %>
@@ -57,7 +58,18 @@
       </div>
     </div>
   </div>
-  <%= javascript_tag "hideOnMouseOut(['#menu_user_settings', '#menu_home']);" %>
+  
+  <div style="float:left">
+    <%= link_to_function 'Manual '.html_safe + image_tag('icons/pdf.png', :style => 'vertical-align:middle').html_safe, "$('#menu_manual').show();", :onmouseover => "$('#menu_manual').show();" %>
+    <div style="position:relative;">
+      <div id="menu_manual" class="menu_dropdown_left_center" style="display:none;white-space:nowrap">
+        <div><%= link_to 'Manual '.html_safe + image_tag('icons/pdf.png', :style => 'vertical-align:middle').html_safe, SITE_URL + '/documents/CHAT Publications Manual.pdf', :target => '_blank', :class => 'noicon' %></div>
+      </div>
+    </div>
+  </div>
+  
+  <%= javascript_tag "hideOnMouseOut(['#menu_user_settings', '#menu_home', '#menu_manual']);" %>
 <% end %>
+
 
 <div style="clear:both"></div>
