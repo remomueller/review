@@ -9,7 +9,7 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: hybrid_development
+  database: review_development
   pool: 5
   username: <%= print "Enter Database Username [username]: "; u = gets.chomp(); if u == '' then u = 'username' end; u %>
   password: <%= print "Enter Database Password [password]: "; p = gets.chomp(); if p == '' then p = 'password' end; p %>
@@ -23,7 +23,7 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: hybrid_test
+  database: review_test
   pool: 5
   username: <%= u %>
   password: <%= p %>
@@ -34,7 +34,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: hybrid_production
+  database: review_production
   pool: 5
   username: <%= u %>
   password: <%= p %>
