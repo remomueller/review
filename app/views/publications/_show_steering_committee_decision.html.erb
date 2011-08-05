@@ -1,7 +1,7 @@
 <% form_name = "steering_committee_decision_form" %>
 <%= form_tag edit_steering_committee_decision_publication_path(@publication), :method => :post, :remote => true, :id => form_name do %>
 <div class="field">
-  <label>Publication Status</label><br />
+  <label>Publication Status</label>
   <% Publication::SC_STATUS.each do |display, value| %>
     <%= radio_button :publication, :status, value, :checked => (value == @publication.status), :disabled => 'disabled' %> <label><%= display %></label>
   <% end %>

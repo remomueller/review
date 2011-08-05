@@ -52,6 +52,17 @@ pre {
   margin: 0px;
 }
 
+table.blank, table.blank tr, table.blank td, table.blank th {
+  border:0px;
+  border-collapse:collapse;
+  margin:0px;
+  padding:0px;
+}
+
+table.padded td, table.padded.th {
+  padding:5px;
+}
+
 textarea[disabled='disabled'], input[disabled='disabled'], select[disabled='disabled'], .disabled { color: #0E7799; }
 
 /**************************************/

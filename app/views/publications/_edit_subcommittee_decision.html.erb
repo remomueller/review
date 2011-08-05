@@ -1,7 +1,7 @@
 <% width = '914px' %>
 <%= form_tag pp_approval_publication_path(@publication), :method => :post, :id => 'subcommittee_decision_form' do %>
 <div class="field">
-  <label>Publication Status</label><br />
+  <label>Publication Status</label>
   <% Publication::PP_STATUS.each do |display, value| %>
     <%= radio_button :publication, :status, value, :checked => (value == @publication.status) %> <label><%= display %></label>
   <% end %>

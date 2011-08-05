@@ -13,6 +13,75 @@
 <%#= link_to 'Back', publications_path %>
 <div style="clear:both"></div>
 
+<% if (current_user.pp_committee? and ['proposed'].include?(@publication.status)) or (current_user.steering_committee? and ['approved'].include?(@publication.status)) %>
+  <% @user = current_user %>
+  <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
+  <% @user_publication_review = @user.user_publication_reviews.new(:publication_id => @publication.id) if @user_publication_review.blank? %>
+  <div id="publication_review_box_user_<%= @user.id %>"><%= render :partial => 'user_publication_reviews/show_simple' %></div>
+  <div style="clear:both"></div>  
+<% end %>
+
+<% if current_user.committee_member? or current_user.secretary? %>
+<%= link_to_function "Show/Hide P&P Committee Reviews", "$('#sc_reviews').hide(); $('#pp_reviews').toggle( 'blind', {}, 500 );", :class => 'button' %>
+<%= link_to_function "Show/Hide Steering Committee Reviews", "$('#pp_reviews').hide(); $('#sc_reviews').toggle( 'blind', {}, 500 );", :class => 'button' %>
+<div style="clear:both"></div>
+<fieldset id="pp_reviews" style="display:none">
+  <legend>P&amp;P Committee Reviews</legend>
+  <table class="blank padded">
+    <tbody>
+      <% User.current.pp_committee_members.order('last_name, first_name').each do |user| %>
+        <% @user = user %>
+        <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
+        <% @user_publication_review = @user.user_publication_reviews.new(:publication_id => @publication.id) if @user_publication_review.blank? %>
+        <%= render :partial => 'user_publication_reviews/show_small' %>
+      <% end %>
+    </tbody>
+  </table>
+</fieldset>
+<fieldset id="sc_reviews" style="display:none">
+  <legend>Steering Committee Reviews</legend>
+  <table class="blank padded">
+    <tbody>
+      <% User.current.steering_committee_members.order('last_name, first_name').each do |user| %>
+        <% @user = user %>
+        <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
+        <% @user_publication_review = @user.user_publication_reviews.new(:publication_id => @publication.id) if @user_publication_review.blank? %>
+        <%= render :partial => 'user_publication_reviews/show_small' %>
+      <% end %>
+    </tbody>
+  </table>
+</fieldset>
+<% end %>
+
+<% if ['approved', 'nominated'].include?(@publication.status) and current_user.steering_committee_secretary? %>
+  <fieldset style="border: 1px solid #0E7799;">
+    <legend>Steering Committee Decision</legend>
+    
+    <div id="steering_committee_decision_box">
+      <% if @publication.status == 'approved' %>
+        <%= render :partial => 'publications/edit_steering_committee_decision' %>
+      <% else %>
+        <%= render :partial => 'publications/show_steering_committee_decision' %>
+      <% end %>
+    </div>
+  </fieldset>
+<% end %>
+
+<% if ['proposed', 'not approved', 'approved'].include?(@publication.status) and current_user.pp_committee_secretary? %>
+  <fieldset style="border: 1px solid #0E7799;">
+    <legend>P&amp;P Committee Decision</legend>
+    <div id="subcommittee_decision_box">
+      <% if @publication.status == 'proposed' %>
+        <%= render :partial => 'publications/edit_subcommittee_decision' %>
+      <% else %>
+        <%= render :partial => 'publications/show_subcommittee_decision' %>
+      <% end %>
+    </div>
+  </fieldset>
+<% end %>
+
+
+<% if false %>
 <% if (current_user.steering_committee? or current_user.steering_committee_secretary?) and ['approved', 'nominated'].include?(@publication.status) %>
   <fieldset>
     <legend>Steering Committee: Publication Reviews</legend>
@@ -72,6 +141,7 @@
     <% end %>
     
   </fieldset>
+<% end %>
 <% end %>
 
 <% if ['nominated', 'submitted', 'published'].include?(@publication.status) %>

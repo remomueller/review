@@ -1,0 +1,30 @@
+
+<% if @user_publication_review.new_record? and current_user.secretary? %>
+<tr style="border-bottom:1px solid #eee;">
+  <td style="white-space:nowrap"><span id="user_<%= @user_publication_review.user_id %>_notified" style="color:black"><%= link_to image_tag('icons/email.png', :alt => '', :style => 'vertical-align:text-bottom') + ' Email Reminder', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true %></span></td>
+  <td><%= link_to @user_publication_review.user.name, @user_publication_review.user %></td>
+</tr>
+<% elsif not @user_publication_review.new_record? %>
+  <tr>
+    <td style="white-space:nowrap"> <strong><span style="color:<%= @user_publication_review.status == "approved" ? "green" : "red" %>"><%= @user_publication_review.status %></span></strong></td>
+    <td>
+      <%= link_to @user_publication_review.user.name, @user_publication_review.user %>
+      <%= simple_time(@user_publication_review.updated_at) %>
+    </td>
+  </tr>
+  <% unless @user_publication_review.comment.blank? %>
+    <tr>
+      <td></td>
+      <td><em><pre><%= @user_publication_review.comment %></pre></em></td>
+    </tr>
+  <% end %>
+  <% unless @user_publication_review.writing_group_nomination.blank? %>
+    <tr style="border-bottom:1px solid #eee;">
+      <td></td>
+      <td>
+        <b>Nomination</b>
+        <em><pre><%= @user_publication_review.writing_group_nomination %></pre></em>
+      </td>
+    </tr>
+  <% end %>
+<% end %>

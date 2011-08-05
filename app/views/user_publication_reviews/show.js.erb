@@ -1,5 +1,9 @@
-<% if params[:committee] == 'steering' %>
-  $("#publication_review_box_user_<%= current_user.id %>").html("<%= escape_javascript(render("user_publication_reviews/sc_show")) %>");
+<% if params[:mode] == 'simple' %>
+  $("#publication_review_box_user_<%= current_user.id %>").html("<%= escape_javascript(render("user_publication_reviews/show_simple")) %>");
 <% else %>
-  $("#publication_review_box_user_<%= current_user.id %>").html("<%= escape_javascript(render("user_publication_reviews/show")) %>");
+  <% if params[:committee] == 'steering' %>
+    $("#publication_review_box_user_<%= current_user.id %>").html("<%= escape_javascript(render("user_publication_reviews/sc_show")) %>");
+  <% else %>
+    $("#publication_review_box_user_<%= current_user.id %>").html("<%= escape_javascript(render("user_publication_reviews/show")) %>");
+  <% end %>
 <% end %>

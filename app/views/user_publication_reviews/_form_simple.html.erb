@@ -1,0 +1,41 @@
+<% width = '914px' %>
+<% url = @user_publication_review.new_record? ? user_publication_reviews_path(:publication_id => @user_publication_review.publication_id, :mode => 'simple') : user_publication_review_path(@user_publication_review, :mode => 'simple') %>
+<% method = @user_publication_review.new_record? ? :post : :put %>
+<% form_name = "upr_form_#{@user_publication_review.user_id}" %>
+
+<%= form_tag url, :method => method, :remote => true, :id => form_name do %>
+  <fieldset style="border: 1px solid #0E7799;">
+    <legend>Review Publication
+      <%= link_to_function image_tag('icons/tick.png', :alt => '', :style => 'vertical-align:text-bottom'), "$('##{form_name}').submit();" %>
+      <% unless @user_publication_review.new_record? %>
+        <%= link_to image_tag('icons/cross.png', :alt => '', :style => 'vertical-align:text-bottom'), user_publication_review_path(@user_publication_review, :mode => 'simple'), :remote => true %>
+      <% end %>
+    </legend>
+    
+    <div class="field">
+      <label>Approval Status</label>
+      <% UserPublicationReview::STATUS.each do |display, value| %>
+        <%= radio_button :user_publication_review, :status, value, :checked => (@user_publication_review.status == value) %> <label><%= display %></label>
+      <% end %>
+    </div>
+    
+    <div class="field">
+      <%= label :user_publication_review, :comment %><br />
+      <%= text_area :user_publication_review, :comment, :rows => 7, :style => "width:#{width}" %>
+    </div>
+    
+    <% if current_user.steering_committee? and ['approved'].include?(@user_publication_review.publication.status) %>
+      <div class="field">
+        <%= label :user_publication_review, :writing_group_nomination %><br />
+        <%= text_area :user_publication_review, :writing_group_nomination, :rows => 3, :style => "width:#{width}" %>
+      </div>
+    <% end %>
+    
+    <div class="actions">
+      <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('##{form_name}').submit();", :class => "button positive" %>
+      <% unless @user_publication_review.new_record? %>
+        <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', user_publication_review_path(@user_publication_review, :mode => 'simple'), :remote => true, :class => 'button negative' %>
+      <% end %>
+    </div>
+  </fieldset>
+<% end %>
