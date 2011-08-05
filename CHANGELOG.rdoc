@@ -13,6 +13,8 @@
     * Pending users aren't allowed to login
     * Deleted users aren't allowed to login
 
+== 0.8.0
+
 == 0.7.0
 
 * Enhancements
