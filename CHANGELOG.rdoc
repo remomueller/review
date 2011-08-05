@@ -16,10 +16,8 @@
 == 0.7.0
 
 * Enhancements
-  
-* Refactoring
-
-* Test Coverage
+  * Reviewers on the P&P committee and in the Steering committee are now presented a simpler interface for creating a review
+  * A link to the manual is now provided to document the login process
 
 == 0.6.0
 
