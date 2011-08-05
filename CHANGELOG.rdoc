@@ -1,12 +1,5 @@
 == Planned
 
-* Enhancements
-  * Update Rails to 3.1
-  * Update Devise to 1.3.4 and Omniauth 0.2.6
-
-* Refactoring
-  * JavaScript rewritten using CoffeeScript
-
 * Test Coverage
   * Integration tests added to check that
     * Valid users are forwarded to the correct url after login
@@ -18,6 +11,11 @@
 * Enhancements
   * Reviewers on the P&P committee and in the Steering committee are now presented a simpler interface for creating a review
   * A link to the manual is now provided to document the login process
+  * Update Rails to 3.1
+  * Update Devise to 1.3.4 and Omniauth 0.2.6
+
+* Refactoring
+  * JavaScript rewritten using CoffeeScript
 
 == 0.6.0
 
