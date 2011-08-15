@@ -8,6 +8,11 @@
 
 == 0.8.0
 
+== 0.7.1
+
+* Enhancements
+  * Modified the authentication system so that it can authenticate correctly when behind a reverse proxy and within a firewall
+
 == 0.7.0
 
 * Enhancements
