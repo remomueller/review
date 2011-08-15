@@ -1,12 +1,18 @@
 == Planned
 
-* Test Coverage
+* Testing
   * Integration tests added to check that
     * Valid users are forwarded to the correct url after login
     * Pending users aren't allowed to login
     * Deleted users aren't allowed to login
 
 == 0.8.0
+
+* Testing
+  * Added navigation tests to assure inactive and deleted users can't login
+
+* Bug Fix
+  * Don't allow inactive or deleted users to login, caused by Devise updating active? to active_for_authentication?
 
 == 0.7.1
 
