@@ -37,10 +37,10 @@ class User < ActiveRecord::Base
   # User Methods
   
   # Overriding Devise built-in active? method
-  def active?
+  def active_for_authentication?
     super and self.status == 'active' and not self.deleted?
   end
-  
+    
   def destroy
     update_attribute :deleted, true
     update_attribute :status, 'inactive'
