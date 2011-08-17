@@ -125,7 +125,6 @@ class Publication < ActiveRecord::Base
   
   def human_status
     statuses = Publication::STATUS.select{|a| a[1] == self.status}
-    puts statuses.inspect
     if statuses.size > 0
       statuses.first.first
     else

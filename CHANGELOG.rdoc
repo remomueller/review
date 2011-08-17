@@ -12,6 +12,7 @@
     * Valid users are forwarded to the correct url after login
     * Pending users aren't allowed to login
     * Deleted users aren't allowed to login
+  * Functional tests now check that publication matrix is initially sorted based on the responsibility of the user
 
 * Bug Fix
   * Don't allow inactive or deleted users to login, caused by Devise updating active? to active_for_authentication?

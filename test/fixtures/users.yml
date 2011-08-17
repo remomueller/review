@@ -168,3 +168,166 @@ pp_committee:
   locked_at: 2011-02-23
   authentication_token: MyString
   pp_committee: true
+  steering_committee: false
+  pp_committee_secretary: false
+  steering_committee_secretary: false
+
+sc_committee:
+  id: 7
+  first_name: MyString
+  last_name: MyString
+  status: active
+  deleted: false
+  system_admin: false
+  # email_notifications: {}
+  users_per_page: 10
+  email: sc_committee@example.com
+  encrypted_password: MyString
+  password_salt: MyString
+  reset_password_token: ResetTokenSeven
+  remember_token: MyString
+  remember_created_at: 2011-02-23
+  sign_in_count: 0
+  current_sign_in_at: 2011-02-23
+  last_sign_in_at: 2011-02-23
+  current_sign_in_ip: MyString
+  last_sign_in_ip: MyString
+  confirmation_token: ConfirmationTokenSeven
+  confirmed_at: 2011-02-23
+  confirmation_sent_at: 2011-02-23
+  failed_attempts: 0
+  unlock_token: UnlockTokenSeven
+  locked_at: 2011-02-23
+  authentication_token: MyString
+  pp_committee: false
+  steering_committee: true
+  pp_committee_secretary: false
+  steering_committee_secretary: false
+
+pp_and_sc_committee:
+  id: 8
+  first_name: MyString
+  last_name: MyString
+  status: active
+  deleted: false
+  system_admin: false
+  # email_notifications: {}
+  users_per_page: 10
+  email: pp_and_sc_committee@example.com
+  encrypted_password: MyString
+  password_salt: MyString
+  reset_password_token: ResetTokenEight
+  remember_token: MyString
+  remember_created_at: 2011-02-23
+  sign_in_count: 0
+  current_sign_in_at: 2011-02-23
+  last_sign_in_at: 2011-02-23
+  current_sign_in_ip: MyString
+  last_sign_in_ip: MyString
+  confirmation_token: ConfirmationTokenEight
+  confirmed_at: 2011-02-23
+  confirmation_sent_at: 2011-02-23
+  failed_attempts: 0
+  unlock_token: UnlockTokenEight
+  locked_at: 2011-02-23
+  authentication_token: MyString
+  pp_committee: true
+  steering_committee: true
+  pp_committee_secretary: false
+  steering_committee_secretary: false
+  
+pp_secretary:
+  id: 9
+  first_name: MyString
+  last_name: MyString
+  status: active
+  deleted: false
+  system_admin: false
+  # email_notifications: {}
+  users_per_page: 10
+  email: pp_secretary@example.com
+  encrypted_password: MyString
+  password_salt: MyString
+  reset_password_token: ResetTokenNine
+  remember_token: MyString
+  remember_created_at: 2011-02-23
+  sign_in_count: 0
+  current_sign_in_at: 2011-02-23
+  last_sign_in_at: 2011-02-23
+  current_sign_in_ip: MyString
+  last_sign_in_ip: MyString
+  confirmation_token: ConfirmationTokenNine
+  confirmed_at: 2011-02-23
+  confirmation_sent_at: 2011-02-23
+  failed_attempts: 0
+  unlock_token: UnlockTokenNine
+  locked_at: 2011-02-23
+  authentication_token: MyString
+  pp_committee: false
+  steering_committee: false
+  pp_committee_secretary: true
+  steering_committee_secretary: false
+
+sc_secretary:
+  id: 10
+  first_name: MyString
+  last_name: MyString
+  status: active
+  deleted: false
+  system_admin: false
+  # email_notifications: {}
+  users_per_page: 10
+  email: sc_secretary@example.com
+  encrypted_password: MyString
+  password_salt: MyString
+  reset_password_token: ResetTokenTen
+  remember_token: MyString
+  remember_created_at: 2011-02-23
+  sign_in_count: 0
+  current_sign_in_at: 2011-02-23
+  last_sign_in_at: 2011-02-23
+  current_sign_in_ip: MyString
+  last_sign_in_ip: MyString
+  confirmation_token: ConfirmationTokenTen
+  confirmed_at: 2011-02-23
+  confirmation_sent_at: 2011-02-23
+  failed_attempts: 0
+  unlock_token: UnlockTokenTen
+  locked_at: 2011-02-23
+  authentication_token: MyString
+  pp_committee: false
+  steering_committee: false
+  pp_committee_secretary: false
+  steering_committee_secretary: true
+
+pp_and_sc_secretary:
+  id: 11
+  first_name: MyString
+  last_name: MyString
+  status: active
+  deleted: false
+  system_admin: false
+  # email_notifications: {}
+  users_per_page: 10
+  email: pp_and_sc_secretary@example.com
+  encrypted_password: MyString
+  password_salt: MyString
+  reset_password_token: ResetTokenEleven
+  remember_token: MyString
+  remember_created_at: 2011-02-23
+  sign_in_count: 0
+  current_sign_in_at: 2011-02-23
+  last_sign_in_at: 2011-02-23
+  current_sign_in_ip: MyString
+  last_sign_in_ip: MyString
+  confirmation_token: ConfirmationTokenEleven
+  confirmed_at: 2011-02-23
+  confirmation_sent_at: 2011-02-23
+  failed_attempts: 0
+  unlock_token: UnlockTokenEleven
+  locked_at: 2011-02-23
+  authentication_token: MyString
+  pp_committee: false
+  steering_committee: false
+  pp_committee_secretary: true
+  steering_committee_secretary: true
