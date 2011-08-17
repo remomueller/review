@@ -2,6 +2,9 @@
 
 == 0.8.0
 
+* Enhancements
+  * Remove the need for reviewers to click "Create Review" before being able to fill out a new review
+
 * Testing
   * Integration tests added to check that
     * Valid users are forwarded to the correct url after login
