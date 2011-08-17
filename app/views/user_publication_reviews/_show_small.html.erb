@@ -1,5 +1,5 @@
 
-<% if @user_publication_review.status == nil and current_user.secretary? %>
+<% if @user_publication_review.status == nil and ((@user_publication_review.user.pp_committee? and current_user.pp_committee_secretary?) or (@user_publication_review.user.steering_committee? and current_user.steering_committee_secretary?)) %>
 <tr style="border-bottom:1px solid #eee;">
   <td style="white-space:nowrap">
     <span id="user_<%= @user_publication_review.user_id %>_notified" style="color:black">
@@ -13,7 +13,7 @@
   </td>
   <td><%= link_to @user_publication_review.user.name, @user_publication_review.user %></td>
 </tr>
-<% elsif not @user_publication_review.new_record? %>
+<% elsif @user_publication_review.status != nil %>
   <tr>
     <td style="white-space:nowrap"> <strong><span style="color:<%= @user_publication_review.status == "approved" ? "green" : "red" %>"><%= @user_publication_review.status %></span></strong></td>
     <td>
