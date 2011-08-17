@@ -1,1 +1,1 @@
-$("#user_<%= @reviewer.id %>_notified").html('<span class="quiet"><%= image_tag("icons/email.png", :alt => '', :style => "vertical-align:text-bottom") %> Email Sent</span>');
+$("#user_<%= @reviewer.id %>_notified").html('<span class="quiet">Reminder sent <%= simple_time(@user_publication_review.reminder_sent_at) %></span><br /><%= image_tag("icons/email.png", :alt => '', :style => "vertical-align:text-bottom") %> <%= link_to 'Resend', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true %>');

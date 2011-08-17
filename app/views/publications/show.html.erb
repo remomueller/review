@@ -18,7 +18,7 @@
   <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
   <% @user_publication_review = @user.user_publication_reviews.new(:publication_id => @publication.id) if @user_publication_review.blank? %>
   <div id="publication_review_box_user_<%= @user.id %>">
-    <% if @user_publication_review.new_record? %>
+    <% if @user_publication_review.status == nil %>
       <%= render :partial => 'user_publication_reviews/form_simple' %>
     <% else %>
       <%= render :partial => 'user_publication_reviews/show_simple' %>

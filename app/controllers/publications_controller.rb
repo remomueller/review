@@ -17,6 +17,12 @@ class PublicationsController < ApplicationController
     @publication = Publication.current.find_by_id(params[:id])
     @reviewer = User.current.find_by_id(params[:reviewer_id])
     if @publication and @reviewer and current_user.secretary?
+      
+      @user_publication_review = @reviewer.user_publication_reviews.find_by_publication_id(@publication.id)
+      @user_publication_review = @reviewer.user_publication_reviews.create(:publication_id => @publication.id) if @user_publication_review.blank?
+      
+      @user_publication_review.update_attribute :reminder_sent_at, Time.now
+      
       UserMailer.publication_approval_reminder(@publication, @reviewer).deliver if Rails.env.production?
     else
       render :nothing => true

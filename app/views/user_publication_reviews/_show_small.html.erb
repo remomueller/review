@@ -1,7 +1,16 @@
 
-<% if @user_publication_review.new_record? and current_user.secretary? %>
+<% if @user_publication_review.status == nil and current_user.secretary? %>
 <tr style="border-bottom:1px solid #eee;">
-  <td style="white-space:nowrap"><span id="user_<%= @user_publication_review.user_id %>_notified" style="color:black"><%= link_to image_tag('icons/email.png', :alt => '', :style => 'vertical-align:text-bottom') + ' Email Reminder', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true %></span></td>
+  <td style="white-space:nowrap">
+    <span id="user_<%= @user_publication_review.user_id %>_notified" style="color:black">
+      <% if @user_publication_review.reminder_sent_at %>
+        <span class="quiet">Reminder sent <%= simple_time(@user_publication_review.reminder_sent_at) %></span><br />
+        <%= image_tag("icons/email.png", :alt => '', :style => "vertical-align:text-bottom") %> <%= link_to 'Resend', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true %>
+      <% else %>
+        <%= link_to image_tag('icons/email.png', :alt => '', :style => 'vertical-align:text-bottom') + ' Email Reminder', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true %>
+      <% end %>
+    </span>
+  </td>
   <td><%= link_to @user_publication_review.user.name, @user_publication_review.user %></td>
 </tr>
 <% elsif not @user_publication_review.new_record? %>
