@@ -29,3 +29,9 @@ jQuery ->
       $(el).parent().removeClass('field_with_errors_cleared')
       $(el).parent().addClass('field_with_errors')
   )
+  
+  $('#menu').waypoint( (event, direction) ->
+    $(this).toggleClass('sticky', direction == "down")
+    $(this).css( left: $("#header").offset().left )
+    event.stopPropagation()
+  )
