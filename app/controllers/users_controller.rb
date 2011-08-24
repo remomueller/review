@@ -17,6 +17,11 @@ class UsersController < ApplicationController
     @search_terms.each{|search_term| users_scope = users_scope.search(search_term) }
     users_scope = users_scope.order(@order)
     @users = users_scope.page(params[:page]).per(current_user.users_per_page)
+    respond_to do |format|
+      format.html
+      format.js
+      format.json { render :json => [params[:q].to_s].collect{|u| {:name => u, :id => u}}}
+    end
   end
 
   def show

@@ -27,7 +27,7 @@
     <% if current_user.steering_committee? and ['approved'].include?(@user_publication_review.publication.status) %>
       <div class="field">
         <%= label :user_publication_review, :writing_group_nomination %><br />
-        <%= text_area :user_publication_review, :writing_group_nomination, :rows => 3, :style => "width:#{width}" %>
+        <%= text_field :user_publication_review, :writing_group_nomination, :rows => 3, :style => "width:#{width}", "data-pre" => @user_publication_review.writing_group_nomination.to_s.split(',').collect{|u| {:name => u, :id => u}}.to_json %>
       </div>
     <% end %>
     
