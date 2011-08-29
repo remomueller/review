@@ -19,7 +19,7 @@
       <%= text_area :user_publication_review, :comment, :rows => 7, :style => "width:#{width}", :disabled => 'disabled' %>
     </div>
     
-    <% if current_user.steering_committee? and ['approved'].include?(@user_publication_review.publication.status) %>
+    <% if current_user.steering_committee? %>
       <div class="field">
         <%= label :user_publication_review, :writing_group_nomination %><br />
         <ul>
