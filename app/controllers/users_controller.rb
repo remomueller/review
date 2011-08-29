@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.js
-      format.json { render :json => params[:q].to_s.split(',').collect{|u| {:name => u.strip.titleize, :id => u.strip.titleize}} + @users.collect{|u| {:name => u.name, :id => u.name}}}
+      format.json { render :json => params[:q].to_s.split(',').collect{|u| (u.strip.downcase == 'me') ? {:name => current_user.name, :id => current_user.name} : {:name => u.strip.titleize, :id => u.strip.titleize}} + @users.collect{|u| {:name => u.name, :id => u.name}}}
     end
   end
 
