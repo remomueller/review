@@ -7,6 +7,7 @@
   * Writing Group nominations are now
     * Tokenized when separated using commas
     * Parsed to show corresponding emails of users who are already in the system
+    * Users writing 'Me' will now get a drop down item that gives their full username
 
 == 0.8.1
 
