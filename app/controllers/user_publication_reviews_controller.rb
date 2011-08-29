@@ -30,7 +30,8 @@ class UserPublicationReviewsController < ApplicationController
 
   def edit
     @user_publication_review = current_user.user_publication_reviews.find_by_id(params[:id])
-    if @user_publication_review and ((current_user.steering_committee? and @user_publication_review.publication.status == 'approved') or (current_user.pp_committee? and @user_publication_review.publication.status == 'proposed'))
+    @publication = @user_publication_review.publication if @user_publication_review
+    if @user_publication_review and @publication and @publication.reviewable?(current_user)
       render 'new'
     else
       render :nothing => true
