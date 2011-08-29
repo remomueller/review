@@ -1,0 +1,26 @@
+Hello <%= @secretary.first_name %>,
+
+<%= @reviewer.name %> [<%= @reviewer.email %>] has created or updated a review for:
+
+  <%= @publication.full_title_and_ms %>
+
+Please follow the link <%= "#{SITE_URL}/publications/#{@publication.id}" %> to see the review.
+
+
+Reviewer's Approval Status:
+
+  <%= @user_publication_review.status %>
+
+Comment:
+
+  <%= @user_publication_review.comment %>
+
+Writing Group Nomination:
+
+<% @user_publication_review.writing_group_nomination.to_s.split(',').each do |user_name| %>
+  <%= user_name %>
+<% end %>
+
+Thank you!
+
+<%= DEFAULT_APP_NAME %> System Mailer

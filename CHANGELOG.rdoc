@@ -8,6 +8,7 @@
     * Tokenized when separated using commas
     * Parsed to show corresponding emails of users who are already in the system
     * Users writing 'Me' will now get a drop down item that gives their full username
+  * Steering committee secretaries are now notified if a review is created for a publication that has already been SC Approved
 
 == 0.8.1
 

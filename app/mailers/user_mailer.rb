@@ -47,6 +47,19 @@ class UserMailer < ActionMailer::Base
          :reply_to => secretary.email)
   end
   
+  def review_updated(user_publication_review, secretary)
+    setup_email
+    @secretary = secretary
+    @user_publication_review = user_publication_review
+    @reviewer = user_publication_review.user
+    @publication = user_publication_review.publication
+    
+    mail(:to => secretary.email,
+         :subject => @subject + " #{@reviewer.name} has reviewed #{@publication.abbreviated_title_and_ms}",
+         :reply_to => @reviewer.email
+    )
+  end
+  
   protected
   
   def setup_email
