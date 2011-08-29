@@ -35,10 +35,3 @@ jQuery ->
     $(this).css( left: $("#header").offset().left )
     event.stopPropagation()
   )
-  
-  $("#user_publication_review_writing_group_nomination").tokenInput(root_url + "users.json"
-      crossDomain: false
-      prePopulate: $("#user_publication_review_writing_group_nomination").data("pre")
-      theme: "facebook"
-      preventDuplicates: true
-  )

@@ -22,7 +22,7 @@
     <% if current_user.steering_committee? and ['approved'].include?(@user_publication_review.publication.status) %>
       <div class="field">
         <%= label :user_publication_review, :writing_group_nomination %><br />
-        <%= text_area :user_publication_review, :writing_group_nomination, :rows => 3, :style => "width:#{width}", :disabled => 'disabled' %>
+        <%= text_area_tag :user_publication_review_writing_group_nomination_disabled, @user_publication_review.writing_group_nomination, :rows => 3, :style => "width:#{width}", :disabled => 'disabled' %>
       </div>
     <% end %>
     

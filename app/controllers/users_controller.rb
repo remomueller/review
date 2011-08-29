@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.js
-      format.json { render :json => [params[:q].to_s].collect{|u| {:name => u, :id => u}}}
+      format.json { render :json => params[:q].to_s.split(',').collect{|u| {:name => u.strip.titleize, :id => u.strip.titleize}}}
     end
   end
 
