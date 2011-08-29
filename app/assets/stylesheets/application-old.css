@@ -359,6 +359,10 @@ table.status-table td {
   vertical-align: middle;
 }
 
+ul.token-input-list-facebook {
+  width: 100%;
+}
+
 /**************************************/
 /*               FOOTER               */
 /**************************************/
