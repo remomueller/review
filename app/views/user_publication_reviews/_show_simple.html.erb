@@ -22,7 +22,14 @@
     <% if current_user.steering_committee? and ['approved'].include?(@user_publication_review.publication.status) %>
       <div class="field">
         <%= label :user_publication_review, :writing_group_nomination %><br />
-        <%= text_area_tag :user_publication_review_writing_group_nomination_disabled, @user_publication_review.writing_group_nomination, :rows => 3, :style => "width:#{width}", :disabled => 'disabled' %>
+        <ul>
+        <% @user_publication_review.writing_group_nomination.to_s.split(',').each do |user_name| %>
+          <% first_name = user_name.split(' ').first.to_s %>
+          <% last_name = user_name.split(' ').last.to_s %>
+          <% u = User.find_by_first_name_and_last_name(first_name, last_name) %>
+          <li><%= u ? link_to(u.name, u) + "<br /><span class='quiet small'>#{u.email}</span>".html_safe : user_name %></li>
+        <% end %>
+        </ul>
       </div>
     <% end %>
     

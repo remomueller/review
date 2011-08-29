@@ -4,7 +4,9 @@
 
 * Enhancements
   * Rails updated to 3.1.0.rc6
-  * Writing Group nominations are now tokenized when separated using commas
+  * Writing Group nominations are now
+    * Tokenized when separated using commas
+    * Parsed to show corresponding emails of users who are already in the system
 
 == 0.8.1
 
