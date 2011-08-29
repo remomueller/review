@@ -40,8 +40,8 @@ class UserPublicationReviewsController < ApplicationController
   def create
     if current_user.pp_committee? or current_user.steering_committee?
       @user_publication_review = current_user.user_publication_reviews.find_or_create_by_publication_id(params[:publication_id])
-      # @user_publication_review = current_user.user_publication_reviews.new(params[:user_publication_review])
-      if ((current_user.pp_committee? and @user_publication_review.publication.status == 'proposed') or (current_user.steering_committee? and @user_publication_review.publication.status == 'approved')) and @user_publication_review.update_attributes(params[:user_publication_review]) # @user_publication_review.save
+      @publication = @user_publication_review.publication
+      if @publication and @publication.reviewable?(current_user) and @user_publication_review.update_attributes(params[:user_publication_review]) # @user_publication_review.save
         render 'show'
       else
         render :nothing => true
@@ -53,8 +53,8 @@ class UserPublicationReviewsController < ApplicationController
   
   def update
     @user_publication_review = current_user.user_publication_reviews.find_by_id(params[:id])
-    
-    if @user_publication_review and ((current_user.steering_committee? and @user_publication_review.publication.status == 'approved') or (current_user.pp_committee? and @user_publication_review.publication.status == 'proposed'))
+    @publication = @user_publication_review.publication if @user_publication_review
+    if @user_publication_review and @publication and @publication.reviewable?(current_user)
   
       if @user_publication_review.update_attributes(params[:user_publication_review])
         render 'show'

@@ -111,6 +111,10 @@ class Publication < ActiveRecord::Base
     "#{"#{self.manuscript_number} " unless self.manuscript_number.blank?}#{self.full_title}"
   end
 
+  def reviewable?(current_user)
+    ['proposed', 'approved', 'not approved', 'nominated', 'submitted', 'published'].include?(self.status) and (current_user.pp_committee? or current_user.steering_committee?)
+  end
+
   def targeted_start_date_pretty
     result = ''
     unless self.targeted_start_date.blank?

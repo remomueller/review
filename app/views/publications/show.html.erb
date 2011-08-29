@@ -14,7 +14,7 @@
 <div style="clear:both"></div>
 
 <%# if (current_user.pp_committee? and ['proposed'].include?(@publication.status)) or (current_user.steering_committee? and ['approved'].include?(@publication.status)) %>
-<% if ['proposed', 'approved', 'not approved', 'nominated', 'submitted', 'published'].include?(@publication.status) and (current_user.pp_committee? or current_user.steering_committee?) %>
+<% if @publication.reviewable?(current_user) %>
   <% @user = current_user %>
   <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
   <% @user_publication_review = @user.user_publication_reviews.new(:publication_id => @publication.id) if @user_publication_review.blank? %>
