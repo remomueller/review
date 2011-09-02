@@ -1,5 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
+# TODO: Remove Password Salt from Migrations and Schema
+
 valid:
   id: 1
   first_name: MyString
@@ -11,7 +13,7 @@ valid:
   users_per_page: 10
   email: valid@example.com
   encrypted_password: MyString
-  password_salt: MyString
+#  password_salt: MyString
   reset_password_token: ResetTokenOne
   remember_token: MyString
   remember_created_at: 2011-02-23
@@ -39,7 +41,7 @@ two:
   users_per_page: 10
   email: EmailTwo
   encrypted_password: MyString
-  password_salt: MyString
+#  password_salt: MyString
   reset_password_token: ResetTokenTwo
   remember_token: MyString
   remember_created_at: 2011-02-23
@@ -67,7 +69,7 @@ admin:
   users_per_page: 10
   email: admin@example.com
   encrypted_password: MyString
-  password_salt: MyString
+#  password_salt: MyString
   reset_password_token: ResetTokenThree
   remember_token: MyString
   remember_created_at: 2011-02-23
@@ -95,7 +97,7 @@ pending:
   users_per_page: 10
   email: pending@example.com
   encrypted_password: MyString
-  password_salt: MyString
+#  password_salt: MyString
   reset_password_token: ResetTokenFour
   remember_token: MyString
   remember_created_at: 2011-02-23
@@ -123,7 +125,7 @@ deleted:
   users_per_page: 10
   email: deleted@example.com
   encrypted_password: MyString
-  password_salt: MyString
+#  password_salt: MyString
   reset_password_token: ResetTokenFive
   remember_token: MyString
   remember_created_at: 2011-02-23
@@ -151,7 +153,7 @@ pp_committee:
   users_per_page: 10
   email: pp_committee@example.com
   encrypted_password: MyString
-  password_salt: MyString
+#  password_salt: MyString
   reset_password_token: ResetTokenSix
   remember_token: MyString
   remember_created_at: 2011-02-23
@@ -183,7 +185,7 @@ sc_committee:
   users_per_page: 10
   email: sc_committee@example.com
   encrypted_password: MyString
-  password_salt: MyString
+#  password_salt: MyString
   reset_password_token: ResetTokenSeven
   remember_token: MyString
   remember_created_at: 2011-02-23
@@ -215,7 +217,7 @@ pp_and_sc_committee:
   users_per_page: 10
   email: pp_and_sc_committee@example.com
   encrypted_password: MyString
-  password_salt: MyString
+#  password_salt: MyString
   reset_password_token: ResetTokenEight
   remember_token: MyString
   remember_created_at: 2011-02-23
@@ -247,7 +249,7 @@ pp_secretary:
   users_per_page: 10
   email: pp_secretary@example.com
   encrypted_password: MyString
-  password_salt: MyString
+#  password_salt: MyString
   reset_password_token: ResetTokenNine
   remember_token: MyString
   remember_created_at: 2011-02-23
@@ -279,7 +281,7 @@ sc_secretary:
   users_per_page: 10
   email: sc_secretary@example.com
   encrypted_password: MyString
-  password_salt: MyString
+#  password_salt: MyString
   reset_password_token: ResetTokenTen
   remember_token: MyString
   remember_created_at: 2011-02-23
@@ -311,7 +313,7 @@ pp_and_sc_secretary:
   users_per_page: 10
   email: pp_and_sc_secretary@example.com
   encrypted_password: MyString
-  password_salt: MyString
+#  password_salt: MyString
   reset_password_token: ResetTokenEleven
   remember_token: MyString
   remember_created_at: 2011-02-23
