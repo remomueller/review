@@ -6,9 +6,9 @@
 <%= form_tag url, :method => method, :remote => true, :id => form_name do %>
   <fieldset style="border: 1px solid #0E7799;">
     <legend>Review Publication
-      <%= link_to_function image_tag('icons/tick.png', :alt => '', :style => 'vertical-align:text-bottom'), "$('##{form_name}').submit();" %>
+      <%= link_to_function image_tag('contour/tick.png', :alt => '', :style => 'vertical-align:text-bottom'), "$('##{form_name}').submit();" %>
       <% unless @user_publication_review.new_record? %>
-        <%= link_to image_tag('icons/cross.png', :alt => '', :style => 'vertical-align:text-bottom'), user_publication_review_path(@user_publication_review, :mode => 'simple'), :remote => true %>
+        <%= link_to image_tag('contour/cross.png', :alt => '', :style => 'vertical-align:text-bottom'), user_publication_review_path(@user_publication_review, :mode => 'simple'), :remote => true %>
       <% end %>
     </legend>
     
@@ -32,9 +32,9 @@
     <% end %>
     
     <div class="actions">
-      <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('##{form_name}').submit();", :class => "button positive" %>
+      <%= link_to_function image_tag('contour/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('##{form_name}').submit();", :class => "button positive" %>
       <% unless @user_publication_review.new_record? %>
-        <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', user_publication_review_path(@user_publication_review, :mode => 'simple'), :remote => true, :class => 'button negative' %>
+        <%= link_to image_tag('contour/cross.png', :alt => '') + 'Cancel', user_publication_review_path(@user_publication_review, :mode => 'simple'), :remote => true, :class => 'button negative' %>
       <% end %>
     </div>
   </fieldset>

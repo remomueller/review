@@ -20,11 +20,11 @@
                  else{ $('#user_publication_review_status').val(''); }
                  $('#user_publication_review_comment').val($('#user_publication_review_display_comment').val());" %>
     
-      <%#= link_to(image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), '#', :onclick => remote_function(:url => url, :method => method, :with => with) + "; return false;", :class => "button positive" )%>
-      <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "#{with};$('##{form_name}').submit();", :class => "button positive" %>
+      <%#= link_to(image_tag('contour/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), '#', :onclick => remote_function(:url => url, :method => method, :with => with) + "; return false;", :class => "button positive" )%>
+      <%= link_to_function image_tag('contour/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "#{with};$('##{form_name}').submit();", :class => "button positive" %>
       <% unless @user_publication_review.new_record? %>
-        <%#= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', @user_publication_review.publication, :class => 'button negative' %>
-        <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', @user_publication_review, :remote => true, :class => 'button negative' %>
+        <%#= link_to image_tag('contour/cross.png', :alt => '') + 'Cancel', @user_publication_review.publication, :class => 'button negative' %>
+        <%= link_to image_tag('contour/cross.png', :alt => '') + 'Cancel', @user_publication_review, :remote => true, :class => 'button negative' %>
       <% end %>
     <% end %>
   </td>
@@ -68,10 +68,10 @@
   <div class="actions">    
     <% form_name = @user_publication_review.new_record? ? 'new_user_publication_review' : "edit_user_publication_review_#{@user_publication_review.id}" %>
     
-    <%= link_to_function image_tag('icons/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('##{form_name}').submit();", :class => "button positive" %>
+    <%= link_to_function image_tag('contour/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('##{form_name}').submit();", :class => "button positive" %>
 
     <% unless @user_publication_review.new_record? %>
-      <%= link_to image_tag('icons/cross.png', :alt => '') + 'Cancel', @user_publication_review.publication, :class => 'button negative' %>
+      <%= link_to image_tag('contour/cross.png', :alt => '') + 'Cancel', @user_publication_review.publication, :class => 'button negative' %>
     <% end %>
 		<br />
   </div>

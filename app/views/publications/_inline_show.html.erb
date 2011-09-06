@@ -5,7 +5,7 @@
     <%= @publication.manuscript_number %>
     <% unless @publication.manuscript_url.blank? %>
       <br />
-      <span style="margin-left:20px"><%= link_to image_tag('icons/download.png', :alt => '', :style => 'vertical-align:middle'), SITE_URL + @publication.manuscript_url, :target => '_blank' %></span>
+      <span style="margin-left:20px"><%= link_to image_tag('contour/download.png', :alt => '', :style => 'vertical-align:middle'), SITE_URL + @publication.manuscript_url, :target => '_blank' %></span>
       <% if false %>
       <br />
       <span class="quiet"><%= simple_time(@publication.manuscript_uploaded_at) %></span><br />
@@ -38,7 +38,7 @@
       <td></td>
     <% else %>
       <td style="white-space:nowrap">
-        <%= link_to image_tag('icons/edit.png', :alt => ''), inline_edit_publication_path(@publication), :method => :post, :remote => true %>
+        <%= link_to image_tag('contour/edit.png', :alt => ''), inline_edit_publication_path(@publication), :method => :post, :remote => true %>
       </td>
     <% end %>
   <% end %>

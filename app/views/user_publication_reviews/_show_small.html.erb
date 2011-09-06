@@ -5,9 +5,9 @@
     <span id="user_<%= @user_publication_review.user_id %>_notified" style="color:black">
       <% if @user_publication_review.reminder_sent_at %>
         <span class="quiet">Reminder sent <%= simple_time(@user_publication_review.reminder_sent_at) %></span><br />
-        <%= image_tag("icons/email.png", :alt => '', :style => "vertical-align:text-bottom") %> <%= link_to 'Resend', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true %>
+        <%= image_tag("contour/email.png", :alt => '', :style => "vertical-align:text-bottom") %> <%= link_to 'Resend', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true %>
       <% else %>
-        <%= link_to image_tag('icons/email.png', :alt => '', :style => 'vertical-align:text-bottom') + ' Email Reminder', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true %>
+        <%= link_to image_tag('contour/email.png', :alt => '', :style => 'vertical-align:text-bottom') + ' Email Reminder', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true %>
       <% end %>
     </span>
   </td>

@@ -1,7 +1,7 @@
 <% @title = "Publication: #{@publication.full_title}" %>
 <h1><%= @title %></h1>
-<%= link_to image_tag('icons/edit.png', :alt => '') + "Edit Publication", edit_publication_path(@publication), :class => 'button' if current_user.all_publications.include?(@publication) and ['draft', 'not approved'].include?(@publication.status) %>
-<%= link_to image_tag('icons/mydocuments.png', :alt => '') + "View All Publications", publications_path, :class => 'button' %>
+<%= link_to image_tag('contour/edit.png', :alt => '') + "Edit Publication", edit_publication_path(@publication), :class => 'button' if current_user.all_publications.include?(@publication) and ['draft', 'not approved'].include?(@publication.status) %>
+<%= link_to image_tag('contour/mydocuments.png', :alt => '') + "View All Publications", publications_path, :class => 'button' %>
 
 <div style="clear:both"></div><br />
 <table style="border-collapse:collapse;border:0px;margin:0px;padding:0px">

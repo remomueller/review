@@ -2,10 +2,10 @@
 Contour.setup do |config|
   
   # Enter your application name here. The name will be displayed in the title of all pages, ex: AppName - PageTitle
-  # config.application_name = ''
+  config.application_name = DEFAULT_APP_NAME
   
   # Enter your application version here. Do not include a trailing backslash. Recommend using a predefined constant
-  # config.application_version = ''
+  config.application_version = Review::VERSION::STRING
   
   # Enter your application header background image here.
   # config.header_background_image = 'rails.png'
