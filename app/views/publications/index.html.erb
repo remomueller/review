@@ -15,14 +15,12 @@
 
 <div style="clear:both"></div>
 
-<div id="publications"></div>
+<div id="publications"><br /><center><%= image_tag "ajax-loader.gif" %></center></div>
 
-<% content_for :script do %>
-  <%= javascript_tag do %>
-    $(function(){
-      $.get($("#search_form").attr("action"), $("#search_form").serialize(), null, "script");
-    });
-  <% end %>
+<%= javascript_tag do %>
+  $(function(){
+    $.get($("#search_form").attr("action"), $("#search_form").serialize(), null, "script");
+  });
 <% end %>
 
 <% if false %>
