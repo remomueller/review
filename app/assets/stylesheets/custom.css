@@ -1,0 +1,115 @@
+/*************************************
+   WELCOME TO THE CUSTOM STYLESHEET
+--------------------------------------
+              custom.css
+        BlueTrip CSS Framework
+    Put your custom styles in here.
+***************************************/
+
+/**************************************/
+/*           COLOR SCHEME             */
+/**************************************
+- black		#000
+- white		#fff
+- logo blue   #0E7799  
+- link blue   #057080
+
+- dark blue   #094E63
+- light blue  #CDEDF7
+- orange      #EB6C20
+***************************************/
+
+/* TODO extract into SCSS files */
+
+/**************************************/
+/*              GLOBALS               */
+/**************************************/
+
+a:link { color: #057080; }
+a:hover { color: #EB6C20; }
+
+textarea[disabled='disabled'], input[disabled='disabled'], select[disabled='disabled'], .disabled { color: #0E7799; }
+
+/**************************************/
+/*            MAIN CONTENT            */
+/**************************************/
+
+.odd {
+  background-color: #FCF6F1;
+}
+
+.even {
+  background-color: white;
+}
+
+.status_marked, .status_unmarked {
+  float: left;
+  padding: 2px;
+  width: 10px;
+/*  height: 10px;*/
+  line-height: 10px;
+  font-size: 10px;
+  text-align: center;
+  vertical-align: middle;
+  border: 2px solid #DDD;
+  background-color: #FFFFFF;
+  margin-right:2px;
+  margin-bottom: -2px;
+}
+
+.status_marked {
+  border: 2px solid #404040;
+}
+
+.status_marked.not_approved {
+  border-color: #FA5158;
+  background-color: #FEE1E2;
+}
+
+.status_marked.draft {
+  border-color: #FFED25;
+  background-color: #FFF8BF;
+}
+
+.status_marked.proposed {
+  border-color: #FFB475;
+  background-color: #FEE5CD;
+}
+
+.status_marked.approved {
+  border-color: #66FF66;
+  background-color: #D4FFCD;
+}
+
+.status_marked.nominated {
+  border-color: #45E600;
+  background-color: #DBFDC8;
+}
+
+.status_marked.submitted {
+  border-color: #2CA0A5;
+  background-color: #BBE3E4;
+}
+
+.status_marked.published {
+  border-color: #366DC2;
+  background-color: #B1BFDB;
+}
+
+.status_unmarked {
+/*  border: 2px solid gray;*/
+}
+
+table.status-table, table.status-table tr, table.status-table td {
+  border:0px;
+  margin:0px;
+  padding:0px
+}
+
+table.status-table td {
+  vertical-align: middle;
+}
+
+ul.token-input-list-facebook {
+  width: 100%;
+}
