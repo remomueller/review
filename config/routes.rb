@@ -1,12 +1,12 @@
 Review::Application.routes.draw do
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
 
-  match '/auth/failure' => 'authentications#failure'
-  match '/auth/:provider/callback' => 'authentications#create'
-  match '/auth/:provider' => 'authentications#passthru'
+  resources :samples, :controller => 'contour/samples', :only => [:index]
 
-  resources :authentications
+  match '/auth/failure' => 'contour/authentications#failure'
+  match '/auth/:provider/callback' => 'contour/authentications#create'
+  match '/auth/:provider' => 'contour/authentications#passthru'
+
+  resources :authentications, :controller => 'contour/authentications'
 
   resources :publications do
     collection do
@@ -31,7 +31,7 @@ Review::Application.routes.draw do
     end
   end
 
-  devise_for :users, :controllers => {:registrations => 'registrations'}, :path_names => { :sign_up => 'register', :sign_in => 'login' }
+  devise_for :users, :controllers => {:registrations => 'contour/registrations', :sessions => 'contour/sessions', :passwords => 'contour/passwords'}, :path_names => { :sign_up => 'register', :sign_in => 'login' }
   resources :users do
     collection do
       post :filtered
