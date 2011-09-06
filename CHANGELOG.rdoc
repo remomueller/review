@@ -1,5 +1,9 @@
 == 0.9.1
 
+* Enhancements
+  * Updated to Rails 3.1.0
+  * Now uses Contour for application layout, registration, and authentication
+
 == 0.9.0
 
 * Enhancements
