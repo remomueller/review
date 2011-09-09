@@ -1,5 +1,8 @@
 == 0.9.2
 
+* Refactoring
+  * Updating to Contour version 0.5.0
+
 == 0.9.1
 
 * Enhancements
