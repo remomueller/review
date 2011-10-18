@@ -4,6 +4,7 @@
   * Update to Rails 3.1.1
   * Login instructions on the downloadable PDF have been updated
   * Quick save icon added to allow users to quick save a draft of a publication they are editing
+  * Users can now add additional comments in Section E
 
 == 0.9.2
 

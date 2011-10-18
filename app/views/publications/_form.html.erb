@@ -366,7 +366,14 @@
         <pre class="disabled"><%= @publication.references %></pre>
       <% end %>
     </div>
-    
+    <div class="field">
+      <%= f.label :additional_comments %><br />
+      <% if disabled.blank? %>
+        <%= f.text_area :additional_comments, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
+      <% else %>
+        <pre class="disabled"><%= @publication.additional_comments %></pre>
+      <% end %>
+    </div>
   </fieldset>
   <fieldset>
     <legend>F. Author assurance and sign off</legend>
