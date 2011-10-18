@@ -1,3 +1,8 @@
+== 0.10.1
+
+* Refactoring
+  * Static Assets should be served by Apache not Rails
+
 == 0.10.0
 
 * Enhancements
