@@ -1,36 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= [DEFAULT_APP_NAME, @title].compact.join(' - ') %></title>
-  <%= favicon_link_tag %>
-	<%= stylesheet_link_tag "application" %>
-	<%= javascript_include_tag "application" %>
-  <%= csrf_meta_tag %>
+  <title><%= @title %></title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= javascript_tag "var root_url='#{SITE_URL + '/'}';var auth_token='#{form_authenticity_token}';" %>
-  <div id="header" class="container" style="background-image: url(<%= SITE_URL %>/assets/brigham.png);">
-    <div id="version" style="position:relative;display:none">
-      <span style="position:absolute;top:-15px;left:112px;font-size:0.5em;font-variant:normal" class="quiet"><%= Review::VERSION::STRING %></span>
-    </div>
-    <%= image_tag('chatpublications.png', :alt => '', :style => 'vertical-align:middle') %>
-    <%= link_to '<span style="color:#D4002F">C</span><span style="color:#56DF00">H</span><span style="color:#D9DE00">A</span><span style="color:#23FFFF">T</span> <span style="color:#2F0C72">Publications</span>'.html_safe, root_path, :style => 'text-decoration:none;', :onmouseover => "$('#version').show();", :onmouseout => "$('#version').hide();" %>
-  </div>
 
-  <div class="container" style="position:relative">
-    <div id="message">
-      <%= render :partial => 'layouts/message' %>
-    </div>
-  </div>
+<%= yield %>
 
-  <div style="height:29px">
-    <div id="menu" class="container">
-      <%= render :partial => 'layouts/menu' %>
-    </div>
-  </div>
-  
-  <div id="content" class="container">
-    <%= yield %>
-  </div>
 </body>
 </html>

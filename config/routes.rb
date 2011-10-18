@@ -1,6 +1,6 @@
 Review::Application.routes.draw do
-
-  resources :samples, :controller => 'contour/samples', :only => [:index]
+  
+  match '/contour' => 'contour/samples#index'
 
   match '/auth/failure' => 'contour/authentications#failure'
   match '/auth/:provider/callback' => 'contour/authentications#create'
@@ -43,6 +43,4 @@ Review::Application.routes.draw do
   match "/about" => "sites#about", :as => :about
 
   root :to => "publications#index"
-  
-  # See how all your routes lay out with "rake routes"
 end

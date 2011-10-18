@@ -33,3 +33,13 @@ class ActionController::IntegrationTest
     user
   end
 end
+
+module Rack
+  module Test
+    class UploadedFile
+      def tempfile
+        @tempfile
+      end
+    end
+  end
+end
