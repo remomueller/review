@@ -2,6 +2,7 @@
 
 * Enhancements
   * Update to Rails 3.1.1
+  * Login instructions on the downloadable PDF have been updated
 
 == 0.9.2
 
