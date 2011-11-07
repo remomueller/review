@@ -24,7 +24,7 @@
     <% elsif current_user == @user_publication_review.user %>
       No editing, review has been locked.
     <% elsif @user_publication_review.publication.status == 'proposed' and @user_publication_review.new_record? and current_user.pp_committee_secretary? %>
-      <span id="user_<%= @user_publication_review.user_id %>_notified"><%= link_to image_tag('contour/email.png', :alt => '') + 'Send Email Reminder', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true, :class => 'button', :style => 'margin-bottom:0px' %></span>
+      <span id="user_<%= @user_publication_review.user_id %>_notified_pp"><%= link_to image_tag('contour/email.png', :alt => '') + 'Send Email Reminder', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true, :class => 'button', :style => 'margin-bottom:0px' %></span>
     <% elsif @user_publication_review.new_record? and current_user.pp_committee_secretary? %>
       Review Locked (By Being Approved/Not Approved). No more email reminders for reviewer.
     <% end %>

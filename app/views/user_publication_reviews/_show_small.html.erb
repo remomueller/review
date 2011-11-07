@@ -2,7 +2,7 @@
 <% if @user_publication_review.status == nil and ((@user_publication_review.user.pp_committee? and current_user.pp_committee_secretary?) or (@user_publication_review.user.steering_committee? and current_user.steering_committee_secretary?)) %>
 <tr style="border-bottom:1px solid #eee;">
   <td style="white-space:nowrap">
-    <span id="user_<%= @user_publication_review.user_id %>_notified" style="color:black">
+    <span id="user_<%= @user_publication_review.user_id %>_notified_<%= @committee %>" style="color:black">
       <% if @user_publication_review.reminder_sent_at %>
         <span class="quiet">Reminder sent <%= simple_time(@user_publication_review.reminder_sent_at) %></span><br />
         <%= image_tag("contour/email.png", :alt => '', :style => "vertical-align:text-bottom") %> <%= link_to 'Resend', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true %>

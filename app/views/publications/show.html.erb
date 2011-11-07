@@ -39,6 +39,7 @@
         <% @user = user %>
         <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
         <% @user_publication_review = @user.user_publication_reviews.new(:publication_id => @publication.id) if @user_publication_review.blank? %>
+        <% @committee = 'pp' %>
         <%= render :partial => 'user_publication_reviews/show_small' %>
       <% end %>
     </tbody>
@@ -52,6 +53,7 @@
         <% @user = user %>
         <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
         <% @user_publication_review = @user.user_publication_reviews.new(:publication_id => @publication.id) if @user_publication_review.blank? %>
+        <% @committee = 'sc' %>
         <%= render :partial => 'user_publication_reviews/show_small' %>
       <% end %>
     </tbody>

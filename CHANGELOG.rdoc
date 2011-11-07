@@ -1,5 +1,8 @@
 == 0.10.3
 
+* Bug Fix
+  * Sending Email Reminders now correctly updates when the selected reviewer is on both the P&P committee and the Steering committee
+
 == 0.10.2
 
 * Bug Fix
