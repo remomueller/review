@@ -1,5 +1,8 @@
 == 0.10.2
 
+* Bug Fix
+  * User Publication Reviews 'review updates' are no longer sent when the secretary hits "Send Reminder"
+
 == 0.10.1
 
 * Refactoring
