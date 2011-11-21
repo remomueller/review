@@ -37,7 +37,7 @@ Contour.setup do |config|
     :links => [{:name => 'Manual ', :path => 'SITE_URL + \'/documents/CHAT Publications Manual.pdf\'', :target => '_blank', :image => 'contour/pdf.png', :image_options => {:style => 'vertical-align:middle'}}]
   },
   {
-    :name => 'Users', :id => 'users', :display => 'signed_in', :position => 'left', :position_class => 'left_center',
+    :name => 'Users', :id => 'users', :display => 'signed_in', :position => 'left', :position_class => 'left_center', :condition => 'current_user.system_admin?',
     :links => [{:name => 'Users', :path => 'users_path'}]
   }]
   

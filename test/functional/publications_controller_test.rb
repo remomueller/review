@@ -12,6 +12,14 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:publications)
   end
+  
+  test "should not show 'draft' or 'not approved' for regular users on the publication matrix unless they are the author" do
+    login(users(:two))
+    get :index, format: 'js'
+    assert_not_nil assigns(:publications)
+    assert_equal 0, assigns(:publications).where(['user_id = ? and status IN (?)', users(:two).to_param, ['draft', 'not approved']]).size
+    assert_template 'index'
+  end
 
   test "should sort marked for P&P review to top in index if user P&P Secretary" do
     login(users(:pp_secretary))
@@ -66,7 +74,6 @@ class PublicationsControllerTest < ActionController::TestCase
     tagged_array = assigns(:publications).collect{|p| p.tagged_for_pp_review?.to_s + p.tagged_for_sc_review?.to_s}
     assert_equal tagged_array, tagged_array.sort.reverse
   end
-
 
   test "should get new" do
     login(users(:valid))

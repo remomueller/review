@@ -2,7 +2,7 @@
 
 proposed:
   id: 1
-  user_id: 1
+  user: valid
   status: proposed
   centers: MyString
   proposal_submission_date: 2011-02-23
@@ -77,7 +77,7 @@ proposed:
 
 draft:
   id: 2
-  user_id: 1
+  user: valid
   status: draft
   centers: MyString
   proposal_submission_date: 2011-02-23
@@ -152,7 +152,7 @@ draft:
 
 three:
   id: 3
-  user_id: 1
+  user: valid
   status: proposed
   centers: MyString
   proposal_submission_date: 2011-02-23
@@ -227,7 +227,7 @@ three:
   
 tagged_for_pp_review:
   id: 4
-  user_id: 1
+  user: valid
   status: proposed
   centers: MyString
   proposal_submission_date: 2011-02-23
@@ -302,7 +302,7 @@ tagged_for_pp_review:
 
 tagged_for_sc_review:
   id: 5
-  user_id: 1
+  user: valid
   status: approved
   centers: MyString
   proposal_submission_date: 2011-02-23
@@ -378,7 +378,7 @@ tagged_for_sc_review:
 
 tagged_for_pp_and_sc_review:
   id: 6
-  user_id: 1
+  user: valid
   status: approved
   centers: MyString
   proposal_submission_date: 2011-02-23

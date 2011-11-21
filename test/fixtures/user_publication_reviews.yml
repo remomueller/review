@@ -2,7 +2,7 @@
 
 one:
   id: 1
-  user_id: 6
+  user: pp_committee
   publication_id: 1
   status: approved
   comment: "This is a good proposal."
@@ -10,7 +10,7 @@ one:
 
 two:
   id: 2
-  user_id: 2
+  user: two
   publication_id: 1
   status: "not approved"
   comment: "This is not a good proposal.  Back to the drawing board."

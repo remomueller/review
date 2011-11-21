@@ -1,5 +1,8 @@
 == 0.11.0
 
+* Enhancements
+  * Users can now see all publications on the publications matrix as long as they are not listed as 'draft' or 'not approved'
+
 == 0.10.3
 
 * Bug Fix

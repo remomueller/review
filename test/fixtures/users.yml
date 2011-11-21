@@ -3,7 +3,6 @@
 # TODO: Remove Password Salt from Migrations and Schema
 
 valid:
-  id: 1
   first_name: MyString
   last_name: MyString
   status: active
@@ -31,7 +30,6 @@ valid:
   authentication_token: MyString
 
 two:
-  id: 2
   first_name: MyString
   last_name: MyString
   status: active
@@ -143,7 +141,6 @@ deleted:
   authentication_token: MyString
 
 pp_committee:
-  id: 6
   first_name: MyString
   last_name: MyString
   status: active

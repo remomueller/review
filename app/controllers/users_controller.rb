@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :check_system_admin, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :check_system_admin, :only => [:new, :create, :edit, :update, :destroy, :index]
 
   # Retrieves filtered list of users.
   def filtered

@@ -38,6 +38,7 @@ class Publication < ActiveRecord::Base
   scope :current, :conditions => { :deleted => false }
   scope :status, lambda { |*args|  { :conditions => ["publications.status IN (?)", args.first] } }
   scope :search, lambda { |*args| {:conditions => [ 'LOWER(manuscript_number) LIKE ? or LOWER(full_title) LIKE ? or LOWER(abbreviated_title) LIKE ? or user_id in (SELECT users.id FROM users WHERE LOWER(users.last_name) LIKE ? or LOWER(users.first_name) LIKE ?) or co_lead_author_id in (SELECT users.id FROM users WHERE LOWER(users.last_name) LIKE ? or LOWER(users.first_name) LIKE ?)', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%' ] } }
+  scope :with_user_or_status, lambda { |*args|  { :conditions => ["publications.user_id = ? or publications.status IN (?)", args.first, args[1]] } }
   
   # scope :order_by_pp_and_sc, :order => ['tagged_for_pp_review DESC', 'tagged_for_sc_review DESC']
   # scope :order_by_pp, :order => ['tagged_for_pp_review DESC']
