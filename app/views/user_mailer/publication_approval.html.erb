@@ -12,13 +12,13 @@ You can view the publication here:
 <% if @pp_committee %>
   <strong>P&amp;P Committee Comments:</strong><br />
   <% @publication.user_publication_reviews.each do |user_publication_review| %>
-    <% unless user_publication_review.comment.blank? %><div><pre><%= user_publication_review.comment %></pre></div><% end %>
+    <% unless user_publication_review.comment.blank? %><div><%= simple_format user_publication_review.comment %></div><% end %>
   <% end %>
   <br />
 <% else %>
   <strong>Steering Committee Comments:</strong><br />
   <% @publication.user_publication_reviews.each do |user_publication_review| %>
-    <% unless user_publication_review.comment.blank? %><div><pre><%= user_publication_review.comment %></pre></div><% end %>
+    <% unless user_publication_review.comment.blank? %><div><%= simple_format user_publication_review.comment %></div><% end %>
   <% end %>
   <br />
   <strong>Steering Committee Nominations:</strong>
@@ -30,10 +30,10 @@ You can view the publication here:
 <% end %>
 <% if @pp_committee and not @publication.additional_ppcommittee_instructions.blank? %>
 <strong>Additional Instructions:</strong><br />
-<pre><%= @publication.additional_ppcommittee_instructions %></pre>
+<div><%= simple_format @publication.additional_ppcommittee_instructions %></div>
 <% elsif not @pp_committee and not @publication.additional_sccommittee_instructions.blank? %>
 <strong>Additional Instructions:</strong><br />
-<pre><%= @publication.additional_sccommittee_instructions %></pre>
+<div><%= simple_format @publication.additional_sccommittee_instructions %></div>
 <% end %>
 <br /><br />
 Thanks,<br />

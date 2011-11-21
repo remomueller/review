@@ -19,6 +19,16 @@
 <% form_name = @publication.new_record? ? 'new_publication' : "edit_publication_#{@publication.id}" %>
 <% quick_save = disabled.blank? ? link_to_function(image_tag('contour/save.png', :alt => '', :title => 'Quick Save', :style => 'vertical-align:text-bottom'), "$('#publish').val('-1');$('##{form_name}').submit();") : "" %>
 <%= form_for(@publication, :html => {:multipart => true}) do |f| %>
+
+  <% if disabled.blank? and current_user.secretary? %>
+  <fieldset>
+    <legend>Status
+    <%= quick_save %>
+    </legend>
+    <%= f.select :status, options_for_select(Publication::STATUS, @publication.status) %>
+  </fieldset>
+  <% end %>
+
   <fieldset>
     <legend>
       A. Administrative Information
@@ -39,7 +49,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :centers, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.centers %></pre>
+        <div class="disabled"><%= simple_format @publication.centers %></div>
       <% end %>
     </div>
     
@@ -48,7 +58,7 @@
       <% if disabled.blank? %>
         <%= f.date_select :proposal_submission_date, :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.proposal_submission_date %></pre>
+        <div class="disabled"><%= simple_format @publication.proposal_submission_date.to_s %></div>
       <% end %>
     </div>
     
@@ -71,7 +81,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :publication_type_specify, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.publication_type_specify %></pre>
+        <div class="disabled"><%= simple_format @publication.publication_type_specify %></div>
       <% end %>
     </div>
   </fieldset>
@@ -90,13 +100,13 @@
       <% if disabled.blank? %>
         <%= f.text_field :dcc_resources_staff_specify, :style => "width:#{width}", :disabled => disabled %><br />
       <% else %>
-        <pre class="disabled"><%= @publication.dcc_resources_staff_specify %></pre>
+        <div class="disabled"><%= simple_format @publication.dcc_resources_staff_specify %></div>
       <% end %>
       <%= f.check_box :dcc_resources_other, :disabled => disabled %> <%= f.label :dcc_resources_other, 'Other (specify):' %><br />
       <% if disabled.blank? %>
         <%= f.text_field :dcc_resources_other_specify, :style => "width:#{width}", :disabled => disabled %><br />
       <% else %>
-        <pre class="disabled"><%= @publication.dcc_resources_other_specify %></pre>
+        <div class="disabled"><%= simple_format @publication.dcc_resources_other_specify %></div>
       <% end %>
     </div>
     <br />
@@ -121,7 +131,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :chat_data_other_specify, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.chat_data_other_specify %></pre>
+        <div class="disabled"><%= simple_format @publication.chat_data_other_specify %></div>
       <% end %>
     </div>
   </fieldset>
@@ -142,7 +152,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :manuscript_preparation_other_specify, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.manuscript_preparation_other_specify %></pre>
+        <div class="disabled"><%= simple_format @publication.manuscript_preparation_other_specify %></div>
       <% end %>
     </div>
     <br />
@@ -151,7 +161,7 @@
       <% if disabled.blank? %>
         <%= f.text_area :proposed_analysis, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.proposed_analysis %></pre>
+        <div class="disabled"><%= simple_format @publication.proposed_analysis %></div>
       <% end %>
     </div>
   </fieldset>
@@ -172,7 +182,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :attachment_chat_form_specify, :style => "width:#{width}", :disabled => disabled %><br />
       <% else %>
-        <pre class="disabled"><%= @publication.attachment_chat_form_specify %></pre>
+        <div class="disabled"><%= simple_format @publication.attachment_chat_form_specify %></div>
       <% end %>
       <%= f.check_box :attachment_chat_variables, :disabled => disabled, :onclick => "toggleAttachment('#publication_attachment_chat_variables');" %> <%= f.label :attachment_chat_variables, 'List of CHAT sleep study variables intended for analysis:' %>
       <% @attribute = 'attachment_chat_variables'; @disabled = disabled %>
@@ -181,7 +191,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :attachment_chat_variables_specify, :style => "width:#{width}", :disabled => disabled %><br />
       <% else %>
-        <pre class="disabled"><%= @publication.attachment_chat_variables_specify %></pre>
+        <div class="disabled"><%= simple_format @publication.attachment_chat_variables_specify %></div>
       <% end %>
       <%= f.check_box :attachment_ancillary_forms, :disabled => disabled, :onclick => "toggleAttachment('#publication_attachment_ancillary_forms');" %> <%= f.label :attachment_ancillary_forms,'CHAT ancillary study forms with items marked to indicate variables intended for analysis:' %>
       <% @attribute = 'attachment_ancillary_forms'; @disabled = disabled %>
@@ -190,7 +200,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :attachment_ancillary_forms_specify, :style => "width:#{width}", :disabled => disabled %><br />
       <% else %>
-        <pre class="disabled"><%= @publication.attachment_ancillary_forms_specify %></pre>
+        <div class="disabled"><%= simple_format @publication.attachment_ancillary_forms_specify %></div>
       <% end %>
       <%= f.check_box :attachment_other, :disabled => disabled, :onclick => "toggleAttachment('#publication_attachment_other');" %> <%= f.label :attachment_other, 'Other (<em>specify</em>):'.html_safe %>
       <% @attribute = 'attachment_other'; @disabled = disabled %>
@@ -199,7 +209,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :attachment_other_specify, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.attachment_other_specify %></pre>
+        <div class="disabled"><%= simple_format @publication.attachment_other_specify %></div>
       <% end %>
     </div>
     <br />
@@ -216,7 +226,7 @@
       <% if disabled.blank? %>
           <%= f.text_field :full_title, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.full_title %></pre>
+        <div class="disabled"><%= simple_format @publication.full_title %></div>
       <% end %>
     </div>
     <div class="field">
@@ -224,15 +234,15 @@
       <% if disabled.blank? %>
         <%= f.text_field :abbreviated_title, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.abbreviated_title %></pre>
+        <div class="disabled"><%= simple_format @publication.abbreviated_title %></div>
       <% end %>
     </div>
     <div class="field">
       <label>Lead Author</label><br />
       <% if @publication.user %>
-        <pre class="disabled"><%= link_to @publication.user.name, @publication.user %></pre>
+        <div class="disabled"><%= link_to @publication.user.name, @publication.user %></div>
       <% else %>
-        <pre class="disabled"><span class="quiet">No Lead Author</span></pre>
+        <div class="disabled"><span class="quiet">No Lead Author</span></div>
       <% end %>
     </div>
     <div class="field">
@@ -241,7 +251,7 @@
         <%= f.select :co_lead_author_id, options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.co_lead_author_id) %>
         <%#= f.text_field :co_lead_author, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= link_to @publication.co_lead_author.name, @publication.co_lead_author if @publication.co_lead_author  %></pre>
+        <div class="disabled"><%= link_to @publication.co_lead_author.name, @publication.co_lead_author if @publication.co_lead_author  %></div>
       <% end %>
     </div>
     <div class="field">
@@ -249,7 +259,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :writing_group_members, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.writing_group_members %></pre>
+        <div class="disabled"><%= simple_format @publication.writing_group_members %></div>
       <% end %>
     </div>
     <% if false %>
@@ -258,7 +268,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :additional_coauthors, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.additional_coauthors %></pre>
+        <div class="disabled"><%= simple_format @publication.additional_coauthors %></div>
       <% end %>
     </div>
     <% end %>
@@ -267,7 +277,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :keywords, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.keywords %></pre>
+        <div class="disabled"><%= simple_format @publication.keywords %></div>
       <% end %>
     </div>
     <div class="field">
@@ -275,7 +285,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :affiliation, :disabled => disabled, :style => "width:#{width}" %>
       <% else %>
-        <pre class="disabled"><%= @publication.affiliation %></pre>
+        <div class="disabled"><%= simple_format @publication.affiliation %></div>
       <% end %>
     </div>
     <div class="field">
@@ -283,7 +293,7 @@
       <% if disabled.blank? %>
         <%= f.text_area :timeline, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.timeline %></pre>
+        <div class="disabled"><%= simple_format @publication.timeline %></div>
       <% end %>
     </div>
     <div class="field">
@@ -291,7 +301,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :sponsoring_pi, :disabled => disabled, :style => "width:#{width}" %>
       <% else %>
-        <pre class="disabled"><%= @publication.sponsoring_pi %></pre>
+        <div class="disabled"><%= simple_format @publication.sponsoring_pi %></div>
       <% end %>
     </div>
     <div class="field">
@@ -299,7 +309,7 @@
       <% if disabled.blank? %>
         <%= f.text_area :rationale, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.rationale %></pre>
+        <div class="disabled"><%= simple_format @publication.rationale %></div>
       <% end %>
     </div>
     <div class="field">
@@ -307,7 +317,7 @@
       <% if disabled.blank? %>
         <%= f.text_area :hypothesis, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.hypothesis %></pre>
+        <div class="disabled"><%= simple_format @publication.hypothesis %></div>
       <% end %>
     </div>
     <div class="field">
@@ -315,7 +325,7 @@
       <% if disabled.blank? %>
         <%= f.text_area :data, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.data %></pre>
+        <div class="disabled"><%= simple_format @publication.data %></div>
       <% end %>
     </div>
     <div class="field">
@@ -323,7 +333,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :study_type, :disabled => disabled, :style => "width:#{width}" %>
       <% else %>
-        <pre class="disabled"><%= @publication.study_type %></pre>
+        <div class="disabled"><%= simple_format @publication.study_type %></div>
       <% end %>
     </div>
     <div class="field">
@@ -331,7 +341,7 @@
       <% if disabled.blank? %>
         <%= f.text_field :target_journal, :disabled => disabled, :style => "width:#{width}" %>
       <% else %>
-        <pre class="disabled"><%= @publication.target_journal %></pre>
+        <div class="disabled"><%= simple_format @publication.target_journal %></div>
       <% end %>
     </div>
     <div class="field">
@@ -339,7 +349,7 @@
       <% if disabled.blank? %>
         <%= f.text_area :analysis_responsibility, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.analysis_responsibility %></pre>
+        <div class="disabled"><%= simple_format @publication.analysis_responsibility %></div>
       <% end %>
     </div>
     <div class="field">
@@ -347,7 +357,7 @@
       <% if disabled.blank? %>
         <%= f.text_area :analysis_plan, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.analysis_plan %></pre>
+        <div class="disabled"><%= simple_format @publication.analysis_plan %></div>
       <% end %>
     </div>
     <div class="field">
@@ -355,7 +365,7 @@
       <% if disabled.blank? %>
         <%= f.text_area :summary_section, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.summary_section %></pre>
+        <div class="disabled"><%= simple_format @publication.summary_section %></div>
       <% end %>
     </div>
     <div class="field">
@@ -363,7 +373,7 @@
       <% if disabled.blank? %>
         <%= f.text_area :references, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.references %></pre>
+        <div class="disabled"><%= simple_format @publication.references %></div>
       <% end %>
     </div>
     <div class="field">
@@ -371,7 +381,7 @@
       <% if disabled.blank? %>
         <%= f.text_area :additional_comments, :rows => 7, :style => "width:#{width}", :disabled => disabled %>
       <% else %>
-        <pre class="disabled"><%= @publication.additional_comments %></pre>
+        <div class="disabled"><%= simple_format @publication.additional_comments %></div>
       <% end %>
     </div>
   </fieldset>
@@ -404,8 +414,12 @@
   <% if disabled.blank? %>
     <div class="actions">
       <%= hidden_field_tag 'publish', '0' %>
-      <%= link_to_function image_tag('contour/save.png', :alt => '') + (@publication.new_record? ? "Save Draft of Publication" : "Update Draft of Publication"), "$('#publish').val('0');$('##{form_name}').submit();", :class => "button" %>
-      <%= link_to_function image_tag('contour/tick.png', :alt => '') + "Submit Publication for Review", "if(authorAssuranceCheck() == false){return false;};$('#publish').val('1');$('##{form_name}').submit();", :class => "button positive" %>
+      <% if current_user.secretary? %>
+        <%= link_to_function image_tag('contour/tick.png', :alt => '') + "Save Publication", "$('##{form_name}').submit();", :class => "button positive" %>
+      <% else %>
+        <%= link_to_function image_tag('contour/save.png', :alt => '') + (@publication.new_record? ? "Save Draft of Publication" : "Update Draft of Publication"), "$('#publish').val('0');$('##{form_name}').submit();", :class => "button" %>
+        <%= link_to_function image_tag('contour/tick.png', :alt => '') + "Submit Publication for Review", "if(authorAssuranceCheck() == false){return false;};$('#publish').val('1');$('##{form_name}').submit();", :class => "button positive" %>
+      <% end %>
       <%= link_to image_tag('contour/cross.png', :alt => '') + 'Cancel', @publication.new_record? ? root_path : @publication, :class => 'button negative' %>
   		<br />
     </div>

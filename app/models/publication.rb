@@ -1,7 +1,7 @@
 class Publication < ActiveRecord::Base
 
-  STATUS = [["Draft", "draft"], ["Proposed", "proposed"], ["P&P Approved", "approved"],
-            ["Not Approved", "not approved"], ["SC Approved", "nominated"], ["Submitted", "submitted"], ["Published", "published"]]
+  STATUS = [["Not Approved", "not approved"], ["Draft", "draft"], ["Proposed", "proposed"], ["P&P Approved", "approved"],
+            ["SC Approved", "nominated"], ["Submitted", "submitted"], ["Published", "published"]]
   
   PP_STATUS = [["Proposed","proposed"], ["P&P Approved", "approved"], ["Not Approved", "not approved"]]
   SC_STATUS = [["P&P Approved", "approved"], ["SC Approved", "nominated"], ["Not Approved", "not approved"]]
@@ -114,6 +114,14 @@ class Publication < ActiveRecord::Base
 
   def reviewable?(current_user)
     ['proposed', 'approved', 'not approved', 'nominated', 'submitted', 'published'].include?(self.status) and (current_user.pp_committee? or current_user.steering_committee?)
+  end
+  
+  def editable?(current_user)
+    if current_user.secretary?
+      true
+    else
+      current_user.all_publications.include?(self) and ['draft', 'not approved'].include?(self.status)
+    end
   end
 
   def targeted_start_date_pretty

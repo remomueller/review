@@ -13,9 +13,9 @@
 <div class="field">
   <%= label :publication, :additional_sccommittee_instructions, 'Additional Instructions to Email to Lead Author' %> <%= link_to_function 'Preview', "$('#sc_email').toggle();" %><br />
   <% if @publication.additional_sccommittee_instructions.blank? %>
-    <pre class="quiet">None</pre>
+    <div class="quiet">None</div>
   <% else %>
-    <pre class="disabled"><%= @publication.additional_sccommittee_instructions %></pre>
+    <div class="disabled"><%= @publication.additional_sccommittee_instructions %></div>
   <% end %>
 </div>
 <div class="actions">

@@ -159,7 +159,7 @@ class PublicationsController < ApplicationController
 
   def edit
     @publication = current_user.all_publications.find_by_id(params[:id])
-    redirect_to root_path unless @publication and ['draft', 'not approved'].include?(@publication.status)
+    redirect_to root_path unless @publication and @publication.editable?(current_user)
   end
   
   def inline_edit
@@ -205,7 +205,7 @@ class PublicationsController < ApplicationController
   end
 
   def create
-    params[:publication][:status] = (params[:publish] == '1') ? 'proposed' : 'draft'
+    params[:publication][:status] = (params[:publish] == '1') ? 'proposed' : 'draft' unless current_user.secretary?
     params[:publication][:author_assurance_date] = Date.today if params[:publish] == '1'
     @publication = current_user.publications.new(params[:publication])
     
@@ -217,13 +217,19 @@ class PublicationsController < ApplicationController
     
     
     if @publication.save
-      @publication.update_attribute :status, params[:publish] == '1' ? 'proposed' : 'draft'
-      @publication.send_reminders if params[:publish] == '1'
+      # @publication.update_attribute :status, params[:publish] == '1' ? 'proposed' : 'draft' unless current_user.secretary?
+      @publication.send_reminders if params[:publish] == '1' and not current_user.secretary?
       if params[:publish] == '-1'
         flash[:notice] = "Publication draft was successfully quick saved."
         render :action => "new"
       else
-        redirect_to(@publication, :notice => params[:publish] == '1' ? 'Publication was successfully submitted for review.' : 'Publication draft was successfully created.')
+        notice = ''
+        if current_user.secretary?
+          notice = 'Publication was successfully created.'
+        else
+          notice = (params[:publish] == '1' ? 'Publication was successfully submitted for review.' : 'Publication draft was successfully created.')
+        end
+        redirect_to(@publication, :notice => notice)
       end
     else
       flash[:alert] = "#{@publication.errors.count} error#{ 's' unless @publication.errors.count == 1} prohibited this publication from being saved." if @publication.errors.any?
@@ -233,17 +239,23 @@ class PublicationsController < ApplicationController
 
   def update
     @publication = current_user.all_publications.find_by_id(params[:id])
-    if @publication and ['draft', 'not approved'].include?(@publication.status)
-      params[:publication][:status] = (params[:publish] == '1') ? 'proposed' : 'draft'
+    if @publication and @publication.editable?(current_user)
+      params[:publication][:status] = (params[:publish] == '1') ? 'proposed' : 'draft' unless current_user.secretary?
       params[:publication][:author_assurance_date] = Date.today if params[:publish] == '1'
       if @publication.update_attributes(params[:publication])
-        @publication.update_attribute :status, params[:publish] == '1' ? 'proposed' : 'draft'
-        @publication.send_reminders if params[:publish] == '1'
+        # @publication.update_attribute :status, params[:publish] == '1' ? 'proposed' : 'draft' # TODO not needed
+        @publication.send_reminders if params[:publish] == '1' and not current_user.secretary?
         if params[:publish] == '-1'
           flash[:notice] = "Publication draft was successfully quick saved."
           render :action => "edit"
         else
-          redirect_to(@publication, :notice => params[:publish] == '1' ? 'Publication was successfully resubmitted for review.' : 'Publication draft was saved successfully.')
+          notice = ''
+          if current_user.secretary?
+            notice = 'Publication was successfully updated.'
+          else
+            notice = (params[:publish] == '1' ? 'Publication was successfully resubmitted for review.' : 'Publication draft was saved successfully.')
+          end
+          redirect_to(@publication, :notice => notice)
         end
       else
         flash[:alert] = "#{@publication.errors.count} error#{ 's' unless @publication.errors.count == 1} prohibited this publication from being updated." if @publication.errors.any?

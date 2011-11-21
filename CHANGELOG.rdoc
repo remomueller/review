@@ -2,6 +2,7 @@
 
 * Enhancements
   * Users can now see all publications on the publications matrix as long as they are not listed as 'draft' or 'not approved'
+  * Secretaries can now directly modify existing publications
 
 == 0.10.3
 

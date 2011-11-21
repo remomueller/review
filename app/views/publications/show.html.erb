@@ -1,9 +1,10 @@
-<% @title = "Publication: #{@publication.full_title}" %>
-<h1><%= @title %></h1>
-<%= link_to image_tag('contour/edit.png', :alt => '') + "Edit Publication", edit_publication_path(@publication), :class => 'button' if current_user.all_publications.include?(@publication) and ['draft', 'not approved'].include?(@publication.status) %>
+<% @title = @publication.full_title %>
+<h3><center><%= @title %></center></h3>
+<br />
+<%= link_to image_tag('contour/edit.png', :alt => '') + "Edit Publication", edit_publication_path(@publication), :class => 'button' if @publication.editable?(current_user) %>
 <%= link_to image_tag('contour/mydocuments.png', :alt => '') + "View All Publications", publications_path, :class => 'button' %>
 
-<div style="clear:both"></div><br />
+<div style="clear:both"></div>
 <table style="border-collapse:collapse;border:0px;margin:0px;padding:0px">
   <tr style="border:0px;margin:0px;padding:0px"><td style="border:0px;margin:0px;padding:0px"><b>Status:</b></td><td style="border:0px;margin:0px;"><%= display_status(@publication.status) %></td><td style="border:0px;margin:0px;"><%= @publication.human_status %></td></tr>
 </table>
@@ -182,7 +183,7 @@
 <fieldset>
   <legend>Publications and Presentations Sub Committee Reviewer Comments</legend>
   <% @publication.user_publication_reviews.each do |user_publication_review| %>
-    <% unless user_publication_review.comment.blank? %><div><pre><%= user_publication_review.comment %></pre></div><% end %>
+    <% unless user_publication_review.comment.blank? %><div><%= simple_format user_publication_review.comment %></div><% end %>
   <% end %>
 </fieldset>
 <% end %>

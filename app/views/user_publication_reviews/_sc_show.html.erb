@@ -35,6 +35,6 @@
 <% unless @user_publication_review.comment.blank? %>
 <tr>
   <td></td>
-  <td colspan="3"><em><pre><%= @user_publication_review.comment %></pre></em></td>
+  <td colspan="3"><em><div><%= simple_format @user_publication_review.comment %></div></em></td>
 </tr>
 <% end %>

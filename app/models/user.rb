@@ -56,17 +56,19 @@ class User < ActiveRecord::Base
   
   def all_publications
     @all_publications ||= begin
-      self.publications
+      if self.secretary?
+        Publication.current
+      else
+        self.publications
+      end
     end
   end
   
-  # TODO: Make all viewable to anyone logged in current and status not draft or rejected....
   def all_viewable_publications
     @all_viewable_publications ||= begin
       if self.committee_member? or self.secretary?
         Publication.current
       else
-        # self.publications
         Publication.current.with_user_or_status(self.id, ['proposed', 'approved', 'nominated', 'submitted', 'published'])
       end
     end
