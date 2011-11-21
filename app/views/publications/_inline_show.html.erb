@@ -32,7 +32,39 @@
     <div style="margin-top:4px"><%= @publication.human_status %></div>
   </td>
   <td><div style="padding-left:0;margin-bottom:0"><%= @publication.dataset_requested_analyst %></div></td>
-  <td><%= @publication.targeted_start_date_pretty %></td>
+  <td>
+    <% if @publication.targeted_start_date %><%= @publication.targeted_start_date_pretty %><br /><% end %>
+    <% unless @publication.timeline.blank? %>
+      <%= image_tag 'contour/gentleface/lightbulb_16.png', style: 'vertical-align:text-bottom;cursor:pointer', :class => 'smudge', id: "publication_timeline_box_#{@publication.id}" %>
+      <%= javascript_tag do %>
+        $('#publication_timeline_box_<%= @publication.id %>')
+          .qtip({
+            content:{
+              text: '<%= escape_javascript simple_format(@publication.timeline) %>',
+              title:{
+                text: '<%= escape_javascript @publication.manuscript_number %> Timeline:',
+                button: true
+              }
+            },
+            show:{
+//              event: 'click',
+              solo: true
+            },
+            hide: {
+              event: 'unfocus'
+            },
+            position:{
+              my: 'top right',
+              at: 'bottom center',
+              viewport: $(window)
+            },
+            style:{
+              classes: 'ui-tooltip-shadow'
+            }
+          });
+      <% end %>
+    <% end %>
+  </td>
   <% if current_user.pp_committee_secretary? or current_user.steering_committee_secretary? %>
     <% if ['draft'].include?(@publication.status) %>
       <td></td>
