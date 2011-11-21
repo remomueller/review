@@ -124,6 +124,24 @@ class Publication < ActiveRecord::Base
     end
   end
 
+  def proposed_nominations
+    @proposed_nominations ||= begin
+      self.user_publication_reviews.collect{|upr| upr.writing_group_nomination.to_s.split(/,|\n/)}.flatten.select{|nom| not nom.blank?}.collect{|nom| nom.strip.titleize}.uniq.sort
+    end
+  end
+  
+  def finalized_nominations
+    @finalized_nominations ||= begin
+      self.writing_group_members.split(/,|\n/).flatten.select{|nom| not nom.blank?}.collect{|nom| nom.strip.titleize}.uniq.sort
+    end
+  end
+
+  def all_nominations
+    @all_nominations ||= begin
+      (self.finalized_nominations | self.proposed_nominations).uniq.sort
+    end
+  end
+
   def targeted_start_date_pretty
     result = ''
     unless self.targeted_start_date.blank?

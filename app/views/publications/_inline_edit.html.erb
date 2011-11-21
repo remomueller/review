@@ -30,10 +30,9 @@
     <%= text_area_tag "publication_display[#{@publication.id}][writing_group_members]", @publication.writing_group_members, :cols => 20, :rows => 3 %><br />
     
     Committee Nominations:
-    <% nominations = @publication.user_publication_reviews.where('writing_group_nomination IS NOT NULL') %> <%# and writing_group_nomination != "" was removed (TODO CLEANUP) %>
-    <% if nominations.size > 0 %>
-      <% nominations.each do |upr| %>
-        <br /><%= upr.writing_group_nomination %>
+    <% if @publication.proposed_nominations.size > 0 %>
+      <% @publication.proposed_nominations.each do |nomination| %>
+        <br /><%= nomination %>
       <% end %>
     <% else %>
       <br /><span class="quiet">None</span>

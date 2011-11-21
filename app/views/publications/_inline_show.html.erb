@@ -16,15 +16,42 @@
   <td><%= link_to @publication.abbreviated_title, @publication, :title => @publication.full_title %></td>
   <td>
     <% if @publication.user %>
-      <span style="white-space:nowrap">Lead Author: <%= link_to @publication.user.name, @publication.user %></span>
+      <span style="white-space:nowrap"><b>Lead Author:</b> <%= link_to @publication.user.name, @publication.user %></span>
     <% else %>
       <span class="quiet" style="white-space:nowrap">No Lead Author</span>
     <% end %>
     <br />
     <% if @publication.co_lead_author %>
-      <span style="white-space:nowrap">Co-Lead Author: <%= link_to @publication.co_lead_author.name, @publication.co_lead_author %><br /></span>
+      <span style="white-space:nowrap"><b>Co-Lead Author:</b> <%= link_to @publication.co_lead_author.name, @publication.co_lead_author %><br /></span>
     <% end %>
-    <% unless @publication.writing_group_members.blank? %><br /><%= @publication.writing_group_members %><% end %>
+    <% unless @publication.all_nominations.size == 0 %><br /><b>Writing Group (<%= @publication.finalized_nominations.size %> of <%= @publication.all_nominations.size %>):</b> <span id="publication_nominations_box_<%= @publication.id %>"><%= image_tag 'contour/gentleface/lightbulb_16.png', style: 'vertical-align:text-bottom;cursor:pointer', class: 'smudge' %></span><br /><%= @publication.finalized_nominations.join(', ') %>
+      <%= javascript_tag do %>
+        $('#publication_nominations_box_<%= @publication.id %>')
+          .qtip({
+            content:{
+              text: '<%= escape_javascript simple_format("<ul>" + @publication.all_nominations.collect{|nom| @publication.finalized_nominations.include?(nom) ? "<li><b>#{nom}</b></li>" : "<li class='quiet'>#{nom}</li>"}.join + "</ul><br />Key:<ul><li><b>Selected</b></li><li class='quiet'>Not Selected</li></ul>") %>',
+              title:{
+                text: '<%= escape_javascript @publication.manuscript_number %> Writing Group Nominations:',
+                button: true
+              }
+            },
+            show:{
+              solo: true
+            },
+            hide: {
+              event: 'unfocus'
+            },
+            position:{
+              my: 'left center',
+              at: 'right center',
+              viewport: $(window)
+            },
+            style:{
+              classes: 'ui-tooltip-shadow ui-tooltip-green'
+            }
+          });
+      <% end %>      
+    <% end %>
   </td>
   <td><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
   <td style="white-space:nowrap">
@@ -47,7 +74,6 @@
               }
             },
             show:{
-//              event: 'click',
               solo: true
             },
             hide: {
@@ -59,7 +85,7 @@
               viewport: $(window)
             },
             style:{
-              classes: 'ui-tooltip-shadow'
+              classes: 'ui-tooltip-shadow ui-tooltip-green'
             }
           });
       <% end %>
