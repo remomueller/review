@@ -3,6 +3,7 @@
 * Enhancements
   * Users can now see all publications on the publications matrix as long as they are not listed as 'draft' or 'not approved'
   * Secretaries can now directly modify existing publications
+  * The Publication Timeline can now be viewed on the Publication Matrix by hovering over the additional information icon
 
 == 0.10.3
 
