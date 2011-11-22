@@ -1,0 +1,5 @@
+<% if @publication.proposed_nominations.size > 0 %>
+  <%= @publication.proposed_nominations.collect{|nom| link_to(nom, remove_nomination_publication_path(@publication, nomination: nom), method: :post, remote: true, confirm: "Are you sure you want to remove '#{nom}' from all reviewer nominations?")}.join(', ').html_safe %>
+<% else %>
+  <span class="quiet">None</span>
+<% end %>

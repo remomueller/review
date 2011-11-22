@@ -280,7 +280,7 @@ class PublicationsController < ApplicationController
     @publication = Publication.current.find_by_id(params[:id])
     if @publication and current_user.secretary?
       @publication.remove_nomination(params[:nomination])
-      render 'inline_edit'
+      render 'committee_nominations'
     else
       render nothing: true
     end
