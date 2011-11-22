@@ -259,7 +259,7 @@ class PublicationsController < ApplicationController
         end
       else
         flash[:alert] = "#{@publication.errors.count} error#{ 's' unless @publication.errors.count == 1} prohibited this publication from being updated." if @publication.errors.any?
-        render :action => "edit"
+        render action: "edit"
       end
     else
       redirect_to root_path
@@ -273,6 +273,16 @@ class PublicationsController < ApplicationController
       redirect_to publications_path
     else
       redirect_to root_path
+    end
+  end
+  
+  def remove_nomination
+    @publication = Publication.current.find_by_id(params[:id])
+    if @publication and current_user.secretary?
+      @publication.remove_nomination(params[:nomination])
+      render 'inline_edit'
+    else
+      render nothing: true
     end
   end
 end

@@ -124,6 +124,13 @@ class Publication < ActiveRecord::Base
     end
   end
 
+  def remove_nomination(nomination)
+    self.user_publication_reviews.each do |upr|
+      upr.remove_nomination(nomination)
+    end
+    self.reload
+  end
+
   def proposed_nominations
     @proposed_nominations ||= begin
       self.user_publication_reviews.collect{|upr| upr.writing_group_nomination.to_s.split(/,|\n/)}.flatten.select{|nom| not nom.blank?}.collect{|nom| nom.strip.titleize}.uniq.sort

@@ -129,6 +129,7 @@ class PublicationsControllerTest < ActionController::TestCase
       delete :destroy, id: -1
     end
 
-    assert_redirected_to publications_path
+    assert_nil assigns(:publication)
+    assert_redirected_to root_path
   end
 end

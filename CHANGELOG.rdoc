@@ -5,6 +5,7 @@
   * Secretaries can now directly modify existing publications
   * The Publication Timeline can now be viewed on the Publication Matrix by hovering over the additional information icon
   * Writing group proposed nominations and finalized nominations are now both displayed on the Publication Matrix
+  * Secretaries can remove malformed nominations when editing a publication on the publication matrix
 
 * Bug Fix
   * Backspace no longer goes back in browser history when trying to remove a selected Writing Group Committee nominations

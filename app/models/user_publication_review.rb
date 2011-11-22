@@ -14,6 +14,12 @@ class UserPublicationReview < ActiveRecord::Base
 
   # User Publication Review Methods
 
+  def remove_nomination(nomination)
+    modified_writing_group = self.writing_group_nomination.to_s.split(/,|\n/).select{|nom| not nom.blank?}.collect{|nom| nom.strip.titleize}.uniq.select{|nom| nom != nomination}.sort.join(',')
+    # Update without firing callbacks
+    self.update_column :writing_group_nomination, modified_writing_group
+  end
+
   private
   
   # If a steering committee member creates or updates their review of a publication
