@@ -1,13 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :check_system_admin, :only => [:new, :create, :edit, :update, :destroy, :index]
-
-  # Retrieves filtered list of users.
-  def filtered
-    @search = params[:search]
-    @relation = params[:relation]
-    render :partial => 'user_select_filter'
-  end
   
   def index
     current_user.update_attribute :users_per_page, params[:users_per_page].to_i if params[:users_per_page].to_i >= 10 and params[:users_per_page].to_i <= 200

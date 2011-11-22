@@ -92,32 +92,41 @@ class PublicationsControllerTest < ActionController::TestCase
 
   test "should show publication" do
     login(users(:valid))
-    get :show, :id => @proposed.to_param
+    get :show, id: @proposed.to_param
     assert_response :success
   end
 
   test "should get edit if publication is a draft" do
     login(users(:valid))
-    get :edit, :id => @draft.to_param
+    get :edit, id: @draft.to_param
     assert_response :success
   end
 
   test "should not get edit if publication is proposed" do
     login(users(:valid))
-    get :edit, :id => @proposed.to_param
+    get :edit, id: @proposed.to_param
     assert_redirected_to root_path
   end
 
   test "should update publication" do
     login(users(:valid))
-    put :update, :id => @draft.to_param, :publication => @proposed.attributes
+    put :update, id: @draft.to_param, :publication => @proposed.attributes
     assert_redirected_to publication_path(assigns(:publication))
   end
 
   test "should destroy publication" do
     login(users(:valid))
     assert_difference('Publication.current.count', -1) do
-      delete :destroy, :id => @draft.to_param
+      delete :destroy, id: @draft.to_param
+    end
+
+    assert_redirected_to publications_path
+  end
+  
+  test "should not destroy publication with invalid id" do
+    login(users(:valid))
+    assert_difference('Publication.current.count', 0) do
+      delete :destroy, id: -1
     end
 
     assert_redirected_to publications_path

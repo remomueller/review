@@ -16,26 +16,25 @@
   <td style="vertical-align:top"><%= link_to @publication.abbreviated_title, @publication %></td>
   <td style="vertical-align:top">
     <span style="white-space:nowrap">
-      Lead Author:<br />
+      <b>Lead Author:</b><br />
       <%= select_tag "publication_display[#{@publication.id}][user_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.user_id) %>
     </span>
+    <br />
     <span style="white-space:nowrap">
-      Co-Lead Author:<br />
+      <b>Co-Lead Author:</b><br />
       <%= select_tag "publication_display[#{@publication.id}][co_lead_author_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.co_lead_author_id) %>
     </span>
     <%#= link_to @publication.user.name, @publication.user %><br />
     <%#= @publication.writing_group_members %>
     <br />
-    Writing Group Members:
-    <%= text_area_tag "publication_display[#{@publication.id}][writing_group_members]", @publication.writing_group_members, :cols => 20, :rows => 3 %><br />
+    <b>Writing Group:</b><br />
+    <%= text_area_tag "publication_display[#{@publication.id}][writing_group_members]", @publication.writing_group_members, :cols => 60, :rows => 6 %><br />
     
-    Committee Nominations:
+    <b>Committee Nominations:</b><br />
     <% if @publication.proposed_nominations.size > 0 %>
-      <% @publication.proposed_nominations.each do |nomination| %>
-        <br /><%= nomination %>
-      <% end %>
+      <%= @publication.proposed_nominations.join(', ') %>
     <% else %>
-      <br /><span class="quiet">None</span>
+      <span class="quiet">None</span>
     <% end %>
   </td>
   <td style="vertical-align:top"><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
