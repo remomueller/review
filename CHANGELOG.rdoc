@@ -6,6 +6,9 @@
   * The Publication Timeline can now be viewed on the Publication Matrix by hovering over the additional information icon
   * Writing group proposed nominations and finalized nominations are now both displayed on the Publication Matrix
 
+* Bug Fix
+  * Backspace no longer goes back in browser history when trying to remove a selected Writing Group Committee nominations
+
 == 0.10.3
 
 * Bug Fix
