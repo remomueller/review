@@ -4,6 +4,152 @@ class PublicationsControllerTest < ActionController::TestCase
   setup do
     @proposed = publications(:proposed)
     @draft = publications(:draft)
+    @nominated = publications(:nominated)
+  end
+
+  test "should tag for sc review" do
+    login(users(:sc_secretary))
+    post :tag_for_review, id: @proposed.to_param, committee: 'sc', tagged: '1', format: 'js'
+    assert_not_nil assigns(:publication)
+    assert_equal 'sc', assigns(:committee)
+    assert_equal true, assigns(:publication).tagged_for_sc_review
+    assert_template 'tag_for_review'
+  end
+
+  test "should untag for sc review" do
+    login(users(:sc_secretary))
+    post :tag_for_review, id: @proposed.to_param, committee: 'sc', format: 'js'
+    assert_not_nil assigns(:publication)
+    assert_equal 'sc', assigns(:committee)
+    assert_equal false, assigns(:publication).tagged_for_sc_review
+    assert_template 'tag_for_review'
+  end
+
+  test "should tag for pp review" do
+    login(users(:pp_secretary))
+    post :tag_for_review, id: @proposed.to_param, committee: 'pp', tagged: '1', format: 'js'
+    assert_not_nil assigns(:publication)
+    assert_equal 'pp', assigns(:committee)
+    assert_equal true, assigns(:publication).tagged_for_pp_review
+    assert_template 'tag_for_review'
+  end
+
+  test "should untag for pp review" do
+    login(users(:pp_secretary))
+    post :tag_for_review, id: @proposed.to_param, committee: 'pp', format: 'js'
+    assert_not_nil assigns(:publication)
+    assert_equal 'pp', assigns(:committee)
+    assert_equal false, assigns(:publication).tagged_for_pp_review
+    assert_template 'tag_for_review'
+  end
+
+  test "should not tag for review as non-secretary" do
+    login(users(:valid))
+    post :tag_for_review, id: @proposed.to_param, committee: 'pp', tagged: '1', format: 'js'
+    assert_nil assigns(:publication)
+    assert_response :success
+  end
+
+  test "should send reminder" do
+    login(users(:pp_secretary))
+    post :send_reminder, id: @proposed.to_param, reviewer_id: users(:pp_committee).to_param, format: 'js'
+    assert_not_nil assigns(:publication)
+    assert_not_nil assigns(:reviewer)
+    assert_not_nil assigns(:user_publication_review)
+    assert_template 'send_reminder'
+  end
+
+  test "should not send reminder for non-secretary" do
+    login(users(:valid))
+    post :send_reminder, id: @proposed.to_param, reviewer_id: users(:pp_committee).to_param, format: 'js'
+    assert_nil assigns(:publication)
+    assert_nil assigns(:reviewer)
+    assert_nil assigns(:user_publication_review)
+    assert_response :success
+  end
+
+  test "should edit manuscript" do
+    login(users(:valid))
+    post :edit_manuscript, id: @nominated.to_param, format: 'js'
+    assert_not_nil assigns(:publication)
+    assert_template 'publications/manuscripts/edit_manuscript'
+  end
+
+  test "should not edit manuscript on publication pending sc approval" do
+    login(users(:valid))
+    post :edit_manuscript, id: @proposed.to_param, format: 'js'
+    assert_response :success
+  end
+
+  test "should show manuscript" do
+    login(users(:valid))
+    post :show_manuscript, id: @nominated.to_param, format: 'js'
+    assert_not_nil assigns(:publication)
+    assert_template 'publications/manuscripts/show_manuscript'
+  end
+
+  test "should not show manuscript on publication pending sc approval" do
+    login(users(:valid))
+    post :show_manuscript, id: @proposed.to_param, format: 'js'
+    assert_response :success
+  end
+
+  test "should upload manuscript in DOC format" do
+    login(users(:valid))
+    post :upload_manuscript, id: @nominated.to_param, publication: { manuscript: fixture_file_upload('../../test/support/publications/manuscripts/test_01.doc') }
+    assert_not_nil assigns(:publication)
+    assert_redirected_to publication_path(assigns(:publication))
+  end
+
+  test "should upload manuscript in DOCX format" do
+    login(users(:valid))
+    post :upload_manuscript, id: @nominated.to_param, publication: { manuscript: fixture_file_upload('../../test/support/publications/manuscripts/test_01.docx') }
+    assert_not_nil assigns(:publication)
+    assert_redirected_to publication_path(assigns(:publication))
+  end
+  
+  test "should upload manuscript in PDF format" do
+    login(users(:valid))
+    post :upload_manuscript, id: @nominated.to_param, publication: { manuscript: fixture_file_upload('../../test/support/publications/manuscripts/test_01.pdf') }
+    assert_not_nil assigns(:publication)
+    assert_redirected_to publication_path(assigns(:publication))
+  end
+
+  test "should not upload manuscript on publication pending sc approval" do
+    login(users(:valid))
+    post :upload_manuscript, id: @proposed.to_param, publication: { manuscript: fixture_file_upload('../../test/support/publications/manuscripts/test_01.doc') }
+    assert_not_nil assigns(:publication)
+    assert_equal 'Please specify a file to upload.', flash[:notice]
+    assert_redirected_to publication_path(assigns(:publication))
+  end
+
+  test "should not upload manuscript non-existent manuscript" do
+    login(users(:valid))
+    post :upload_manuscript, id: @nominated.to_param
+    assert_not_nil assigns(:publication)
+    assert_equal 'Please specify a file to upload.', flash[:notice]
+    assert_redirected_to publication_path(assigns(:publication))
+  end
+
+  test "should not upload manuscript" do
+    login(users(:two))
+    post :upload_manuscript, id: @nominated.to_param, publication: { manuscript: fixture_file_upload('../../test/support/publications/manuscripts/test_01.doc') }
+    assert_nil assigns(:publication)
+    assert_redirected_to root_path
+  end
+
+  test "should destroy manuscript" do
+    login(users(:valid))
+    post :destroy_manuscript, id: @proposed.to_param, format: 'js'
+    assert_not_nil assigns(:publication)
+    assert_template 'publications/manuscripts/edit_manuscript'
+  end
+
+  test "should not destroy manuscript" do
+    login(users(:two))
+    post :destroy_manuscript, id: @proposed.to_param, format: 'js'
+    assert_nil assigns(:publication)
+    assert_response :success
   end
 
   test "should send pp approval" do

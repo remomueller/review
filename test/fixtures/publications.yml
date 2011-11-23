@@ -450,3 +450,77 @@ tagged_for_pp_and_sc_review:
   attachment_chat_variables_attachment: MyString
   attachment_ancillary_forms_attachment: MyString
   attachment_other_attachment: MyString
+
+nominated:
+  user: valid
+  status: nominated
+  centers: MyString
+  proposal_submission_date: 2011-02-23
+  publication_type: MyString
+  publication_type_specify: MyString
+  dcc_resources_none: true
+  dcc_resources_staff: false
+  dcc_resources_staff_specify: MyString
+  dcc_resources_other: false
+  dcc_resources_other_specify: MyString
+  chat_data_none: true
+  chat_data_main_forms: false
+  chat_data_main_database: false
+  chat_data_other: false
+  chat_data_other_specify: MyString
+  manuscript_preparation_analysis_data: false
+  manuscript_preparation_analysis_ancillary_data: false
+  manuscript_analysis_review: false
+  manuscript_preparation_other: false
+  manuscript_preparation_other_specify: MyString
+  manuscript_preparation_none: true
+  attachment_chat_form: false
+  attachment_chat_form_specify: MyString
+  attachment_chat_variables: false
+  attachment_chat_variables_specify: MyString
+  attachment_ancillary_forms: false
+  attachment_ancillary_forms_specify: MyString
+  attachment_other: false
+  attachment_other_specify: MyString
+  full_title: Nominated Publication
+  abbreviated_title: Nom Nom
+  keywords: MyString
+  affiliation: MyString
+  sponsoring_pi: MyString
+  additional_coauthors: MyString
+  timeline: MyText
+  rationale: MyText
+  hypothesis: MyText
+  data: MyText
+  study_type: MyString
+  target_journal: MyString
+  analysis_responsibility: MyText
+  analysis_plan: MyText
+  summary_section: MyText
+  writing_group_members: MyString
+  references: MyText
+  author_assurance: true
+  author_assurance_date: 2011-02-23 09:58:27
+  approval_date: 2011-02-23
+  committee_submission_date: 2011-02-23
+  deleted: false
+  manuscript_number: MyString
+  proposed_analysis: MyString
+  secretary_notes: MyString
+  targeted_start_date: 2011-02-23
+  manuscript: MyString
+  manuscript_uploaded_at: 2011-02-23 09:58:27
+  attachment_none: true
+  chat_data_main_forms_attachment: MyString
+  chat_data_main_database_attachment: MyString
+  attachment_chat_form_attachment: MyString
+  # co_lead_author:
+  dataset_requested_analyst: MyString
+  additional_ppcommittee_instructions: MyString
+  additional_sccommittee_instructions: MyString
+  tagged_for_pp_review: false
+  tagged_for_sc_review: false
+  chat_data_other_attachment: MyString
+  attachment_chat_variables_attachment: MyString
+  attachment_ancillary_forms_attachment: MyString
+  attachment_other_attachment: MyString

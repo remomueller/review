@@ -220,9 +220,9 @@ class Publication < ActiveRecord::Base
     self.chat_data_main_database?
   end
   
-  def chat_data_other_selected?
-    self.chat_data_other?
-  end
+  # def chat_data_other_selected?
+  #   self.chat_data_other?
+  # end
   
   def manuscript_preparation_not_selected?
     !(self.manuscript_preparation_none? || self.manuscript_preparation_analysis_data? || self.manuscript_preparation_analysis_ancillary_data? || self.manuscript_analysis_review? || self.manuscript_preparation_other?)
@@ -256,17 +256,17 @@ class Publication < ActiveRecord::Base
     self.attachment_chat_form?
   end
 
-  def attachment_chat_variables_selected?
-    self.attachment_chat_variables?
-  end
+  # def attachment_chat_variables_selected?
+  #   self.attachment_chat_variables?
+  # end
 
   def attachment_ancillary_forms_selected?
     self.attachment_ancillary_forms?
   end
 
-  def attachment_other_selected?
-    self.attachment_other?
-  end
+  # def attachment_other_selected?
+  #   self.attachment_other?
+  # end
 
   def no_longer_draft?
     self.status != 'draft'

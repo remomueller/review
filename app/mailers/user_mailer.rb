@@ -55,7 +55,7 @@ class UserMailer < ActionMailer::Base
     @publication = user_publication_review.publication
     
     mail(:to => secretary.email,
-         :subject => @subject + " #{@reviewer.name} has reviewed #{@publication.abbreviated_title_and_ms}",
+         :subject => @subject + "#{@reviewer.name} has reviewed #{@publication.abbreviated_title_and_ms}",
          :reply_to => @reviewer.email
     )
   end

@@ -3,10 +3,9 @@ class PublicationsController < ApplicationController
 
   def tag_for_review
     @committee = params[:committee]
-    @publication = Publication.current.find_by_id(params[:id])
-    if @publication and current_user.pp_committee_secretary? and params[:committee] == 'pp'
+    if current_user.pp_committee_secretary? and params[:committee] == 'pp' and @publication = Publication.current.find_by_id(params[:id])
       @publication.update_attribute :tagged_for_pp_review, (params[:tagged] == '1')
-    elsif @publication and current_user.steering_committee_secretary? and params[:committee] == 'sc'
+    elsif current_user.steering_committee_secretary? and params[:committee] == 'sc' and @publication = Publication.current.find_by_id(params[:id])
       @publication.update_attribute :tagged_for_sc_review, (params[:tagged] == '1')
     else
       render :nothing => true
@@ -14,13 +13,9 @@ class PublicationsController < ApplicationController
   end
 
   def send_reminder
-    @publication = Publication.current.find_by_id(params[:id])
-    @reviewer = User.current.find_by_id(params[:reviewer_id])
-    if @publication and @reviewer and current_user.secretary?
-      
+    if current_user.secretary? and @publication = Publication.current.find_by_id(params[:id]) and @reviewer = User.current.find_by_id(params[:reviewer_id])
       @user_publication_review = @reviewer.user_publication_reviews.find_by_publication_id(@publication.id)
       @user_publication_review = @reviewer.user_publication_reviews.create(:publication_id => @publication.id) if @user_publication_review.blank?
-      
       @user_publication_review.update_attribute :reminder_sent_at, Time.now
       
       UserMailer.publication_approval_reminder(@publication, @reviewer).deliver if Rails.env.production?

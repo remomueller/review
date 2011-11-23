@@ -29,5 +29,17 @@ class ApplicationHelperTest < ActionView::TestCase
     assert recent_activity(Time.now - 1.month).kind_of?(String)
     assert recent_activity(Time.now - 1.year).kind_of?(String)
     assert recent_activity(Time.now - 2.year).kind_of?(String)
-  end  
+  end
+  
+  test "should display status" do
+    assert display_status(nil).kind_of?(String)
+    assert display_status('').kind_of?(String)
+    assert display_status('published').kind_of?(String)
+    assert display_status('submitted').kind_of?(String)
+    assert display_status('nominated').kind_of?(String)
+    assert display_status('approved').kind_of?(String)
+    assert display_status('proposed').kind_of?(String)
+    assert display_status('draft').kind_of?(String)
+    assert display_status('not approved').kind_of?(String)
+  end
 end

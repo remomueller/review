@@ -14,7 +14,17 @@ class UserPublicationReviewsControllerTest < ActionController::TestCase
 
   test "should create user publication review" do
     assert_difference('UserPublicationReview.count') do
-      post :create, user_publication_review: @user_publication_review.attributes, publication_id: 3, format: 'js'
+      post :create, user_publication_review: @user_publication_review.attributes, publication_id: publications(:three).to_param, format: 'js'
+    end
+
+    assert_not_nil assigns(:user_publication_review)
+    assert_template 'show'
+  end
+
+  test "should create user publication review and send notification to secretary" do
+    login(users(:sc_committee))
+    assert_difference('UserPublicationReview.count') do
+      post :create, user_publication_review: { comment: "I reviewed this.", writing_group_nomination: "Jane Smith, Bill Smith", status: 'approved' }, publication_id: publications(:nominated).to_param, format: 'js'
     end
 
     assert_not_nil assigns(:user_publication_review)
@@ -34,7 +44,7 @@ class UserPublicationReviewsControllerTest < ActionController::TestCase
   test "should not create user publication review for non-committee member" do
     login(users(:valid))
     assert_difference('UserPublicationReview.count', 0) do
-      post :create, user_publication_review: @user_publication_review.attributes, publication_id: 3, format: 'js'
+      post :create, user_publication_review: @user_publication_review.attributes, publication_id: publications(:three).to_param, format: 'js'
     end
 
     assert_nil assigns(:user_publication_review)

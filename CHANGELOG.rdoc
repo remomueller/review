@@ -10,6 +10,9 @@
 * Bug Fix
   * Backspace no longer goes back in browser history when trying to remove a selected Writing Group Committee nomination
 
+* Testing
+  * Test coverage at 100%
+
 == 0.10.3
 
 * Bug Fix
