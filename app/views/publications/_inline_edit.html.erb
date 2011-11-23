@@ -17,12 +17,12 @@
   <td style="vertical-align:top">
     <span style="white-space:nowrap">
       <b>Lead Author:</b><br />
-      <%= select_tag "publication_display[#{@publication.id}][user_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.user_id) %>
+      <%= select_tag "publication_display[#{@publication.id}][user_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.reverse_name, u.id]}, @publication.user_id) %>
     </span>
     <br />
     <span style="white-space:nowrap">
       <b>Co-Lead Author:</b><br />
-      <%= select_tag "publication_display[#{@publication.id}][co_lead_author_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.rev_name, u.id]}, @publication.co_lead_author_id) %>
+      <%= select_tag "publication_display[#{@publication.id}][co_lead_author_id]", options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.reverse_name, u.id]}, @publication.co_lead_author_id) %>
     </span>
     <%#= link_to @publication.user.name, @publication.user %><br />
     <%#= @publication.writing_group_members %>

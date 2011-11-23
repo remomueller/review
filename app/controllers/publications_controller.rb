@@ -80,8 +80,7 @@ class PublicationsController < ApplicationController
   end
 
   def pp_approval
-    @publication = Publication.current.find_by_id(params[:id])
-    if @publication and current_user.pp_committee_secretary? and params[:publication]
+    if current_user.pp_committee_secretary? and @publication = Publication.current.find_by_id(params[:id]) and params[:publication]
       [:status, :manuscript_number, :additional_ppcommittee_instructions].each do |attribute|
         @publication.update_attribute attribute, params[:publication][attribute]
       end
@@ -94,18 +93,15 @@ class PublicationsController < ApplicationController
   end
 
   def show_subcommittee_decision
-    @publication = Publication.current.find_by_id(params[:id])
-    render :nothing => true unless @publication and current_user.pp_committee_secretary?
+    render nothing: true unless current_user.pp_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
   
   def edit_subcommittee_decision
-    @publication = Publication.current.find_by_id(params[:id])
-    render :nothing => true unless @publication and current_user.pp_committee_secretary?
+    render nothing: true unless current_user.pp_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
 
   def sc_approval
-    @publication = Publication.current.find_by_id(params[:id])
-    if @publication and current_user.steering_committee_secretary? and params[:publication]
+    if current_user.steering_committee_secretary? and @publication = Publication.current.find_by_id(params[:id]) and params[:publication]
       [:status, :additional_sccommittee_instructions].each do |attribute|
         @publication.update_attribute attribute, params[:publication][attribute]
       end
@@ -117,13 +113,11 @@ class PublicationsController < ApplicationController
   end
 
   def show_steering_committee_decision
-    @publication = Publication.current.find_by_id(params[:id])
-    render :nothing => true unless @publication and current_user.steering_committee_secretary?
+    render nothing: true unless current_user.steering_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
   
   def edit_steering_committee_decision
-    @publication = Publication.current.find_by_id(params[:id])
-    render :nothing => true unless @publication and current_user.steering_committee_secretary?
+    render nothing: true unless current_user.steering_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
 
   def index
@@ -163,28 +157,16 @@ class PublicationsController < ApplicationController
   end
   
   def inline_edit
-    @publication = Publication.current.find_by_id(params[:id]) if current_user.pp_committee_secretary? or current_user.steering_committee_secretary?
-    render :nothing => true unless @publication
+    render nothing: true unless current_user.secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
   
   def inline_update
-    if current_user.secretary?
-      @publication = Publication.current.find_by_id(params[:id])
-    end
-    
-    if @publication and params[:publication][params[:id]]
-      
+    if current_user.secretary? and @publication = Publication.current.find_by_id(params[:id]) and params[:publication][params[:id]]
       params[:publication][params[:id]][:targeted_start_date] = Date.strptime(params[:publication][params[:id]][:targeted_start_date], "%m/%d/%Y") unless params[:publication][params[:id]][:targeted_start_date].blank?
-      
+
       params[:publication][params[:id]].keys.each do |attribute|
         @publication.update_attribute attribute, params[:publication][params[:id]][attribute]
       end
-      
-      # begin
-      #   @publication.update_attribute :targeted_start_date, Date.parse(params[:publication][params[:id]][:targeted_start_date])
-      # rescue ArgumentError
-      #   @publication.update_attribute :targeted_start_date, nil  
-      # end
       
       render 'inline_show'
     else
@@ -193,15 +175,7 @@ class PublicationsController < ApplicationController
   end
   
   def inline_show
-    if current_user.secretary?
-      @publication = Publication.current.find_by_id(params[:id])
-    end
-    
-    if @publication
-      render 'inline_show'
-    else
-      render :nothing => true
-    end
+    render nothing: true unless current_user.secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
 
   def create

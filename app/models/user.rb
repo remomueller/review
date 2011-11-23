@@ -73,22 +73,12 @@ class User < ActiveRecord::Base
       end
     end
   end
-  
-  def all_comments
-    @all_comments ||= begin
-      if self.system_admin?
-        Comment.current.order('created_at DESC')
-      else
-        self.comments
-      end
-    end
-  end
 
   def name
     "#{first_name} #{last_name}"
   end
   
-  def rev_name
+  def reverse_name
     "#{last_name}, #{first_name}"
   end
   

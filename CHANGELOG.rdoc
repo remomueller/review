@@ -8,7 +8,7 @@
   * Secretaries can remove malformed nominations when editing a publication on the publication matrix
 
 * Bug Fix
-  * Backspace no longer goes back in browser history when trying to remove a selected Writing Group Committee nominations
+  * Backspace no longer goes back in browser history when trying to remove a selected Writing Group Committee nomination
 
 == 0.10.3
 

@@ -15,3 +15,11 @@ two:
   status: "not approved"
   comment: "This is not a good proposal.  Back to the drawing board."
   writing_group_nomination: MyString
+
+three:
+  user: two
+  # publication: tagged_for_pp_and_sc_review
+  publication_id: 6
+  status: "approved"
+  comment: "This is a great approval and I'm including a nomination!"
+  writing_group_nomination: "First Last,Joe Schmoe,John Doe"

@@ -8,12 +8,12 @@ proposed:
   proposal_submission_date: 2011-02-23
   publication_type: MyString
   publication_type_specify: MyString
-  dcc_resources_none: false
+  dcc_resources_none: true
   dcc_resources_staff: false
   dcc_resources_staff_specify: MyString
   dcc_resources_other: false
   dcc_resources_other_specify: MyString
-  chat_data_none: false
+  chat_data_none: true
   chat_data_main_forms: false
   chat_data_main_database: false
   chat_data_other: false
@@ -23,7 +23,7 @@ proposed:
   manuscript_analysis_review: false
   manuscript_preparation_other: false
   manuscript_preparation_other_specify: MyString
-  manuscript_preparation_none: false
+  manuscript_preparation_none: true
   attachment_chat_form: false
   attachment_chat_form_specify: MyString
   attachment_chat_variables: false
@@ -60,7 +60,7 @@ proposed:
   targeted_start_date: 2011-02-23
   manuscript: MyString
   manuscript_uploaded_at: 2011-02-23 09:58:27
-  attachment_none: false
+  attachment_none: true
   chat_data_main_forms_attachment: MyString
   chat_data_main_database_attachment: MyString
   attachment_chat_form_attachment: MyString
