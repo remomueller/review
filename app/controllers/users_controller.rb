@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :check_system_admin, :only => [:new, :create, :edit, :update, :destroy, :index]
+  before_filter :check_system_admin, :only => [:new, :create, :edit, :update, :destroy]
   
   def index
+    unless current_user.system_admin? or params[:format] == 'json'
+      redirect_to root_path, :alert => "You do not have sufficient privileges to access that page."
+      return
+    end
     current_user.update_attribute :users_per_page, params[:users_per_page].to_i if params[:users_per_page].to_i >= 10 and params[:users_per_page].to_i <= 200
     @order = params[:order].blank? ? 'users.current_sign_in_at DESC' : params[:order]
     users_scope = User.current

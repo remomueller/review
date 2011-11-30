@@ -1,5 +1,8 @@
 == 0.11.1
 
+* Bug Fix
+  * Fixed user name autocomplete not working for non-system admins
+
 == 0.11.0
 
 * Enhancements
