@@ -1,3 +1,8 @@
+== 0.11.2
+
+* Testing
+  * Updated a test description to accurately reflect what it was actually testing
+
 == 0.11.1
 
 * Bug Fix

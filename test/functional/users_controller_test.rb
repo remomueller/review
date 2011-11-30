@@ -51,7 +51,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to root_path
   end
   
-  test "should get index with pagination for non-system admin" do
+  test "should not get index with pagination for non-system admin" do
     login(users(:valid))
     get :index, format: 'js'
     assert_nil assigns(:users)
