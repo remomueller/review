@@ -1,13 +1,5 @@
 Review::Application.routes.draw do
   
-  match '/contour' => 'contour/samples#index'
-
-  match '/auth/failure' => 'contour/authentications#failure'
-  match '/auth/:provider/callback' => 'contour/authentications#create'
-  match '/auth/:provider' => 'contour/authentications#passthru'
-
-  resources :authentications, :controller => 'contour/authentications'
-
   resources :publications do
     collection do
       get :search
