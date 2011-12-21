@@ -239,8 +239,16 @@ class PublicationsControllerTest < ActionController::TestCase
   test "should get index" do
     login(users(:valid))
     get :index
-    assert_response :success
     assert_not_nil assigns(:publications)
+    assert_response :success
+  end
+  
+  test "should get print" do
+    login(users(:valid))
+    get :print
+    assert_not_nil assigns(:order)
+    assert_not_nil assigns(:publications)
+    assert_response :success
   end
   
   test "should not show 'draft' or 'not approved' for regular users on the publication matrix unless they are the author" do

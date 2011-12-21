@@ -3,6 +3,7 @@ Review::Application.routes.draw do
   resources :publications do
     collection do
       get :search
+      get :print
     end
     member do
        post :pp_approval

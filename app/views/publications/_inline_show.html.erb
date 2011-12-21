@@ -101,6 +101,14 @@
     <% end %>
   <% end %>
 </tr>
+<% if @print %>
+<tr>
+  <td></td>
+  <td colspan="<%= (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?) ? 9 : 8 %>">
+    <strong>Timeline:</strong> <%= simple_format(@publication.timeline) %>
+  </td>
+</tr>
+<% end %>
 <tr style="border-bottom: 2px solid #777">
   <td></td>
   <td colspan="<%= (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?) ? 9 : 8 %>">

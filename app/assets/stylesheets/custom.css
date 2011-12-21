@@ -117,3 +117,37 @@ table.status-table td {
 ul.token-input-list-facebook {
   width: 100%;
 }
+
+@media print {
+  
+  body {
+    background-color: #fff;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+  
+  body a {
+    background:none !important;
+    padding:0 !important;
+    margin:0 !important;
+  }
+
+  #header, #message, #menu, .smudge {
+    display: none;
+  }
+  
+  a:link, a:visited, a:hover, a:active, a:focus {
+    text-decoration: none;
+  }
+  
+  h3 {
+    margin: 0px;
+  }
+
+  p {
+    margin-bottom: 0px;
+  }
+
+}
