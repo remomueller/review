@@ -11,7 +11,7 @@ gem 'eventmachine',   '~> 1.0.0.beta.4.1',  platforms: [:mswin, :mingw]
 gem 'contour',        '~> 0.9.0'            # Basic Layout and Assets
 gem 'carrierwave'                           # File Uploads
 gem 'kaminari'                              # Pagination
-gem 'pdfkit'                                # Generate PDFs from webpages
+gem 'pdfkit'                                # Generate PDFs from webpages, https://github.com/jdpace/PDFKit/wiki/Installing-WKHTMLTOPDF
 
 # Gems used only for assets and not required
 # in production environments by default.
