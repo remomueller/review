@@ -1,3 +1,5 @@
+== 0.12.1
+
 == 0.12.0
 
 * Enhancements
@@ -122,7 +124,7 @@
     * P&P committee members and secretaries will have Marked for P&P review filtered to top when they first load the page
     * SC committee members and secretaries will have Marked for SC review filtered to top when they first load the page
     * Members of both will have Marked for P&P at top followed by Marked for SC at top of page
-  
+
 * Test Coverage
   * Created initial test coverage for all unit and functional tests
 
