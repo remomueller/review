@@ -1,7 +1,5 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-# TODO: Remove Password Salt from Migrations and Schema
-
 valid:
   first_name: FirstName
   last_name: LastName
@@ -11,23 +9,6 @@ valid:
   # email_notifications: {}
   users_per_page: 10
   email: valid@example.com
-  encrypted_password: MyString
-#  password_salt: MyString
-  reset_password_token: ResetTokenOne
-  remember_token: MyString
-  remember_created_at: 2011-02-23
-  sign_in_count: 0
-  current_sign_in_at: 2011-02-23
-  last_sign_in_at: 2011-02-23
-  current_sign_in_ip: MyString
-  last_sign_in_ip: MyString
-  confirmation_token: ConfirmationTokenOne
-  confirmed_at: 2011-02-23
-  confirmation_sent_at: 2011-02-23
-  failed_attempts: 0
-  unlock_token: UnlockTokenOne
-  locked_at: 2011-02-23
-  authentication_token: MyString
 
 two:
   first_name: MyString
@@ -38,24 +19,7 @@ two:
   # email_notifications: {}
   users_per_page: 10
   email: EmailTwo
-  encrypted_password: MyString
-#  password_salt: MyString
-  reset_password_token: ResetTokenTwo
-  remember_token: MyString
-  remember_created_at: 2011-02-23
-  sign_in_count: 0
-  current_sign_in_at: 2011-02-23
-  last_sign_in_at: 2011-02-23
-  current_sign_in_ip: MyString
-  last_sign_in_ip: MyString
-  confirmation_token: ConfirmationTokenTwo
-  confirmed_at: 2011-02-23
-  confirmation_sent_at: 2011-02-23
-  failed_attempts: 0
-  unlock_token: UnlockTokenTwo
-  locked_at: 2011-02-23
-  authentication_token: MyString
-  
+
 admin:
   id: 3
   first_name: MyString
@@ -66,23 +30,6 @@ admin:
   # email_notifications: {}
   users_per_page: 10
   email: admin@example.com
-  encrypted_password: MyString
-#  password_salt: MyString
-  reset_password_token: ResetTokenThree
-  remember_token: MyString
-  remember_created_at: 2011-02-23
-  sign_in_count: 0
-  current_sign_in_at: 2011-02-23
-  last_sign_in_at: 2011-02-23
-  current_sign_in_ip: MyString
-  last_sign_in_ip: MyString
-  confirmation_token: ConfirmationTokenThree
-  confirmed_at: 2011-02-23
-  confirmation_sent_at: 2011-02-23
-  failed_attempts: 0
-  unlock_token: UnlockTokenThree
-  locked_at: 2011-02-23
-  authentication_token: MyString
 
 pending:
   id: 4
@@ -94,23 +41,6 @@ pending:
   # email_notifications: {}
   users_per_page: 10
   email: pending@example.com
-  encrypted_password: MyString
-#  password_salt: MyString
-  reset_password_token: ResetTokenFour
-  remember_token: MyString
-  remember_created_at: 2011-02-23
-  sign_in_count: 0
-  current_sign_in_at: 2011-02-23
-  last_sign_in_at: 2011-02-23
-  current_sign_in_ip: MyString
-  last_sign_in_ip: MyString
-  confirmation_token: ConfirmationTokenFour
-  confirmed_at: 2011-02-23
-  confirmation_sent_at: 2011-02-23
-  failed_attempts: 0
-  unlock_token: UnlockTokenFour
-  locked_at: 2011-02-23
-  authentication_token: MyString
 
 deleted:
   id: 5
@@ -122,23 +52,6 @@ deleted:
   # email_notifications: {}
   users_per_page: 10
   email: deleted@example.com
-  encrypted_password: MyString
-#  password_salt: MyString
-  reset_password_token: ResetTokenFive
-  remember_token: MyString
-  remember_created_at: 2011-02-23
-  sign_in_count: 0
-  current_sign_in_at: 2011-02-23
-  last_sign_in_at: 2011-02-23
-  current_sign_in_ip: MyString
-  last_sign_in_ip: MyString
-  confirmation_token: ConfirmationTokenFive
-  confirmed_at: 2011-02-23
-  confirmation_sent_at: 2011-02-23
-  failed_attempts: 0
-  unlock_token: UnlockTokenFive
-  locked_at: 2011-02-23
-  authentication_token: MyString
 
 pp_committee:
   first_name: MyString
@@ -149,23 +62,6 @@ pp_committee:
   # email_notifications: {}
   users_per_page: 10
   email: pp_committee@example.com
-  encrypted_password: MyString
-#  password_salt: MyString
-  reset_password_token: ResetTokenSix
-  remember_token: MyString
-  remember_created_at: 2011-02-23
-  sign_in_count: 0
-  current_sign_in_at: 2011-02-23
-  last_sign_in_at: 2011-02-23
-  current_sign_in_ip: MyString
-  last_sign_in_ip: MyString
-  confirmation_token: ConfirmationTokenSix
-  confirmed_at: 2011-02-23
-  confirmation_sent_at: 2011-02-23
-  failed_attempts: 0
-  unlock_token: UnlockTokenSix
-  locked_at: 2011-02-23
-  authentication_token: MyString
   pp_committee: true
   steering_committee: false
   pp_committee_secretary: false
@@ -181,23 +77,6 @@ sc_committee:
   # email_notifications: {}
   users_per_page: 10
   email: sc_committee@example.com
-  encrypted_password: MyString
-#  password_salt: MyString
-  reset_password_token: ResetTokenSeven
-  remember_token: MyString
-  remember_created_at: 2011-02-23
-  sign_in_count: 0
-  current_sign_in_at: 2011-02-23
-  last_sign_in_at: 2011-02-23
-  current_sign_in_ip: MyString
-  last_sign_in_ip: MyString
-  confirmation_token: ConfirmationTokenSeven
-  confirmed_at: 2011-02-23
-  confirmation_sent_at: 2011-02-23
-  failed_attempts: 0
-  unlock_token: UnlockTokenSeven
-  locked_at: 2011-02-23
-  authentication_token: MyString
   pp_committee: false
   steering_committee: true
   pp_committee_secretary: false
@@ -213,28 +92,11 @@ pp_and_sc_committee:
   # email_notifications: {}
   users_per_page: 10
   email: pp_and_sc_committee@example.com
-  encrypted_password: MyString
-#  password_salt: MyString
-  reset_password_token: ResetTokenEight
-  remember_token: MyString
-  remember_created_at: 2011-02-23
-  sign_in_count: 0
-  current_sign_in_at: 2011-02-23
-  last_sign_in_at: 2011-02-23
-  current_sign_in_ip: MyString
-  last_sign_in_ip: MyString
-  confirmation_token: ConfirmationTokenEight
-  confirmed_at: 2011-02-23
-  confirmation_sent_at: 2011-02-23
-  failed_attempts: 0
-  unlock_token: UnlockTokenEight
-  locked_at: 2011-02-23
-  authentication_token: MyString
   pp_committee: true
   steering_committee: true
   pp_committee_secretary: false
   steering_committee_secretary: false
-  
+
 pp_secretary:
   id: 9
   first_name: MyString
@@ -245,23 +107,6 @@ pp_secretary:
   # email_notifications: {}
   users_per_page: 10
   email: pp_secretary@example.com
-  encrypted_password: MyString
-#  password_salt: MyString
-  reset_password_token: ResetTokenNine
-  remember_token: MyString
-  remember_created_at: 2011-02-23
-  sign_in_count: 0
-  current_sign_in_at: 2011-02-23
-  last_sign_in_at: 2011-02-23
-  current_sign_in_ip: MyString
-  last_sign_in_ip: MyString
-  confirmation_token: ConfirmationTokenNine
-  confirmed_at: 2011-02-23
-  confirmation_sent_at: 2011-02-23
-  failed_attempts: 0
-  unlock_token: UnlockTokenNine
-  locked_at: 2011-02-23
-  authentication_token: MyString
   pp_committee: false
   steering_committee: false
   pp_committee_secretary: true
@@ -277,23 +122,6 @@ sc_secretary:
   # email_notifications: {}
   users_per_page: 10
   email: sc_secretary@example.com
-  encrypted_password: MyString
-#  password_salt: MyString
-  reset_password_token: ResetTokenTen
-  remember_token: MyString
-  remember_created_at: 2011-02-23
-  sign_in_count: 0
-  current_sign_in_at: 2011-02-23
-  last_sign_in_at: 2011-02-23
-  current_sign_in_ip: MyString
-  last_sign_in_ip: MyString
-  confirmation_token: ConfirmationTokenTen
-  confirmed_at: 2011-02-23
-  confirmation_sent_at: 2011-02-23
-  failed_attempts: 0
-  unlock_token: UnlockTokenTen
-  locked_at: 2011-02-23
-  authentication_token: MyString
   pp_committee: false
   steering_committee: false
   pp_committee_secretary: false
@@ -309,23 +137,6 @@ pp_and_sc_secretary:
   # email_notifications: {}
   users_per_page: 10
   email: pp_and_sc_secretary@example.com
-  encrypted_password: MyString
-#  password_salt: MyString
-  reset_password_token: ResetTokenEleven
-  remember_token: MyString
-  remember_created_at: 2011-02-23
-  sign_in_count: 0
-  current_sign_in_at: 2011-02-23
-  last_sign_in_at: 2011-02-23
-  current_sign_in_ip: MyString
-  last_sign_in_ip: MyString
-  confirmation_token: ConfirmationTokenEleven
-  confirmed_at: 2011-02-23
-  confirmation_sent_at: 2011-02-23
-  failed_attempts: 0
-  unlock_token: UnlockTokenEleven
-  locked_at: 2011-02-23
-  authentication_token: MyString
   pp_committee: false
   steering_committee: false
   pp_committee_secretary: true
