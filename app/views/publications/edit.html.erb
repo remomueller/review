@@ -1,5 +1,13 @@
 <% @title = "Edit: #{@publication.full_title}" %>
 
-<h3><center>Edit:<br /><br /><span class="quiet"><%= @publication.full_title %></span></center></h3>
+<h3><center>Editing<br /><br /><span class="quiet"><%= @publication.full_title %></span></center></h3>
 
-<%= render 'form' %>
+<div class="frame">
+  <table class="blank padded" style="width:100%">
+    <tr>
+      <td style="padding:0px 15px 15px 15px">
+        <%= render 'form' %>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -6,7 +6,7 @@
   <legend>Quick Save</legend>
   <div class="field">
     <label><%= image_tag 'contour/save.png', :alt => '', :title => 'Quick Save', :style => 'vertical-align:text-bottom' %> Quick Save</label><br />
-    While you are composing your publication make sure to occasionally click the <strong>Quick Save</strong> icon <%= image_tag 'contour/save.png', :alt => '', :title => 'Quick Save', :style => 'vertical-align:text-bottom' %> in the section header.    
+    While you are composing your publication make sure to occasionally click the <strong>Quick Save</strong> icon <%= image_tag 'contour/save.png', :alt => '', :title => 'Quick Save', :style => 'vertical-align:text-bottom' %> in the section header.
   </div>
   <br />
   <div class="field">
@@ -34,7 +34,7 @@
       A. Administrative Information
       <%= quick_save %>
     </legend>
-    
+
     <div class="field">
       <label>1. Lead Author</label><br />
       <% if @publication.user %>
@@ -43,7 +43,7 @@
         <span class="quiet">No Lead Author</span>
       <% end %>
     </div>
-    
+
     <div class="field">
       <%= f.label :centers, '2. Center(s):' %><br />
       <% if disabled.blank? %>
@@ -52,7 +52,7 @@
         <div class="disabled"><%= simple_format @publication.centers %></div>
       <% end %>
     </div>
-    
+
     <div class="field">
       <%= f.label :proposal_submission_date, '3. Date this publication was submitted to CHAT DCC' %><br />
       <% if disabled.blank? %>
@@ -61,9 +61,9 @@
         <div class="disabled"><%= simple_format @publication.proposal_submission_date.to_s %></div>
       <% end %>
     </div>
-    
+
   </fieldset>
-  
+
   <fieldset class="<%= 'fieldset_with_errors' if @publication.errors.keys.include?(:publication_type) %>">
     <legend>
       B. Publication Information
@@ -85,13 +85,13 @@
       <% end %>
     </div>
   </fieldset>
-  
+
   <fieldset class="<%= 'fieldset_with_errors' if @publication.errors.keys.include?(:dcc_resources_none) or @publication.errors.keys.include?(:chat_data_none) %>">
     <legend>
       C. CHAT Resources
       <%= quick_save %>
     </legend>
-    
+
     <div class="field">
       <label>5. Does preparation of this publication require any DCC RESOURCES? (<em>check all that apply; specify resources in each category</em>)</label><br />
       <br />
@@ -114,12 +114,12 @@
       <label>6.  What CHAT data will be required to prepare this publication? <em>(check all that apply)</em></label><br />
       <br />
       <%= f.check_box :chat_data_none, :disabled => disabled %> <%= f.label :chat_data_none, 'None' %><br />
-      
+
       <%= f.check_box :chat_data_main_forms, :disabled => disabled, :onclick => "toggleAttachment('#publication_chat_data_main_forms');" %> <%= f.label :chat_data_main_forms, 'CHAT main forms database (<em>please attach copies of release forms with required items circled</em>)'.html_safe %>
       <% @attribute = 'chat_data_main_forms'; @disabled = disabled %>
       <%= render :partial => 'publications/download_link' %>
       <br />
-      
+
       <%= f.check_box :chat_data_main_database, :disabled => disabled, :onclick => "toggleAttachment('#publication_chat_data_main_database');" %> <%= f.label :chat_data_main_database, 'CHAT main sleep study database (<em>please attach a list of data items</em>)'.html_safe %>
       <% @attribute = 'chat_data_main_database'; @disabled = disabled %>
       <%= render :partial => 'publications/download_link' %>
@@ -140,7 +140,7 @@
       D. Data Analysis
       <%= quick_save %>
     </legend>
-    
+
     <div class="field">
       <label>7. Which of the following is required for preparation of this manuscript? (<em>check all that apply</em>)</label><br />
       <br />
@@ -170,7 +170,7 @@
       E. Attachments
       <%= quick_save %>
     </legend>
-    
+
     <div class="field">
       <label>9.  Attachments to this form (<em>check all that apply</em>)</label><br />
       <br />
@@ -398,7 +398,7 @@
 
     <div class="field">
       <%= f.check_box :author_assurance, :disabled => disabled %> <%= f.label :author_assurance, 'Please tick to confirm that you have read and understand the above text' %><br />
-      
+
     </div>
 <% if false %>
     <div class="field">
@@ -415,12 +415,12 @@
     <div class="actions">
       <%= hidden_field_tag 'publish', '0' %>
       <% if current_user.secretary? %>
-        <%= link_to_function image_tag('contour/tick.png', :alt => '') + "Save Publication", "$('##{form_name}').submit();", :class => "button positive" %>
+        <%= link_to_function image_tag('gentleface/16/checkmark.png', :alt => '') + "Save Publication", "$('##{form_name}').submit();", :class => "button positive" %>
       <% else %>
         <%= link_to_function image_tag('contour/save.png', :alt => '') + (@publication.new_record? ? "Save Draft of Publication" : "Update Draft of Publication"), "$('#publish').val('0');$('##{form_name}').submit();", :class => "button" %>
-        <%= link_to_function image_tag('contour/tick.png', :alt => '') + "Submit Publication for Review", "if(authorAssuranceCheck() == false){return false;};$('#publish').val('1');$('##{form_name}').submit();", :class => "button positive" %>
+        <%= link_to_function image_tag('gentleface/16/checkmark.png', :alt => '') + "Submit Publication for Review", "if(authorAssuranceCheck() == false){return false;};$('#publish').val('1');$('##{form_name}').submit();", :class => "button positive" %>
       <% end %>
-      <%= link_to image_tag('contour/cross.png', :alt => '') + 'Cancel', @publication.new_record? ? root_path : @publication, :class => 'button negative' %>
+      <%= link_to image_tag('gentleface/16/cancel.png', :alt => '') + 'Cancel', @publication.new_record? ? root_path : @publication, :class => 'button negative' %>
   		<br />
     </div>
   <% end %>

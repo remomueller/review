@@ -11,20 +11,20 @@
   <% else %>
     <td style="vertical-align:middle"><strong><%= @user_publication_review.status %></strong></td>
   <% end %>
-  
+
   <td>
     <% if current_user == @user_publication_review.user and  @user_publication_review.publication.status == 'proposed' %>
       <% if @user_publication_review.new_record? %>
         <%#= link_to 'Create Review', '#', :onclick => remote_function(:url => new_user_publication_review_path(:publication_id => @publication.id), :method => :get) + "; return false;", :class => "button" %>
         <%= link_to 'Create Review', new_user_publication_review_path(:publication_id => @publication.id), :method => :get, :remote => true, :class => "button" %>
       <% else %>
-        <%#= link_to image_tag('contour/edit.png', :alt => '') + 'Edit Review', '#', :onclick => remote_function(:url => edit_user_publication_review_path(@user_publication_review), :method => :get) + "; return false;", :class => 'button' %>
-        <%= link_to image_tag('contour/edit.png', :alt => '') + 'Edit Review', edit_user_publication_review_path(@user_publication_review), :method => :get, :remote => true, :class => 'button' %>
+        <%#= link_to image_tag('gentleface/16/doc_edit.png', :alt => '') + 'Edit Review', '#', :onclick => remote_function(:url => edit_user_publication_review_path(@user_publication_review), :method => :get) + "; return false;", :class => 'button' %>
+        <%= link_to image_tag('gentleface/16/doc_edit.png', :alt => '') + 'Edit Review', edit_user_publication_review_path(@user_publication_review), :method => :get, :remote => true, :class => 'button' %>
       <% end %>
     <% elsif current_user == @user_publication_review.user %>
       No editing, review has been locked.
     <% elsif @user_publication_review.publication.status == 'proposed' and @user_publication_review.new_record? and current_user.pp_committee_secretary? %>
-      <span id="user_<%= @user_publication_review.user_id %>_notified_pp"><%= link_to image_tag('contour/email.png', :alt => '') + 'Send Email Reminder', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true, :class => 'button', :style => 'margin-bottom:0px' %></span>
+      <span id="user_<%= @user_publication_review.user_id %>_notified_pp"><%= link_to image_tag('gentleface/16/mail.png', :alt => '') + 'Send Email Reminder', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true, :class => 'button', :style => 'margin-bottom:0px' %></span>
     <% elsif @user_publication_review.new_record? and current_user.pp_committee_secretary? %>
       Review Locked (By Being Approved/Not Approved). No more email reminders for reviewer.
     <% end %>
@@ -39,7 +39,7 @@
 <% end %>
 
 
-  
+
 <% if false %>
   <tr>
     <td style="vertical-align:middle"><%= link_to @user.name, @user %></td>
@@ -49,7 +49,7 @@
       <% if current_user == @user %>
         <%= link_to 'Create Review', '#', :onclick => remote_function(:url => new_user_publication_review_path(:publication_id => @publication.id), :method => :get) + "; return false;", :class => "button" %>
       <% else %>
-        <%= link_to_function image_tag('contour/email.png', :alt => '') + 'Send Email Reminder', "alert('Not yet implemented, just a placeholder sorry!')", :class => 'button', :style => 'margin-bottom:0px' %>
+        <%= link_to_function image_tag('gentleface/16/mail.png', :alt => '') + 'Send Email Reminder', "alert('Not yet implemented, just a placeholder sorry!')", :class => 'button', :style => 'margin-bottom:0px' %>
       <% end %>
     </td>
   </tr>

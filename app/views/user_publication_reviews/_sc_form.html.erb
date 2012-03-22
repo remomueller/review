@@ -18,22 +18,22 @@
     <% url = @user_publication_review.new_record? ? user_publication_reviews_path(:publication_id => @user_publication_review.publication_id, :committee => 'steering') : user_publication_review_path(@user_publication_review, :committee => 'steering') %>
     <% method = @user_publication_review.new_record? ? :post : :put %>
     <% form_name = "upr_sc_form_#{@user_publication_review.user_id}" %>
-    
+
     <%= form_tag url, :method => method, :remote => true, :id => form_name do %>
       <%= hidden_field_tag "user_publication_review[status]" %>
       <%= hidden_field_tag 'user_publication_review[comment]' %>
       <%= hidden_field_tag 'user_publication_review[writing_group_nomination]' %>
-    
+
       <% with = "if($('#user_publication_review_display_status_approved').is(':checked')){ $('#user_publication_review_status').val('approved'); }
                  else if($('#user_publication_review_display_status_not_approved').is(':checked')){ $('#user_publication_review_status').val('not approved'); }
                  else{ $('#user_publication_review_status').val(''); }
                  $('#user_publication_review_comment').val($('#user_publication_review_display_comment').val());
                  $('#user_publication_review_writing_group_nomination').val($('#user_publication_review_display_writing_group_nomination').val());" %>
-    
-      <%#= link_to(image_tag('contour/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Nomination" : "Update Nomination"), '#', :onclick => remote_function(:url => url, :method => method, :with => with) + "; return false;", :class => "button positive" )%>
-      <%= link_to_function image_tag('contour/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Nomination" : "Update Nomination"), "#{with};$('##{form_name}').submit();", :class => "button positive"%>
+
+      <%#= link_to(image_tag('gentleface/16/checkmark.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Nomination" : "Update Nomination"), '#', :onclick => remote_function(:url => url, :method => method, :with => with) + "; return false;", :class => "button positive" )%>
+      <%= link_to_function image_tag('gentleface/16/checkmark.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Nomination" : "Update Nomination"), "#{with};$('##{form_name}').submit();", :class => "button positive"%>
       <% unless @user_publication_review.new_record? %>
-        <%= link_to image_tag('contour/cross.png', :alt => '') + 'Cancel', user_publication_review_path(@user_publication_review, :committee => 'steering'), :remote => true, :class => 'button negative' %>
+        <%= link_to image_tag('gentleface/16/cancel.png', :alt => '') + 'Cancel', user_publication_review_path(@user_publication_review, :committee => 'steering'), :remote => true, :class => 'button negative' %>
       <% end %>
     <% end %>
   </td>
@@ -77,19 +77,19 @@
     <%= f.text_area :comment, :rows => 7, :style => "width:#{width}" %>
   </div>
   <div class="actions">
-    
-    <% form_name = @user_publication_review.new_record? ? 'new_user_publication_review' : "edit_user_publication_review_#{@user_publication_review.id}" %>
-    
-    <%= link_to_function image_tag('contour/tick.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('##{form_name}').submit();", :class => "button positive" %>
 
-<% if false %>    
+    <% form_name = @user_publication_review.new_record? ? 'new_user_publication_review' : "edit_user_publication_review_#{@user_publication_review.id}" %>
+
+    <%= link_to_function image_tag('gentleface/16/checkmark.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('##{form_name}').submit();", :class => "button positive" %>
+
+<% if false %>
     <button class="positive">
-      <%= image_tag('contour/tick.png', :alt => '') %>
+      <%= image_tag('gentleface/16/checkmark.png', :alt => '') %>
       <%= @user_publication_review.new_record? ? "Submit Review" : "Update Review" %>
     </button>
 <% end %>
     <% unless @user_publication_review.new_record? %>
-      <%= link_to image_tag('contour/cross.png', :alt => '') + 'Cancel', @user_publication_review.publication, :class => 'button negative' %>
+      <%= link_to image_tag('gentleface/16/cancel.png', :alt => '') + 'Cancel', @user_publication_review.publication, :class => 'button negative' %>
     <% end %>
 		<br />
   </div>

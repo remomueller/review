@@ -2,8 +2,21 @@
 
 <h1><%= @title %></h1>
 
-<%= render 'header' %>
-
-<%= render 'form' %>
-
+<div class="frame">
+  <table class="blank padded" style="width:100%">
+    <tr>
+      <td style="padding:0px 15px">
+        <%= render 'header' %>
+      </td>
+    </tr>
+  </table>
+  <br />
+  <table class="blank padded" style="width:100%">
+    <tr>
+      <td style="padding:0px 15px 15px 15px">
+        <%= render 'form' %>
+      </td>
+    </tr>
+  </table>
+</div>
 <%#= link_to 'Back', publications_path %>

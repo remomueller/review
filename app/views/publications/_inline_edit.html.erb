@@ -29,7 +29,7 @@
     <br />
     <b>Writing Group:</b><br />
     <%= text_area_tag "publication_display[#{@publication.id}][writing_group_members]", @publication.writing_group_members, :cols => 60, :rows => 6 %><br />
-    
+
     <b>Committee Nominations:</b><br />
     <span id="publication_committee_nominations_box_<%= @publication.id %>">
       <%= render partial: 'publications/committee_nominations' %>
@@ -71,9 +71,9 @@
       <%= hidden_field_tag "publication[#{@publication.id}][dataset_requested_analyst]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][targeted_start_date]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][secretary_notes]" %>
-    
-      <%= link_to_function image_tag('contour/tick.png', :alt => '') + 'Update', "#{with};$('##{form_name}').submit();", :class => "button positive" %>
-      <%#= link_to image_tag('contour/tick.png', :alt => '') + 'Update', '#', :onclick => remote_function(
+
+      <%= link_to_function image_tag('gentleface/16/checkmark.png', :alt => '') + 'Update', "#{with};$('##{form_name}').submit();", :class => "button positive" %>
+      <%#= link_to image_tag('gentleface/16/checkmark.png', :alt => '') + 'Update', '#', :onclick => remote_function(
           :url => inline_update_publication_path(@publication), :method => :post,
           :with => "'&'+$('publication_#{@publication.id}_secretary_notes').serialize()+
                     '&'+$('publication_#{@publication.id}_status').serialize()+
@@ -82,7 +82,7 @@
                     '&'+$('publication_#{@publication.id}_targeted_start_date__2i').serialize()+
                     '&'+$('publication_#{@publication.id}_targeted_start_date__3i').serialize()"
         ) + "; return false;", :class => "button positive" %>
-      <%= link_to image_tag('contour/cross.png', :alt => '') + 'Cancel', inline_show_publication_path(@publication), :method => :post, :remote => true, :class => "button negative" %>
+      <%= link_to image_tag('gentleface/16/cancel.png', :alt => '') + 'Cancel', inline_show_publication_path(@publication), :method => :post, :remote => true, :class => "button negative" %>
     <% end %>
   </td>
 </tr>
@@ -91,7 +91,7 @@
   <td colspan="9">
     <% if @publication.status != 'published' %>
       <span class="quiet">
-        <strong>Action Items:</strong> 
+        <strong>Action Items:</strong>
         <% case @publication.status when 'draft' %>
           Author has not submitted publication.
         <% when 'not approved' %>

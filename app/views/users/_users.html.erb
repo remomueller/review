@@ -1,11 +1,11 @@
-<div style="float:right;margin-bottom:-5px">
-  Per Page 
+<div style="float:right;">
+  Per Page
   <% [10,25,50].each do |count| %>
     <span class="per_page">
       <% if current_user.users_per_page != count %>
         <%= link_to count, "#", 'data-count' => count, 'data-object' => 'users', :id => "count_#{count}" %>
       <% else %>
-        <%= count %>
+        <span class="selected"><%= count %></span>
       <% end %>
     </span>
   <% end %>
@@ -13,44 +13,54 @@
 
 <div style="clear:both"></div>
 
-<table style="width:100%">
-  <tr>
-    <th><%== sort_field_helper(@order, 'users.last_name', 'Name', 'users_search') %></th>
-    <th><%== sort_field_helper(@order, 'users.email', 'Email', 'users_search') %></th>
-    <th><%== sort_field_helper(@order, 'users.current_sign_in_at', 'Recent Activity', 'users_search') %></th>
+<div class="frame">
+  <table style="width:100%">
     <% if current_user.system_admin? %>
-      <th><%== sort_field_helper(@order, 'users.status', 'Status', 'users_search') %></th>
-      <th><%== sort_field_helper(@order, 'users.pp_committee', 'P&amp;P Committee', 'users_search') %></th>
-      <th><%== sort_field_helper(@order, 'users.steering_committee', 'Steering Committee', 'users_search') %></th>
-      <th><%== sort_field_helper(@order, 'users.pp_committee_secretary', 'P&amp;P Secretary', 'users_search') %></th>
-      <th><%== sort_field_helper(@order, 'users.steering_committee_secretary', 'SC Secretary', 'users_search') %></th>      
-      <th><%== sort_field_helper(@order, 'users.system_admin', 'System Admin', 'users_search') %></th>
-      <th></th>
-      <th></th>
+      <tr>
+        <th colspan="4"></th>
+        <th colspan="2">Committee</th>
+        <th colspan="2">Secretary</th>
+        <th colspan="3"></th>
+      </tr>
     <% end %>
-  </tr>
+    <tr>
+      <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.last_name', 'Name', 'users_search') %></th>
+      <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.email', 'Email', 'users_search') %></th>
+      <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.current_sign_in_at', 'Recent Activity', 'users_search') %></th>
+      <% if current_user.system_admin? %>
+        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.status', 'Status', 'users_search') %></th>
+        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.pp_committee', 'P&amp;P', 'users_search') %></th>
+        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.steering_committee', 'Steering', 'users_search') %></th>
+        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.pp_committee_secretary', 'P&amp;P', 'users_search') %></th>
+        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.steering_committee_secretary', 'Steering', 'users_search') %></th>
+        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.system_admin', 'System Admin', 'users_search') %></th>
+        <th></th>
+        <th></th>
+      <% end %>
+    </tr>
 
-<% @users.each do |user| %>
-  <tr>
-    <td><%= link_to user.name, user %></td>
-    <td><%= user.email %></td>
-    <td><%= recent_activity(user.current_sign_in_at) %></td>
-    <% if current_user.system_admin? %>
-      <td><%= user.status %></td>
-      <td style="text-align:center"><%= check_box_tag 'user', 'pp_committee', user.pp_committee?, :disabled => true %></td>
-      <td style="text-align:center"><%= check_box_tag 'user', 'steering_committee', user.steering_committee?, :disabled => true %></td>
-      <td style="text-align:center"><%= check_box_tag 'user', 'pp_committee_secretary', user.pp_committee_secretary?, :disabled => true %></td>
-      <td style="text-align:center"><%= check_box_tag 'user', 'steering_committee_secretary', user.steering_committee_secretary?, :disabled => true %></td>
-      <td style="text-align:center"><%= check_box_tag 'user', 'system_admin', user.system_admin?, :disabled => true %></td>
-      <td style="vertical-align:middle"><%= link_to image_tag('contour/edit.png', :alt => ''), edit_user_path(user) %></td>
-      <td style="vertical-align:middle">
-        <% unless current_user == user %>
-          <%= link_to image_tag('contour/delete.png', :alt => ''), user, :confirm => "Are you sure you want to delete User #{user.name}?", :method => :delete %>
-        <% end %>
-      </td>
-    <% end %>
-  </tr>
-<% end %>
-</table>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to user.name, user %></td>
+      <td><%= user.email %></td>
+      <td><%= recent_activity(user.current_sign_in_at) %></td>
+      <% if current_user.system_admin? %>
+        <td><%= user.status %></td>
+        <td style="text-align:center"><%= check_box_tag 'user', 'pp_committee', user.pp_committee?, :disabled => true %></td>
+        <td style="text-align:center"><%= check_box_tag 'user', 'steering_committee', user.steering_committee?, :disabled => true %></td>
+        <td style="text-align:center"><%= check_box_tag 'user', 'pp_committee_secretary', user.pp_committee_secretary?, :disabled => true %></td>
+        <td style="text-align:center"><%= check_box_tag 'user', 'steering_committee_secretary', user.steering_committee_secretary?, :disabled => true %></td>
+        <td style="text-align:center"><%= check_box_tag 'user', 'system_admin', user.system_admin?, :disabled => true %></td>
+        <td style="vertical-align:middle"><%= link_to image_tag('gentleface/16/doc_edit.png', :alt => ''), edit_user_path(user) %></td>
+        <td style="vertical-align:middle">
+          <% unless current_user == user %>
+            <%= link_to image_tag('gentleface/16/doc_delete.png', :alt => ''), user, :confirm => "Are you sure you want to delete User #{user.name}?", :method => :delete %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+  </table>
+</div>
 
 <center><%= paginate @users %></center>

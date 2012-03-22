@@ -5,14 +5,14 @@
   <span class="quiet">uploaded <%= simple_time(@publication.manuscript_uploaded_at) %></span>
   -- <%= number_to_human_size(@publication.manuscript.size) %>
   <% if current_user == @publication.user or current_user.secretary? %>
-  <%= link_to image_tag('contour/delete.png', :alt => '', :style => 'vertical-align:middle'), destroy_manuscript_publication_path(@publication), :method => :post, :remote => true, :confirm => "Are you sure you want to delete the uploaded manuscript?" %>
+  <%= link_to image_tag('gentleface/16/doc_delete.png', :alt => '', :style => 'vertical-align:middle'), destroy_manuscript_publication_path(@publication), :method => :post, :remote => true, :confirm => "Are you sure you want to delete the uploaded manuscript?" %>
   <% end %>
-  
+
   <br /><br />
-  
+
   <div class="actions">
     <% if current_user == @publication.user or current_user.secretary? %>
-      <%= link_to image_tag('contour/addfile.png', :alt => '') + 'Upload a Revised Manuscript', edit_manuscript_publication_path(@publication), :method => :post, :remote => true, :class => "button" %>
+      <%= link_to image_tag('gentleface/16/doc_new.png', :alt => '') + 'Upload a Revised Manuscript', edit_manuscript_publication_path(@publication), :method => :post, :remote => true, :class => "button" %>
     <% end %>
   </div>
 </div>

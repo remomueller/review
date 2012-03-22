@@ -1,5 +1,8 @@
 == 0.12.2
 
+* Enhancements
+  * Update to Rails 3.2.2 and Contour 0.10.2 with Contour-Minimalist theme
+
 == 0.12.1
 
 * Refactoring

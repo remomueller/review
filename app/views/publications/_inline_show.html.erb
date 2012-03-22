@@ -50,7 +50,7 @@
               classes: 'ui-tooltip-shadow ui-tooltip-green'
             }
           });
-      <% end %>      
+      <% end %>
     <% end %>
   </td>
   <td><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
@@ -96,7 +96,7 @@
       <td></td>
     <% else %>
       <td style="white-space:nowrap">
-        <%= link_to image_tag('contour/edit.png', :alt => ''), inline_edit_publication_path(@publication), :method => :post, :remote => true %>
+        <%= link_to image_tag('gentleface/16/doc_edit.png', :alt => ''), inline_edit_publication_path(@publication), :method => :post, :remote => true %>
       </td>
     <% end %>
   <% end %>
@@ -114,7 +114,7 @@
   <td colspan="<%= (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?) ? 9 : 8 %>">
     <% if @publication.status != 'published' %>
       <span class="quiet">
-        <strong>Action Items:</strong> 
+        <strong>Action Items:</strong>
         <% case @publication.status when 'draft' %>
           Author has not submitted publication.
         <% when 'not approved' %>
