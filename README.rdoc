@@ -38,7 +38,7 @@ All done!
 
 == Installing wkhtmltopdf
 
-Follow instructions given here: {https://github.com/jdpace/PDFKit/wiki/Installing-WKHTMLTOPDF}[https://github.com/jdpace/PDFKit/wiki/Installing-WKHTMLTOPDF]
+Follow instructions given here: {https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF}[https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF]
 
 == Contributing to Review
 
