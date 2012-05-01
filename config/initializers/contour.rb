@@ -20,18 +20,16 @@ Contour.setup do |config|
   config.menu_items = [
     {
       name: 'Login', display: 'not_signed_in', path: 'new_user_session_path', position: 'right',
-      links: [{ name: 'Sign Up', path: 'new_user_registration_path' }]
+      links: [{ name: 'Sign Up', path: 'new_user_registration_path' },
+              { divider: true },
+              { authentications: true }]
     },
     {
       name: 'current_user.name', eval: true, display: 'signed_in', path: 'user_path(current_user)', position: 'right',
       links: [{ html: '"<div class=\"small\" style=\"color:#bbb\">"+current_user.email+"</div>"', eval: true },
               { name: 'Authentications', path: 'authentications_path', condition: 'not PROVIDERS.blank?' },
-              { html: "<br />" },
+              { divider: true },
               { name: 'Logout', path: 'destroy_user_session_path' }]
-    },
-    {
-      name: 'About', display: 'not_signed_in', path: 'about_path', position: 'left',
-      links: []
     },
     {
       name: 'Manual ', display: 'not_signed_in', path: 'SITE_URL + \'/documents/CHAT Publications Manual.pdf\'', target: '_blank', position: 'left', image: 'contour/pdf.png', image_options: { style: 'vertical-align:middle' },
@@ -39,12 +37,14 @@ Contour.setup do |config|
     },
     {
       name: 'Publications', display: 'signed_in', path: 'publications_path', position: 'left',
-      links: [{ name: '&raquo;New', path: 'new_publication_path' },
-              { html: "<br />" },
-              { name: 'About', path: 'about_path' }]
+      links: [{ name: 'Create', path: 'new_publication_path' }]
     },
     {
       name: 'Users', display: 'signed_in', path: 'users_path', position: 'left', condition: 'current_user.system_admin?',
+      links: []
+    },
+    {
+      name: 'About', display: 'always', path: 'about_path', position: 'left',
       links: []
     }
   ]

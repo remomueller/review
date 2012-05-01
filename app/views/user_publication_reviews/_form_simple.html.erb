@@ -3,12 +3,12 @@
 <% method = @user_publication_review.new_record? ? :post : :put %>
 <% form_name = "upr_form_#{@user_publication_review.user_id}" %>
 
-<%= form_tag url, :method => method, :remote => true, :id => form_name do %>
+<%= form_tag url, method: method, :remote => true, :id => form_name do %>
   <fieldset style="border: 1px solid #0E7799;">
     <legend>Review Publication
-      <%= link_to_function image_tag('gentleface/16/checkmark.png', :alt => '', :style => 'vertical-align:text-bottom'), "$('##{form_name}').submit();" %>
+      <%= link_to_function image_tag('gentleface/16/checkmark.png', alt: '', :style => 'vertical-align:text-bottom'), "$('##{form_name}').submit();" %>
       <% unless @user_publication_review.new_record? %>
-        <%= link_to image_tag('gentleface/16/cancel.png', :alt => '', :style => 'vertical-align:text-bottom'), user_publication_review_path(@user_publication_review, :mode => 'simple'), :remote => true %>
+        <%= link_to image_tag('gentleface/16/cancel.png', alt: '', :style => 'vertical-align:text-bottom'), user_publication_review_path(@user_publication_review, :mode => 'simple'), :remote => true %>
       <% end %>
     </legend>
 
@@ -32,9 +32,9 @@
     <% end %>
 
     <div class="actions">
-      <%= link_to_function image_tag('gentleface/16/checkmark.png', :alt => '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('##{form_name}').submit();", :class => "button positive" %>
+      <%= link_to_function image_tag('gentleface/16/checkmark.png', alt: '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('##{form_name}').submit();", class: 'btn btn-primary' %>
       <% unless @user_publication_review.new_record? %>
-        <%= link_to image_tag('gentleface/16/cancel.png', :alt => '') + 'Cancel', user_publication_review_path(@user_publication_review, :mode => 'simple'), :remote => true, :class => 'button negative' %>
+        <%= link_to image_tag('gentleface/16/cancel.png', alt: '') + 'Cancel', user_publication_review_path(@user_publication_review, :mode => 'simple'), :remote => true, class: 'btn btn-danger' %>
       <% end %>
     </div>
   </fieldset>

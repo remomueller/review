@@ -1,13 +1,13 @@
-<%= form_tag upload_manuscript_publication_path(@publication), :method => :post, :multipart => true, :id => 'manuscript_form' do  %>
+<%= form_tag upload_manuscript_publication_path(@publication), method: :post, :multipart => true, :id => 'manuscript_form' do  %>
   <div class="field">
     <%= label :publication, :manuscript, 'Upload Manuscript (PDF, Word)' %>
     <%= file_field :publication, :manuscript %>
   </div>
   <div class="actions">
-    <%= link_to_function image_tag('gentleface/16/checkmark.png', :alt => '') + (@publication.manuscript_url.blank? ? "Upload Manuscript" : "Replace Existing Manuscript"), "$('#manuscript_form').submit();", :class => "button positive" %>
+    <%= link_to_function image_tag('gentleface/16/checkmark.png', alt: '') + (@publication.manuscript_url.blank? ? "Upload Manuscript" : "Replace Existing Manuscript"), "$('#manuscript_form').submit();", class: 'btn btn-primary' %>
 
     <% unless @publication.manuscript_url.blank? %>
-      <%= link_to image_tag('gentleface/16/cancel.png', :alt => '') + 'Cancel', show_manuscript_publication_path(@publication), :method => :post, :remote => true, :class => "button negative" %>
+      <%= link_to image_tag('gentleface/16/cancel.png', alt: '') + 'Cancel', show_manuscript_publication_path(@publication), method: :post, :remote => true, class: "button negative" %>
     <% end %>
   </div>
 <% end %>

@@ -2,21 +2,21 @@
 <% url = @user_publication_review.new_record? ? new_user_publication_review_path(:publication_id => @user_publication_review.publication.id, :mode => 'simple') : edit_user_publication_review_path(@user_publication_review, :mode => 'simple') %>
 <% form_name = "upr_form_#{@user_publication_review.user_id}" %>
 
-<%= form_tag url, :method => :get, :remote => true, :id => form_name do %>
+<%= form_tag url, method: :get, :remote => true, :id => form_name do %>
 
   <fieldset style="border: 1px solid #0E7799;">
-    <legend>Review Publication <%= link_to_function image_tag('gentleface/16/doc_edit.png', :alt => '', :style => 'vertical-align:text-bottom'), "$('##{form_name}').submit();" %></legend>
+    <legend>Review Publication <%= link_to_function image_tag('gentleface/16/doc_edit.png', alt: '', :style => 'vertical-align:text-bottom'), "$('##{form_name}').submit();" %></legend>
 
     <div class="field">
       <label>Approval Status</label>
       <% UserPublicationReview::STATUS.each do |display, value| %>
-        <%= radio_button :user_publication_review, :status, value, :checked => (@user_publication_review.status == value), :disabled => 'disabled' %> <label><%= display %></label>
+        <%= radio_button :user_publication_review, :status, value, :checked => (@user_publication_review.status == value), disabled: 'disabled' %> <label><%= display %></label>
       <% end %>
     </div>
 
     <div class="field">
       <%= label :user_publication_review, :comment %><br />
-      <%= text_area :user_publication_review, :comment, :rows => 7, :style => "width:#{width}", :disabled => 'disabled' %>
+      <%= text_area :user_publication_review, :comment, :rows => 7, :style => "width:#{width}", disabled: 'disabled' %>
     </div>
 
     <% if current_user.steering_committee? %>
@@ -35,9 +35,9 @@
 
     <div class="actions">
       <% if @user_publication_review.new_record? %>
-        <%= link_to_function image_tag('gentleface/16/doc_new.png', :alt => '') + 'Create Review', "$('##{form_name}').submit();", :class => "button" %>
+        <%= link_to_function image_tag('gentleface/16/doc_new.png', alt: '') + 'Create Review', "$('##{form_name}').submit();", class: 'btn' %>
       <% else %>
-        <%= link_to_function image_tag('gentleface/16/doc_edit.png', :alt => '') + 'Edit Review', "$('##{form_name}').submit();", :class => 'button' %>
+        <%= link_to_function image_tag('gentleface/16/doc_edit.png', alt: '') + 'Edit Review', "$('##{form_name}').submit();", class: 'btn' %>
       <% end %>
     </div>
   </fieldset>

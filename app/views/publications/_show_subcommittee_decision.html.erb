@@ -1,14 +1,14 @@
 <% form_name = "subcommittee_decision_form" %>
-<%= form_tag edit_subcommittee_decision_publication_path(@publication), :method => :post, :remote => true, :id => form_name do %>
+<%= form_tag edit_subcommittee_decision_publication_path(@publication), method: :post, :remote => true, :id => form_name do %>
   <div class="field">
     <label>Publication Status</label>
     <% Publication::PP_STATUS.each do |display, value| %>
-      <%= radio_button :publication, :status, value, :checked => (value == @publication.status), :disabled => 'disabled' %> <label><%= display %></label>
+      <%= radio_button :publication, :status, value, :checked => (value == @publication.status), disabled: 'disabled' %> <label><%= display %></label>
     <% end %>
   </div>
   <div class="field">
     <%= label :publication, :manuscript_number, 'Manuscript Number' %><br />
-    <%= text_field :publication, :manuscript_number, :disabled => 'disabled' %>
+    <%= text_field :publication, :manuscript_number, disabled: 'disabled' %>
   </div>
   <div class="field">
     <%= label :publication, :additional_ppcommittee_instructions, 'Additional Instructions to Email to Lead Author' %> <%= link_to_function 'Preview', "$('#pp_email').toggle();" %><br />
@@ -19,7 +19,7 @@
     <% end %>
   </div>
   <div class="actions">
-    <%= link_to_function image_tag('gentleface/16/doc_edit.png', :alt => '') + 'Edit Subcommittee Decision', "$('##{form_name}').submit();", :class => 'button' %>
+    <%= link_to_function image_tag('gentleface/16/doc_edit.png', alt: '') + 'Edit Subcommittee Decision', "$('##{form_name}').submit();", class: 'btn' %>
   	<br />
   </div>
 <% end %>

@@ -1,8 +1,8 @@
 <% @title = @publication.full_title %>
 <h3><center><%= @title %></center></h3>
 <br />
-<%= link_to image_tag('gentleface/16/doc_edit.png', :alt => '') + "Edit Publication", edit_publication_path(@publication), :class => 'button' if @publication.editable?(current_user) %>
-<%= link_to image_tag('gentleface/16/folder_open.png', :alt => '') + "View All Publications", publications_path, :class => 'button' %>
+<%= link_to image_tag('gentleface/16/doc_edit.png', alt: '') + "Edit Publication", edit_publication_path(@publication), class: 'btn' if @publication.editable?(current_user) %>
+<%= link_to image_tag('gentleface/16/folder_open.png', alt: '') + "View Publications", publications_path, class: 'btn' %>
 
 <div style="clear:both"></div>
 <table style="border-collapse:collapse;border:0px;margin:0px;padding:0px">
@@ -37,8 +37,8 @@
   <% end %>
 
   <% if current_user.committee_member? or current_user.secretary? %>
-  <%= link_to_function "Show/Hide P&P Committee Reviews", "$('#sc_reviews').hide(); $('#pp_reviews').toggle( 'blind', {}, 500 );", :class => 'button' %>
-  <%= link_to_function "Show/Hide Steering Committee Reviews", "$('#pp_reviews').hide(); $('#sc_reviews').toggle( 'blind', {}, 500 );", :class => 'button' %>
+  <%= link_to_function "Show/Hide P&P Committee Reviews", "$('#sc_reviews').hide(); $('#pp_reviews').toggle( 'blind', {}, 500 );", class: 'btn' %>
+  <%= link_to_function "Show/Hide Steering Committee Reviews", "$('#pp_reviews').hide(); $('#sc_reviews').toggle( 'blind', {}, 500 );", class: 'btn' %>
   <div style="clear:both"></div>
   <fieldset id="pp_reviews" style="display:none">
     <legend>P&amp;P Committee Reviews</legend>
@@ -196,7 +196,7 @@
   </fieldset>
   <% end %>
 
-  <%= render :partial => 'publications/form', :locals => { :disabled => 'disabled' } %>
+  <%= render :partial => 'publications/form', :locals => { disabled: 'disabled' } %>
   </td>
   </tr>
   </table>

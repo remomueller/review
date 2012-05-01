@@ -19,7 +19,7 @@
     <td><%= user_publication_review.comment %></td>
     <td><%= link_to 'Show', user_publication_review %></td>
     <td><%= link_to 'Edit', edit_user_publication_review_path(user_publication_review) %></td>
-    <td><%= link_to 'Destroy', user_publication_review, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', user_publication_review, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

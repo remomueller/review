@@ -26,7 +26,12 @@ Review::Application.routes.draw do
   end
 
   devise_for :users, :controllers => {:registrations => 'contour/registrations', :sessions => 'contour/sessions', :passwords => 'contour/passwords'}, :path_names => { :sign_up => 'register', :sign_in => 'login' }
-  resources :users
+
+  resources :users do
+    collection do
+      post :activate
+    end
+  end
 
   resources :user_publication_reviews
 
@@ -35,4 +40,5 @@ Review::Application.routes.draw do
   root :to => "publications#index"
 
   # See how all your routes lay out with "rake routes"
+
 end

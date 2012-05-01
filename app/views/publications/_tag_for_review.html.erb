@@ -4,5 +4,5 @@
   <% (icon, title, tagged) = @publication.tagged_for_sc_review? ? ['blue', 'Marked for Steering Committee Review', '0'] : ['neutral', 'Mark for Steering Committee Review', '1'] %>
 <% end %>
 <% if (@committee == 'pp' and (current_user.pp_committee_secretary? or @publication.tagged_for_pp_review?)) or (@committee == 'sc' and (current_user.steering_committee_secretary? or @publication.tagged_for_sc_review?)) %>
-  <%= link_to_if ((current_user.pp_committee_secretary? and @committee == 'pp') or (current_user.steering_committee_secretary? and @committee == 'sc')), image_tag("contour/tag_#{icon}.png", :alt => '', :title => title), tag_for_review_publication_path(@publication, :tagged => tagged, :committee => @committee), :remote => true, :method => :post %>
+  <%= link_to_if ((current_user.pp_committee_secretary? and @committee == 'pp') or (current_user.steering_committee_secretary? and @committee == 'sc')), image_tag("contour/tag_#{icon}.png", alt: '', :title => title), tag_for_review_publication_path(@publication, :tagged => tagged, :committee => @committee), :remote => true, method: :post %>
 <% end %>

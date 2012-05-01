@@ -5,7 +5,7 @@
     <%= text_field_tag "publication_display[#{@publication.id}][manuscript_number]", @publication.manuscript_number %>
     <% unless @publication.manuscript_url.blank? %>
       <br />
-      <span style="margin-left:20px"><%= link_to image_tag('contour/download.png', :alt => '', :style => 'vertical-align:middle'), SITE_URL + @publication.manuscript_url, :target => '_blank' %></span>
+      <span style="margin-left:20px"><%= link_to image_tag('contour/download.png', alt: '', :style => 'vertical-align:middle'), SITE_URL + @publication.manuscript_url, :target => '_blank' %></span>
       <% if false %>
       <br />
       <span class="quiet"><%= simple_time(@publication.manuscript_uploaded_at) %></span><br />
@@ -62,7 +62,7 @@
                $('#publication_#{@publication.id}_secretary_notes').val($('#publication_display_#{@publication.id}_secretary_notes').val());" %>
 
     <% form_name = "publication_#{@publication.id}_form" %>
-    <%= form_tag inline_update_publication_path(@publication), :method => :post, :remote => true, :id => form_name do %>
+    <%= form_tag inline_update_publication_path(@publication), method: :post, :remote => true, :id => form_name do %>
       <%= hidden_field_tag "publication[#{@publication.id}][manuscript_number]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][user_id]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][co_lead_author_id]" %>
@@ -72,17 +72,17 @@
       <%= hidden_field_tag "publication[#{@publication.id}][targeted_start_date]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][secretary_notes]" %>
 
-      <%= link_to_function image_tag('gentleface/16/checkmark.png', :alt => '') + 'Update', "#{with};$('##{form_name}').submit();", :class => "button positive" %>
-      <%#= link_to image_tag('gentleface/16/checkmark.png', :alt => '') + 'Update', '#', :onclick => remote_function(
-          :url => inline_update_publication_path(@publication), :method => :post,
+      <%= link_to_function image_tag('gentleface/16/checkmark.png', alt: '') + 'Update', "#{with};$('##{form_name}').submit();", class: 'btn btn-primary' %>
+      <%#= link_to image_tag('gentleface/16/checkmark.png', alt: '') + 'Update', '#', :onclick => remote_function(
+          :url => inline_update_publication_path(@publication), method: :post,
           :with => "'&'+$('publication_#{@publication.id}_secretary_notes').serialize()+
                     '&'+$('publication_#{@publication.id}_status').serialize()+
                     '&'+$('publication_#{@publication.id}_manuscript_number').serialize()+
                     '&'+$('publication_#{@publication.id}_targeted_start_date__1i').serialize()+
                     '&'+$('publication_#{@publication.id}_targeted_start_date__2i').serialize()+
                     '&'+$('publication_#{@publication.id}_targeted_start_date__3i').serialize()"
-        ) + "; return false;", :class => "button positive" %>
-      <%= link_to image_tag('gentleface/16/cancel.png', :alt => '') + 'Cancel', inline_show_publication_path(@publication), :method => :post, :remote => true, :class => "button negative" %>
+        ) + "; return false;", class: 'btn btn-primary' %>
+      <%= link_to image_tag('gentleface/16/cancel.png', alt: '') + 'Cancel', inline_show_publication_path(@publication), method: :post, :remote => true, class: "button negative" %>
     <% end %>
   </td>
 </tr>

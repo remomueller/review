@@ -25,13 +25,6 @@
 /*              GLOBALS               */
 /**************************************/
 
-input[type="text"], input[type="password"], textarea {
-  font-family: "Liberation Sans", Helvetica, Arial, sans-serif;
-}
-
-a:link { color: #057080; }
-a:hover { color: #EB6C20; }
-
 textarea[disabled='disabled'], input[disabled='disabled'], select[disabled='disabled'], .disabled { color: #0E7799; }
 
 /**************************************/

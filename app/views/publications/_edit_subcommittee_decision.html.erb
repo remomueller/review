@@ -1,5 +1,5 @@
 <% width = '914px' %>
-<%= form_tag pp_approval_publication_path(@publication), :method => :post, :id => 'subcommittee_decision_form' do %>
+<%= form_tag pp_approval_publication_path(@publication), method: :post, :id => 'subcommittee_decision_form' do %>
 <div class="field">
   <label>Publication Status</label>
   <% Publication::PP_STATUS.each do |display, value| %>
@@ -16,10 +16,10 @@
 </div>
 <div class="actions">
 
-  <%= link_to_function image_tag('gentleface/16/checkmark.png', :alt => '') + (@publication.status == 'proposed' ? 'Submit' : 'Update') + " Subcommittee Decision", "$('#subcommittee_decision_form').submit();", :class => "button positive" %>
+  <%= link_to_function image_tag('gentleface/16/checkmark.png', alt: '') + (@publication.status == 'proposed' ? 'Submit' : 'Update') + " Subcommittee Decision", "$('#subcommittee_decision_form').submit();", class: 'btn btn-primary' %>
 
   <% unless @publication.status == 'proposed' %>
-    <%= link_to image_tag('gentleface/16/cancel.png', :alt => '') + 'Cancel', show_subcommittee_decision_publication_path(@publication), :method => :post, :remote => true, :class => 'button negative' %>
+    <%= link_to image_tag('gentleface/16/cancel.png', alt: '') + 'Cancel', show_subcommittee_decision_publication_path(@publication), method: :post, :remote => true, class: 'btn btn-danger' %>
   <% end %>
 	<br />
 </div>

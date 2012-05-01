@@ -18,14 +18,14 @@
   <td>
     <% if current_user == @user_publication_review.user and  @user_publication_review.publication.status == 'approved' %>
       <% if @user_publication_review.new_record? %>
-        <%= link_to 'Create Review', new_user_publication_review_path(:publication_id => @publication.id, :committee => 'steering'), :method => :get, :remote => true, :class => "button" %>
+        <%= link_to 'Create Review', new_user_publication_review_path(:publication_id => @publication.id, :committee => 'steering'), method: :get, :remote => true, class: 'btn' %>
       <% else %>
-        <%= link_to image_tag('gentleface/16/doc_edit.png', :alt => '') + 'Edit Review and Nomination', edit_user_publication_review_path(@user_publication_review, :committee => 'steering'), :method => :get, :remote => true, :class => 'button' %>
+        <%= link_to image_tag('gentleface/16/doc_edit.png', alt: '') + 'Edit Review and Nomination', edit_user_publication_review_path(@user_publication_review, :committee => 'steering'), method: :get, :remote => true, class: 'btn' %>
       <% end %>
     <% elsif current_user == @user_publication_review.user %>
       No editing, review has been locked.
     <% elsif @user_publication_review.publication.status == 'approved' and @user_publication_review.new_record? and current_user.steering_committee_secretary? %>
-      <span id="user_<%= @user_publication_review.user_id %>_notified_sc"><%= link_to image_tag('gentleface/16/mail.png', :alt => '') + 'Send Email Reminder', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), :method => :post, :remote => true, :class => 'button', :style => 'margin-bottom:0px' %></span>
+      <span id="user_<%= @user_publication_review.user_id %>_notified_sc"><%= link_to image_tag('gentleface/16/mail.png', alt: '') + 'Send Email Reminder', send_reminder_publication_path(@publication, :reviewer_id => @user_publication_review.user_id), method: :post, :remote => true, class: 'btn', :style => 'margin-bottom:0px' %></span>
     <% elsif @user_publication_review.new_record? and current_user.steering_committee_secretary? %>
       Review Locked (By Being Nominated/Not Approved). No more email reminders for committee member.
     <% end %>

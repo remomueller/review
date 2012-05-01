@@ -5,7 +5,7 @@
     <%= @publication.manuscript_number %>
     <% unless @publication.manuscript_url.blank? %>
       <br />
-      <span style="margin-left:20px"><%= link_to image_tag('contour/download.png', :alt => '', :style => 'vertical-align:middle'), SITE_URL + @publication.manuscript_url, :target => '_blank' %></span>
+      <span style="margin-left:20px"><%= link_to image_tag('contour/download.png', alt: '', :style => 'vertical-align:middle'), SITE_URL + @publication.manuscript_url, :target => '_blank' %></span>
       <% if false %>
       <br />
       <span class="quiet"><%= simple_time(@publication.manuscript_uploaded_at) %></span><br />
@@ -62,7 +62,7 @@
   <td>
     <% if @publication.targeted_start_date %><%= @publication.targeted_start_date_pretty %><br /><% end %>
     <% unless @publication.timeline.blank? %>
-      <%= image_tag 'contour/gentleface/lightbulb_16.png', style: 'vertical-align:text-bottom;cursor:pointer', :class => 'smudge', id: "publication_timeline_box_#{@publication.id}" %>
+      <%= image_tag 'contour/gentleface/lightbulb_16.png', style: 'vertical-align:text-bottom;cursor:pointer', class: 'smudge', id: "publication_timeline_box_#{@publication.id}" %>
       <%= javascript_tag do %>
         $('#publication_timeline_box_<%= @publication.id %>')
           .qtip({
@@ -96,7 +96,7 @@
       <td></td>
     <% else %>
       <td style="white-space:nowrap">
-        <%= link_to image_tag('gentleface/16/doc_edit.png', :alt => ''), inline_edit_publication_path(@publication), :method => :post, :remote => true %>
+        <%= link_to image_tag('gentleface/16/doc_edit.png', alt: ''), inline_edit_publication_path(@publication), method: :post, :remote => true %>
       </td>
     <% end %>
   <% end %>
