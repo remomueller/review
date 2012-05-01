@@ -4,7 +4,7 @@
   <span class="muted">uploaded <%= simple_time(@publication.manuscript_uploaded_at) %></span>
   -- <%= number_to_human_size(@publication.manuscript.size) %>
   <% if current_user == @publication.user or current_user.secretary? %>
-    <%= link_to 'Delete', alt: '', style: 'vertical-align:middle'), destroy_manuscript_publication_path(@publication), method: :post, remote: true, confirm: "Are you sure you want to delete the uploaded manuscript?" %>
+    <%= link_to 'Delete', destroy_manuscript_publication_path(@publication), method: :post, remote: true, confirm: "Are you sure you want to delete the uploaded manuscript?", class: 'btn btn-danger' %>
   <% end %>
 
   <div class="form-actions">
