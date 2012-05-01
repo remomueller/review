@@ -1,44 +1,48 @@
-<% width = '914px' %>
 <% url = @user_publication_review.new_record? ? new_user_publication_review_path(:publication_id => @user_publication_review.publication.id, :mode => 'simple') : edit_user_publication_review_path(@user_publication_review, :mode => 'simple') %>
 <% form_name = "upr_form_#{@user_publication_review.user_id}" %>
 
-<%= form_tag url, method: :get, :remote => true, :id => form_name do %>
+<%= form_tag url, method: :get, remote: true, id: form_name, class: 'form-horizontal' do %>
+  <div class="well">
+    <div class="page-header"><h3>Review Publication</h3></div>
 
-  <fieldset style="border: 1px solid #0E7799;">
-    <legend>Review Publication <%= link_to_function image_tag('gentleface/16/doc_edit.png', alt: '', :style => 'vertical-align:text-bottom'), "$('##{form_name}').submit();" %></legend>
-
-    <div class="field">
-      <label>Approval Status</label>
-      <% UserPublicationReview::STATUS.each do |display, value| %>
-        <%= radio_button :user_publication_review, :status, value, :checked => (@user_publication_review.status == value), disabled: 'disabled' %> <label><%= display %></label>
-      <% end %>
+    <div class="control-group">
+      <label class="control-label">Approval Status</label>
+      <div class="controls radio">
+        <% UserPublicationReview::STATUS.each do |display, value| %>
+          <%= radio_button :user_publication_review, :status, value, :checked => (@user_publication_review.status == value), disabled: 'disabled' %> <label><%= display %></label>
+        <% end %>
+      </div>
     </div>
 
-    <div class="field">
-      <%= label :user_publication_review, :comment %><br />
-      <%= text_area :user_publication_review, :comment, :rows => 7, :style => "width:#{width}", disabled: 'disabled' %>
+    <div class="control-group">
+      <%= label :user_publication_review, :comment, class: 'control-label' %>
+      <div class="controls">
+        <%= text_area :user_publication_review, :comment, rows: 7, style: "width:99%", disabled: 'disabled' %>
+      </div>
     </div>
 
     <% if current_user.steering_committee? %>
-      <div class="field">
-        <%= label :user_publication_review, :writing_group_nomination %><br />
-        <ul>
-        <% @user_publication_review.writing_group_nomination.to_s.split(',').each do |user_name| %>
-          <% first_name = user_name.split(' ').first.to_s %>
-          <% last_name = user_name.split(' ').last.to_s %>
-          <% u = User.find_by_first_name_and_last_name(first_name, last_name) %>
-          <li><%= u ? link_to(u.name, u) + "<br /><span class='quiet small'>#{u.email}</span>".html_safe : user_name %></li>
-        <% end %>
-        </ul>
+      <div class="control-group">
+        <%= label :user_publication_review, :writing_group_nomination, class: 'control-label' %>
+        <div class="controls">
+          <ul>
+            <% @user_publication_review.writing_group_nomination.to_s.split(',').each do |user_name| %>
+              <% first_name = user_name.split(' ').first.to_s %>
+              <% last_name = user_name.split(' ').last.to_s %>
+              <% u = User.find_by_first_name_and_last_name(first_name, last_name) %>
+              <li><%= u ? link_to(u.name, u) + "<br /><span class='quiet small'>#{u.email}</span>".html_safe : user_name %></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     <% end %>
 
-    <div class="actions">
+    <div class="form-actions">
       <% if @user_publication_review.new_record? %>
-        <%= link_to_function image_tag('gentleface/16/doc_new.png', alt: '') + 'Create Review', "$('##{form_name}').submit();", class: 'btn' %>
+        <%= link_to_function 'Create Review', "$('##{form_name}').submit();", class: 'btn' %>
       <% else %>
-        <%= link_to_function image_tag('gentleface/16/doc_edit.png', alt: '') + 'Edit Review', "$('##{form_name}').submit();", class: 'btn' %>
+        <%= link_to_function 'Edit Review', "$('##{form_name}').submit();", class: 'btn' %>
       <% end %>
     </div>
-  </fieldset>
+  </div>
 <% end %>

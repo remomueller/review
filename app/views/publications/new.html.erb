@@ -1,22 +1,9 @@
 <% @title = "Publication Proposal" %>
-
-<h1><%= @title %></h1>
-
-<div class="frame">
-  <table class="blank padded" style="width:100%">
-    <tr>
-      <td style="padding:0px 15px">
-        <%= render 'header' %>
-      </td>
-    </tr>
-  </table>
-  <br />
-  <table class="blank padded" style="width:100%">
-    <tr>
-      <td style="padding:0px 15px 15px 15px">
-        <%= render 'form' %>
-      </td>
-    </tr>
-  </table>
+<div class="page-header">
+  <h1><%= @title %></h1>
 </div>
-<%#= link_to 'Back', publications_path %>
+
+<%= render 'header' %>
+
+<%= render 'form' %>
+

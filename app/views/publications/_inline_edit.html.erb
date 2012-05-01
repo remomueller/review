@@ -5,10 +5,10 @@
     <%= text_field_tag "publication_display[#{@publication.id}][manuscript_number]", @publication.manuscript_number %>
     <% unless @publication.manuscript_url.blank? %>
       <br />
-      <span style="margin-left:20px"><%= link_to image_tag('contour/download.png', alt: '', :style => 'vertical-align:middle'), SITE_URL + @publication.manuscript_url, :target => '_blank' %></span>
+      <span style="margin-left:20px"><%= link_to image_tag('contour/download.png', alt: '', style: 'vertical-align:middle'), SITE_URL + @publication.manuscript_url, target: '_blank' %></span>
       <% if false %>
       <br />
-      <span class="quiet"><%= simple_time(@publication.manuscript_uploaded_at) %></span><br />
+      <span class="muted"><%= simple_time(@publication.manuscript_uploaded_at) %></span><br />
       <%= number_to_human_size(@publication.manuscript.size) %>
       <% end %>
     <% end %>
@@ -28,7 +28,7 @@
     <%#= @publication.writing_group_members %>
     <br />
     <b>Writing Group:</b><br />
-    <%= text_area_tag "publication_display[#{@publication.id}][writing_group_members]", @publication.writing_group_members, :cols => 60, :rows => 6 %><br />
+    <%= text_area_tag "publication_display[#{@publication.id}][writing_group_members]", @publication.writing_group_members, cols: 60, rows: 6 %><br />
 
     <b>Committee Nominations:</b><br />
     <span id="publication_committee_nominations_box_<%= @publication.id %>">
@@ -45,7 +45,7 @@
     <% end %>
   </td>
   <td style="vertical-align:top">
-    <%= text_area_tag "publication_display[#{@publication.id}][dataset_requested_analyst]", @publication.dataset_requested_analyst, :cols => 20, :rows => 3 %>
+    <%= text_area_tag "publication_display[#{@publication.id}][dataset_requested_analyst]", @publication.dataset_requested_analyst, cols: 20, rows: 3 %>
   </td>
   <td style="vertical-align:top">
     <%= text_field_tag "publication_display[#{@publication.id}][targeted_start_date]", (@publication.targeted_start_date ? @publication.targeted_start_date.strftime('%m/%d/%Y') : ''), :size => '10' %>
@@ -62,7 +62,7 @@
                $('#publication_#{@publication.id}_secretary_notes').val($('#publication_display_#{@publication.id}_secretary_notes').val());" %>
 
     <% form_name = "publication_#{@publication.id}_form" %>
-    <%= form_tag inline_update_publication_path(@publication), method: :post, :remote => true, :id => form_name do %>
+    <%= form_tag inline_update_publication_path(@publication), method: :post, remote: true, id: form_name do %>
       <%= hidden_field_tag "publication[#{@publication.id}][manuscript_number]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][user_id]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][co_lead_author_id]" %>
@@ -72,17 +72,8 @@
       <%= hidden_field_tag "publication[#{@publication.id}][targeted_start_date]" %>
       <%= hidden_field_tag "publication[#{@publication.id}][secretary_notes]" %>
 
-      <%= link_to_function image_tag('gentleface/16/checkmark.png', alt: '') + 'Update', "#{with};$('##{form_name}').submit();", class: 'btn btn-primary' %>
-      <%#= link_to image_tag('gentleface/16/checkmark.png', alt: '') + 'Update', '#', :onclick => remote_function(
-          :url => inline_update_publication_path(@publication), method: :post,
-          :with => "'&'+$('publication_#{@publication.id}_secretary_notes').serialize()+
-                    '&'+$('publication_#{@publication.id}_status').serialize()+
-                    '&'+$('publication_#{@publication.id}_manuscript_number').serialize()+
-                    '&'+$('publication_#{@publication.id}_targeted_start_date__1i').serialize()+
-                    '&'+$('publication_#{@publication.id}_targeted_start_date__2i').serialize()+
-                    '&'+$('publication_#{@publication.id}_targeted_start_date__3i').serialize()"
-        ) + "; return false;", class: 'btn btn-primary' %>
-      <%= link_to image_tag('gentleface/16/cancel.png', alt: '') + 'Cancel', inline_show_publication_path(@publication), method: :post, :remote => true, class: "button negative" %>
+      <%= link_to_function 'Update', "#{with};$('##{form_name}').submit();", class: 'btn btn-primary btn-mini' %>
+      <%= link_to 'Cancel', inline_show_publication_path(@publication), method: :post, remote: true, class: 'btn btn-danger btn-mini' %>
     <% end %>
   </td>
 </tr>
@@ -90,7 +81,7 @@
   <td></td>
   <td colspan="9">
     <% if @publication.status != 'published' %>
-      <span class="quiet">
+      <span class="muted">
         <strong>Action Items:</strong>
         <% case @publication.status when 'draft' %>
           Author has not submitted publication.
@@ -109,6 +100,6 @@
       <br />
     <% end %>
     <strong>Secretary Notes:</strong><br />
-    <%= text_area_tag "publication_display[#{@publication.id}][secretary_notes]", @publication.secretary_notes, :cols => 100, :rows => 3 %>
+    <%= text_area_tag "publication_display[#{@publication.id}][secretary_notes]", @publication.secretary_notes, cols: 100, rows: 3, style: 'width:99%' %>
   </td>
 </tr>

@@ -1,4 +1,3 @@
-<%# width = '914px' %>
 <tr>
   <td style="vertical-align:middle"><%= link_to @user_publication_review.user.name, @user_publication_review.user %></td>
   <td></td>
@@ -11,7 +10,7 @@
     </div>
     <div class="field">
       <%= label :user_publication_review_display, :writing_group_nomination %><br />
-      <%= text_area_tag 'user_publication_review_display[writing_group_nomination]', @user_publication_review.writing_group_nomination, :rows => 3 %>
+      <%= text_area_tag 'user_publication_review_display[writing_group_nomination]', @user_publication_review.writing_group_nomination, rows: 3 %>
     </div>
   </td>
   <td>
@@ -19,7 +18,7 @@
     <% method = @user_publication_review.new_record? ? :post : :put %>
     <% form_name = "upr_sc_form_#{@user_publication_review.user_id}" %>
 
-    <%= form_tag url, method: method, :remote => true, :id => form_name do %>
+    <%= form_tag url, method: method, remote: true, id: form_name do %>
       <%= hidden_field_tag "user_publication_review[status]" %>
       <%= hidden_field_tag 'user_publication_review[comment]' %>
       <%= hidden_field_tag 'user_publication_review[writing_group_nomination]' %>
@@ -30,11 +29,8 @@
                  $('#user_publication_review_comment').val($('#user_publication_review_display_comment').val());
                  $('#user_publication_review_writing_group_nomination').val($('#user_publication_review_display_writing_group_nomination').val());" %>
 
-      <%#= link_to(image_tag('gentleface/16/checkmark.png', alt: '') + (@user_publication_review.new_record? ? "Submit Nomination" : "Update Nomination"), '#', :onclick => remote_function(:url => url, method: method, :with => with) + "; return false;", class: 'btn btn-primary' )%>
-      <%= link_to_function image_tag('gentleface/16/checkmark.png', alt: '') + (@user_publication_review.new_record? ? "Submit Nomination" : "Update Nomination"), "#{with};$('##{form_name}').submit();", class: 'btn btn-primary'%>
-      <% unless @user_publication_review.new_record? %>
-        <%= link_to image_tag('gentleface/16/cancel.png', alt: '') + 'Cancel', user_publication_review_path(@user_publication_review, :committee => 'steering'), :remote => true, class: 'btn btn-danger' %>
-      <% end %>
+      <%= link_to_function (@user_publication_review.new_record? ? "Submit Nomination" : "Update Nomination"), "#{with};$('##{form_name}').submit();", class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', user_publication_review_path(@user_publication_review, :committee => 'steering'), remote: true, class: 'btn btn-danger' unless @user_publication_review.new_record? %>
     <% end %>
   </td>
 </tr>
@@ -43,56 +39,7 @@
   <td colspan="3">
     <div class="field">
       <%= label :user_publication_review_display, :comment %><br />
-      <%= text_area_tag 'user_publication_review_display[comment]', @user_publication_review.comment, :rows => 7, :style => "width:588px" %>
+      <%= text_area_tag 'user_publication_review_display[comment]', @user_publication_review.comment, rows: 7, style: "width:99%" %>
     </div>
   </td>
 </tr>
-
-<% if false %>
-
-<%= form_for(@user_publication_review) do |f| %>
-  <% if @user_publication_review.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user_publication_review.errors.count, "error") %> prohibited this user_publication_review from being saved:</h2>
-
-      <ul>
-      <% @user_publication_review.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <%= f.hidden_field :publication_id %>
-
-  <div class="field">
-    <%= f.label :status %><br />
-    <% UserPublicationReview::STATUS.each do |label, value| %>
-      <%= f.radio_button :status, value %> <label><%= label %></label>
-    <% end %>
-    <%#= f.select :status, UserPublicationReview::STATUS %>
-  </div>
-  <div class="field">
-    <%= f.label :comment %><br />
-    <%= f.text_area :comment, :rows => 7, :style => "width:#{width}" %>
-  </div>
-  <div class="actions">
-
-    <% form_name = @user_publication_review.new_record? ? 'new_user_publication_review' : "edit_user_publication_review_#{@user_publication_review.id}" %>
-
-    <%= link_to_function image_tag('gentleface/16/checkmark.png', alt: '') + (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('##{form_name}').submit();", class: 'btn btn-primary' %>
-
-<% if false %>
-    <button class="positive">
-      <%= image_tag('gentleface/16/checkmark.png', alt: '') %>
-      <%= @user_publication_review.new_record? ? "Submit Review" : "Update Review" %>
-    </button>
-<% end %>
-    <% unless @user_publication_review.new_record? %>
-      <%= link_to image_tag('gentleface/16/cancel.png', alt: '') + 'Cancel', @user_publication_review.publication, class: 'btn btn-danger' %>
-    <% end %>
-		<br />
-  </div>
-<% end %>
-
-<% end %>

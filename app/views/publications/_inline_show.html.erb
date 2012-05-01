@@ -3,22 +3,14 @@
     <span id="publication_<%= @publication.id %>_tag_sc_link"><%= @committee = 'sc';  render :partial => 'publications/tag_for_review' %></span></td>
   <td style="white-space:nowrap">
     <%= @publication.manuscript_number %>
-    <% unless @publication.manuscript_url.blank? %>
-      <br />
-      <span style="margin-left:20px"><%= link_to image_tag('contour/download.png', alt: '', :style => 'vertical-align:middle'), SITE_URL + @publication.manuscript_url, :target => '_blank' %></span>
-      <% if false %>
-      <br />
-      <span class="quiet"><%= simple_time(@publication.manuscript_uploaded_at) %></span><br />
-      <%= number_to_human_size(@publication.manuscript.size) %>
-      <% end %>
-    <% end %>
+    <%= link_to 'Download', SITE_URL + @publication.manuscript_url, target: '_blank', class: 'btn btn-mini' unless @publication.manuscript_url.blank? %>
   </td>
   <td><%= link_to @publication.abbreviated_title, @publication, :title => @publication.full_title %></td>
   <td>
     <% if @publication.user %>
       <span style="white-space:nowrap"><b>Lead Author:</b> <%= link_to @publication.user.name, @publication.user %></span>
     <% else %>
-      <span class="quiet" style="white-space:nowrap">No Lead Author</span>
+      <span class="muted" style="white-space:nowrap">No Lead Author</span>
     <% end %>
     <br />
     <% if @publication.co_lead_author %>
@@ -95,8 +87,8 @@
     <% if ['draft'].include?(@publication.status) %>
       <td></td>
     <% else %>
-      <td style="white-space:nowrap">
-        <%= link_to image_tag('gentleface/16/doc_edit.png', alt: ''), inline_edit_publication_path(@publication), method: :post, :remote => true %>
+      <td>
+        <%= link_to 'Edit', inline_edit_publication_path(@publication), method: :post, remote: true, class: 'btn btn-mini' %>
       </td>
     <% end %>
   <% end %>
@@ -113,7 +105,7 @@
   <td></td>
   <td colspan="<%= (current_user.pp_committee_secretary? or current_user.steering_committee_secretary?) ? 9 : 8 %>">
     <% if @publication.status != 'published' %>
-      <span class="quiet">
+      <span class="muted">
         <strong>Action Items:</strong>
         <% case @publication.status when 'draft' %>
           Author has not submitted publication.

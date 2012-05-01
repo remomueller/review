@@ -1,28 +1,36 @@
 <% form_name = "steering_committee_decision_form" %>
-<%= form_tag edit_steering_committee_decision_publication_path(@publication), method: :post, :remote => true, :id => form_name do %>
-<div class="field">
-  <label>Publication Status</label>
-  <% Publication::SC_STATUS.each do |display, value| %>
-    <%= radio_button :publication, :status, value, :checked => (value == @publication.status), disabled: 'disabled' %> <label><%= display %></label>
-  <% end %>
-</div>
-<div class="field">
-  <%= label :publication, :manuscript_number, 'Manuscript Number' %><br />
-  <%= text_field :publication, :manuscript_number, disabled: 'disabled' %>
-</div>
-<div class="field">
-  <%= label :publication, :additional_sccommittee_instructions, 'Additional Instructions to Email to Lead Author' %> <%= link_to_function 'Preview', "$('#sc_email').toggle();" %><br />
-  <% if @publication.additional_sccommittee_instructions.blank? %>
-    <div class="quiet">None</div>
-  <% else %>
-    <div class="disabled"><%= @publication.additional_sccommittee_instructions %></div>
-  <% end %>
-</div>
-<div class="actions">
-  <%#= link_to image_tag('gentleface/16/doc_edit.png', alt: '') + 'Edit Steering Committee Decision', '#', :onclick => remote_function(:url => edit_steering_committee_decision_publication_path(@publication), method: :post) + "; return false;", class: 'btn' %>
-  <%= link_to_function image_tag('gentleface/16/doc_edit.png', alt: '') + 'Edit Steering Committee Decision', "$('##{form_name}').submit();", class: 'btn' %>
-	<br />
-</div>
+<%= form_tag edit_steering_committee_decision_publication_path(@publication), method: :post, remote: true, id: form_name, class: 'form-horizontal' do %>
+  <div class="control-group">
+    <label class="control-label">Publication Status</label>
+    <div class="controls radio">
+      <% Publication::SC_STATUS.each do |display, value| %>
+        <%= radio_button :publication, :status, value, :checked => (value == @publication.status), disabled: 'disabled' %> <label><%= display %></label>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= label :publication, :manuscript_number, 'Manuscript Number', class: 'control-label' %>
+    <div class="controls">
+      <%= text_field :publication, :manuscript_number, disabled: 'disabled' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= label :publication, :additional_sccommittee_instructions, 'Additional Instructions to Email to Lead Author', class: 'control-label' %>
+    <div class="controls">
+      <% if @publication.additional_sccommittee_instructions.blank? %>
+        <div class="muted">None</div>
+      <% else %>
+        <div class="disabled"><%= @publication.additional_sccommittee_instructions %></div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= link_to_function 'Preview Email', "$('#sc_email').toggle();", class: 'btn' %>
+    <%= link_to_function 'Edit Steering Committee Decision', "$('##{form_name}').submit();", class: 'btn' %>
+  </div>
 <% end %>
 
 <div id="sc_email" style="display:none">
