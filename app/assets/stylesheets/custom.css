@@ -122,12 +122,12 @@ ul.token-input-list-facebook {
   }
 
   body a {
-    background:none !important;
-    padding:0 !important;
-    margin:0 !important;
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
-  #header, #message, #menu, .smudge {
+  .navbar, .alert, .smudge {
     display: none;
   }
 
@@ -142,7 +142,6 @@ ul.token-input-list-facebook {
   p {
     margin-bottom: 0px;
   }
-
 }
 
 span.selected {
