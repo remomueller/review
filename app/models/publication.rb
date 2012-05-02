@@ -2,7 +2,7 @@ class Publication < ActiveRecord::Base
 
   STATUS = [["Not Approved", "not approved"], ["Draft", "draft"], ["Proposed", "proposed"], ["P&P Approved", "approved"],
             ["SC Approved", "nominated"], ["Submitted", "submitted"], ["Published", "published"]]
-  
+
   PP_STATUS = [["Proposed","proposed"], ["P&P Approved", "approved"], ["Not Approved", "not approved"]]
   SC_STATUS = [["P&P Approved", "approved"], ["SC Approved", "nominated"], ["Not Approved", "not approved"]]
 
@@ -11,17 +11,17 @@ class Publication < ActiveRecord::Base
   attr_protected :user_id, :deleted, :manuscript_number, :secretary_notes, :targeted_start_date, :dataset_requested_analyst,
                  :additional_ppcommittee_instructions, :additional_sccommittee_instructions,
                  :tagged_for_pp_review, :tagged_for_sc_review
-  
+
   mount_uploader :manuscript, ManuscriptUploader
   mount_uploader :chat_data_main_forms_attachment, ManuscriptUploader
   mount_uploader :chat_data_main_database_attachment, ManuscriptUploader
   mount_uploader :chat_data_other_attachment, ManuscriptUploader
-  
+
   mount_uploader :attachment_chat_form_attachment, ManuscriptUploader
   mount_uploader :attachment_chat_variables_attachment, ManuscriptUploader
   mount_uploader :attachment_ancillary_forms_attachment, ManuscriptUploader
   mount_uploader :attachment_other_attachment, ManuscriptUploader
-  
+
   # attr_accessible :full_title, :centers, :proposal_submission_date, :publication_type, :publication_type_specify, :dcc_resources_none, :dcc_resources_staff,
   #   :dcc_resources_staff_specify, :dcc_resources_other, :dcc_resources_other_specify, :chat_data_none, :chat_data_main_forms, :chat_data_main_database,
   #   :chat_data_other, :chat_data_other_specify, :manuscript_preparation_analysis_data, :manuscript_preparation_analysis_ancillary_data,
@@ -35,27 +35,27 @@ class Publication < ActiveRecord::Base
 
 
   # Named Scopes
-  scope :current, :conditions => { :deleted => false }
-  scope :status, lambda { |*args|  { :conditions => ["publications.status IN (?)", args.first] } }
-  scope :search, lambda { |*args| {:conditions => [ 'LOWER(manuscript_number) LIKE ? or LOWER(full_title) LIKE ? or LOWER(abbreviated_title) LIKE ? or user_id in (SELECT users.id FROM users WHERE LOWER(users.last_name) LIKE ? or LOWER(users.first_name) LIKE ?) or co_lead_author_id in (SELECT users.id FROM users WHERE LOWER(users.last_name) LIKE ? or LOWER(users.first_name) LIKE ?)', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%' ] } }
-  scope :with_user_or_status, lambda { |*args|  { :conditions => ["publications.user_id = ? or publications.status IN (?)", args.first, args[1]] } }
-  
-  # scope :order_by_pp_and_sc, :order => ['tagged_for_pp_review DESC', 'tagged_for_sc_review DESC']
-  # scope :order_by_pp, :order => ['tagged_for_pp_review DESC']
-  # scope :order_by_sc, :order => ['tagged_for_sc_review DESC'] 
+  scope :current, conditions: { deleted: false }
+  scope :status, lambda { |*args|  { conditions: ["publications.status IN (?)", args.first] } }
+  scope :search, lambda { |*args| {conditions: [ 'LOWER(manuscript_number) LIKE ? or LOWER(full_title) LIKE ? or LOWER(abbreviated_title) LIKE ? or user_id in (SELECT users.id FROM users WHERE LOWER(users.last_name) LIKE ? or LOWER(users.first_name) LIKE ?) or co_lead_author_id in (SELECT users.id FROM users WHERE LOWER(users.last_name) LIKE ? or LOWER(users.first_name) LIKE ?)', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%' ] } }
+  scope :with_user_or_status, lambda { |*args|  { conditions: ["publications.user_id = ? or publications.status IN (?)", args.first, args[1]] } }
+
+  # scope :order_by_pp_and_sc, order: ['tagged_for_pp_review DESC', 'tagged_for_sc_review DESC']
+  # scope :order_by_pp, order: ['tagged_for_pp_review DESC']
+  # scope :order_by_sc, order: ['tagged_for_sc_review DESC']
 
   # Model Validation
   validates_presence_of :full_title, :abbreviated_title
-  
+
   validates_presence_of :centers, :proposed_analysis, :if => :no_longer_draft?
-  
-  validates_presence_of :writing_group_members, :keywords, :affiliation, :timeline, :sponsoring_pi, :rationale, :hypothesis, 
+
+  validates_presence_of :writing_group_members, :keywords, :affiliation, :timeline, :sponsoring_pi, :rationale, :hypothesis,
                         :data, :study_type, :target_journal, :analysis_responsibility, :analysis_plan, :summary_section, :references, :if => :no_longer_draft?
 
   validates_presence_of :publication_type, :if => :no_longer_draft?
-  
+
   validates_presence_of :publication_type_specify, :if => [:should_validate_publication_type?, :no_longer_draft?]
-  
+
   validates_acceptance_of :dcc_resources_none, :message => 'select at least one', :if => [:dcc_resources_not_selected?, :no_longer_draft?]
   validates_acceptance_of :dcc_resources_staff, :message => 'select at least one', :if => [:dcc_resources_not_selected?, :no_longer_draft?]
   validates_acceptance_of :dcc_resources_other, :message => 'select at least one', :if => [:dcc_resources_not_selected?, :no_longer_draft?]
@@ -73,31 +73,31 @@ class Publication < ActiveRecord::Base
   validates_presence_of :chat_data_main_forms_attachment, :if => [:chat_data_main_forms_selected?]
   validates_presence_of :chat_data_main_database_attachment, :if => [:chat_data_main_database_selected?]
 #  validates_presence_of :chat_data_other_attachment, :if => [:chat_data_other_selected?]
-  
+
   validates_acceptance_of :manuscript_preparation_none, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
   validates_acceptance_of :manuscript_preparation_analysis_data, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
   validates_acceptance_of :manuscript_preparation_analysis_ancillary_data, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
   validates_acceptance_of :manuscript_analysis_review, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
   validates_acceptance_of :manuscript_preparation_other, :message => 'select at least one', :if => [:manuscript_preparation_not_selected?, :no_longer_draft?]
-  
+
   validates_presence_of :manuscript_preparation_other_specify, :if => [:should_validate_manuscript_preparation_other_specify?, :no_longer_draft?]
-  
+
   validates_acceptance_of :attachment_none, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
   validates_acceptance_of :attachment_chat_form, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
   validates_acceptance_of :attachment_chat_variables, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
   validates_acceptance_of :attachment_ancillary_forms, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
   validates_acceptance_of :attachment_other, :message => 'select at least one', :if => [:attachment_not_selected?, :no_longer_draft?]
-  
+
   validates_presence_of :attachment_chat_form_attachment, :if => [:attachment_chat_form_selected?]
 #  validates_presence_of :attachment_chat_variables_attachment, :if => [:attachment_chat_variables_selected?]
   validates_presence_of :attachment_ancillary_forms_attachment, :if => [:attachment_ancillary_forms_selected?]
 #  validates_presence_of :attachment_other_attachment, :if => [:attachment_other_selected?]
-  
+
   validates_presence_of :attachment_chat_form_specify, :if => [:should_validate_attachment_chat_form_specify?, :no_longer_draft?]
   validates_presence_of :attachment_chat_variables_specify, :if => [:should_validate_attachment_chat_variables_specify?, :no_longer_draft?]
   validates_presence_of :attachment_ancillary_forms_specify, :if => [:should_validate_attachment_ancillary_forms_specify?, :no_longer_draft?]
   validates_presence_of :attachment_other_specify, :if => [:should_validate_attachment_other_specify?, :no_longer_draft?]
-  
+
 
   # Model Relationships
   belongs_to :user
@@ -115,7 +115,7 @@ class Publication < ActiveRecord::Base
   def reviewable?(current_user)
     ['proposed', 'approved', 'not approved', 'nominated', 'submitted', 'published'].include?(self.status) and (current_user.pp_committee? or current_user.steering_committee?)
   end
-  
+
   def editable?(current_user)
     if current_user.secretary?
       true
@@ -136,7 +136,7 @@ class Publication < ActiveRecord::Base
       self.user_publication_reviews.collect{|upr| upr.writing_group_nomination.to_s.split(/,|\n/)}.flatten.select{|nom| not nom.blank?}.collect{|nom| nom.strip.titleize}.uniq.sort
     end
   end
-  
+
   def finalized_nominations
     @finalized_nominations ||= begin
       self.writing_group_members.split(/,|\n/).flatten.select{|nom| not nom.blank?}.collect{|nom| nom.strip.titleize}.uniq.sort
@@ -160,7 +160,7 @@ class Publication < ActiveRecord::Base
     end
     result
   end
-  
+
   def human_status
     statuses = Publication::STATUS.select{|a| a[1] == self.status}
     if statuses.size > 0
@@ -207,31 +207,31 @@ class Publication < ActiveRecord::Base
   def chat_data_not_selected?
     !(self.chat_data_none? || self.chat_data_main_forms? || self.chat_data_main_database? || self.chat_data_other?)
   end
-  
+
   def should_validate_chat_data_other_specify?
     self.chat_data_other?
   end
-  
+
   def chat_data_main_forms_selected?
     self.chat_data_main_forms?
   end
-  
+
   def chat_data_main_database_selected?
     self.chat_data_main_database?
   end
-  
+
   # def chat_data_other_selected?
   #   self.chat_data_other?
   # end
-  
+
   def manuscript_preparation_not_selected?
     !(self.manuscript_preparation_none? || self.manuscript_preparation_analysis_data? || self.manuscript_preparation_analysis_ancillary_data? || self.manuscript_analysis_review? || self.manuscript_preparation_other?)
   end
-  
+
   def should_validate_manuscript_preparation_other_specify?
-    self.manuscript_preparation_other?    
+    self.manuscript_preparation_other?
   end
-  
+
   def attachment_not_selected?
     !(self.attachment_none? || self.attachment_chat_form? || self.attachment_chat_variables? || self.attachment_ancillary_forms? || self.attachment_other?)
   end
@@ -239,7 +239,7 @@ class Publication < ActiveRecord::Base
   def should_validate_attachment_chat_form_specify?
     self.attachment_chat_form?
   end
-  
+
   def should_validate_attachment_chat_variables_specify?
     self.attachment_chat_variables?
   end
