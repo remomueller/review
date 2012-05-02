@@ -456,7 +456,7 @@
         <%= link_to_function (@publication.new_record? ? "Save Draft of Publication" : "Update Draft of Publication"), "$('#publish').val('0');$('##{form_name}').submit();", class: 'btn' %>
         <%= link_to_function "Submit Publication for Review", "if(authorAssuranceCheck() == false){return false;};$('#publish').val('1');$('##{form_name}').submit();", class: 'btn btn-primary' %>
       <% end %>
-      <%= link_to 'Cancel', @publication.new_record? ? root_path : @publication, class: 'btn btn-danger' %>
+      <%= cancel %>
     </div>
   <% end %>
 <% end %>

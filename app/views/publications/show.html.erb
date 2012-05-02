@@ -7,9 +7,13 @@
   </center>
 </div>
 
-<table style="width:100%"><col width="1%"/><col width="1%"/><col width="80px"/>
-  <tr><td style="vertical-align:top"><b>Status:</b></td><td style="vertical-align:top"><%= display_status(@publication.status) %></td><td style="vertical-align:top;white-space:nowrap"><%= @publication.human_status %></td><td></td></tr>
-</table>
+<dl class="dl-horizontal">
+  <dt>Status</dt>
+  <dd>
+    <%= display_status(@publication.status) %><br />
+    <%= @publication.human_status %>
+  </dd>
+</dl>
 
 <% if @publication.reviewable?(current_user) %>
   <% @user = current_user %>

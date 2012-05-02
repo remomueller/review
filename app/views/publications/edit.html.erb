@@ -1,13 +1,8 @@
 <% @title = "Edit: #{@publication.full_title}" %>
-
-<h3><center>Editing<br /><br /><span class="muted"><%= @publication.full_title %></span></center></h3>
-
-<div class="frame">
-  <table class="blank padded" style="width:100%">
-    <tr>
-      <td style="padding:0px 15px 15px 15px">
-        <%= render 'form' %>
-      </td>
-    </tr>
-  </table>
+<div class="page-header">
+  <center><h2><%= @publication.full_title %></h2>
+    <small class="muted">Editing </small> <%= cancel_mini %>
+  </center>
 </div>
+
+<%= render 'form' %>
