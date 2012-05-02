@@ -14,7 +14,7 @@
     </div>
   </td>
   <td>
-    <% url = @user_publication_review.new_record? ? user_publication_reviews_path(publication_id: @user_publication_review.publication_id, comittee: 'steering') : user_publication_review_path(@user_publication_review, comittee: 'steering') %>
+    <% url = @user_publication_review.new_record? ? user_publication_reviews_path(publication_id: @user_publication_review.publication_id, committee: 'steering') : user_publication_review_path(@user_publication_review, committee: 'steering') %>
     <% method = @user_publication_review.new_record? ? :post : :put %>
     <% form_name = "upr_sc_form_#{@user_publication_review.user_id}" %>
 
@@ -30,7 +30,7 @@
                  $('#user_publication_review_writing_group_nomination').val($('#user_publication_review_display_writing_group_nomination').val());" %>
 
       <%= link_to_function (@user_publication_review.new_record? ? "Submit Nomination" : "Update Nomination"), "#{with};$('##{form_name}').submit();", class: 'btn btn-primary' %>
-      <%= link_to 'Cancel', user_publication_review_path(@user_publication_review, comittee: 'steering'), remote: true, class: 'btn btn-danger' unless @user_publication_review.new_record? %>
+      <%= link_to 'Cancel', user_publication_review_path(@user_publication_review, committee: 'steering'), remote: true, class: 'btn btn-danger' unless @user_publication_review.new_record? %>
     <% end %>
   </td>
 </tr>

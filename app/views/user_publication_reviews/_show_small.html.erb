@@ -5,9 +5,9 @@
       <span id="user_<%= @user_publication_review.user_id %>_notified_<%= @committee %>" style="color:black">
         <% if @user_publication_review.reminder_sent_at %>
           <span class="muted">Reminder sent <%= simple_time(@user_publication_review.reminder_sent_at) %></span>
-          <%= link_to 'Resend', send_reminder_publication_path(@publication, reviewer: @user_publication_review.user_id), method: :post, remote: true, class: 'btn btn-mini' %>
+          <%= link_to 'Resend', send_reminder_publication_path(@publication, reviewer_id: @user_publication_review.user_id), method: :post, remote: true, class: 'btn btn-mini' %>
         <% else %>
-          <%= link_to 'Email Reminder', send_reminder_publication_path(@publication, reviewer: @user_publication_review.user_id), method: :post, remote: true, class: 'btn btn-mini' %>
+          <%= link_to 'Email Reminder', send_reminder_publication_path(@publication, reviewer_id: @user_publication_review.user_id), method: :post, remote: true, class: 'btn btn-mini' %>
         <% end %>
       </span>
     </td>

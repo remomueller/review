@@ -3,7 +3,7 @@ class UserPublicationReviewsController < ApplicationController
 
   def show
     @user_publication_review = current_user.user_publication_reviews.find_by_id(params[:id])
-    render :nothing => true unless @user_publication_review
+    render nothing: true unless @user_publication_review
   end
 
   def new
@@ -17,7 +17,7 @@ class UserPublicationReviewsController < ApplicationController
     if @user_publication_review and @publication and @publication.reviewable?(current_user)
       render 'new'
     else
-      render :nothing => true
+      render nothing: true
     end
   end
 
@@ -28,10 +28,10 @@ class UserPublicationReviewsController < ApplicationController
       if @publication and @publication.reviewable?(current_user) and @user_publication_review.update_attributes(params[:user_publication_review]) # @user_publication_review.save
         render 'show'
       else
-        render :nothing => true
+        render nothing: true
       end
     else
-      render :nothing => true
+      render nothing: true
     end
   end
 
@@ -42,7 +42,7 @@ class UserPublicationReviewsController < ApplicationController
       render 'show'
     else
       # redirect_to(root_path, :warn => 'You do not have the privilege to update the selected publication review.')
-      render :nothing => true
+      render nothing: true
     end
   end
 end

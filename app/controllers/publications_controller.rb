@@ -13,7 +13,7 @@ class PublicationsController < ApplicationController
     elsif current_user.steering_committee_secretary? and params[:committee] == 'sc' and @publication = Publication.current.find_by_id(params[:id])
       @publication.update_attribute :tagged_for_sc_review, (params[:tagged] == '1')
     else
-      render :nothing => true
+      render nothing: true
     end
   end
 
@@ -25,7 +25,7 @@ class PublicationsController < ApplicationController
 
       UserMailer.publication_approval_reminder(@publication, @reviewer).deliver if Rails.env.production?
     else
-      render :nothing => true
+      render nothing: true
     end
   end
 
@@ -34,7 +34,7 @@ class PublicationsController < ApplicationController
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status)
       render 'publications/manuscripts/edit_manuscript'
     else
-      render :nothing => true
+      render nothing: true
     end
   end
 
@@ -43,7 +43,7 @@ class PublicationsController < ApplicationController
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status)
       render 'publications/manuscripts/show_manuscript'
     else
-      render :nothing => true
+      render nothing: true
     end
   end
 
@@ -68,7 +68,7 @@ class PublicationsController < ApplicationController
       # render 'publications/manuscripts/edit_manuscript'
     else
       redirect_to root_path
-      # render :nothing => true
+      # render nothing: true
     end
   end
 
@@ -79,7 +79,7 @@ class PublicationsController < ApplicationController
       @publication.update_attribute :remove_manuscript, true
       render 'publications/manuscripts/edit_manuscript'
     else
-      render :nothing => true
+      render nothing: true
     end
   end
 
@@ -174,7 +174,7 @@ class PublicationsController < ApplicationController
 
       render 'inline_show'
     else
-      render :nothing => true
+      render nothing: true
     end
   end
 
