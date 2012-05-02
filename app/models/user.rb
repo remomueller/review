@@ -41,6 +41,11 @@ class User < ActiveRecord::Base
     super and self.status == 'active' and not self.deleted?
   end
 
+  def after_token_authentication
+    self.reset_authentication_token!
+    super
+  end
+
   def destroy
     update_attribute :deleted, true
     update_attribute :status, 'inactive'
