@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def index
     unless current_user.system_admin? or params[:format] == 'json'
-      redirect_to root_path, :alert => "You do not have sufficient privileges to access that page."
+      redirect_to root_path, alert: "You do not have sufficient privileges to access that page."
       return
     end
     current_user.update_attribute :users_per_page, params[:users_per_page].to_i if params[:users_per_page].to_i >= 10 and params[:users_per_page].to_i <= 200
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
       [:pp_committee, :pp_committee_secretary, :steering_committee, :steering_committee_secretary, :system_admin, :status].each do |attribute|
         @user.update_attribute attribute, params[:user][attribute]
       end
-      redirect_to(@user, :notice => 'User was successfully updated.')
+      redirect_to(@user, notice: 'User was successfully updated.')
     else
       render :action => "edit"
     end

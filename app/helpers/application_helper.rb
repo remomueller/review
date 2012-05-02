@@ -24,10 +24,6 @@ module ApplicationHelper
     "<span style='color:#{color};font-weight:bold;font-variant:small-caps;'>#{time_ago_in_words(past_time)} ago</span>".html_safe
   end
 
-  def information(message = ' Press Enter to Search')
-    "<small class=\"muted\">#{message}</small>".html_safe
-  end
-
   def simple_time(past_time)
     return '' if past_time.blank?
     if past_time.to_date == Date.today

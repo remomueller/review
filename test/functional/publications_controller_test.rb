@@ -98,6 +98,7 @@ class PublicationsControllerTest < ActionController::TestCase
     login(users(:valid))
     post :upload_manuscript, id: @nominated.to_param, publication: { manuscript: fixture_file_upload('../../test/support/publications/manuscripts/test_01.doc') }
     assert_not_nil assigns(:publication)
+    assert_equal 'test_01.doc', assigns(:publication).manuscript.identifier
     assert_redirected_to publication_path(assigns(:publication))
   end
 
@@ -105,13 +106,15 @@ class PublicationsControllerTest < ActionController::TestCase
     login(users(:valid))
     post :upload_manuscript, id: @nominated.to_param, publication: { manuscript: fixture_file_upload('../../test/support/publications/manuscripts/test_01.docx') }
     assert_not_nil assigns(:publication)
+    assert_equal 'test_01.docx', assigns(:publication).manuscript.identifier
     assert_redirected_to publication_path(assigns(:publication))
   end
-  
+
   test "should upload manuscript in PDF format" do
     login(users(:valid))
     post :upload_manuscript, id: @nominated.to_param, publication: { manuscript: fixture_file_upload('../../test/support/publications/manuscripts/test_01.pdf') }
     assert_not_nil assigns(:publication)
+    assert_equal 'test_01.pdf', assigns(:publication).manuscript.identifier
     assert_redirected_to publication_path(assigns(:publication))
   end
 
@@ -242,7 +245,7 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:publications)
     assert_response :success
   end
-  
+
   test "should get print" do
     login(users(:valid))
     get :print
@@ -250,7 +253,7 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:publications)
     assert_response :success
   end
-  
+
   test "should not show 'draft' or 'not approved' for regular users on the publication matrix unless they are the author" do
     login(users(:two))
     get :index, format: 'js'
@@ -267,7 +270,7 @@ class PublicationsControllerTest < ActionController::TestCase
     tagged_array = assigns(:publications).collect{|p| p.tagged_for_pp_review?.to_s}
     assert_equal tagged_array, tagged_array.sort.reverse
   end
-  
+
   test "should sort marked for P&P review to top in index if user P&P Member" do
     login(users(:pp_committee))
     get :index
@@ -276,7 +279,7 @@ class PublicationsControllerTest < ActionController::TestCase
     tagged_array = assigns(:publications).collect{|p| p.tagged_for_pp_review?.to_s}
     assert_equal tagged_array, tagged_array.sort.reverse
   end
-  
+
   test "should sort marked for SC review to top in index if user SC Secretary" do
     login(users(:sc_secretary))
     get :index
@@ -285,7 +288,7 @@ class PublicationsControllerTest < ActionController::TestCase
     tagged_array = assigns(:publications).collect{|p| p.tagged_for_sc_review?.to_s}
     assert_equal tagged_array, tagged_array.sort.reverse
   end
-  
+
   test "should sort marked for SC review to top in index if user SC Member" do
     login(users(:sc_committee))
     get :index
@@ -294,7 +297,7 @@ class PublicationsControllerTest < ActionController::TestCase
     tagged_array = assigns(:publications).collect{|p| p.tagged_for_sc_review?.to_s}
     assert_equal tagged_array, tagged_array.sort.reverse
   end
-  
+
   test "should sort marked for P&P review followed by SC review to top in index if user is in both P&P and SC committees" do
     login(users(:pp_and_sc_committee))
     get :index
@@ -371,7 +374,7 @@ class PublicationsControllerTest < ActionController::TestCase
 
     assert_redirected_to publication_path(assigns(:publication))
   end
-  
+
   test "should create publication using quick save" do
     login(users(:valid))
     assert_difference('Publication.count') do
@@ -393,7 +396,7 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_equal 2, assigns(:publication).errors.size
     assert_template 'new'
   end
-  
+
   test "should create publication for secretary" do
     login(users(:pp_secretary))
     assert_difference('Publication.count') do
@@ -435,7 +438,7 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_equal 'proposed', assigns(:publication).status
     assert_redirected_to publication_path(assigns(:publication))
   end
-  
+
   test "should update publication and save as a draft" do
     login(users(:valid))
     put :update, id: @draft.to_param, publication: @proposed.attributes
@@ -453,14 +456,14 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_equal 2, assigns(:publication).errors.size
     assert_template 'edit'
   end
-  
+
   test "should not update publication with invalid id" do
     login(users(:valid))
     put :update, id: -1, publication: @proposed.attributes
     assert_nil assigns(:publication)
     assert_redirected_to root_path
   end
-  
+
   test "should update publication and quick save" do
     login(users(:valid))
     put :update, id: @draft.to_param, publication: @proposed.attributes, publish: -1
@@ -485,7 +488,7 @@ class PublicationsControllerTest < ActionController::TestCase
 
     assert_redirected_to publications_path
   end
-  
+
   test "should not destroy publication with invalid id" do
     login(users(:valid))
     assert_difference('Publication.current.count', 0) do
@@ -495,29 +498,29 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_nil assigns(:publication)
     assert_redirected_to root_path
   end
-  
+
   test "should remove nomination from publication reviews" do
     login(users(:pp_secretary))
     post :remove_nomination, id: publications(:tagged_for_pp_and_sc_review), nomination: 'Joe Schmoe', format: 'js'
-    
+
     assert_not_nil assigns(:publication)
     assert !assigns(:publication).proposed_nominations.include?('Joe Schmoe')
     assert_template 'committee_nominations'
   end
-  
+
   test "should not remove nomination from publication reviews for non-secretary" do
     login(users(:valid))
     post :remove_nomination, id: publications(:tagged_for_pp_and_sc_review), nomination: 'Joe Schmoe', format: 'js'
-    
+
     assert_not_nil assigns(:publication)
     assert assigns(:publication).proposed_nominations.include?('Joe Schmoe')
     assert_response :success
   end
-  
+
   test "should not remove nomination from publication reviews for invalid publication" do
     login(users(:pp_secretary))
     post :remove_nomination, id: -1, nomination: 'Joe Schmoe', format: 'js'
-    
+
     assert_nil assigns(:publication)
     assert_response :success
   end

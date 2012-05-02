@@ -14,15 +14,15 @@ class PublicationsController < ApplicationController
       @publication.update_attribute :tagged_for_sc_review, (params[:tagged] == '1')
     else
       render :nothing => true
-    end    
+    end
   end
 
   def send_reminder
     if current_user.secretary? and @publication = Publication.current.find_by_id(params[:id]) and @reviewer = User.current.find_by_id(params[:reviewer_id])
       @user_publication_review = @reviewer.user_publication_reviews.find_by_publication_id(@publication.id)
-      @user_publication_review = @reviewer.user_publication_reviews.create(:publication_id => @publication.id) if @user_publication_review.blank?
+      @user_publication_review = @reviewer.user_publication_reviews.create(publication_id: @publication.id) if @user_publication_review.blank?
       @user_publication_review.update_attribute :reminder_sent_at, Time.now
-      
+
       UserMailer.publication_approval_reminder(@publication, @reviewer).deliver if Rails.env.production?
     else
       render :nothing => true
@@ -37,7 +37,7 @@ class PublicationsController < ApplicationController
       render :nothing => true
     end
   end
-  
+
   def show_manuscript
     @publication = current_user.all_viewable_publications.find_by_id(params[:id])
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status)
@@ -51,23 +51,27 @@ class PublicationsController < ApplicationController
   def upload_manuscript
     @publication = current_user.secretary? ? Publication.current.find_by_id(params[:id]) : current_user.all_publications.find_by_id(params[:id])
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status) and params[:publication] and params[:publication][:manuscript]
-      # Remove any existing manuscripts!
-      @publication.remove_manuscript!
-      
-      @publication.update_attributes(:manuscript => params[:publication][:manuscript], :manuscript_uploaded_at => Time.now)
+      # # Remove any existing manuscripts!
+      # @publication.remove_manuscript!
+
+      @publication.update_attribute :manuscript, params[:publication][:manuscript]
+      @publication.update_attribute :manuscript_uploaded_at, Time.now
+
       extension = params[:publication][:manuscript].original_filename.downcase.split('.').last
       message = ManuscriptUploader.new.extension_white_list.include?(extension) ? nil : "Not a valid document type: #{extension}"
-      redirect_to @publication, :alert => message
+      flash[:notice] = "Manuscript was successfully uploaded." if message.blank?
+
+      redirect_to @publication, alert: message
       # render 'publications/manuscripts/show_manuscript'
     elsif @publication
-      redirect_to @publication, :notice => 'Please specify a file to upload.'
+      redirect_to @publication, notice: 'Please specify a file to upload.'
       # render 'publications/manuscripts/edit_manuscript'
     else
       redirect_to root_path
       # render :nothing => true
     end
   end
-  
+
   def destroy_manuscript
     @publication = current_user.secretary? ? Publication.current.find_by_id(params[:id]) : current_user.all_publications.find_by_id(params[:id])
     if @publication
@@ -95,7 +99,7 @@ class PublicationsController < ApplicationController
   def show_subcommittee_decision
     render nothing: true unless current_user.pp_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
-  
+
   def edit_subcommittee_decision
     render nothing: true unless current_user.pp_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
@@ -115,7 +119,7 @@ class PublicationsController < ApplicationController
   def show_steering_committee_decision
     render nothing: true unless current_user.steering_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
-  
+
   def edit_steering_committee_decision
     render nothing: true unless current_user.steering_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
@@ -127,7 +131,7 @@ class PublicationsController < ApplicationController
     publications_scope = current_user.all_viewable_publications
     @search_terms = params[:search].to_s.gsub(/[^0-9a-zA-Z]/, ' ').split(' ')
     @search_terms.each{|search_term| publications_scope = publications_scope.search(search_term) }
-    
+
     if first_visit
       if (current_user.pp_committee? or current_user.pp_committee_secretary?) and (current_user.steering_committee? or current_user.steering_committee_secretary?)
         @order = ['tagged_for_pp_review DESC', 'tagged_for_sc_review DESC']
@@ -139,7 +143,7 @@ class PublicationsController < ApplicationController
     end
     publications_scope = publications_scope.order(@order)
     @publications = publications_scope.page(params[:page]).per(10)
-    
+
   end
 
   def show
@@ -155,11 +159,11 @@ class PublicationsController < ApplicationController
     @publication = current_user.all_publications.find_by_id(params[:id])
     redirect_to root_path unless @publication and @publication.editable?(current_user)
   end
-  
+
   def inline_edit
     render nothing: true unless current_user.secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
-  
+
   def inline_update
     if current_user.secretary? and @publication = Publication.current.find_by_id(params[:id]) and params[:publication][params[:id]]
       params[:publication][params[:id]][:targeted_start_date] = Date.strptime(params[:publication][params[:id]][:targeted_start_date], "%m/%d/%Y") unless params[:publication][params[:id]][:targeted_start_date].blank?
@@ -167,13 +171,13 @@ class PublicationsController < ApplicationController
       params[:publication][params[:id]].keys.each do |attribute|
         @publication.update_attribute attribute, params[:publication][params[:id]][attribute]
       end
-      
+
       render 'inline_show'
     else
       render :nothing => true
-    end    
+    end
   end
-  
+
   def inline_show
     render nothing: true unless current_user.secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
@@ -182,14 +186,14 @@ class PublicationsController < ApplicationController
     params[:publication][:status] = (params[:publish] == '1') ? 'proposed' : 'draft' unless current_user.secretary?
     params[:publication][:author_assurance_date] = Date.today if params[:publish] == '1'
     @publication = current_user.publications.new(params[:publication])
-    
+
     # @publication.remove_manuscript!
-    
-    # @publication.update_attributes(:manuscript => params[:publication][:manuscript], :manuscript_uploaded_at => Time.now)
+
+    # @publication.update_attributes(manuscript: params[:publication][:manuscript], manuscript_uploaded_at: Time.now)
     # extension = params[:publication][:manuscript].original_filename.downcase.split('.').last
     # message = ManuscriptUploader.new.extension_white_list.include?(extension) ? nil : "Not a valid document type: #{extension}"
-    
-    
+
+
     if @publication.save
       # @publication.update_attribute :status, params[:publish] == '1' ? 'proposed' : 'draft' unless current_user.secretary?
       @publication.send_reminders if params[:publish] == '1' and not current_user.secretary?
@@ -203,7 +207,7 @@ class PublicationsController < ApplicationController
         else
           notice = (params[:publish] == '1' ? 'Publication was successfully submitted for review.' : 'Publication draft was successfully created.')
         end
-        redirect_to(@publication, :notice => notice)
+        redirect_to(@publication, notice: notice)
       end
     else
       flash[:alert] = "#{@publication.errors.count} error#{ 's' unless @publication.errors.count == 1} prohibited this publication from being saved." if @publication.errors.any?
@@ -229,7 +233,7 @@ class PublicationsController < ApplicationController
           else
             notice = (params[:publish] == '1' ? 'Publication was successfully resubmitted for review.' : 'Publication draft was saved successfully.')
           end
-          redirect_to(@publication, :notice => notice)
+          redirect_to(@publication, notice: notice)
         end
       else
         flash[:alert] = "#{@publication.errors.count} error#{ 's' unless @publication.errors.count == 1} prohibited this publication from being updated." if @publication.errors.any?
@@ -249,7 +253,7 @@ class PublicationsController < ApplicationController
       redirect_to root_path
     end
   end
-  
+
   def remove_nomination
     @publication = Publication.current.find_by_id(params[:id])
     if @publication and current_user.secretary?

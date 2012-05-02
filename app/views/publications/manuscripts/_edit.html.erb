@@ -3,10 +3,11 @@
     <%= label :publication, :manuscript, 'Upload Manuscript (PDF, Word)', class: 'control-label' %>
     <div class="controls">
       <%= file_field :publication, :manuscript %>
+      <%= hidden_field :publication, 'manuscript_cache' %>
     </div>
   </div>
   <div class="form-actions">
-    <%= link_to_function (@publication.manuscript_url.blank? ? "Upload Manuscript" : "Replace Existing Manuscript"), "$('#manuscript_form').submit();", class: 'btn btn-primary' %>
-    <%= link_to image_tag('gentleface/16/cancel.png', alt: '') + 'Cancel', show_manuscript_publication_path(@publication), method: :post, remote: true, class: 'btn btn-danger' unless @publication.manuscript_url.blank? %>
+    <%= submit_tag (@publication.manuscript_url.blank? ? "Upload Manuscript" : "Replace Existing Manuscript"), class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', show_manuscript_publication_path(@publication), method: :post, remote: true, class: 'btn btn-danger' unless @publication.manuscript_url.blank? %>
   </div>
 <% end %>

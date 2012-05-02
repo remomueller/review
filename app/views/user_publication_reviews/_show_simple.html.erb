@@ -1,4 +1,4 @@
-<% url = @user_publication_review.new_record? ? new_user_publication_review_path(:publication_id => @user_publication_review.publication.id, :mode => 'simple') : edit_user_publication_review_path(@user_publication_review, :mode => 'simple') %>
+<% url = @user_publication_review.new_record? ? new_user_publication_review_path(publication_id: @user_publication_review.publication.id, :mode => 'simple') : edit_user_publication_review_path(@user_publication_review, :mode => 'simple') %>
 <% form_name = "upr_form_#{@user_publication_review.user_id}" %>
 
 <%= form_tag url, method: :get, remote: true, id: form_name, class: 'form-horizontal' do %>

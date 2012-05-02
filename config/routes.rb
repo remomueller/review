@@ -25,7 +25,7 @@ Review::Application.routes.draw do
     end
   end
 
-  devise_for :users, :controllers => {:registrations => 'contour/registrations', :sessions => 'contour/sessions', :passwords => 'contour/passwords'}, :path_names => { :sign_up => 'register', :sign_in => 'login' }
+  devise_for :users, controllers: { registrations: 'contour/registrations', sessions: 'contour/sessions', passwords: 'contour/passwords' }, path_names: { sign_up: 'register', sign_in: 'login' }
 
   resources :users do
     collection do
@@ -35,9 +35,9 @@ Review::Application.routes.draw do
 
   resources :user_publication_reviews
 
-  match "/about" => "sites#about", :as => :about
+  match "/about" => "sites#about", as: :about
 
-  root :to => "publications#index"
+  root to: "publications#index"
 
   # See how all your routes lay out with "rake routes"
 

@@ -7,7 +7,7 @@
   <% end %>
   </td>
   <td>
-    <% url = @user_publication_review.new_record? ? user_publication_reviews_path(:publication_id => @user_publication_review.publication_id) : user_publication_review_path(@user_publication_review) %>
+    <% url = @user_publication_review.new_record? ? user_publication_reviews_path(publication_id: @user_publication_review.publication_id) : user_publication_review_path(@user_publication_review) %>
     <% method = @user_publication_review.new_record? ? :post : :put %>
     <% form_name = "upr_form_#{@user_publication_review.user_id}" %>
 
