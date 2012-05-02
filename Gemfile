@@ -12,7 +12,7 @@ gem 'eventmachine',         '~> 1.0.0.beta.4.1',  :platforms => [ :mswin, :mingw
 gem 'contour',              '~> 1.0.0.beta2'
 gem 'kaminari'
 # Carrierwave: File Uploads
-gem 'carrierwave'
+gem 'carrierwave',          '~> 0.6.2'
 # PDFKit: Generate PDFs from webpages, https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF
 gem 'pdfkit'
 

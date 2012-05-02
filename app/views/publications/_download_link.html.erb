@@ -7,7 +7,7 @@
     <% if @publication.send(@attribute+'_attachment') and @publication.send(@attribute+'_attachment_url') %>
       <br />
       <span style="margin-left:30px;">
-        &raquo; <%= link_to @publication.send(@attribute+'_attachment_url').split('/').last, SITE_URL + @publication.send(@attribute+'_attachment_url'), target: '_blank' %>
+        &raquo; <%= link_to @publication.send(@attribute+'_attachment_url').split('/').last, @publication.send(@attribute+'_attachment_url'), target: '_blank' %>
         <%= image_tag('contour/download.png', alt: '', style: 'vertical-align:middle') %>
         -- <%= number_to_human_size(@publication.send(@attribute+'_attachment').size) %>
       </span>

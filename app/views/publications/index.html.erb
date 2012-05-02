@@ -19,6 +19,8 @@
   <%= link_to "Export Matrix as PDF", print_publications_path(format: 'pdf'), target: '_blank', class: 'btn btn-mini' %>
 <% end %>
 
+<div style="clear:both"></div>
+
 <div id="publications"><center><%= image_tag "ajax-loader.gif" %></center></div>
 
 <%= javascript_tag do %>

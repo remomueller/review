@@ -13,15 +13,15 @@ class User < ActiveRecord::Base
   STATUS = ["active", "denied", "inactive", "pending"].collect{|i| [i,i]}
 
   # Named Scopes
-  scope :current, :conditions => { :deleted => false }
-  scope :status, lambda { |*args|  { :conditions => ["users.status IN (?)", args.first] } }
-  scope :search, lambda { |*args| {:conditions => [ 'LOWER(first_name) LIKE ? or LOWER(last_name) LIKE ? or LOWER(email) LIKE ?', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%' ] } }
-  scope :system_admins, :conditions => { :system_admin => true }
-  scope :pp_committee_members, :conditions => { :pp_committee => true }
-  scope :steering_committee_members, :conditions => { :steering_committee => true }
+  scope :current, conditions: { deleted: false }
+  scope :status, lambda { |*args|  { conditions: ["users.status IN (?)", args.first] } }
+  scope :search, lambda { |*args| { conditions: [ 'LOWER(first_name) LIKE ? or LOWER(last_name) LIKE ? or LOWER(email) LIKE ?', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%' ] } }
+  scope :system_admins, conditions: { system_admin: true }
+  scope :pp_committee_members, conditions: { pp_committee: true }
+  scope :steering_committee_members, conditions: { steering_committee: true }
 
-  scope :pp_secretaries, :conditions => { :pp_committee_secretary => true }
-  scope :sc_secretaries, :conditions => { :steering_committee_secretary => true }
+  scope :pp_secretaries, conditions: { pp_committee_secretary: true }
+  scope :sc_secretaries, conditions: { steering_committee_secretary: true }
 
 
   # Model Validation
@@ -30,8 +30,8 @@ class User < ActiveRecord::Base
 
   # Model Relationships
   has_many :authentications
-  has_many :comments, :conditions => {:deleted => false}, :order => 'created_at DESC'
-  has_many :publications, :conditions => { :deleted => false }
+  has_many :comments, conditions: { deleted: false }, order: 'created_at DESC'
+  has_many :publications, conditions: { deleted: false }
   has_many :user_publication_reviews
 
   # User Methods
@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
       self.first_name = omniauth['info']['first_name'] if first_name.blank?
       self.last_name = omniauth['info']['last_name'] if last_name.blank?
     end
-    authentications.build( :provider => omniauth['provider'], :uid => omniauth['uid'] )
+    authentications.build( provider: omniauth['provider'], uid: omniauth['uid'] )
   end
 
   def password_required?

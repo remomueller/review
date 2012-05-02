@@ -5,12 +5,7 @@
     <%= text_field_tag "publication_display[#{@publication.id}][manuscript_number]", @publication.manuscript_number %>
     <% unless @publication.manuscript_url.blank? %>
       <br />
-      <span style="margin-left:20px"><%= link_to image_tag('contour/download.png', alt: '', style: 'vertical-align:middle'), SITE_URL + @publication.manuscript_url, target: '_blank' %></span>
-      <% if false %>
-      <br />
-      <span class="muted"><%= simple_time(@publication.manuscript_uploaded_at) %></span><br />
-      <%= number_to_human_size(@publication.manuscript.size) %>
-      <% end %>
+      <span style="margin-left:20px"><%= link_to image_tag('contour/download.png', alt: '', style: 'vertical-align:middle'), @publication.manuscript_url, target: '_blank' %></span>
     <% end %>
   </td>
   <td style="vertical-align:top"><%= link_to @publication.abbreviated_title, @publication %></td>

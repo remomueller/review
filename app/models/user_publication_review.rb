@@ -5,8 +5,8 @@ class UserPublicationReview < ActiveRecord::Base
   before_update :notify_sc_secretary
 
   # Named Scopes
-  scope :current, :conditions => { }
-  scope :status, lambda { |*args|  { :conditions => ["user_publication_reviews.status IN (?)", args.first] } }
+  scope :current, conditions: { }
+  scope :status, lambda { |*args|  { conditions: ["user_publication_reviews.status IN (?)", args.first] } }
 
   # Model Relationships
   belongs_to :publication
@@ -21,7 +21,7 @@ class UserPublicationReview < ActiveRecord::Base
   end
 
   private
-  
+
   # If a steering committee member creates or updates their review of a publication
   # after the steering committee secretary has marked it as SC Approved
   # then send the Steering Committee secretary an email with that review and link to publication.
@@ -34,5 +34,5 @@ class UserPublicationReview < ActiveRecord::Base
       end
     end
   end
-  
+
 end

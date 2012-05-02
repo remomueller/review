@@ -1,5 +1,5 @@
 <div class="field">
-  <%= link_to @publication.manuscript_url.split('/').last, SITE_URL + @publication.manuscript_url, target: '_blank', class: 'btn' %>
+  <%= link_to @publication.manuscript_url.split('/').last, @publication.manuscript_url, target: '_blank', class: 'btn' %>
 
   <span class="muted">uploaded <%= simple_time(@publication.manuscript_uploaded_at) %></span>
   -- <%= number_to_human_size(@publication.manuscript.size) %>
