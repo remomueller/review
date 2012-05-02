@@ -9,6 +9,7 @@ valid:
   # email_notifications: {}
   users_per_page: 10
   email: valid@example.com
+  authentication_token: 12345678
 
 two:
   first_name: MyString
