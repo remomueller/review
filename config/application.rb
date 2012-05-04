@@ -59,9 +59,5 @@ module Review
 
     # Used to add .pdf to end of urls to generate a PDF
     config.middleware.use PDFKit::Middleware, :print_media_type => true
-
-    # Overwrite Rails errors to use Twitter CSS classes
-    # config.action_view.field_error_proc = Proc.new{ |html_tag, instance| "<div class=\"field_with_errors\">#{html_tag}</div>".html_safe }
-    config.action_view.field_error_proc = Proc.new { |html_tag, instance| "<span class=\"control-group error\">#{html_tag}</span>".html_safe }
   end
 end
