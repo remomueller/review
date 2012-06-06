@@ -1,4 +1,3 @@
-# Global functions referenced from HTML
 @authorAssuranceCheck = () ->
   if !$('#publication_author_assurance').is(':checked')
     alert 'Please read and check the Author Assurance and Sign Off'
@@ -14,3 +13,9 @@
     file_container.show()
   else
     file_container.hide()
+
+jQuery ->
+  $(document)
+    .on('mouseover', ".smudge", () -> $(this).attr('src', $(this).attr('src').replace(/(-(.*?))?.png/, '_g1.png')))
+    .on('mouseout', ".smudge",  () -> $(this).attr('src', $(this).attr('src').replace(/(-(.*?))?_g1.png/, '.png')))
+    .on('click', ".token-input-list-facebook", () -> $(this).parent().find("input").focus()  )
