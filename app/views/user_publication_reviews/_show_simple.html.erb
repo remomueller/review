@@ -1,7 +1,6 @@
 <% url = @user_publication_review.new_record? ? new_user_publication_review_path(publication_id: @user_publication_review.publication.id, :mode => 'simple') : edit_user_publication_review_path(@user_publication_review, :mode => 'simple') %>
-<% form_name = "upr_form_#{@user_publication_review.user_id}" %>
 
-<%= form_tag url, method: :get, remote: true, id: form_name, class: 'form-horizontal' do %>
+<%= form_tag url, method: :get, remote: true, class: 'form-horizontal' do %>
   <div class="well">
     <div class="page-header"><h3>Review Publication</h3></div>
 
@@ -38,11 +37,8 @@
     <% end %>
 
     <div class="form-actions">
-      <% if @user_publication_review.new_record? %>
-        <%= link_to_function 'Create Review', "$('##{form_name}').submit();", class: 'btn' %>
-      <% else %>
-        <%= link_to_function 'Edit Review', "$('##{form_name}').submit();", class: 'btn' %>
-      <% end %>
+      <% link_name = @user_publication_review.new_record? ? 'Create Review' : 'Edit Review' %>
+      <%= submit_tag link_name, class: 'btn' %>
     </div>
   </div>
 <% end %>

@@ -1,8 +1,7 @@
 <% url = @user_publication_review.new_record? ? user_publication_reviews_path(publication_id: @user_publication_review.publication_id, :mode => 'simple') : user_publication_review_path(@user_publication_review, :mode => 'simple') %>
 <% method = @user_publication_review.new_record? ? :post : :put %>
-<% form_name = "upr_form_#{@user_publication_review.user_id}" %>
 
-<%= form_tag url, method: method, remote: true, id: form_name, class: 'form-horizontal' do %>
+<%= form_tag url, method: method, remote: true, class: 'form-horizontal' do %>
   <div class="well">
     <div class="page-header"><h3>Review Publication</h3></div>
 
@@ -32,7 +31,7 @@
     <% end %>
 
     <div class="form-actions">
-      <%= link_to_function (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), "$('##{form_name}').submit();", class: 'btn btn-primary' %>
+      <%= submit_tag (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), class: 'btn btn-primary' %>
       <%= link_to 'Cancel', user_publication_review_path(@user_publication_review, :mode => 'simple'), remote: true, class: 'btn btn-danger' unless @user_publication_review.new_record? %>
     </div>
   </div>

@@ -13,7 +13,7 @@ gem 'contour',              '~> 1.0.1'
 gem 'kaminari',             '~> 0.13.0'
 gem 'carrierwave',          '~> 0.6.2'
 # PDFKit: Generate PDFs from webpages, https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF
-gem 'pdfkit'
+gem 'pdfkit',               '~> 0.5.2'
 
 # Gems used only for assets and not required
 # in production environments by default.

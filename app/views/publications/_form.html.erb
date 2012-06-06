@@ -5,8 +5,8 @@
 <div class="well">
   <h3>Quick Save</h3>
   <dl class="dl-horizontal">
-    <dt><%= image_tag 'contour/save.png', alt: '', :title => 'Quick Save', style: 'vertical-align:text-bottom' %> Quick Save</dt>
-    <dd>While you are composing your publication make sure to occasionally click the <strong>Quick Save</strong> icon <%= image_tag 'contour/save.png', alt: '', :title => 'Quick Save', style: 'vertical-align:text-bottom' %> in the section header.</dd>
+    <dt><%= image_tag 'contour/save.png', alt: '', title: 'Quick Save', style: 'vertical-align:text-bottom' %> Quick Save</dt>
+    <dd>While you are composing your publication make sure to occasionally click the <strong>Quick Save</strong> icon <%= image_tag 'contour/save.png', alt: '', title: 'Quick Save', style: 'vertical-align:text-bottom' %> in the section header.</dd>
 
     <dt><span class="label label-warning">Important!</span></dt>
     <dd>You will have to give your publication a <strong>Full Title</strong> and <strong>Abbreviated Title</strong> in <%= link_to 'Section E.10', '#section_e10' %> first so that your publication can be saved.</dd>
@@ -15,7 +15,7 @@
 <% end %>
 
 <% form_name = @publication.new_record? ? 'new_publication' : "edit_publication_#{@publication.id}" %>
-<% quick_save = disabled.blank? ? link_to_function(image_tag('contour/save.png', alt: '', :title => 'Quick Save', style: 'vertical-align:text-bottom'), "$('#publish').val('-1');$('##{form_name}').submit();") : "" %>
+<% quick_save = disabled.blank? ? link_to(image_tag('contour/save.png', alt: '', title: 'Quick Save', style: 'vertical-align:text-bottom'), '#', data: { object: 'publication-save', publish: '-1', target: "##{form_name}" }) : "" %>
 <%= form_for(@publication, html: { multipart: true, class: 'form-horizontal' }) do |f| %>
 
   <% if disabled.blank? and current_user.secretary? %>
@@ -453,8 +453,8 @@
       <% if current_user.secretary? %>
         <%= submit_tag "Save Publication", class: 'btn btn-primary' %>
       <% else %>
-        <%= link_to_function (@publication.new_record? ? "Save Draft of Publication" : "Update Draft of Publication"), "$('#publish').val('0');$('##{form_name}').submit();", class: 'btn' %>
-        <%= link_to_function "Submit Publication for Review", "if(authorAssuranceCheck() == false){return false;};$('#publish').val('1');$('##{form_name}').submit();", class: 'btn btn-primary' %>
+        <%= link_to (@publication.new_record? ? "Save Draft of Publication" : "Update Draft of Publication"), '#', data: { object: 'publication-save', publish: '0', target: "##{form_name}" }, class: 'btn' %>
+        <%= link_to "Submit Publication for Review", '#', data: { object: 'publication-save', publish: '1', target: "##{form_name}", assurance: true }, class: 'btn btn-primary' %>
       <% end %>
       <%= cancel %>
     </div>

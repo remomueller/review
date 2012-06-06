@@ -5,7 +5,7 @@
     <%= @publication.manuscript_number %>
     <%= link_to 'Download', @publication.manuscript_url, target: '_blank', class: 'btn btn-mini' unless @publication.manuscript_url.blank? %>
   </td>
-  <td><%= link_to @publication.abbreviated_title, @publication, :title => @publication.full_title %></td>
+  <td><%= link_to @publication.abbreviated_title, @publication, title: @publication.full_title %></td>
   <td>
     <% if @publication.user %>
       <span style="white-space:nowrap"><b>Lead Author:</b> <%= link_to @publication.user.name, @publication.user %></span>
