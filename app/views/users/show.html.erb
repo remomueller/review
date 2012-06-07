@@ -19,17 +19,17 @@
     <dt>Status</dt>
     <dd><%= @user.status %></dd>
 
-    <dt>Steering Committee Member</dt>
-    <dd><%= check_box_tag :steering_committee, 'member', @user.steering_committee?, disabled: true %></dd>
-
-    <dt>Steering Committee Secretary</dt>
-    <dd><%= check_box_tag :steering_committee, 'secretary', @user.steering_committee_secretary?, disabled: true %></dd>
-
-    <dt>Publications and Presentations Sub Committee Member</dt>
+    <dt>P&amp;P Member</dt>
     <dd><%= check_box_tag :pp_committee, 'member', @user.pp_committee?, disabled: true %></dd>
 
-    <dt>Publications and Presentations Sub Committee Secretary</dt>
+    <dt>P&amp;P Secretary</dt>
     <dd><%= check_box_tag :pp_committee, 'secretary', @user.pp_committee_secretary?, disabled: true %></dd>
+
+    <dt>SC Member</dt>
+    <dd><%= check_box_tag :steering_committee, 'member', @user.steering_committee?, disabled: true %></dd>
+
+    <dt>SC Secretary</dt>
+    <dd><%= check_box_tag :steering_committee, 'secretary', @user.steering_committee_secretary?, disabled: true %></dd>
 
     <dt>System Admin</dt>
     <dd><%= check_box_tag :system, 'admin', @user.system_admin?, disabled: true %></dd>
