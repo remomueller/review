@@ -24,7 +24,7 @@
     <% @publications.each do |publication| %>
       <% @publication = publication %>
       <tbody id="publication_<%= @publication.id %>_container" class="<%= cycle('even-borderless', 'odd-borderless') %>">
-        <%= render :partial => 'publications/inline_show' %>
+        <%= render partial: 'publications/inline_show' %>
       </tbody>
     <% end %>
   <% else %>

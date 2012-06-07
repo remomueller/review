@@ -1,6 +1,6 @@
 <tr>
-  <td><span id="publication_<%= @publication.id %>_tag_pp_link"><%= @committee = 'pp'; render :partial => 'publications/tag_for_review' %></span>
-    <span id="publication_<%= @publication.id %>_tag_sc_link"><%= @committee = 'sc';  render :partial => 'publications/tag_for_review' %></span></td>
+  <td><span id="publication_<%= @publication.id %>_tag_pp_link"><%= @committee = 'pp'; render partial: 'publications/tag_for_review' %></span>
+    <span id="publication_<%= @publication.id %>_tag_sc_link"><%= @committee = 'sc';  render partial: 'publications/tag_for_review' %></span></td>
   <td style="vertical-align:top">
     <%= text_field_tag "publication_display[#{@publication.id}][manuscript_number]", @publication.manuscript_number %>
     <% unless @publication.manuscript_url.blank? %>

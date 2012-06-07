@@ -322,46 +322,19 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get inline edit for secretary" do
-    login(users(:pp_secretary))
-    post :inline_edit, id: @proposed.to_param, format: 'js'
-    assert_not_nil assigns(:publication)
-    assert_template 'inline_edit'
-  end
-
-  test "should not get inline edit for non-secretary" do
-    login(users(:valid))
-    post :inline_edit, id: @proposed.to_param, format: 'js'
-    assert_nil assigns(:publication)
-    assert_response :success
-  end
-
   test "should update inline for secretary" do
     login(users(:pp_secretary))
-    post :inline_update, id: @proposed.to_param, publication: { @proposed.to_param.to_s => { targeted_start_date: "05/20/2011", status: 'submitted' } }, format: 'js'
+    post :inline_update, id: @proposed.to_param, publication: { targeted_start_date: "05/20/2011", status: 'submitted' }, format: 'js'
     assert_not_nil assigns(:publication)
     assert_equal "2011-05-20", assigns(:publication).targeted_start_date.strftime("%Y-%m-%d")
     assert_equal "submitted", assigns(:publication).status
-    assert_template 'inline_show'
+    assert_template 'inline_update'
+    assert_response :success
   end
 
   test "should not update inline for non-secretary" do
     login(users(:valid))
-    post :inline_update, id: @proposed.to_param, publication: { @proposed.to_param.to_s => { targeted_start_date: "05/20/2011", status: 'submitted' } }, format: 'js'
-    assert_nil assigns(:publication)
-    assert_response :success
-  end
-
-  test "should get inline show for secretary" do
-    login(users(:pp_secretary))
-    post :inline_show, id: @proposed.to_param, format: 'js'
-    assert_not_nil assigns(:publication)
-    assert_template 'inline_show'
-  end
-
-  test "should not get inline show for non-secretary" do
-    login(users(:valid))
-    post :inline_show, id: @proposed.to_param, format: 'js'
+    post :inline_update, id: @proposed.to_param, publication: { targeted_start_date: "05/20/2011", status: 'submitted' }, format: 'js'
     assert_nil assigns(:publication)
     assert_response :success
   end

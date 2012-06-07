@@ -1,6 +1,6 @@
 <tr>
-  <td><span id="publication_<%= @publication.id %>_tag_pp_link"><%= @committee = 'pp'; render :partial => 'publications/tag_for_review' %></span>
-    <span id="publication_<%= @publication.id %>_tag_sc_link"><%= @committee = 'sc';  render :partial => 'publications/tag_for_review' %></span></td>
+  <td><span id="publication_<%= @publication.id %>_tag_pp_link"><%= @committee = 'pp'; render partial: 'publications/tag_for_review' %></span>
+    <span id="publication_<%= @publication.id %>_tag_sc_link"><%= @committee = 'sc';  render partial: 'publications/tag_for_review' %></span></td>
   <td style="white-space:nowrap">
     <%= @publication.manuscript_number %>
     <%= link_to 'Download', @publication.manuscript_url, target: '_blank', class: 'btn btn-mini' unless @publication.manuscript_url.blank? %>
@@ -21,7 +21,7 @@
         $('#publication_nominations_box_<%= @publication.id %>')
           .qtip({
             content:{
-              text: '<%= escape_javascript simple_format("<ul>" + @publication.all_nominations.collect{|nom| @publication.finalized_nominations.include?(nom) ? "<li><b>#{nom}</b></li>" : "<li class='quiet'>#{nom}</li>"}.join + "</ul><br />Key:<ul><li><b>Selected</b></li><li class='quiet'>Not Selected</li></ul>") %>',
+              text: '<%= escape_javascript simple_format("<ul>" + @publication.all_nominations.collect{|nom| @publication.finalized_nominations.include?(nom) ? "<li><b>#{nom}</b></li>" : "<li class='quiet'><del>#{nom}</del></li>"}.join + "</ul><br />Key:<ul><li><b>Selected</b></li><li class='quiet'><del>Not Selected</del></li></ul>") %>',
               title:{
                 text: '<%= escape_javascript @publication.manuscript_number %> Writing Group Nominations:',
                 button: true
@@ -88,7 +88,8 @@
       <td></td>
     <% else %>
       <td>
-        <%= link_to 'Edit', inline_edit_publication_path(@publication), method: :post, remote: true, class: 'btn btn-mini' %>
+        <%= link_to 'Edit', '#', class: 'btn btn-mini', data: { object: 'modal-show', target: "#publication_#{@publication.id}_popup" } %>
+        <%= render partial: 'publications/matrix_popup' %>
       </td>
     <% end %>
   <% end %>

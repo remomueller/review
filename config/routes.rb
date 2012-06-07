@@ -17,9 +17,7 @@ Review::Application.routes.draw do
        post :show_manuscript
        post :destroy_manuscript
        post :send_reminder
-       post :inline_edit
        post :inline_update
-       post :inline_show
        post :tag_for_review
        post :remove_nomination
     end

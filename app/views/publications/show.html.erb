@@ -21,9 +21,9 @@
   <% @user_publication_review = @user.user_publication_reviews.new(publication_id: @publication.id) if @user_publication_review.blank? %>
   <div id="publication_review_box_user_<%= @user.id %>">
     <% if @user_publication_review.status == nil %>
-      <%= render :partial => 'user_publication_reviews/form_simple' %>
+      <%= render partial: 'user_publication_reviews/form_simple' %>
     <% else %>
-      <%= render :partial => 'user_publication_reviews/show_simple' %>
+      <%= render partial: 'user_publication_reviews/show_simple' %>
     <% end %>
   </div>
 <% end %>
@@ -43,7 +43,7 @@
             <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
             <% @user_publication_review = @user.user_publication_reviews.new(publication_id: @publication.id) if @user_publication_review.blank? %>
             <% @committee = 'pp' %>
-            <%= render :partial => 'user_publication_reviews/show_small' %>
+            <%= render partial: 'user_publication_reviews/show_small' %>
           <% end %>
         </tbody>
       </table>
@@ -56,7 +56,7 @@
             <% @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id) %>
             <% @user_publication_review = @user.user_publication_reviews.new(publication_id: @publication.id) if @user_publication_review.blank? %>
             <% @committee = 'sc' %>
-            <%= render :partial => 'user_publication_reviews/show_small' %>
+            <%= render partial: 'user_publication_reviews/show_small' %>
           <% end %>
         </tbody>
       </table>
@@ -72,9 +72,9 @@
 
     <div id="steering_committee_decision_box">
       <% if @publication.status == 'approved' %>
-        <%= render :partial => 'publications/edit_steering_committee_decision' %>
+        <%= render partial: 'publications/edit_steering_committee_decision' %>
       <% else %>
-        <%= render :partial => 'publications/show_steering_committee_decision' %>
+        <%= render partial: 'publications/show_steering_committee_decision' %>
       <% end %>
     </div>
   </div>
@@ -85,9 +85,9 @@
     <div class="page-header"><h3>P&amp;P Committee Decision</h3></div>
     <div id="subcommittee_decision_box">
       <% if @publication.status == 'proposed' %>
-        <%= render :partial => 'publications/edit_subcommittee_decision' %>
+        <%= render partial: 'publications/edit_subcommittee_decision' %>
       <% else %>
-        <%= render :partial => 'publications/show_subcommittee_decision' %>
+        <%= render partial: 'publications/show_subcommittee_decision' %>
       <% end %>
     </div>
   </div>
@@ -99,9 +99,9 @@
     <div class="page-header"><h3>Manuscript</h3></div>
     <div id="publication_<%= @publication.id %>_manuscript_container">
       <% if @publication.manuscript_url.blank? and (current_user == @publication.user or current_user.secretary?) %>
-        <%= render :partial => 'publications/manuscripts/edit' %>
+        <%= render partial: 'publications/manuscripts/edit' %>
       <% elsif not @publication.manuscript_url.blank? %>
-        <%= render :partial => 'publications/manuscripts/show' %>
+        <%= render partial: 'publications/manuscripts/show' %>
       <% else %>
         The author has not uploaded any manuscripts.
       <% end %>
@@ -129,4 +129,4 @@
   </div>
 <% end %>
 
-<%= render :partial => 'publications/form', :locals => { disabled: 'disabled' } %>
+<%= render partial: 'publications/form', :locals => { disabled: 'disabled' } %>

@@ -160,26 +160,18 @@ class PublicationsController < ApplicationController
     redirect_to root_path unless @publication and @publication.editable?(current_user)
   end
 
-  def inline_edit
-    render nothing: true unless current_user.secretary? and @publication = Publication.current.find_by_id(params[:id])
-  end
-
   def inline_update
-    if current_user.secretary? and @publication = Publication.current.find_by_id(params[:id]) and params[:publication][params[:id]]
-      params[:publication][params[:id]][:targeted_start_date] = Date.strptime(params[:publication][params[:id]][:targeted_start_date], "%m/%d/%Y") unless params[:publication][params[:id]][:targeted_start_date].blank?
+    if current_user.secretary? and @publication = Publication.current.find_by_id(params[:id]) and params[:publication]
+      params[:publication][:targeted_start_date] = parse_date(params[:publication][:targeted_start_date])
 
-      params[:publication][params[:id]].keys.each do |attribute|
-        @publication.update_attribute attribute, params[:publication][params[:id]][attribute]
+      params[:publication].keys.each do |attribute|
+        @publication.update_attribute attribute, params[:publication][attribute]
       end
 
-      render 'inline_show'
+      render 'inline_update'
     else
       render nothing: true
     end
-  end
-
-  def inline_show
-    render nothing: true unless current_user.secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
 
   def create

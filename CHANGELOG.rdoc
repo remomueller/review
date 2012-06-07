@@ -3,6 +3,7 @@
 * Enhancements
   * Update to Rails 3.2.5 and Contour 1.0.1
   * Updated Devise configuration files for devise 2.1.0
+  * Inline editing of publication matrix now uses a popup box
 
 == 0.13.2
 

@@ -12,3 +12,17 @@ jQuery ->
         $($(this).data('target')).submit()
         false
     )
+    .on('click', '[data-object~="modal-show"]', () ->
+      $($(this).data('target')).modal( dynamic: true )
+      false
+    )
+  .on('click', '[data-object~="modal-hide"]', () ->
+    $($(this).data('target')).modal('hide')
+    $($(this).data('form-target'))[0].reset()
+    $('.' + $(this).data('remove-class')).removeClass($(this).data('remove-class'))
+    false
+  )
+  .on('click', '[data-object~="submit"]', () ->
+    $($(this).data('target')).submit();
+    false
+  )
