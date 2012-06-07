@@ -1,35 +1,44 @@
-<% @user_publication_review = @user.user_publication_reviews.new(publication_id: @publication.id) if @user_publication_review.blank? %>
+<% url = @user_publication_review.new_record? ? new_user_publication_review_path(publication_id: @user_publication_review.publication.id) : edit_user_publication_review_path(@user_publication_review) %>
 
-<tr>
-  <td style="vertical-align:middle"><%= link_to @user_publication_review.user.name, @user_publication_review.user %></td>
-  <td style="vertical-align:middle"><% unless @user_publication_review.new_record? %>reviewed <%= simple_time(@user_publication_review.updated_at) %><% end %></td>
+<%= form_tag url, method: :get, remote: true, class: 'form-horizontal' do %>
+  <div class="well">
+    <div class="page-header"><h3>Review Publication</h3></div>
 
-  <% if @user_publication_review.new_record? %>
-    <td class="muted" style="vertical-align:middle">not yet submitted</td>
-  <% else %>
-    <td style="vertical-align:middle"><strong><%= @user_publication_review.status %></strong></td>
-  <% end %>
+    <div class="control-group">
+      <label class="control-label">Approval Status</label>
+      <div class="controls radio">
+        <% UserPublicationReview::STATUS.each do |display, value| %>
+          <%= radio_button :user_publication_review, :status, value, :checked => (@user_publication_review.status == value), disabled: 'disabled' %> <label><%= display %></label>
+        <% end %>
+      </div>
+    </div>
 
-  <td>
-    <% if current_user == @user_publication_review.user and  @user_publication_review.publication.status == 'proposed' %>
-      <% if @user_publication_review.new_record? %>
-        <%= link_to 'Create Review', new_user_publication_review_path(publication_id: @publication.id), method: :get, remote: true, class: 'btn' %>
-      <% else %>
-        <%= link_to 'Edit Review', edit_user_publication_review_path(@user_publication_review), method: :get, remote: true, class: 'btn' %>
-      <% end %>
-    <% elsif current_user == @user_publication_review.user %>
-      No editing, review has been locked.
-    <% elsif @user_publication_review.publication.status == 'proposed' and @user_publication_review.new_record? and current_user.pp_committee_secretary? %>
-      <span id="user_<%= @user_publication_review.user_id %>_notified_pp"><%= link_to 'Send Email Reminder', send_reminder_publication_path(@publication, reviewer_id: @user_publication_review.user_id), method: :post, remote: true, class: 'btn' %></span>
-    <% elsif @user_publication_review.new_record? and current_user.pp_committee_secretary? %>
-      Review Locked (By Being Approved/Not Approved). No more email reminders for reviewer.
+    <div class="control-group">
+      <%= label :user_publication_review, :comment, class: 'control-label' %>
+      <div class="controls">
+        <%= text_area :user_publication_review, :comment, rows: 7, style: "width:99%", disabled: 'disabled' %>
+      </div>
+    </div>
+
+    <% if current_user.steering_committee? %>
+      <div class="control-group">
+        <%= label :user_publication_review, :writing_group_nomination, class: 'control-label' %>
+        <div class="controls">
+          <ul>
+            <% @user_publication_review.writing_group_nomination.to_s.split(',').each do |user_name| %>
+              <% first_name = user_name.split(' ').first.to_s %>
+              <% last_name = user_name.split(' ').last.to_s %>
+              <% u = User.find_by_first_name_and_last_name(first_name, last_name) %>
+              <li><%= u ? link_to(u.name, u) + "<br /><span class='quiet small'>#{u.email}</span>".html_safe : user_name %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     <% end %>
-  </td>
-</tr>
 
-<% unless @user_publication_review.comment.blank? %>
-<tr>
-  <td></td>
-  <td colspan="3"><em><div><%= simple_format @user_publication_review.comment %></div></em></td>
-</tr>
+    <div class="form-actions">
+      <% link_name = @user_publication_review.new_record? ? 'Create Review' : 'Edit Review' %>
+      <%= submit_tag link_name, class: 'btn' %>
+    </div>
+  </div>
 <% end %>
