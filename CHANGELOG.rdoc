@@ -1,5 +1,12 @@
 == 0.13.5
 
+* Enhancements
+  * Updated to Rails 3.2.8
+    * Removed deprecated use of update_attribute for Rails 4.0 compatibility
+
+* Testing
+  * Use ActionDispatch for Integration tests instead of ActionController
+
 == 0.13.4
 
 * Enhancements
@@ -28,7 +35,9 @@
 * Enhancements
   * Reviewers can now log in directly to the publication they should review
   * Update to Contour 1.0.0 with Twitter Bootstrap
-
+* Enhancements
+  * Updated to Rails 3.2.8
+    * Removed deprecated use of update_attribute for Rails 4.0 compatibility
 == 0.12.2
 
 * Enhancements

@@ -1,5 +1,7 @@
 class UserPublicationReview < ActiveRecord::Base
 
+  attr_accessible :user_id, :publication_id, :status, :comment, :writing_group_nomination, :reminder_sent_at
+
   STATUS = ["approved", "not approved"].collect{|i| [i,i]}
 
   before_update :notify_sc_secretary

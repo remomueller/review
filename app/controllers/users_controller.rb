@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       redirect_to root_path, alert: "You do not have sufficient privileges to access that page."
       return
     end
-    current_user.update_attribute :users_per_page, params[:users_per_page].to_i if params[:users_per_page].to_i >= 10 and params[:users_per_page].to_i <= 200
+    current_user.update_column :users_per_page, params[:users_per_page].to_i if params[:users_per_page].to_i >= 10 and params[:users_per_page].to_i <= 200
     @order = params[:order].blank? ? 'users.current_sign_in_at DESC' : params[:order]
     users_scope = User.current
     @search_terms = (params[:search] || params[:q]).to_s.gsub(/[^0-9a-zA-Z]/, ' ').split(' ')
@@ -22,7 +22,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_id(params[:id])
+    @user = User.current.find_by_id(params[:id])
+    redirect_to users_path unless @user
   end
 
   def new
@@ -30,7 +31,8 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by_id(params[:id])
+    @user = User.current.find_by_id(params[:id])
+    redirect_to users_path unless @user
   end
 
   # # This is in registrations_controller.rb
@@ -44,8 +46,10 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       [:pp_committee, :pp_committee_secretary, :steering_committee, :steering_committee_secretary, :system_admin, :status].each do |attribute|
-        @user.update_attribute attribute, params[:user][attribute]
+        @user.update_column attribute, params[:user][attribute]
       end
+
+      UserMailer.status_activated(@user).deliver if Rails.env.production? and @user.status = 'active'
 
       respond_to do |format|
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -60,14 +64,18 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find_by_id(params[:id])
-    if @user.update_attributes(params[:user])
+    @user = User.current.find_by_id(params[:id])
+    if @user and @user.update_attributes(post_params)
+      original_status = @user.status
       [:pp_committee, :pp_committee_secretary, :steering_committee, :steering_committee_secretary, :system_admin, :status].each do |attribute|
-        @user.update_attribute attribute, params[:user][attribute]
+        @user.update_column attribute, params[:user][attribute]
       end
-      redirect_to(@user, notice: 'User was successfully updated.')
+      UserMailer.status_activated(@user).deliver if Rails.env.production? and original_status != @user.status and @user.status = 'active'
+      redirect_to @user, notice: 'User was successfully updated.'
+    elsif @user
+      render action: "edit"
     else
-      render :action => "edit"
+      redirect_to users_path
     end
   end
 
@@ -75,5 +83,15 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     @user.destroy
     redirect_to users_path
+  end
+
+  private
+
+  def post_params
+    params[:user] ||= {}
+
+    params[:user].slice(
+      :first_name, :last_name, :email
+    )
   end
 end

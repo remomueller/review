@@ -31,7 +31,7 @@ class Publication < ActiveRecord::Base
   #   :attachment_ancillary_forms_specify, :attachment_other, :attachment_other_specify, :abbreviated_title, :keywords, :affiliation, :sponsoring_pi,
   #   :additional_coauthors, :lead_author, :timeline, :rationale, :hypothesis, :data, :study_type, :target_journal, :analysis_responsibility, :analysis_plan,
   #   :summary_section, :writing_group_members, :references, :author_assurance, :author_assurance_date,
-  #   :approval_date, :committee_submission_date, :manuscript
+  #   :approval_date, :committee_submission_date, :manuscript, :manuscript_uploaded_at, :remove_manuscript
 
 
   # Named Scopes
@@ -171,7 +171,7 @@ class Publication < ActiveRecord::Base
   end
 
   def destroy
-    update_attribute :deleted, true
+    update_column :deleted, true
   end
 
   def send_reminders
