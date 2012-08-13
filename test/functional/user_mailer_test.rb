@@ -12,10 +12,10 @@ class UserMailerTest < ActionMailer::TestCase
 
     # Test the body of the sent email contains what we expect it to
     assert_equal [admin.email], email.to
-    assert_equal "[#{DEFAULT_APP_NAME.downcase}] #{valid.name} Signed Up", email.subject
+    assert_equal "#{valid.name} Signed Up", email.subject
     assert_match /#{valid.name} \[#{valid.email}\] has signed up for an account\./, email.encoded
   end
-  
+
   test "status activated email" do
     valid = users(:valid)
 
@@ -25,10 +25,10 @@ class UserMailerTest < ActionMailer::TestCase
 
     # Test the body of the sent email contains what we expect it to
     assert_equal [valid.email], email.to
-    assert_equal "[#{DEFAULT_APP_NAME.downcase}] #{valid.name}'s Account Activated", email.subject
+    assert_equal "#{valid.name}'s Account Activated", email.subject
     assert_match /Your account \[#{valid.email}\] has been activated\./, email.encoded
   end
-  
+
   test "review updated email" do
     secretary = users(:pp_secretary)
     upr = user_publication_reviews(:one)
@@ -39,7 +39,7 @@ class UserMailerTest < ActionMailer::TestCase
 
     # Test the body of the sent email contains what we expect it to
     assert_equal [secretary.email], email.to
-    assert_equal "[#{DEFAULT_APP_NAME.downcase}] #{upr.user.name} has reviewed #{upr.publication.abbreviated_title_and_ms}", email.subject
+    assert_equal "#{upr.user.name} has reviewed #{upr.publication.abbreviated_title_and_ms}", email.subject
     assert_match /#{upr.user.name} \[#{upr.user.email}\] has created or updated a review for:/, email.encoded
   end
 
@@ -53,59 +53,59 @@ class UserMailerTest < ActionMailer::TestCase
 
     # Test the body of the sent email contains what we expect it to
     assert_equal [reviewer.email], email.to
-    assert_equal "[#{DEFAULT_APP_NAME.downcase}] New Publication Awaiting Approval: #{publication.abbreviated_title_and_ms}", email.subject
+    assert_equal "New Publication Awaiting Approval: #{publication.abbreviated_title_and_ms}", email.subject
     assert_match /Please follow the link #{SITE_URL.to_s + "/publications/" + publication.id.to_s} to approve or deny the proposal\./, email.encoded
   end
-  
+
   test "publication approval email for P&P approved publication" do
     publication = publications(:proposed)
     secretary = users(:pp_secretary)
     publication.status = 'approved'
-    
+
     email = UserMailer.publication_approval(publication, true, secretary).deliver
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal [publication.user.email], email.to
-    assert_equal "[#{DEFAULT_APP_NAME.downcase}] Publication Proposal for #{publication.abbreviated_title_and_ms} has been approved by the P&P Committee", email.subject
+    assert_equal "Publication Proposal for #{publication.abbreviated_title_and_ms} has been approved by the P&P Committee", email.subject
     assert_match /Your publication proposal #{publication.full_title_and_ms} has been approved by the P&amp;P Committee\./, email.encoded
   end
-  
+
   test "publication approval email for P&P denied publication" do
     publication = publications(:proposed)
     secretary = users(:pp_secretary)
     publication.status = 'not approved'
-    
+
     email = UserMailer.publication_approval(publication, true, secretary).deliver
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal [publication.user.email], email.to
-    assert_equal "[#{DEFAULT_APP_NAME.downcase}] Publication Proposal for #{publication.abbreviated_title_and_ms} has been denied by the P&P Committee", email.subject
+    assert_equal "Publication Proposal for #{publication.abbreviated_title_and_ms} has been denied by the P&P Committee", email.subject
     assert_match /Your publication proposal #{publication.full_title_and_ms} has been denied by the P&amp;P Committee\./, email.encoded
   end
-  
+
   test "publication approval email for SC approved publication" do
     publication = publications(:proposed)
     secretary = users(:sc_secretary)
     publication.status = 'nominated'
-    
+
     email = UserMailer.publication_approval(publication, false, secretary).deliver
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal [publication.user.email], email.to
-    assert_equal "[#{DEFAULT_APP_NAME.downcase}] Publication Proposal for #{publication.abbreviated_title_and_ms} has been approved by the Steering Committee", email.subject
+    assert_equal "Publication Proposal for #{publication.abbreviated_title_and_ms} has been approved by the Steering Committee", email.subject
     assert_match /Your publication proposal #{publication.full_title_and_ms} has been approved by the Steering Committee\./, email.encoded
   end
-  
+
   test "publication approval email for SC denied publication" do
     publication = publications(:proposed)
     secretary = users(:sc_secretary)
     publication.status = 'not approved'
-    
+
     email = UserMailer.publication_approval(publication, false, secretary).deliver
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal [publication.user.email], email.to
-    assert_equal "[#{DEFAULT_APP_NAME.downcase}] Publication Proposal for #{publication.abbreviated_title_and_ms} has been denied by the Steering Committee", email.subject
+    assert_equal "Publication Proposal for #{publication.abbreviated_title_and_ms} has been denied by the Steering Committee", email.subject
     assert_match /Your publication proposal #{publication.full_title_and_ms} has been denied by the Steering Committee\./, email.encoded
   end
 end

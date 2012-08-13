@@ -1,12 +1,12 @@
 class UserMailer < ActionMailer::Base
-  default :from => ActionMailer::Base.smtp_settings[:user_name]
+  default from: "#{DEFAULT_APP_NAME} <#{ActionMailer::Base.smtp_settings[:user_name]}>"
 
   def notify_system_admin(system_admin, user)
     setup_email
     @system_admin = system_admin
     @user = user
     mail(to: system_admin.email,
-         subject: @subject + "#{user.name} Signed Up",
+         subject: "#{user.name} Signed Up",
          reply_to: user.email)
   end
 
@@ -16,7 +16,7 @@ class UserMailer < ActionMailer::Base
     @reviewer = reviewer
     @reviewer.reset_authentication_token!
     mail(to: reviewer.email,
-         subject: @subject + "New Publication Awaiting Approval: #{publication.abbreviated_title_and_ms}",
+         subject: "New Publication Awaiting Approval: #{publication.abbreviated_title_and_ms}",
          reply_to: publication.user.email)
   end
 
@@ -24,8 +24,7 @@ class UserMailer < ActionMailer::Base
     setup_email
     @user = user
     mail(to: user.email,
-         subject: @subject + "#{user.name}'s Account Activated") #,
-#         reply_to: user.email)
+         subject: "#{user.name}'s Account Activated")
   end
 
   def publication_approval(publication, pp_committee, secretary)
@@ -44,7 +43,7 @@ class UserMailer < ActionMailer::Base
       @approval_status = 'denied by the Steering Committee'
     end
     mail(to: @user.email,
-         subject: @subject + "Publication Proposal for #{@publication.abbreviated_title_and_ms} has been #{@approval_status}",
+         subject: "Publication Proposal for #{@publication.abbreviated_title_and_ms} has been #{@approval_status}",
          reply_to: secretary.email)
   end
 
@@ -56,7 +55,7 @@ class UserMailer < ActionMailer::Base
     @publication = user_publication_review.publication
 
     mail(to: secretary.email,
-         subject: @subject + "#{@reviewer.name} has reviewed #{@publication.abbreviated_title_and_ms}",
+         subject: "#{@reviewer.name} has reviewed #{@publication.abbreviated_title_and_ms}",
          reply_to: @reviewer.email
     )
   end
@@ -64,7 +63,7 @@ class UserMailer < ActionMailer::Base
   protected
 
   def setup_email
-    @subject = "[#{DEFAULT_APP_NAME.downcase}#{'-development' if Rails.env == 'development'}] "
+
   end
 
 end
