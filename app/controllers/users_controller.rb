@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :check_system_admin, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :check_system_admin, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     unless current_user.system_admin? or params[:format] == 'json'
@@ -8,16 +8,19 @@ class UsersController < ApplicationController
       return
     end
     current_user.update_column :users_per_page, params[:users_per_page].to_i if params[:users_per_page].to_i >= 10 and params[:users_per_page].to_i <= 200
-    @order = params[:order].blank? ? 'users.current_sign_in_at DESC' : params[:order]
-    users_scope = User.current
+
+    user_scope = User.current
     @search_terms = (params[:search] || params[:q]).to_s.gsub(/[^0-9a-zA-Z]/, ' ').split(' ')
-    @search_terms.each{|search_term| users_scope = users_scope.search(search_term) }
-    users_scope = users_scope.order(@order)
-    @users = users_scope.page(params[:page]).per(current_user.users_per_page)
+    @search_terms.each{|search_term| user_scope = user_scope.search(search_term) }
+
+    @order = scrub_order(User, params[:order], 'users.current_sign_in_at DESC')
+    user_scope = user_scope.order(@order)
+
+    @users = user_scope.page(params[:page]).per(current_user.users_per_page)
     respond_to do |format|
       format.html
       format.js
-      format.json { render :json => params[:q].to_s.split(',').collect{|u| (u.strip.downcase == 'me') ? {:name => current_user.name, id: current_user.name} : {:name => u.strip.titleize, id: u.strip.titleize}} + @users.collect{|u| {:name => u.name, id: u.name}}}
+      format.json { render json: params[:q].to_s.split(',').collect{|u| (u.strip.downcase == 'me') ? { name: current_user.name, id: current_user.name} : { name: u.strip.titleize, id: u.strip.titleize } } + @users.collect{|u| { name: u.name, id: u.name } } }
     end
   end
 

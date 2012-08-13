@@ -125,11 +125,13 @@ class PublicationsController < ApplicationController
 
   def index
   	first_visit = params[:order].blank?
-    @order = ['tagged_for_pp_review', 'tagged_for_sc_review', 'manuscript_number', 'abbreviated_title', 'status', 'publication_type', 'targeted_start_date'].include?(params[:order].to_s.split(' ').first) ? params[:order] : 'manuscript_number DESC'
 
     publications_scope = current_user.all_viewable_publications
     @search_terms = params[:search].to_s.gsub(/[^0-9a-zA-Z]/, ' ').split(' ')
     @search_terms.each{|search_term| publications_scope = publications_scope.search(search_term) }
+
+
+    @order = scrub_order(Publication, params[:order], 'manuscript_number DESC')
 
     if first_visit
       if (current_user.pp_committee? or current_user.pp_committee_secretary?) and (current_user.steering_committee? or current_user.steering_committee_secretary?)
@@ -140,9 +142,12 @@ class PublicationsController < ApplicationController
         @order = 'tagged_for_sc_review DESC'
       end
     end
-    publications_scope = publications_scope.order(@order)
-    @publications = publications_scope.page(params[:page]).per(10)
 
+    publications_scope = publications_scope.order(@order)
+
+
+
+    @publications = publications_scope.page(params[:page]).per(10)
   end
 
   def show

@@ -7,6 +7,9 @@
     * Default application name is now added to the from: field for emails
     * Email subjects no longer include the application name
 
+* Refactoring
+  * Consistent sorting and display of model counts used across all objects, (publications, users)
+
 * Testing
   * Use ActionDispatch for Integration tests instead of ActionController
 
