@@ -1,6 +1,6 @@
 class UserPublicationReview < ActiveRecord::Base
 
-  attr_accessible :user_id, :publication_id, :status, :comment, :writing_group_nomination, :reminder_sent_at
+  attr_accessible :status, :comment, :writing_group_nomination, :publication_id
 
   STATUS = ["approved", "not approved"].collect{|i| [i,i]}
 

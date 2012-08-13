@@ -58,7 +58,7 @@
       <%= f.label :proposal_submission_date, '3. Date this publication was submitted to CHAT DCC', class: 'control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
-          <%= f.date_select :proposal_submission_date, disabled: disabled %>
+          <%= f.text_field :proposal_submission_date, class: 'datepicker', value: @publication.proposal_submission_date ? @publication.proposal_submission_date.strftime('%m/%d/%Y') : '', disabled: disabled %>
         <% else %>
           <div class="disabled"><%= simple_format @publication.proposal_submission_date.to_s %></div>
         <% end %>
@@ -220,7 +220,7 @@
     </p>
 
     <div class="control-group">
-      <%= f.label :full_title, class: 'control-label' %>
+      <%= f.label :full_title, nil, class: 'control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
             <%= f.text_field :full_title, style: "width:99%", disabled: disabled %>
@@ -231,7 +231,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :abbreviated_title, 'Abbreviated Title', class: 'control-label' %>
+      <%= f.label :abbreviated_title, 'Abbreviated title', class: 'control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_field :abbreviated_title, style: "width:99%", disabled: disabled %>

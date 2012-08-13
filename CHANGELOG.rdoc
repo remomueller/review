@@ -8,6 +8,7 @@
     * Email subjects no longer include the application name
 
 * Refactoring
+  * Mass-assignment attr_accessible and params slicing implemented to leverage Rails 3.2.x configuration defaults
   * Consistent sorting and display of model counts used across all objects, (publications, users)
 
 * Testing

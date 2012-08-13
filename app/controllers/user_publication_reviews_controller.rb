@@ -25,7 +25,7 @@ class UserPublicationReviewsController < ApplicationController
     if current_user.committee_member?
       @publication = Publication.current.find_by_id(params[:publication_id])
       @user_publication_review = current_user.user_publication_reviews.find_or_create_by_publication_id(@publication.id) if @publication
-      if @publication and @publication.reviewable?(current_user) and @user_publication_review.update_attributes(params[:user_publication_review]) # @user_publication_review.save
+      if @publication and @publication.reviewable?(current_user) and @user_publication_review.update_attributes(post_params) # @user_publication_review.save
         render 'show'
       else
         render nothing: true
@@ -38,11 +38,21 @@ class UserPublicationReviewsController < ApplicationController
   def update
     @user_publication_review = current_user.user_publication_reviews.find_by_id(params[:id])
     @publication = @user_publication_review.publication if @user_publication_review
-    if @publication and @publication.reviewable?(current_user) and @user_publication_review and @user_publication_review.update_attributes(params[:user_publication_review])
+    if @publication and @publication.reviewable?(current_user) and @user_publication_review and @user_publication_review.update_attributes(post_params)
       render 'show'
     else
-      # redirect_to(root_path, :warn => 'You do not have the privilege to update the selected publication review.')
       render nothing: true
     end
   end
+
+  private
+
+  def post_params
+    params[:user_publication_review] ||= {}
+
+    params[:user_publication_review].slice(
+      :status, :comment, :writing_group_nomination
+    )
+  end
+
 end

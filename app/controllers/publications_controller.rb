@@ -21,7 +21,7 @@ class PublicationsController < ApplicationController
     if current_user.secretary? and @publication = Publication.current.find_by_id(params[:id]) and @reviewer = User.current.find_by_id(params[:reviewer_id])
       @user_publication_review = @reviewer.user_publication_reviews.find_by_publication_id(@publication.id)
       @user_publication_review = @reviewer.user_publication_reviews.create(publication_id: @publication.id) if @user_publication_review.blank?
-      @user_publication_review.update_attributes reminder_sent_at: Time.now
+      @user_publication_review.update_column :reminder_sent_at, Time.now
 
       UserMailer.publication_approval_reminder(@publication, @reviewer).deliver if Rails.env.production?
     else
@@ -179,9 +179,9 @@ class PublicationsController < ApplicationController
   end
 
   def create
-    params[:publication][:status] = (params[:publish] == '1') ? 'proposed' : 'draft' unless current_user.secretary?
-    params[:publication][:author_assurance_date] = Date.today if params[:publish] == '1'
-    @publication = current_user.publications.new(params[:publication])
+    # params[:publication][:status] = (params[:publish] == '1') ? 'proposed' : 'draft' unless current_user.secretary?
+    # params[:publication][:author_assurance_date] = Date.today if params[:publish] == '1'
+    @publication = current_user.publications.new(post_params)
 
     if @publication.save
       @publication.send_reminders if params[:publish] == '1' and not current_user.secretary?
@@ -206,9 +206,9 @@ class PublicationsController < ApplicationController
   def update
     @publication = current_user.all_publications.find_by_id(params[:id])
     if @publication and @publication.editable?(current_user)
-      params[:publication][:status] = (params[:publish] == '1') ? 'proposed' : 'draft' unless current_user.secretary?
-      params[:publication][:author_assurance_date] = Date.today if params[:publish] == '1'
-      if @publication.update_attributes(params[:publication])
+      # params[:publication][:status] = (params[:publish] == '1') ? 'proposed' : 'draft' unless current_user.secretary?
+      # params[:publication][:author_assurance_date] = Date.today if params[:publish] == '1'
+      if @publication.update_attributes(post_params)
         @publication.send_reminders if params[:publish] == '1' and not current_user.secretary?
         if params[:publish] == '-1'
           flash[:notice] = "Publication draft was successfully quick saved."
@@ -250,4 +250,52 @@ class PublicationsController < ApplicationController
       render nothing: true
     end
   end
+
+  private
+
+  def post_params
+    params[:publication] ||= {}
+
+    params[:publication][:status] = (params[:publish] == '1') ? 'proposed' : 'draft' unless current_user.secretary?
+    params[:publication][:author_assurance_date] = Date.today if params[:publish] == '1'
+
+    [:proposal_submission_date].each do |date|
+      params[:publication][date] = parse_date(params[:publication][date])
+    end
+
+    params[:publication].slice(
+      # Automatically added
+      :status, :author_assurance_date,
+      # Required to save draft
+      :full_title, :abbreviated_title,
+      # A. Administrative Information
+      :centers, :proposal_submission_date,
+      # B. Publication Information
+      :publication_type, :publication_type_specify,
+      # C. CHAT Resources
+      :dcc_resources_none, :dcc_resources_staff, :dcc_resources_staff_specify, :dcc_resources_other, :dcc_resources_other_specify,
+      :chat_data_none,
+      :chat_data_main_forms, :chat_data_main_forms_attachment, :chat_data_main_forms_attachment_cache,
+      :chat_data_main_database, :chat_data_main_database_attachment, :chat_data_main_database_attachment_cache,
+      :chat_data_other, :chat_data_other_attachment, :chat_data_other_attachment_cache,
+      :chat_data_other_specify,
+      # D. Data Analysis
+      :manuscript_preparation_none, :manuscript_preparation_analysis_data, :manuscript_preparation_analysis_ancillary_data, :manuscript_analysis_review, :manuscript_preparation_other, :manuscript_preparation_other_specify,
+      :proposed_analysis,
+      # E. Attachments
+      :attachment_none,
+      :attachment_chat_form, :attachment_chat_form_attachment, :attachment_chat_form_attachment_cache, :attachment_chat_form_specify,
+      :attachment_chat_variables, :attachment_chat_variables_attachment, :attachment_chat_variables_attachment_cache, :attachment_chat_variables_specify,
+      :attachment_ancillary_forms, :attachment_ancillary_forms_attachment, :attachment_ancillary_forms_attachment_cache, :attachment_ancillary_forms_specify,
+      :attachment_other, :attachment_other_attachment, :attachment_other_attachment_cache, :attachment_other_specify,
+      # 10. CHAT Publication Proposal Description
+      :co_lead_author_id, :writing_group_members, :keywords, :affiliation, :timeline,
+      :sponsoring_pi, :rationale, :hypothesis, :data, :study_type, :target_journal,
+      :analysis_responsibility, :analysis_plan, :summary_section, :references,
+      :additional_comments,
+      # F. Author assurance and sign off
+      :author_assurance
+    )
+  end
+
 end

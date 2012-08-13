@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def parse_date(date_string)
-    date_string.to_s.split('/').last.size == 2 ? Date.strptime(date_string, "%m/%d/%y") : Date.strptime(date_string, "%m/%d/%Y") rescue ""
+  def parse_date(date_string, default_date = '')
+    date_string.to_s.split('/').last.size == 2 ? Date.strptime(date_string, "%m/%d/%y") : Date.strptime(date_string, "%m/%d/%Y") rescue default_date
   end
 
   def scrub_order(model, params_order, default_order)

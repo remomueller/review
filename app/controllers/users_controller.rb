@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   def activate
     params[:user] ||= {}
     params[:user][:password] = params[:user][:password_confirmation] = Digest::SHA1.hexdigest(Time.now.usec.to_s)[0..19] if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
-    @user = User.new(params[:user])
+    @user = User.new(post_params)
     if @user.save
       [:pp_committee, :pp_committee_secretary, :steering_committee, :steering_committee_secretary, :system_admin, :status].each do |attribute|
         @user.update_column attribute, params[:user][attribute]
@@ -94,7 +94,7 @@ class UsersController < ApplicationController
     params[:user] ||= {}
 
     params[:user].slice(
-      :first_name, :last_name, :email
+      :first_name, :last_name, :email, :password, :password_confirmation
     )
   end
 end
