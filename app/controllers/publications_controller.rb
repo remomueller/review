@@ -135,11 +135,11 @@ class PublicationsController < ApplicationController
 
     if first_visit
       if (current_user.pp_committee? or current_user.pp_committee_secretary?) and (current_user.steering_committee? or current_user.steering_committee_secretary?)
-        @order = ['tagged_for_pp_review DESC', 'tagged_for_sc_review DESC']
+        @order = ['publications.tagged_for_pp_review DESC', 'publications.tagged_for_sc_review DESC']
       elsif (current_user.pp_committee? or current_user.pp_committee_secretary?)
-        @order = 'tagged_for_pp_review DESC'
+        @order = 'publications.tagged_for_pp_review DESC'
       elsif (current_user.steering_committee? or current_user.steering_committee_secretary?)
-        @order = 'tagged_for_sc_review DESC'
+        @order = 'publications.tagged_for_sc_review DESC'
       end
     end
 
