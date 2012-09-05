@@ -1,5 +1,8 @@
 == 0.13.6
 
+* Bug Fix
+  * Sorting publications on Publication Matrix now correctly sorts by the selected column (by SusanR)
+
 == 0.13.5
 
 * Enhancements
