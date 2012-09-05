@@ -1,4 +1,4 @@
-= Review, CHAT Publications Manager {<img src="https://secure.travis-ci.org/remomueller/review.png"/>}[http://travis-ci.org/remomueller/review] {<img src="https://gemnasium.com/remomueller/review.png" alt="Dependency Status" />}[https://gemnasium.com/remomueller/review]
+= Review, CHAT Publications Manager {<img src="https://secure.travis-ci.org/remomueller/review.png"/>}[http://travis-ci.org/remomueller/review] {<img src="https://gemnasium.com/remomueller/review.png" alt="Dependency Status" />}[https://gemnasium.com/remomueller/review] {<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/remomueller/review]
 
 Easy management of publication proposals for publication committee, steering committee, and secretaries. Email reminders for committee members, printable PDF of Publication Matrix, easy filtering of publications available for review. Using Rails 3.2+ and Ruby 1.9.3+.
 
