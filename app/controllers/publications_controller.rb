@@ -23,7 +23,7 @@ class PublicationsController < ApplicationController
       @user_publication_review = @reviewer.user_publication_reviews.create(publication_id: @publication.id) if @user_publication_review.blank?
       @user_publication_review.update_column :reminder_sent_at, Time.now
 
-      UserMailer.publication_approval_reminder(@publication, @reviewer).deliver if Rails.env.production?
+      UserMailer.publication_approval_reminder(current_user, params[:to], params[:cc], params[:subject], params[:body]).deliver if Rails.env.production?
     else
       render nothing: true
     end

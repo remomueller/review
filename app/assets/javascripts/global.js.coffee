@@ -19,10 +19,10 @@ jQuery ->
     .on('mouseover', ".smudge", () -> $(this).attr('src', $(this).attr('src').replace(/(-(.*?))?.png/, '_g1.png')))
     .on('mouseout', ".smudge",  () -> $(this).attr('src', $(this).attr('src').replace(/(-(.*?))?_g1.png/, '.png')))
     .on('click', ".token-input-list-facebook", () -> $(this).parent().find("input").focus()  )
-  .on('click', '[data-object~="toggle"]', () ->
-    $($(this).data('target')).toggle()
-    false
-  )
+    .on('click', '[data-object~="toggle"]', () ->
+      $($(this).data('target')).toggle()
+      false
+    )
 
   window.$isDirty = false
   msg = 'You haven\'t saved your changes.'

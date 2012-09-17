@@ -44,17 +44,16 @@ class UserMailerTest < ActionMailer::TestCase
   end
 
   test "publication approval reminder email" do
-    reviewer = users(:pp_committee)
-    publication = publications(:proposed)
+    valid = users(:valid)
 
     # Send the email, then test that it got queued
-    email = UserMailer.publication_approval_reminder(publication, reviewer).deliver
+    email = UserMailer.publication_approval_reminder(valid, 'recipient@example.com', 'cc@example.com', 'New Publication Awaiting Approval', 'Body').deliver
     assert !ActionMailer::Base.deliveries.empty?
 
     # Test the body of the sent email contains what we expect it to
-    assert_equal [reviewer.email], email.to
-    assert_equal "New Publication Awaiting Approval: #{publication.abbreviated_title_and_ms}", email.subject
-    assert_match /Please follow the link #{SITE_URL.to_s + "/publications/" + publication.id.to_s} to approve or deny the proposal\./, email.encoded
+    assert_equal ['recipient@example.com'], email.to
+    assert_equal "New Publication Awaiting Approval", email.subject
+    assert_match(/Body/, email.encoded)
   end
 
   test "publication approval email for P&P approved publication" do

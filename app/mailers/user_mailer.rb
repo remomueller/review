@@ -10,14 +10,8 @@ class UserMailer < ActionMailer::Base
          reply_to: user.email)
   end
 
-  def publication_approval_reminder(publication, reviewer)
-    setup_email
-    @publication = publication
-    @reviewer = reviewer
-    @reviewer.reset_authentication_token!
-    mail(to: reviewer.email,
-         subject: "New Publication Awaiting Approval: #{publication.abbreviated_title_and_ms}",
-         reply_to: publication.user.email)
+  def publication_approval_reminder(current_user, to, cc, subject, body)
+    mail(to: to, cc: cc, reply_to: current_user.email, subject: subject, body: body)
   end
 
   def status_activated(user)

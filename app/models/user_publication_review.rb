@@ -22,6 +22,17 @@ class UserPublicationReview < ActiveRecord::Base
     self.update_column :writing_group_nomination, modified_writing_group
   end
 
+  def email_body_template(current_user)
+    result = ""
+    result << "Hello #{self.user.first_name},\n"
+    result << "\n#{self.publication.user.email_with_name} has submitted a publication proposal #{self.publication.created_at.strftime("on %b %d, %Y at %I:%M %p")}.\n"
+    result << "  \n#{self.publication.full_title_and_ms}\n"
+    result << "\nPlease follow the link #{SITE_URL}/publications/#{self.publication.id} to approve or deny the proposal.\n"
+    result << "\nThank you!\n"
+    result << "\n#{DEFAULT_APP_NAME} System Mailer\n"
+    result
+  end
+
   private
 
   # If a steering committee member creates or updates their review of a publication

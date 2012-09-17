@@ -88,6 +88,10 @@ class User < ActiveRecord::Base
     "#{last_name}, #{first_name}"
   end
 
+  def email_with_name
+    "#{name} <#{email}>"
+  end
+
   def apply_omniauth(omniauth)
     unless omniauth['info'].blank?
       self.email = omniauth['info']['email'] if email.blank?

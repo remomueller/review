@@ -1,8 +1,9 @@
 == 0.13.7
 
 * Enhancements
-  * Secretaries can now delete publications
-  * Secretaries can now set the lead author for new and existing publications
+  * Secretaries can delete publications
+  * Secretaries can set the lead author for new and existing publications
+  * Secretaries can customize publication review reminder emails for committee members
   * Unsaved changes while editing publications now asks the user if they want leave the page
   * Updated to Contour 1.1.0
 
