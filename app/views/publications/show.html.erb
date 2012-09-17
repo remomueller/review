@@ -62,8 +62,6 @@
       </table>
     </div>
   </div>
-
-  <%= javascript_tag "$(function () { $('#myTab a').click(function (e) { e.preventDefault(); $(this).tab('show'); }) });" %>
 <% end %>
 
 <% if ['approved', 'nominated'].include?(@publication.status) and current_user.steering_committee_secretary? %>

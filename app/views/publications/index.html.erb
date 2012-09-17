@@ -12,19 +12,11 @@
   <%= image_tag 'gentleface/16/lightbulb.png', alt: '' %> Mouse Over for Additional Information
 </div>
 
-<%= form_tag publications_path, method: :get, remote: true, id: "search_form", class: 'form-search' do %>
+<%= form_tag publications_path, method: :get, remote: true, id: "search_form", class: 'form-search', data: { object: 'form-load' } do %>
   <%= hidden_field_tag :order, params[:order] %>
   <%= text_field_tag 'search', params[:search], class: 'search-query' %>
   <%= submit_tag 'Search', class: 'btn btn-primary' %>
   <%= link_to "Export Matrix as PDF", print_publications_path(format: 'pdf'), target: '_blank', class: 'btn btn-mini' %>
 <% end %>
 
-<div style="clear:both"></div>
-
 <div id="publications"><center><%= image_tag "contour/ajax-loader.gif" %></center></div>
-
-<%= javascript_tag do %>
-  $(function(){
-    $.get($("#search_form").attr("action"), $("#search_form").serialize(), null, "script");
-  });
-<% end %>

@@ -8,6 +8,6 @@
   </div>
   <div class="form-actions">
     <%= submit_tag (@publication.manuscript_url.blank? ? "Upload Manuscript" : "Replace Existing Manuscript"), class: 'btn btn-primary' %>
-    <%= link_to 'Cancel', show_manuscript_publication_path(@publication), method: :post, remote: true, class: 'btn btn-danger' unless @publication.manuscript_url.blank? %>
+    <%= link_to 'Cancel', show_manuscript_publication_path(@publication), method: :post, remote: true, class: 'btn' unless @publication.manuscript_url.blank? %>
   </div>
 <% end %>

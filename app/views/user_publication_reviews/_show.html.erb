@@ -29,7 +29,7 @@
               <% first_name = user_name.split(' ').first.to_s %>
               <% last_name = user_name.split(' ').last.to_s %>
               <% u = User.find_by_first_name_and_last_name(first_name, last_name) %>
-              <li><%= u ? link_to(u.name, u) + "<br /><span class='quiet small'>#{u.email}</span>".html_safe : user_name %></li>
+              <li style="line-height:30px"><%= u ? link_to(u.name, u) + "<br /><span class='quiet small'>#{u.email}</span>".html_safe : user_name %></li>
             <% end %>
           </ul>
         </div>

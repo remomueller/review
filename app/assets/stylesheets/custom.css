@@ -1,31 +1,9 @@
-/*************************************
-   WELCOME TO THE CUSTOM STYLESHEET
---------------------------------------
-              custom.css
-        BlueTrip CSS Framework
-    Put your custom styles in here.
-***************************************/
-
-/**************************************/
-/*           COLOR SCHEME             */
-/**************************************
-- black		#000
-- white		#fff
-- logo blue   #0E7799
-- link blue   #057080
-
-- dark blue   #094E63
-- light blue  #CDEDF7
-- orange      #EB6C20
-***************************************/
-
-/* TODO extract into SCSS files */
-
 /**************************************/
 /*              GLOBALS               */
 /**************************************/
 
 textarea[disabled='disabled'], input[disabled='disabled'], select[disabled='disabled'], .disabled { color: #0E7799; }
+.disabled { line-height: 30px; }
 
 /**************************************/
 /*            MAIN CONTENT            */

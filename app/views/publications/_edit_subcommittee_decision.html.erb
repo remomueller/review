@@ -24,6 +24,6 @@
 
   <div class="form-actions">
     <%= submit_tag (@publication.status == 'proposed' ? 'Submit' : 'Update') + " Subcommittee Decision", class: 'btn btn-primary' %>
-    <%= link_to 'Cancel', show_subcommittee_decision_publication_path(@publication), method: :post, remote: true, class: 'btn btn-danger' unless @publication.status == 'proposed' %>
+    <%= link_to 'Cancel', show_subcommittee_decision_publication_path(@publication), method: :post, remote: true, class: 'btn' unless @publication.status == 'proposed' %>
   </div>
 <% end %>

@@ -17,6 +17,6 @@
 
   <div class="form-actions">
     <%= submit_tag (@publication.status == 'approved' ? 'Submit' : 'Update') + " Steering Committee Decision", class: 'btn btn-primary' %>
-    <%= link_to 'Cancel', show_steering_committee_decision_publication_path(@publication), method: :post, remote: true, class: 'btn btn-danger' unless @publication.status == 'approved' %>
+    <%= link_to 'Cancel', show_steering_committee_decision_publication_path(@publication), method: :post, remote: true, class: 'btn' unless @publication.status == 'approved' %>
   </div>
 <% end %>

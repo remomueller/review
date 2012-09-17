@@ -26,3 +26,7 @@ jQuery ->
     $($(this).data('target')).submit();
     false
   )
+  .on('click', '#myTab a', (e) ->
+    e.preventDefault()
+    $(this).tab('show')
+  )
