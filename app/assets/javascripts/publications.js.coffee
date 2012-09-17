@@ -36,3 +36,9 @@ jQuery ->
         $($(this).data('target')).submit()
         false
     )
+
+    $('#user_publication_review_writing_group_nomination').tokenInput(root_url + 'users.json',
+      crossDomain: false,
+      prePopulate: $('#user_publication_review_writing_group_nomination').data('pre'),
+      theme: 'facebook', preventDuplicates: true
+    );
