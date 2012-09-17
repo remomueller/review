@@ -2,8 +2,10 @@
 <div class="page-header">
   <center>
     <h2><%= @title %></h2>
-    <%= link_to "Edit Publication", edit_publication_path(@publication), class: 'btn btn-mini' if @publication.editable?(current_user) %>
-    <%= link_to "View Publications", publications_path, class: 'btn btn-mini' %>
+    <% if @publication.editable?(current_user)  %>
+      <%= link_to "Edit Publication", edit_publication_path(@publication), class: 'btn btn-mini' if @publication.editable?(current_user) %>
+      <%= link_to 'Delete Publication', @publication, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: "Are you sure you want to delete Publication #{@publication.abbreviated_title_and_ms}?" } %>
+    <% end %>
   </center>
 </div>
 

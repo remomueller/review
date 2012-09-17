@@ -33,13 +33,17 @@
     <div class="control-group">
       <label class="control-label">1. Lead Author</label>
       <div class="controls">
-        <span class="help-block">
-        <% if @publication.user %>
-          <%= @publication.user.name %>
-        <% else %>
-          <span class="muted">No Lead Author</span>
-        <% end %>
-        </span>
+        <div class="disabled help-block">
+          <% if disabled.blank? and current_user.secretary? %>
+            <%= f.select :user_id, options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.reverse_name, u.id]}, @publication.user_id) %>
+          <% else %>
+            <% if @publication.user %>
+              <%= @publication.user.name %>
+            <% else %>
+              <span class="muted">No Lead Author</span>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
 

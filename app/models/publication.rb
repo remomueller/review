@@ -8,7 +8,7 @@ class Publication < ActiveRecord::Base
 
   FINAL_STATUS = [['SC Approved', 'nominated'], ['Submitted', 'submitted'], ['Published', 'published']]
 
-  attr_protected :user_id, :deleted, :manuscript_number, :secretary_notes, :targeted_start_date, :dataset_requested_analyst,
+  attr_protected :deleted, :manuscript_number, :secretary_notes, :targeted_start_date, :dataset_requested_analyst,
                  :additional_ppcommittee_instructions, :additional_sccommittee_instructions,
                  :tagged_for_pp_review, :tagged_for_sc_review
 

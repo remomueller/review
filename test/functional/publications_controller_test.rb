@@ -469,7 +469,7 @@ class PublicationsControllerTest < ActionController::TestCase
     end
 
     assert_nil assigns(:publication)
-    assert_redirected_to root_path
+    assert_redirected_to publications_path
   end
 
   test "should remove nomination from publication reviews" do
