@@ -3,6 +3,7 @@
 * Enhancements
   * Secretaries can now delete publications
   * Secretaries can now set the lead author for new and existing publications
+  * Unsaved changes while editing publications now asks the user if they want leave the page
   * Updated to Contour 1.1.0
 
 == 0.13.6
