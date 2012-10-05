@@ -24,7 +24,7 @@ jQuery ->
       false
     )
     .on('click', '[data-object~="submit"]', () ->
-      $($(this).data('target')).submit();
+      $($(this).data('target')).submit()
       false
     )
     .on('click', '#myTab a', (e) ->
