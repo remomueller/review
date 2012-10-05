@@ -31,7 +31,7 @@ jQuery ->
       e.preventDefault()
       $(this).tab('show')
     )
-    .on('click', '[data-object~="publication-save"]', () ->
+    .on('click', '[data-object~="publication-secretary-save"]', () ->
         window.$isDirty = false
         $($(this).data('target')).submit()
         false

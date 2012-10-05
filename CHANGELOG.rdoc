@@ -1,5 +1,8 @@
 == 0.13.8
 
+* Bug Fix
+  * Publication save button for secretaries now functions properly
+
 == 0.13.7
 
 * Enhancements
