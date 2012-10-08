@@ -35,7 +35,7 @@ class ManuscriptUploader < CarrierWave::Uploader::Base
 
   # Add a white list of extensions which are allowed to be uploaded.
   def extension_white_list
-    %w(doc docx pdf)
+    %w(doc docx pdf xls xlsx)
   end
 
   # Override the filename of the uploaded files:

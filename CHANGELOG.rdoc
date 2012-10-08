@@ -1,5 +1,8 @@
 == 0.13.9
 
+* Enhancements
+  * Spreadsheets (xls, xlsx) added to valid file upload types
+
 == 0.13.8
 
 * Bug Fix
