@@ -9,7 +9,7 @@
     <dd>While you are composing your publication make sure to occasionally click the <strong>Quick Save</strong> icon <%= image_tag 'contour/save.png', alt: '', title: 'Quick Save', style: 'vertical-align:text-bottom' %> in the section header.</dd>
 
     <dt><span class="label label-warning">Important!</span></dt>
-    <dd>You will have to give your publication a <strong>Full Title</strong> and <strong>Abbreviated Title</strong> in <%= link_to 'Section E.10', '#section_e10' %> first so that your publication can be saved.</dd>
+    <dd>You will have to give your publication a <strong>Full Title</strong> and <strong>Abbreviated Title</strong> first so that your publication can be saved.</dd>
   </dl>
 </div>
 <% end %>
@@ -19,6 +19,42 @@
 <% form_name = @publication.new_record? ? 'new_publication' : "edit_publication_#{@publication.id}" %>
 <% quick_save = disabled.blank? ? link_to(image_tag('contour/save.png', alt: '', title: 'Quick Save', style: 'vertical-align:text-bottom'), '#', data: { object: 'publication-save', publish: '-1', target: "##{form_name}" }) : "" %>
 <%= form_for(@publication, html: { multipart: true, class: 'form-horizontal' }) do |f| %>
+
+  <% if disabled.blank? and @publication.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@publication.errors.count, "error") %> prohibited this publication from being saved:</h2>
+
+      <ul>
+      <% @publication.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="well">
+    <div class="control-group">
+      <%= f.label :full_title, nil, class: 'control-label' %>
+      <div class="controls">
+        <% if disabled.blank? %>
+            <%= f.text_field :full_title, style: "width:99%", disabled: disabled %>
+        <% else %>
+          <div class="disabled"><%= simple_format @publication.full_title %></div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :abbreviated_title, 'Abbreviated title', class: 'control-label' %>
+      <div class="controls">
+        <% if disabled.blank? %>
+          <%= f.text_field :abbreviated_title, style: "width:99%", disabled: disabled %>
+        <% else %>
+          <div class="disabled"><%= simple_format @publication.abbreviated_title %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
   <% if disabled.blank? and current_user.secretary? %>
   <div class="well control-group">
@@ -224,28 +260,6 @@
     <p>
       10.  CHAT Publication Proposal Description
     </p>
-
-    <div class="control-group">
-      <%= f.label :full_title, nil, class: 'control-label' %>
-      <div class="controls">
-        <% if disabled.blank? %>
-            <%= f.text_field :full_title, style: "width:99%", disabled: disabled %>
-        <% else %>
-          <div class="disabled"><%= simple_format @publication.full_title %></div>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :abbreviated_title, 'Abbreviated title', class: 'control-label' %>
-      <div class="controls">
-        <% if disabled.blank? %>
-          <%= f.text_field :abbreviated_title, style: "width:99%", disabled: disabled %>
-        <% else %>
-          <div class="disabled"><%= simple_format @publication.abbreviated_title %></div>
-        <% end %>
-      </div>
-    </div>
 
     <div class="control-group">
       <label class="control-label">Lead Author</label>

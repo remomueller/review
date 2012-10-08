@@ -2,6 +2,7 @@
 
 * Enhancements
   * Spreadsheets (xls, xlsx) added to valid file upload types
+  * Validation errors are displayed at the top of the proposal when the proposal fails to submit
 
 == 0.13.8
 
