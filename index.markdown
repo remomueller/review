@@ -2,56 +2,6 @@
 title: CHAT Publications Documentation
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>CHAT Publications Documentation</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+# Overview
 
-    <!-- Le styles -->
-    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-    </style>
-    <link href="stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-    <div class="container-fluid">
-      <h1>CHAT Publications Documentation</h1>
-      <p>Propose, Review, and Finalize Papers</p>
-
-      <p class="view"><a href="https://github.com/remomueller/review">View the Project on GitHub <small>remomueller/review</small></a></p>
-
-      <ul>
-        <li><a href="http://remomueller.github.com/review/faq/overview">View <strong>FAQ</strong></a></li>
-      </ul>
-
-      <footer>
-        <p>This project is maintained by Remo Mueller [https://github.com/remomueller](@remomueller)</p>
-        <p><small>Hosted on GitHub Pages</small></p>
-      </footer>
-    </div><!--/.fluid-container-->
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="javascripts/jquery-1.8.2.min.js"></script>
-    <script src="javascripts/bootstrap-min.js"></script>
-
-  </body>
-</html>
+Propose, Review, and Finalize Papers

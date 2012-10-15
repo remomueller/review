@@ -1,47 +1,68 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>{{ page.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <link rel="stylesheet" href="/review/stylesheets/styles.css">
-    <link rel="stylesheet" href="/review/stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!-- Le styles -->
+    <link href="/review/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+    <link href="/review/stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Review - CHAT Publications</h1>
-        <p>Propose, Review, and Finalize Papers</p>
-
-        <p><ul>
-          <li><a href="http://remomueller.github.com/review/faq/overview">View <strong>FAQ</strong></a></li>
-        </ul></p>
-
-        <p class="view"><a href="https://github.com/remomueller/review">View the Project on GitHub <small>remomueller/review</small></a></p>
-      </header>
-      <section>
-        {{ content }}
-      </section>
-      <footer>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">CHAT Publications Documentation</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+              Logged in as <a href="#" class="navbar-link">Username</a>
+            </p>
+            <ul class="nav">
+              <li class="active"><a href="/review/">Overview</a></li>
+              <li><a href="/review/faq/overview">FAQ</a></li>
+              <li><a href="/review/faq/contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
     </div>
-    <script src="/review/javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-35597133-2");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+
+    <div class="container-fluid">
+      {{ content }}
+      <footer>
+        <p>This project is maintained by Remo Mueller [https://github.com/remomueller](@remomueller)</p>
+        <p><small>Hosted on GitHub Pages</small></p>
+      </footer>
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/review/javascripts/jquery-1.8.2.min.js"></script>
+    <script src="/review/javascripts/bootstrap-min.js"></script>
 
   </body>
 </html>
