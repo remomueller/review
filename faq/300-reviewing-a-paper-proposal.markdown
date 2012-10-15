@@ -6,7 +6,7 @@ layout: default
 ## #301 - How do I add a comment to a paper proposal?
 
 <ul class="thumbnails">
-  <li class="span4">
+  <li class="span6">
     <div class="thumbnail">
       <div class="caption">
         <p>1) Click the <strong>Abbreviated Title</strong> of the paper you wish to review.</p>
@@ -16,7 +16,7 @@ layout: default
       </a>
     </div>
   </li>
-  <li class="span4">
+  <li class="span6">
     <div class="thumbnail">
       <div class="caption">
         <p>2) In the <strong>Review Publication</strong> section you can set the <i>Approval Status</i> along with a text box for a <i>Comment</i>.  Once you have added your comment click <strong>Submit Review</strong>.</p>
