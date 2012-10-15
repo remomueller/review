@@ -1,3 +1,7 @@
+---
+title: CHAT Publications Documentation
+---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -38,7 +42,7 @@
       </ul>
 
       <footer>
-        <p>This project is maintained by Remo Mueller (<a href="https://github.com/remomueller">@remomueller</a>)</p>
+        <p>This project is maintained by Remo Mueller [https://github.com/remomueller](@remomueller)</p>
         <p><small>Hosted on GitHub Pages</small></p>
       </footer>
     </div><!--/.fluid-container-->
