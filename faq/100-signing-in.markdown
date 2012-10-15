@@ -15,6 +15,18 @@ You can reset your password by entering the email you signed up with here:
 
 [https://sleepepi.partners.org/review/users/password/new](https://sleepepi.partners.org/review/users/password/new)
 
+<ul class="thumbnails">
+  <li class="span4">
+    <div class="thumbnail">
+      <img src="../screenshots/chatpub_reset_password01.png" alt="Reset Password - Enter Email">
+      <div class="caption">
+        <h3>1) Enter Email</h3>
+        <p>Enter the email you signed up with originally, and click "Send me password reset instructions".</p>
+      </div>
+    </div>
+  </li>
+</ul>
+
 ![Reset Password - Enter Email](../screenshots/chatpub_reset_password01.png)
 <legend>1) Enter the email you signed up with originally, and click "Send me password reset instructions".</legend>
 
