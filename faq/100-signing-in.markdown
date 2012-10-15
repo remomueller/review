@@ -26,48 +26,45 @@ You can reset your password by entering the email you signed up with here: [http
   </li>
   <li class="span4">
     <div class="thumbnail">
-      <a data-toggle="lightbox" href="#chatpub_reset_password02">
-        <img src="../screenshots/chatpub_reset_password02.png" alt="Email Sent Confirmation">
-      </a>
       <div class="caption">
         <p>2) If you provided the email you signed up with, you will see a message that a password reset email has been sent.</p>
       </div>
+      <a data-toggle="lightbox" href="#chatpub_reset_password02">
+        <img src="../screenshots/chatpub_reset_password02.png" alt="Email Sent Confirmation">
+      </a>
     </div>
   </li>
   <li class="span4">
     <div class="thumbnail">
-      <a data-toggle="lightbox" href="#chatpub_reset_password03">
-        <img src="../screenshots/chatpub_reset_password03.png" alt="Reset Password Email">
-      </a>
       <div class="caption">
         <p>3) Clicking the link in the email will bring you to the password reset page.</p>
       </div>
+      <a data-toggle="lightbox" href="#chatpub_reset_password03">
+        <img src="../screenshots/chatpub_reset_password03.png" alt="Reset Password Email">
+      </a>
     </div>
   </li>
 </ul>
 
-
-Once you have submitted your email, you will receive an email containing a link to reset your password. Entering a new password will then allow you to sign in to CHAT Publications
-
 <ul class="thumbnails">
   <li class="span4">
     <div class="thumbnail">
-      <a data-toggle="lightbox" href="#chatpub_reset_password04">
-        <img src="../screenshots/chatpub_reset_password04.png" alt="Enter New Password">
-      </a>
       <div class="caption">
         <p>4) Enter a new password and click "Change my password".</p>
       </div>
+      <a data-toggle="lightbox" href="#chatpub_reset_password04">
+        <img src="../screenshots/chatpub_reset_password04.png" alt="Enter New Password">
+      </a>
     </div>
   </li>
   <li class="span4">
     <div class="thumbnail">
-      <a data-toggle="lightbox" href="#chatpub_reset_password05">
-        <img src="../screenshots/chatpub_reset_password05.png" alt="Password Changed Successfully">
-      </a>
       <div class="caption">
         <p>5) You will be logged in if you successfully set a new password.</p>
       </div>
+      <a data-toggle="lightbox" href="#chatpub_reset_password05">
+        <img src="../screenshots/chatpub_reset_password05.png" alt="Password Changed Successfully">
+      </a>
     </div>
   </li>
 </ul>
