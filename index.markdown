@@ -1,5 +1,6 @@
 ---
 title: CHAT Publications Documentation
+layout: default
 ---
 
 # Overview
