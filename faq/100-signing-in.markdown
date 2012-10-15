@@ -11,19 +11,17 @@ If you forgot which email you tried to sign up with, you can send an email to Re
 
 ## #102 - I don't remember my password?
 
-You can reset your password by entering the email you signed up with here:
-
-[https://sleepepi.partners.org/review/users/password/new](https://sleepepi.partners.org/review/users/password/new)
+You can reset your password by entering the email you signed up with here: [https://sleepepi.partners.org/review/users/password/new](https://sleepepi.partners.org/review/users/password/new)
 
 <ul class="thumbnails">
   <li class="span4">
     <div class="thumbnail">
-      <a data-toggle="lightbox" href="#chatpub_reset_password01">
-        <img src="../screenshots/chatpub_reset_password01.png" alt="Enter Email">
-      </a>
       <div class="caption">
         <p>1) Enter the email you signed up with originally, and click "Send me password reset instructions".</p>
       </div>
+      <a data-toggle="lightbox" href="#chatpub_reset_password01">
+        <img src="../screenshots/chatpub_reset_password01.png" alt="Enter Email">
+      </a>
     </div>
   </li>
   <li class="span4">
