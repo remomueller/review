@@ -18,7 +18,9 @@ You can reset your password by entering the email you signed up with here:
 <ul class="thumbnails">
   <li class="span4">
     <div class="thumbnail">
-      <img src="../screenshots/chatpub_reset_password01.png" alt="Reset Password - Enter Email">
+      <a data-toggle="lightbox" href="#demoLightbox">
+        <img src="../screenshots/chatpub_reset_password01.png" alt="Reset Password - Enter Email">
+      </a>
       <div class="caption">
         <h3>1) Enter Email</h3>
         <p>Enter the email you signed up with originally, and click "Send me password reset instructions".</p>
@@ -26,6 +28,12 @@ You can reset your password by entering the email you signed up with here:
     </div>
   </li>
 </ul>
+
+<div class="lightbox fade" id="demoLightbox" style="display: none;">
+  <div class='lightbox-content'>
+    <img src="../screenshots/chatpub_reset_password01.png" alt="Reset Password - Enter Email">
+  </div>
+</div>
 
 ![Reset Password - Enter Email](../screenshots/chatpub_reset_password01.png)
 <legend>1) Enter the email you signed up with originally, and click "Send me password reset instructions".</legend>
