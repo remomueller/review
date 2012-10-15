@@ -1,6 +1,6 @@
 ---
 title: Frequently Asked Questions - Overview
-layout: layouts/default
+layout: default
 ---
 
 # Frequently Asked Questions Overview
