@@ -25,7 +25,11 @@ class UserPublicationReview < ActiveRecord::Base
   def email_body_template(current_user)
     result = ""
     result << "Hello #{self.user.first_name},\n"
-    result << "\n#{self.publication.user.email_with_name} has submitted a publication proposal #{self.publication.created_at.strftime("on %b %d, %Y at %I:%M %p")}.\n"
+    if self.publication.user
+      result << "\n#{self.publication.user.email_with_name} has submitted a publication proposal #{self.publication.created_at.strftime("on %b %d, %Y at %I:%M %p")}.\n"
+    else
+      result << "\nA publication proposal was submitted #{self.publication.created_at.strftime("on %b %d, %Y at %I:%M %p")}.\n"
+    end
     result << "  \n#{self.publication.full_title_and_ms}\n"
     result << "\nPlease follow the link #{SITE_URL}/publications/#{self.publication.id} to approve or deny the proposal.\n"
     result << "\nThank you!\n"

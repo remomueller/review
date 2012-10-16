@@ -385,6 +385,12 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should show publication without a lead author" do
+    login(users(:pp_secretary))
+    get :show, id: publications(:no_lead_author)
+    assert_response :success
+  end
+
   test "should show publication with committee reminders" do
     login(users(:sc_secretary))
     get :show, id: publications(:three)

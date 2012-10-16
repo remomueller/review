@@ -1,5 +1,8 @@
 == 0.13.10
 
+* Bug Fix
+  * Fixed a bug where a secretary could not view paper proposals that had no lead author (by SusanR)
+
 == 0.13.9
 
 * Enhancements
