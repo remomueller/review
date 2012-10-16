@@ -6,24 +6,30 @@ layout: default
 # Frequently Asked Questions
 
 <table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Category</th>
+    </tr>
+  </thead>
   <tbody>
-    <tr>
+    <tr data-link="100-signing-in" style="cursor:pointer">
       <td>
-        <a href="100-signing-in">100 - Signing In</a>
+        100 - I don't remember my login or password, what now?
       </td>
-      <td>I don't remember my login or password, what now?</td>
+      <td>Signing In</td>
     </tr>
-    <tr>
+    <tr data-link="200-creating-a-paper-proposal" style="cursor:pointer">
       <td>
-        <a href="200-creating-a-paper-proposal">200 - Creating a Paper Proposal</a>
+        200 - How do I submit a proposal for a paper?
       </td>
-      <td>How do I submit a proposal for a paper?</td>
+      <td>Creating a Paper Proposal</td>
     </tr>
-    <tr>
+    <tr data-link="300-reviewing-a-paper-proposal" style="cursor:pointer">
       <td>
-        <a href="300-reviewing-a-paper-proposal">300 - Reviewing a Paper Proposal</a>
+        300 - How do I comment on and review a paper proposal?
       </td>
-      <td>How do I comment on and review a paper proposal?</td>
+      <td>Reviewing a Paper Proposal</td>
     </tr>
   </tbody>
 </table>
