@@ -68,7 +68,7 @@ class Publication < ActiveRecord::Base
   validates_acceptance_of :chat_data_main_database, message: 'select at least one', if: [:chat_data_not_selected?, :no_longer_draft?]
   validates_acceptance_of :chat_data_other, message: 'select at least one', if: [:chat_data_not_selected?, :no_longer_draft?]
 
-  validates_presence_of :chat_data_other_specify, if: [:should_validate_chat_data_other_specify?, :no_longer_draft?]
+  # validates_presence_of :chat_data_other_specify, if: [:should_validate_chat_data_other_specify?, :no_longer_draft?]
 
   validates_presence_of :chat_data_main_forms_attachment, if: [:chat_data_main_forms_selected?]
   validates_presence_of :chat_data_main_database_attachment, if: [:chat_data_main_database_selected?]
@@ -93,10 +93,10 @@ class Publication < ActiveRecord::Base
   validates_presence_of :attachment_ancillary_forms_attachment, if: [:attachment_ancillary_forms_selected?]
 #  validates_presence_of :attachment_other_attachment, if: [:attachment_other_selected?]
 
-  validates_presence_of :attachment_chat_form_specify, if: [:should_validate_attachment_chat_form_specify?, :no_longer_draft?]
-  validates_presence_of :attachment_chat_variables_specify, if: [:should_validate_attachment_chat_variables_specify?, :no_longer_draft?]
-  validates_presence_of :attachment_ancillary_forms_specify, if: [:should_validate_attachment_ancillary_forms_specify?, :no_longer_draft?]
-  validates_presence_of :attachment_other_specify, if: [:should_validate_attachment_other_specify?, :no_longer_draft?]
+  # validates_presence_of :attachment_chat_form_specify, if: [:should_validate_attachment_chat_form_specify?, :no_longer_draft?]
+  # validates_presence_of :attachment_chat_variables_specify, if: [:should_validate_attachment_chat_variables_specify?, :no_longer_draft?]
+  # validates_presence_of :attachment_ancillary_forms_specify, if: [:should_validate_attachment_ancillary_forms_specify?, :no_longer_draft?]
+  # validates_presence_of :attachment_other_specify, if: [:should_validate_attachment_other_specify?, :no_longer_draft?]
 
 
   # Model Relationships
@@ -208,9 +208,9 @@ class Publication < ActiveRecord::Base
     !(self.chat_data_none? || self.chat_data_main_forms? || self.chat_data_main_database? || self.chat_data_other?)
   end
 
-  def should_validate_chat_data_other_specify?
-    self.chat_data_other?
-  end
+  # def should_validate_chat_data_other_specify?
+  #   self.chat_data_other?
+  # end
 
   def chat_data_main_forms_selected?
     self.chat_data_main_forms?
@@ -236,21 +236,21 @@ class Publication < ActiveRecord::Base
     !(self.attachment_none? || self.attachment_chat_form? || self.attachment_chat_variables? || self.attachment_ancillary_forms? || self.attachment_other?)
   end
 
-  def should_validate_attachment_chat_form_specify?
-    self.attachment_chat_form?
-  end
+  # def should_validate_attachment_chat_form_specify?
+  #   self.attachment_chat_form?
+  # end
 
-  def should_validate_attachment_chat_variables_specify?
-    self.attachment_chat_variables?
-  end
+  # def should_validate_attachment_chat_variables_specify?
+  #   self.attachment_chat_variables?
+  # end
 
-  def should_validate_attachment_ancillary_forms_specify?
-    self.attachment_ancillary_forms?
-  end
+  # def should_validate_attachment_ancillary_forms_specify?
+  #   self.attachment_ancillary_forms?
+  # end
 
-  def should_validate_attachment_other_specify?
-    self.attachment_other?
-  end
+  # def should_validate_attachment_other_specify?
+  #   self.attachment_other?
+  # end
 
   def attachment_chat_form_selected?
     self.attachment_chat_form?
