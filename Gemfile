@@ -5,11 +5,11 @@ gem 'rails',                '3.2.10'
 # Database Adapter
 # Install instructions for Windows: http://blog.mmediasys.com/2011/07/07/installing-mysql-on-windows-7-x64-and-using-ruby-with-it/
 gem 'mysql2',               '0.3.11'
-gem 'thin',                 '~> 1.4.1',           :platforms => [ :mswin, :mingw ]
+gem 'thin',                 '~> 1.5.0',           :platforms => [ :mswin, :mingw ]
 gem 'eventmachine',         '~> 1.0.0',           :platforms => [ :mswin, :mingw ]
 
 # Gems used by project
-gem 'contour',              '~> 1.1.1'
+gem 'contour',              '~> 1.1.2'
 gem 'kaminari',             '~> 0.14.1'
 gem 'carrierwave',          '~> 0.7.1'
 # PDFKit: Generate PDFs from webpages, https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF

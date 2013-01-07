@@ -1,5 +1,8 @@
 == 0.13.13
 
+* Enhancements
+  * Updated to Contour 1.1.2 and use Contour pagination theme
+
 == 0.13.12 (January 3, 2013)
 
 * Security Fix
