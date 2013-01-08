@@ -1,5 +1,8 @@
 == 0.13.13
 
+* Security Fix
+  * Updated Rails to 3.2.11
+
 * Enhancements
   * Updated to Contour 1.1.2 and use Contour pagination theme
   * Removing PDFKit in favor of direct LaTeX PDF generation
