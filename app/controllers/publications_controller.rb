@@ -1,11 +1,12 @@
 class PublicationsController < ApplicationController
   before_filter :authenticate_user!
 
-  def print_latex
-    @order = 'manuscript_number'
+  # def print_latex
+  def print
+    @order = 'manuscript_number desc'
     @publications = current_user.all_viewable_publications.order(@order).page(1).per(-1)
 
-    file_pdf_location = Publication.latex_file_location(current_user)
+    file_pdf_location = Publication.latex_file_location(current_user, @publications)
 
     if File.exists?(file_pdf_location)
       File.open(file_pdf_location, 'r') do |file|
@@ -16,10 +17,10 @@ class PublicationsController < ApplicationController
     end
   end
 
-  def print
-    @order = 'manuscript_number'
-    @publications = current_user.all_viewable_publications.order(:manuscript_number).page(1).per(-1)
-  end
+  # def print
+  #   @order = 'manuscript_number'
+  #   @publications = current_user.all_viewable_publications.order(:manuscript_number).page(1).per(-1)
+  # end
 
   def tag_for_review
     @committee = params[:committee]

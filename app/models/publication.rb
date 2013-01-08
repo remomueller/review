@@ -272,7 +272,7 @@ class Publication < ActiveRecord::Base
     self.status != 'draft'
   end
 
-  def self.latex_file_location(current_user)
+  def self.latex_file_location(current_user, publications)
     jobname = "publications_#{current_user.id}"
     root_folder = FileUtils.pwd
     output_folder = File.join(root_folder, 'tmp', 'files', 'tex')

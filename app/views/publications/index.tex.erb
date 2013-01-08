@@ -1,5 +1,5 @@
 <%#= index.tex.erb %>
-<%# @publications = self %>
+<%# publications %>
 
 \documentclass{article}
 \usepackage{graphicx}
@@ -13,7 +13,7 @@
 \usepackage{sectsty}
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 \usepackage{indentfirst}
-\usepackage{tabularx}
+
 
 \usepackage{hyperref}
 \usepackage{pifont}
@@ -24,7 +24,7 @@
 \fancyhf{}
 
 \lhead{}
-\chead{\textbf{Project}\\<%= latex_safe "CHAT Publications" %>}
+\chead{\textbf{<%= latex_safe "CHAT Publications" %>}}
 \rhead{}
 \lfoot{<%= latex_safe "Publication Matrix" %>}
 \cfoot{<%= latex_safe Date.today.strftime("%B %-d, %Y") %>}
@@ -42,9 +42,25 @@
 \begin{document}
 
 
-\section*{<%= latex_safe "Section Name" %>}
+\begin{table*}[!htbp]\centering
 
-Some text
+\begin{tabular}{lllrcrrr}\toprule
+<% publications.each do |publication| %>
+  <%= latex_safe publication.manuscript_number %> &
+  <%= latex_safe publication.abbreviated_title.to_s[0..10] %> &
+  <%= latex_safe publication.user.name if publication.user %> &
+  <%= latex_safe publication.publication_type %> &
+  <%= latex_safe publication.status %> &
+  <%= latex_safe publication.dataset_requested_analyst %> &
+  <%= latex_safe publication.targeted_start_date.strftime("%b %d, %Y (%a)") if publication.targeted_start_date %> \\
+  & & \multicolumn{5}{l}{ <%= latex_safe publication.finalized_nominations.join(', ') %> } \\
+  & \multicolumn{6}{l}{ <%= latex_safe publication.secretary_notes %> } \\
+  \\
+  \midrule
+<% end %>
+\end{tabular}
+\end{table*}
+
 
 \end{document}
 
