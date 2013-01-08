@@ -272,4 +272,39 @@ class Publication < ActiveRecord::Base
     self.status != 'draft'
   end
 
+  def self.latex_file_location(current_user)
+    jobname = "publications_#{current_user.id}"
+    root_folder = FileUtils.pwd
+    output_folder = File.join(root_folder, 'tmp', 'files', 'tex')
+    template_folder = File.join(root_folder, 'app', 'views', 'publications')
+    file_template = File.join(template_folder, 'index.tex.erb')
+    file_tex = File.join(root_folder, 'tmp', 'files', 'tex', jobname + '.tex')
+    file_in = File.new(file_template, "r")
+    file_out = File.new(file_tex, "w")
+    template = ERB.new(file_in.sysread(File.size(file_in)))
+    file_out.syswrite(template.result(binding))
+    file_in.close()
+    file_out.close()
+
+    # Run twice to allow LaTeX to compile correctly (page numbers, etc)
+    `#{LATEX_LOCATION} -interaction=nonstopmode --jobname=#{jobname} --output-directory=#{output_folder} #{file_tex}`
+    `#{LATEX_LOCATION} -interaction=nonstopmode --jobname=#{jobname} --output-directory=#{output_folder} #{file_tex}`
+
+    # Rails.logger.debug "----------------\n"
+    # Rails.logger.debug "#{LATEX_LOCATION} -interaction=nonstopmode --jobname=#{jobname} --output-directory=#{output_folder} #{file_tex}"
+
+    file_pdf_location = File.join('tmp', 'files', 'tex', "#{jobname}.pdf")
+  end
+
+  protected
+
+  def self.latex_safe(mystring)
+    mystring = mystring.to_s
+    symbols = [['\\', '\\textbackslash'], ['#', '\\#'], ['$', '\\$'], ['&', '\\&'], ['~', '\\~{}'], ['_', '\\_'], ['^', '\\^{}'], ['{', '\\{'], ['}', '\\}'], ['<', '\\textless{}'], ['>', '\\textgreater{}']]
+    symbols.each do |from, to|
+      mystring.gsub!(from, to)
+    end
+    mystring
+  end
+
 end
