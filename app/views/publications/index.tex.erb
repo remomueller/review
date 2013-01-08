@@ -13,6 +13,7 @@
 \usepackage{sectsty}
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 \usepackage{indentfirst}
+\usepackage{longtable}
 
 
 \usepackage{hyperref}
@@ -42,9 +43,7 @@
 \begin{document}
 
 
-\begin{table*}[!htbp]\centering
-
-\begin{tabular}{lllrcrrr}\toprule
+\begin{longtable}{lllrcrrr}\toprule
 <% publications.each do |publication| %>
   <%= latex_safe publication.manuscript_number %> &
   <%= latex_safe publication.abbreviated_title.to_s[0..10] %> &
@@ -58,8 +57,7 @@
   \\
   \midrule
 <% end %>
-\end{tabular}
-\end{table*}
+\end{longtable}
 
 
 \end{document}
