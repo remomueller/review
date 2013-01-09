@@ -36,10 +36,6 @@ Open a browser and go to: http://localhost
 
 All done!
 
-== Installing wkhtmltopdf
-
-Follow instructions given here: {https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF}[https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF]
-
 == Contributing to CHAT Publications Manager
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
