@@ -16,6 +16,15 @@
   <%= hidden_field_tag :order, params[:order] %>
   <%= text_field_tag 'search', params[:search], class: 'search-query' %>
   <%= submit_tag 'Search', class: 'btn btn-primary' %>
+  <%= hidden_field_tag :archived, @archived %>
+  <div class="btn-group" data-toggle="buttons-radio">
+    <% [['unarchived','unarchived'], ['archived','archived']].each do |label, value| %>
+      <button data-object="set-archived" data-value="<%= value %>" type="button" class="btn btn-mini <%= 'active' if @archived == value %>">
+        <%= label.humanize %>
+      </button>
+    <% end %>
+  </div>
+
   <%= link_to "Export Matrix as PDF", print_publications_path(format: 'pdf'), target: '_blank', class: 'btn btn-mini' %>
 <% end %>
 

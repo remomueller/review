@@ -1,6 +1,15 @@
 class PublicationsController < ApplicationController
   before_filter :authenticate_user!
 
+  def archive
+    if current_user.secretary? and @publication = Publication.current.find_by_id(params[:id])
+      @publication.update_column :archived, (params[:undo] != 'true')
+      render 'inline_update'
+    else
+      render nothing: true
+    end
+  end
+
   # def print_latex
   def print
     @order = 'manuscript_number desc'
@@ -138,6 +147,10 @@ class PublicationsController < ApplicationController
   	first_visit = params[:order].blank?
 
     publications_scope = current_user.all_viewable_publications
+
+    @archived = params[:archived] || 'unarchived'
+    publications_scope = publications_scope.where(archived: (params[:archived] == 'archived'))
+
     @search_terms = params[:search].to_s.gsub(/[^0-9a-zA-Z]/, ' ').split(' ')
     @search_terms.each{|search_term| publications_scope = publications_scope.search(search_term) }
 
@@ -280,7 +293,7 @@ class PublicationsController < ApplicationController
     if current_user.secretary?
       params[:publication].slice(
         # Secretary Only
-        :user_id,
+        :user_id, :archived,
         # Automatically added
         :status, :author_assurance_date,
         # Required to save draft

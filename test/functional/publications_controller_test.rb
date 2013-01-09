@@ -509,4 +509,29 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_nil assigns(:publication)
     assert_response :success
   end
+
+  test "should archive publication" do
+    login(users(:pp_secretary))
+    post :archive, id: @proposed, undo: 'false', format: 'js'
+    assert_not_nil assigns(:publication)
+    assert_equal true, assigns(:publication).archived
+    assert_template 'inline_update'
+    assert_response :success
+  end
+
+  test "should unarchive publication" do
+    login(users(:pp_secretary))
+    post :archive, id: @proposed, undo: 'true', format: 'js'
+    assert_not_nil assigns(:publication)
+    assert_equal false, assigns(:publication).archived
+    assert_template 'inline_update'
+    assert_response :success
+  end
+
+  test "should not archive publication for non-secretary" do
+    login(users(:valid))
+    post :archive, id: @proposed, undo: 'false', format: 'js'
+    assert_nil assigns(:publication)
+    assert_response :success
+  end
 end

@@ -21,6 +21,7 @@ Review::Application.routes.draw do
        post :inline_update
        post :tag_for_review
        post :remove_nomination
+       post :archive
     end
   end
 

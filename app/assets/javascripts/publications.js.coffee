@@ -36,9 +36,13 @@ jQuery ->
         $($(this).data('target')).submit()
         false
     )
+    .on('click', '[data-object~="set-archived"]', () ->
+      $("#archived").val($(this).data('value'))
+      $("#search_form").submit()
+    )
 
-    $('#user_publication_review_writing_group_nomination').tokenInput(root_url + 'users.json',
-      crossDomain: false,
-      prePopulate: $('#user_publication_review_writing_group_nomination').data('pre'),
-      theme: 'facebook', preventDuplicates: true
-    );
+  $('#user_publication_review_writing_group_nomination').tokenInput(root_url + 'users.json',
+    crossDomain: false
+    prePopulate: $('#user_publication_review_writing_group_nomination').data('pre')
+    theme: 'facebook', preventDuplicates: true
+  )
