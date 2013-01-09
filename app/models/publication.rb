@@ -104,6 +104,10 @@ class Publication < ActiveRecord::Base
   has_many :user_publication_reviews
   belongs_to :co_lead_author, class_name: 'User'
 
+  def publication_link
+    SITE_URL + "/publications/#{self.id}"
+  end
+
   def abbreviated_title_and_ms
     "#{"#{self.manuscript_number} " unless self.manuscript_number.blank?}#{self.abbreviated_title}"
   end
@@ -298,13 +302,25 @@ class Publication < ActiveRecord::Base
 
   protected
 
-  def self.latex_safe(mystring)
-    mystring = mystring.to_s
-    symbols = [['\\', '\\textbackslash'], ['#', '\\#'], ['$', '\\$'], ['&', '\\&'], ['~', '\\~{}'], ['_', '\\_'], ['^', '\\^{}'], ['{', '\\{'], ['}', '\\}'], ['<', '\\textless{}'], ['>', '\\textgreater{}']]
-    symbols.each do |from, to|
-      mystring.gsub!(from, to)
+  # Escape text using +replacements+
+  def self.latex_safe(text)
+    replacements.inject(text.to_s) do |corpus, (pattern, replacement)|
+      corpus.gsub(pattern, replacement)
     end
-    mystring
+  end
+
+  # List of replacements
+  def self.replacements
+    @replacements ||= [
+      [/([{}])/,    '\\\\\1'],
+      [/\\/,        '\textbackslash{}'],
+      [/\^/,        '\textasciicircum{}'],
+      [/~/,         '\textasciitilde{}'],
+      [/\|/,        '\textbar{}'],
+      [/\</,        '\textless{}'],
+      [/\>/,        '\textgreater{}'],
+      [/([_$&%#])/, '\\\\\1']
+    ]
   end
 
 end

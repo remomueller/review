@@ -17,11 +17,6 @@ class PublicationsController < ApplicationController
     end
   end
 
-  # def print
-  #   @order = 'manuscript_number'
-  #   @publications = current_user.all_viewable_publications.order(:manuscript_number).page(1).per(-1)
-  # end
-
   def tag_for_review
     @committee = params[:committee]
     if current_user.pp_committee_secretary? and params[:committee] == 'pp' and @publication = Publication.current.find_by_id(params[:id])

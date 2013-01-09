@@ -1,6 +1,3 @@
-<%#= index.tex.erb %>
-<%# publications %>
-
 \documentclass{article}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
@@ -43,17 +40,22 @@
 \begin{document}
 
 
-\begin{longtable}{lllrcrrr}\toprule
+\begin{longtable}{p{0.9cm}lrr}
+  \toprule
 <% publications.each do |publication| %>
   <%= latex_safe publication.manuscript_number %> &
-  <%= latex_safe publication.abbreviated_title.to_s[0..10] %> &
-  <%= latex_safe publication.user.name if publication.user %> &
-  <%= latex_safe publication.publication_type %> &
-  <%= latex_safe publication.status %> &
-  <%= latex_safe publication.dataset_requested_analyst %> &
+  \parbox[t]{3in}{\href{<%= latex_safe publication.publication_link %>}{\textbf{<%= latex_safe publication.abbreviated_title %>}}}&
+  \textit{<%= latex_safe publication.user.name if publication.user %>} &
+  \textcolor[gray]{<%= '0.5' if publication.status == 'draft' %>}{<%= latex_safe publication.human_status %>} \\
+
+   \\
+<% if publication.finalized_nominations.size > 0 %>
+  & \multicolumn{2}{l}{ \parbox[t]{5in}{\textit{<%= latex_safe publication.finalized_nominations.join(', ') %>}} } \\ \\
+<% end %>
+  & \multicolumn{2}{l}{ \parbox[t]{5in}{<%= latex_safe publication.secretary_notes %>} } & <%= latex_safe publication.publication_type %> \\
+
+  & & \textit{<%= latex_safe publication.dataset_requested_analyst unless publication.dataset_requested_analyst.blank? %>} &
   <%= latex_safe publication.targeted_start_date.strftime("%b %d, %Y (%a)") if publication.targeted_start_date %> \\
-  & & \multicolumn{5}{l}{ <%= latex_safe publication.finalized_nominations.join(', ') %> } \\
-  & \multicolumn{6}{l}{ <%= latex_safe publication.secretary_notes %> } \\
   \\
   \midrule
 <% end %>
