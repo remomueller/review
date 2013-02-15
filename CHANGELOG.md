@@ -1,4 +1,4 @@
-## 0.13.15
+## 0.13.15 (February 15, 2013)
 
 ### Enhancements
 - ActionMailer can now also be configured to send email through NTLM
