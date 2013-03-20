@@ -1,5 +1,8 @@
 ## 0.14.1
 
+### Bug Fix
+- Readded missing popovers on the publication matrix
+
 ## 0.14.0 (March 20, 2013)
 
 ### Enhancements
