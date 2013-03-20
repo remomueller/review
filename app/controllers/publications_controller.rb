@@ -77,7 +77,7 @@ class PublicationsController < ApplicationController
       # # Remove any existing manuscripts!
       # @publication.remove_manuscript!
 
-      @publication.update_attributes manuscript: params[:publication][:manuscript], manuscript_uploaded_at: Time.now
+      @publication.update manuscript: params[:publication][:manuscript], manuscript_uploaded_at: Time.now
 
       extension = params[:publication][:manuscript].original_filename.downcase.split('.').last
       message = ManuscriptUploader.new.extension_white_list.include?(extension) ? nil : "Not a valid document type: #{extension}"
@@ -98,7 +98,7 @@ class PublicationsController < ApplicationController
     @publication = current_user.secretary? ? Publication.current.find_by_id(params[:id]) : current_user.all_publications.find_by_id(params[:id])
     if @publication
       @publication.remove_manuscript!
-      @publication.update_attributes remove_manuscript: true
+      @publication.update remove_manuscript: true
       render 'publications/manuscripts/edit_manuscript'
     else
       render nothing: true
@@ -107,9 +107,7 @@ class PublicationsController < ApplicationController
 
   def pp_approval
     if current_user.pp_committee_secretary? and @publication = Publication.current.find_by_id(params[:id]) and params[:publication]
-      [:status, :manuscript_number, :additional_ppcommittee_instructions].each do |attribute|
-        @publication.update_column attribute, params[:publication][attribute]
-      end
+      @publication.update(params.require(:publication).permit(:status, :manuscript_number, :additional_ppcommittee_instructions))
       UserMailer.publication_approval(@publication, true, current_user).deliver if @publication.status != 'proposed' and @publication.user and Rails.env.production?
       @publication.send_reminders if @publication.status == 'approved'
       redirect_to @publication
@@ -128,9 +126,7 @@ class PublicationsController < ApplicationController
 
   def sc_approval
     if current_user.steering_committee_secretary? and @publication = Publication.current.find_by_id(params[:id]) and params[:publication]
-      [:status, :additional_sccommittee_instructions].each do |attribute|
-        @publication.update_column attribute, params[:publication][attribute]
-      end
+      @publication.update(params.require(:publication).permit(:status, :additional_sccommittee_instructions))
       UserMailer.publication_approval(@publication, false, current_user).deliver if @publication.status != 'approved' and @publication.user and Rails.env.production?
       redirect_to @publication
     else
@@ -196,9 +192,7 @@ class PublicationsController < ApplicationController
     if current_user.secretary? and @publication = Publication.current.find_by_id(params[:id]) and params[:publication]
       params[:publication][:targeted_start_date] = parse_date(params[:publication][:targeted_start_date])
 
-      params[:publication].keys.each do |attribute|
-        @publication.update_column attribute, params[:publication][attribute]
-      end
+      @publication.update(params.require(:publication).permit(:manuscript_number, :user_id, :co_lead_author_id, :writing_group_members, :status, :dataset_requested_analyst, :targeted_start_date, :secretary_notes))
 
       render 'inline_update'
     else
