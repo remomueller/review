@@ -4,7 +4,7 @@
 [![Dependency Status](https://gemnasium.com/remomueller/review.png)](https://gemnasium.com/remomueller/review)
 [![Code Climate](https://codeclimate.com/github/remomueller/review.png)](https://codeclimate.com/github/remomueller/review)
 
-Easy management of publication proposals for publication committee, steering committee, and secretaries. Email reminders for committee members, printable PDF of Publication Matrix, easy filtering of publications available for review. Using Rails 3.2+ and Ruby 2.0.0+.
+Easy management of publication proposals for publication committee, steering committee, and secretaries. Email reminders for committee members, printable PDF of Publication Matrix, easy filtering of publications available for review. Using Rails 4.0+ and Ruby 2.0.0+.
 
 ## Installation
 

@@ -35,7 +35,7 @@ Review::Application.routes.draw do
 
   resources :user_publication_reviews
 
-  match "/about" => "sites#about", as: :about
+  get "/about" => "sites#about", as: :about
 
   root to: "publications#index"
 
