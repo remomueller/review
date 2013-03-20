@@ -446,7 +446,7 @@ class PublicationsControllerTest < ActionController::TestCase
     login(users(:valid))
     put :update, id: -1, publication: @proposed.attributes
     assert_nil assigns(:publication)
-    assert_redirected_to root_path
+    assert_redirected_to publications_path
   end
 
   test "should update publication and quick save" do

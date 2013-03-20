@@ -66,7 +66,7 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal [publication.user.email], email.to
     assert_equal "Publication Proposal for #{publication.abbreviated_title_and_ms} has been approved by the P&P Committee", email.subject
-    assert_match /Your publication proposal #{publication.full_title_and_ms} has been approved by the P&amp;P Committee\./, email.encoded
+    assert_match /Your publication proposal #{publication.full_title_and_ms} has been approved by the P&P Committee\./, email.encoded
   end
 
   test "publication approval email for P&P denied publication" do
@@ -79,7 +79,7 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal [publication.user.email], email.to
     assert_equal "Publication Proposal for #{publication.abbreviated_title_and_ms} has been denied by the P&P Committee", email.subject
-    assert_match /Your publication proposal #{publication.full_title_and_ms} has been denied by the P&amp;P Committee\./, email.encoded
+    assert_match /Your publication proposal #{publication.full_title_and_ms} has been denied by the P&P Committee\./, email.encoded
   end
 
   test "publication approval email for SC approved publication" do

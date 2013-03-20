@@ -1,9 +1,9 @@
 class UserPublicationReviewsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_upr, only: [ :show, :edit, :update, :destroy ]
+  before_action :redirect_without_upr, only: [ :show, :edit, :update, :destroy ]
 
   def show
-    @user_publication_review = current_user.user_publication_reviews.find_by_id(params[:id])
-    render nothing: true unless @user_publication_review
   end
 
   def new
@@ -12,9 +12,8 @@ class UserPublicationReviewsController < ApplicationController
   end
 
   def edit
-    @user_publication_review = current_user.user_publication_reviews.find_by_id(params[:id])
-    @publication = @user_publication_review.publication if @user_publication_review
-    if @user_publication_review and @publication and @publication.reviewable?(current_user)
+    @publication = @user_publication_review.publication
+    if @publication and @publication.reviewable?(current_user)
       render 'new'
     else
       render nothing: true
@@ -24,8 +23,8 @@ class UserPublicationReviewsController < ApplicationController
   def create
     if current_user.committee_member?
       @publication = Publication.current.find_by_id(params[:publication_id])
-      @user_publication_review = current_user.user_publication_reviews.find_or_create_by_publication_id(@publication.id) if @publication
-      if @publication and @publication.reviewable?(current_user) and @user_publication_review.update_attributes(post_params) # @user_publication_review.save
+      @user_publication_review = current_user.user_publication_reviews.where( publication_id: @publication.id ).first_or_create if @publication
+      if @publication and @publication.reviewable?(current_user) and @user_publication_review.update(upr_params) # @user_publication_review.save
         render 'show'
       else
         render nothing: true
@@ -36,9 +35,8 @@ class UserPublicationReviewsController < ApplicationController
   end
 
   def update
-    @user_publication_review = current_user.user_publication_reviews.find_by_id(params[:id])
-    @publication = @user_publication_review.publication if @user_publication_review
-    if @publication and @publication.reviewable?(current_user) and @user_publication_review and @user_publication_review.update_attributes(post_params)
+    @publication = @user_publication_review.publication
+    if @publication and @publication.reviewable?(current_user) and @user_publication_review.update(upr_params)
       render 'show'
     else
       render nothing: true
@@ -47,12 +45,18 @@ class UserPublicationReviewsController < ApplicationController
 
   private
 
-  def post_params
-    params[:user_publication_review] ||= {}
+    def set_upr
+      @user_publication_review = current_user.user_publication_reviews.find_by_id(params[:id])
+    end
 
-    params[:user_publication_review].slice(
-      :status, :comment, :writing_group_nomination
-    )
-  end
+    def redirect_without_upr
+      empty_response_or_root_path(publications_path) unless @user_publication_review
+    end
+
+    def upr_params
+      params.require(:user_publication_review).permit(
+        :status, :comment, :writing_group_nomination
+      )
+    end
 
 end
