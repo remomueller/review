@@ -8,9 +8,9 @@ class Publication < ActiveRecord::Base
 
   FINAL_STATUS = [['SC Approved', 'nominated'], ['Submitted', 'submitted'], ['Published', 'published']]
 
-  attr_protected :deleted, :manuscript_number, :secretary_notes, :targeted_start_date, :dataset_requested_analyst,
-                 :additional_ppcommittee_instructions, :additional_sccommittee_instructions,
-                 :tagged_for_pp_review, :tagged_for_sc_review
+  # attr_protected :deleted, :manuscript_number, :secretary_notes, :targeted_start_date, :dataset_requested_analyst,
+  #                :additional_ppcommittee_instructions, :additional_sccommittee_instructions,
+  #                :tagged_for_pp_review, :tagged_for_sc_review
 
   mount_uploader :manuscript, ManuscriptUploader
   mount_uploader :chat_data_main_forms_attachment, ManuscriptUploader
@@ -35,14 +35,10 @@ class Publication < ActiveRecord::Base
 
 
   # Named Scopes
-  scope :current, conditions: { deleted: false }
-  scope :status, lambda { |*args|  { conditions: ["publications.status IN (?)", args.first] } }
-  scope :search, lambda { |*args| {conditions: [ 'LOWER(manuscript_number) LIKE ? or LOWER(full_title) LIKE ? or LOWER(abbreviated_title) LIKE ? or user_id in (SELECT users.id FROM users WHERE LOWER(users.last_name) LIKE ? or LOWER(users.first_name) LIKE ?) or co_lead_author_id in (SELECT users.id FROM users WHERE LOWER(users.last_name) LIKE ? or LOWER(users.first_name) LIKE ?)', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%' ] } }
-  scope :with_user_or_status, lambda { |*args|  { conditions: ["publications.user_id = ? or publications.status IN (?)", args.first, args[1]] } }
-
-  # scope :order_by_pp_and_sc, order: ['tagged_for_pp_review DESC', 'tagged_for_sc_review DESC']
-  # scope :order_by_pp, order: ['tagged_for_pp_review DESC']
-  # scope :order_by_sc, order: ['tagged_for_sc_review DESC']
+  scope :current, -> { where deleted: false }
+  scope :status, lambda { |arg| where( status: arg ) }
+  scope :search, lambda { |arg| where( 'LOWER(manuscript_number) LIKE ? or LOWER(full_title) LIKE ? or LOWER(abbreviated_title) LIKE ? or user_id in (SELECT users.id FROM users WHERE LOWER(users.last_name) LIKE ? or LOWER(users.first_name) LIKE ?) or co_lead_author_id in (SELECT users.id FROM users WHERE LOWER(users.last_name) LIKE ? or LOWER(users.first_name) LIKE ?)', arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%') ) }
+  scope :with_user_or_status, lambda { |*args|  where( "publications.user_id = ? or publications.status IN (?)", args.first, args[1] ) }
 
   # Model Validation
   validates_presence_of :full_title, :abbreviated_title

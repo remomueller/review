@@ -4,24 +4,24 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
-
   # Callbacks
   after_create :notify_system_admins
 
   STATUS = ["active", "denied", "inactive", "pending"].collect{|i| [i,i]}
 
-  # Named Scopes
-  scope :current, conditions: { deleted: false }
-  scope :status, lambda { |*args|  { conditions: ["users.status IN (?)", args.first] } }
-  scope :search, lambda { |*args| { conditions: [ 'LOWER(first_name) LIKE ? or LOWER(last_name) LIKE ? or LOWER(email) LIKE ?', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%', '%' + args.first.downcase.split(' ').join('%') + '%' ] } }
-  scope :system_admins, conditions: { system_admin: true }
-  scope :pp_committee_members, conditions: { pp_committee: true }
-  scope :steering_committee_members, conditions: { steering_committee: true }
+  # Concerns
+  include Contourable
 
-  scope :pp_secretaries, conditions: { pp_committee_secretary: true }
-  scope :sc_secretaries, conditions: { steering_committee_secretary: true }
+  # Named Scopes
+  scope :current, -> { where deleted: false }
+  scope :status, lambda { |arg|  where( status: arg ) }
+  scope :search, lambda { |arg| where( 'LOWER(first_name) LIKE ? or LOWER(last_name) LIKE ? or LOWER(email) LIKE ?', arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%') ) }
+  scope :system_admins, -> { where system_admin: true }
+  scope :pp_committee_members, -> { where pp_committee: true }
+  scope :steering_committee_members, -> { where steering_committee: true }
+
+  scope :pp_secretaries, -> { where pp_committee_secretary: true }
+  scope :sc_secretaries, -> { where steering_committee_secretary: true }
 
 
   # Model Validation
@@ -29,9 +29,8 @@ class User < ActiveRecord::Base
   validates_presence_of     :last_name
 
   # Model Relationships
-  has_many :authentications
-  has_many :comments, conditions: { deleted: false }, order: 'created_at DESC'
-  has_many :publications, conditions: { deleted: false }
+  has_many :comments, -> { where( deleted: false ).order('created_at DESC') }
+  has_many :publications, -> { where deleted: false }
   has_many :user_publication_reviews
 
   # User Methods
@@ -92,17 +91,13 @@ class User < ActiveRecord::Base
     "#{name} <#{email}>"
   end
 
+  # Override of Contourable
   def apply_omniauth(omniauth)
     unless omniauth['info'].blank?
-      self.email = omniauth['info']['email'] if email.blank?
       self.first_name = omniauth['info']['first_name'] if first_name.blank?
       self.last_name = omniauth['info']['last_name'] if last_name.blank?
     end
-    authentications.build( provider: omniauth['provider'], uid: omniauth['uid'] )
-  end
-
-  def password_required?
-    (authentications.empty? || !password.blank?) && super
+    super
   end
 
   private

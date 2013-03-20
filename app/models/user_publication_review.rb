@@ -1,14 +1,14 @@
 class UserPublicationReview < ActiveRecord::Base
 
-  attr_accessible :status, :comment, :writing_group_nomination, :publication_id
+  # attr_accessible :status, :comment, :writing_group_nomination, :publication_id
 
   STATUS = ["approved", "not approved"].collect{|i| [i,i]}
 
   before_update :notify_sc_secretary
 
   # Named Scopes
-  scope :current, conditions: { }
-  scope :status, lambda { |*args|  { conditions: ["user_publication_reviews.status IN (?)", args.first] } }
+  scope :current, -> { all }
+  scope :status, lambda { |args| where( status: arg ) }
 
   # Model Relationships
   belongs_to :publication
