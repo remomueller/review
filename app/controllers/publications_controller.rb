@@ -1,5 +1,5 @@
 class PublicationsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def archive
     if current_user.secretary? and @publication = Publication.current.find_by_id(params[:id])

@@ -1,5 +1,5 @@
 class UserPublicationReviewsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def show
     @user_publication_review = current_user.user_publication_reviews.find_by_id(params[:id])
