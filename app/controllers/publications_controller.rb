@@ -109,7 +109,7 @@ class PublicationsController < ApplicationController
     if current_user.pp_committee_secretary? and @publication = Publication.current.find_by_id(params[:id]) and params[:publication]
       @publication.update(params.require(:publication).permit(:status, :manuscript_number, :additional_ppcommittee_instructions))
       UserMailer.publication_approval(@publication, true, current_user).deliver if @publication.status != 'proposed' and @publication.user and Rails.env.production?
-      @publication.send_reminders if @publication.status == 'approved'
+      @publication.send_reminders(current_user) if @publication.status == 'approved'
       redirect_to @publication
     else
       redirect_to root_path
@@ -204,7 +204,7 @@ class PublicationsController < ApplicationController
     @publication = (current_user.secretary? ? Publication.new(publication_params) : current_user.publications.new(publication_params))
 
     if @publication.save
-      @publication.send_reminders if params[:publish] == '1' and not current_user.secretary?
+      @publication.send_reminders(current_user) if params[:publish] == '1' and not current_user.secretary?
       if params[:publish] == '-1'
         flash[:notice] = "Publication draft was successfully quick saved."
         render action: "new"
@@ -227,7 +227,7 @@ class PublicationsController < ApplicationController
     redirect_to root_path unless @publication.editable?(current_user)
 
     if @publication.update(publication_params)
-      @publication.send_reminders if params[:publish] == '1' and not current_user.secretary?
+      @publication.send_reminders(current_user) if params[:publish] == '1' and not current_user.secretary?
       if params[:publish] == '-1'
         flash[:notice] = "Publication draft was successfully quick saved."
         render action: "edit"

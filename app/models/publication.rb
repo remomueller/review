@@ -174,7 +174,7 @@ class Publication < ActiveRecord::Base
     update_column :deleted, true
   end
 
-  def send_reminders
+  def send_reminders(current_user)
     reviewers = []
     if self.status == 'proposed'
       reviewers = (User.current.pp_committee_members | User.current.pp_secretaries)
@@ -182,7 +182,8 @@ class Publication < ActiveRecord::Base
       reviewers = (User.current.steering_committee_members | User.current.sc_secretaries)
     end
     reviewers.uniq.each do |reviewer|
-      UserMailer.publication_approval_reminder(self, reviewer).deliver if Rails.env.production?
+      upr = UserPublicationReview.new(user_id: reviewer.id, publication_id: self.id)
+      UserMailer.publication_approval_reminder(current_user, reviewer.email_with_name, nil, "New Publication Awaiting Approval: #{self.abbreviated_title_and_ms}", upr.email_body_template(current_user)).deliver if Rails.env.production?
     end
   end
 
