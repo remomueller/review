@@ -1,4 +1,4 @@
-## 0.14.2
+## 0.14.2 (April 1, 2013)
 
 ### Bug Fix
 - Fixed a bug that prevented publications from sending reminders to committee members
