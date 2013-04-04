@@ -1,4 +1,4 @@
-## 0.14.3
+## 0.14.3 (April 4, 2013)
 
 ### Enhancements
 - Writing group members is no longer a required field
