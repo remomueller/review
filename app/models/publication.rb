@@ -36,48 +36,10 @@ class Publication < ActiveRecord::Base
 
   validates_presence_of :publication_type_specify, if: [:should_validate_publication_type?, :no_longer_draft?]
 
-  # validates_acceptance_of :dcc_resources_none, message: 'select at least one', if: [:dcc_resources_not_selected?, :no_longer_draft?]
-  # validates_acceptance_of :dcc_resources_staff, message: 'select at least one', if: [:dcc_resources_not_selected?, :no_longer_draft?]
-  # validates_acceptance_of :dcc_resources_other, message: 'select at least one', if: [:dcc_resources_not_selected?, :no_longer_draft?]
-
   validates_presence_of :dcc_resources_staff_specify, if: [:should_validate_dcc_resources_staff_specify?, :no_longer_draft?]
   validates_presence_of :dcc_resources_other_specify, if: [:should_validate_dcc_resources_other_specify?, :no_longer_draft?]
 
-  # validates_acceptance_of :chat_data_none, message: 'select at least one', if: [:chat_data_not_selected?, :no_longer_draft?]
-  # validates_acceptance_of :chat_data_main_forms, message: 'select at least one', if: [:chat_data_not_selected?, :no_longer_draft?]
-  # validates_acceptance_of :chat_data_main_database, message: 'select at least one', if: [:chat_data_not_selected?, :no_longer_draft?]
-  # validates_acceptance_of :chat_data_other, message: 'select at least one', if: [:chat_data_not_selected?, :no_longer_draft?]
-
-  # validates_presence_of :chat_data_other_specify, if: [:should_validate_chat_data_other_specify?, :no_longer_draft?]
-
-  # validates_presence_of :chat_data_main_forms_attachment, if: [:chat_data_main_forms_selected?]
-  # validates_presence_of :chat_data_main_database_attachment, if: [:chat_data_main_database_selected?]
-#  validates_presence_of :chat_data_other_attachment, if: [:chat_data_other_selected?]
-
-  # validates_acceptance_of :manuscript_preparation_none, message: 'select at least one', if: [:manuscript_preparation_not_selected?, :no_longer_draft?]
-  # validates_acceptance_of :manuscript_preparation_analysis_data, message: 'select at least one', if: [:manuscript_preparation_not_selected?, :no_longer_draft?]
-  # validates_acceptance_of :manuscript_preparation_analysis_ancillary_data, message: 'select at least one', if: [:manuscript_preparation_not_selected?, :no_longer_draft?]
-  # validates_acceptance_of :manuscript_analysis_review, message: 'select at least one', if: [:manuscript_preparation_not_selected?, :no_longer_draft?]
-  # validates_acceptance_of :manuscript_preparation_other, message: 'select at least one', if: [:manuscript_preparation_not_selected?, :no_longer_draft?]
-
   validates_presence_of :manuscript_preparation_other_specify, if: [:should_validate_manuscript_preparation_other_specify?, :no_longer_draft?]
-
-  # validates_acceptance_of :attachment_none, message: 'select at least one', if: [:attachment_not_selected?, :no_longer_draft?]
-  # validates_acceptance_of :attachment_chat_form, message: 'select at least one', if: [:attachment_not_selected?, :no_longer_draft?]
-  # validates_acceptance_of :attachment_chat_variables, message: 'select at least one', if: [:attachment_not_selected?, :no_longer_draft?]
-  # validates_acceptance_of :attachment_ancillary_forms, message: 'select at least one', if: [:attachment_not_selected?, :no_longer_draft?]
-  # validates_acceptance_of :attachment_other, message: 'select at least one', if: [:attachment_not_selected?, :no_longer_draft?]
-
-  # validates_presence_of :attachment_chat_form_attachment, if: [:attachment_chat_form_selected?]
-  # validates_presence_of :attachment_chat_variables_attachment, if: [:attachment_chat_variables_selected?]
-  # validates_presence_of :attachment_ancillary_forms_attachment, if: [:attachment_ancillary_forms_selected?]
-  # validates_presence_of :attachment_other_attachment, if: [:attachment_other_selected?]
-
-  # validates_presence_of :attachment_chat_form_specify, if: [:should_validate_attachment_chat_form_specify?, :no_longer_draft?]
-  # validates_presence_of :attachment_chat_variables_specify, if: [:should_validate_attachment_chat_variables_specify?, :no_longer_draft?]
-  # validates_presence_of :attachment_ancillary_forms_specify, if: [:should_validate_attachment_ancillary_forms_specify?, :no_longer_draft?]
-  # validates_presence_of :attachment_other_specify, if: [:should_validate_attachment_other_specify?, :no_longer_draft?]
-
 
   # Model Relationships
   belongs_to :user
@@ -177,10 +139,6 @@ class Publication < ActiveRecord::Base
     self.publication_type == 'AP'
   end
 
-  # def dcc_resources_not_selected?
-  #   !(self.dcc_resources_none? || self.dcc_resources_staff? || self.dcc_resources_other?)
-  # end
-
   def should_validate_dcc_resources_staff_specify?
     self.dcc_resources_staff?
   end
@@ -189,69 +147,9 @@ class Publication < ActiveRecord::Base
     self.dcc_resources_other?
   end
 
-  # def chat_data_not_selected?
-  #   !(self.chat_data_none? || self.chat_data_main_forms? || self.chat_data_main_database? || self.chat_data_other?)
-  # end
-
-  # def should_validate_chat_data_other_specify?
-  #   self.chat_data_other?
-  # end
-
-  # def chat_data_main_forms_selected?
-  #   self.chat_data_main_forms?
-  # end
-
-  # def chat_data_main_database_selected?
-  #   self.chat_data_main_database?
-  # end
-
-  # def chat_data_other_selected?
-  #   self.chat_data_other?
-  # end
-
-  # def manuscript_preparation_not_selected?
-  #   !(self.manuscript_preparation_none? || self.manuscript_preparation_analysis_data? || self.manuscript_preparation_analysis_ancillary_data? || self.manuscript_analysis_review? || self.manuscript_preparation_other?)
-  # end
-
   def should_validate_manuscript_preparation_other_specify?
     self.manuscript_preparation_other?
   end
-
-  # def attachment_not_selected?
-  #   !(self.attachment_none? || self.attachment_chat_form? || self.attachment_chat_variables? || self.attachment_ancillary_forms? || self.attachment_other?)
-  # end
-
-  # def should_validate_attachment_chat_form_specify?
-  #   self.attachment_chat_form?
-  # end
-
-  # def should_validate_attachment_chat_variables_specify?
-  #   self.attachment_chat_variables?
-  # end
-
-  # def should_validate_attachment_ancillary_forms_specify?
-  #   self.attachment_ancillary_forms?
-  # end
-
-  # def should_validate_attachment_other_specify?
-  #   self.attachment_other?
-  # end
-
-  # def attachment_chat_form_selected?
-  #   self.attachment_chat_form?
-  # end
-
-  # def attachment_chat_variables_selected?
-  #   self.attachment_chat_variables?
-  # end
-
-  # def attachment_ancillary_forms_selected?
-  #   self.attachment_ancillary_forms?
-  # end
-
-  # def attachment_other_selected?
-  #   self.attachment_other?
-  # end
 
   def no_longer_draft?
     self.status != 'draft'
