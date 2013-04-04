@@ -133,7 +133,6 @@
     <div class="control-group">
       <label class="control-label">5. Does preparation of this publication require any DCC RESOURCES?</label>
       <div class="controls checkbox">
-        <%= f.check_box :dcc_resources_none, disabled: disabled %> <%= f.label :dcc_resources_none, 'None' %>
         <%= f.check_box :dcc_resources_staff, disabled: disabled %> <%= f.label :dcc_resources_staff, 'Staff (specify):' %>
         <% if disabled.blank? %>
           <%= f.text_field :dcc_resources_staff_specify, style: "width:99%", disabled: disabled %>
@@ -153,8 +152,6 @@
     <div class="control-group">
       <label class="control-label">6.  What CHAT data will be required to prepare this publication?</label>
       <div class="controls checkbox">
-        <%= f.check_box :chat_data_none, disabled: disabled %> <%= f.label :chat_data_none, 'None' %>
-
         <%= f.check_box :chat_data_main_forms, disabled: disabled, :onclick => "toggleAttachment('#publication_chat_data_main_forms');" %> <%= f.label :chat_data_main_forms, 'CHAT main forms database (<em>please attach copies of release forms with required items circled</em>)'.html_safe %>
         <% @attribute = 'chat_data_main_forms'; @disabled = disabled %>
         <%= render partial: 'publications/download_link' %>
@@ -183,7 +180,6 @@
     <div class="control-group">
       <label class="control-label">7. Which of the following is required for preparation of this manuscript?</label>
       <div class="controls checkbox">
-        <%= f.check_box :manuscript_preparation_none, disabled: disabled %> <%= f.label :manuscript_preparation_none, 'None' %>
         <%= f.check_box :manuscript_preparation_analysis_data, disabled: disabled %> <%= f.label :manuscript_preparation_analysis_data, 'New analysis of CHAT data by DCC staff' %>
         <%= f.check_box :manuscript_preparation_analysis_ancillary_data, disabled: disabled %> <%= f.label :manuscript_preparation_analysis_ancillary_data, 'New analysis of CHAT ancillary study data by DCC staff' %>
         <%= f.check_box :manuscript_analysis_review, disabled: disabled %> <%= f.label :manuscript_analysis_review, 'Review of distributed analysis of CHAT data by DCC staff' %>
@@ -215,7 +211,6 @@
     <div class="control-group">
       <label class="control-label">9.  Attachments to this form</label>
       <div class="controls checkbox">
-        <%= f.check_box :attachment_none, disabled: disabled %> <%= f.label :attachment_none, 'None' %>
         <%= f.check_box :attachment_chat_form, disabled: disabled, :onclick => "toggleAttachment('#publication_attachment_chat_form');" %> <%= f.label :attachment_chat_form, 'CHAT form with items marked to indicate variables intended for analysis:' %>
         <% @attribute = 'attachment_chat_form'; @disabled = disabled %>
         <%= render partial: 'publications/download_link' %>

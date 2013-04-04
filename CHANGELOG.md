@@ -1,5 +1,9 @@
 ## 0.14.3
 
+### Enhancements
+- Writing group members is no longer a required field
+- Removed `None` checkbox options that added unnecessary validations
+
 ## 0.14.2 (April 1, 2013)
 
 ### Bug Fix
