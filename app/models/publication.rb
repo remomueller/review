@@ -197,13 +197,13 @@ class Publication < ActiveRecord::Base
   #   self.chat_data_other?
   # end
 
-  def chat_data_main_forms_selected?
-    self.chat_data_main_forms?
-  end
+  # def chat_data_main_forms_selected?
+  #   self.chat_data_main_forms?
+  # end
 
-  def chat_data_main_database_selected?
-    self.chat_data_main_database?
-  end
+  # def chat_data_main_database_selected?
+  #   self.chat_data_main_database?
+  # end
 
   # def chat_data_other_selected?
   #   self.chat_data_other?
@@ -237,17 +237,17 @@ class Publication < ActiveRecord::Base
   #   self.attachment_other?
   # end
 
-  def attachment_chat_form_selected?
-    self.attachment_chat_form?
-  end
+  # def attachment_chat_form_selected?
+  #   self.attachment_chat_form?
+  # end
 
   # def attachment_chat_variables_selected?
   #   self.attachment_chat_variables?
   # end
 
-  def attachment_ancillary_forms_selected?
-    self.attachment_ancillary_forms?
-  end
+  # def attachment_ancillary_forms_selected?
+  #   self.attachment_ancillary_forms?
+  # end
 
   # def attachment_other_selected?
   #   self.attachment_other?
