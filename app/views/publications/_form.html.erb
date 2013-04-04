@@ -109,10 +109,10 @@
 
   </div>
 
-  <div class="well <%= 'fieldset_with_errors' if @publication.errors.keys.include?(:publication_type) %>">
+  <div class="well">
     <div class="page-header"><h3>B. Publication Information <%= quick_save %></h3></div>
 
-    <div class="control-group">
+    <div class="control-group <%= 'error' if @publication.errors.keys.include?(:publication_type) %>">
       <label class="control-label">4. Type of publication</label>
       <div class="controls radio">
         <%= f.radio_button(:publication_type, "PP", disabled: disabled) %> <%= label 'publication_publication_type', 'pp', 'CHAT primary or mainline paper (design or primary CHAT hypothesis)' %>
@@ -127,7 +127,7 @@
     </div>
   </div>
 
-  <div class="well <%= 'fieldset_with_errors' if @publication.errors.keys.include?(:dcc_resources_none) or @publication.errors.keys.include?(:chat_data_none) %>">
+  <div class="well">
     <div class="page-header"><h3>C. CHAT Resources <%= quick_save %></h3></div>
 
     <div class="control-group">
@@ -174,7 +174,7 @@
     </div>
   </div>
 
-  <div class="well <%= 'fieldset_with_errors' if @publication.errors.keys.include?(:manuscript_preparation_none) %>">
+  <div class="well">
     <div class="page-header"><h3>D. Data Analysis <%= quick_save %></h3></div>
 
     <div class="control-group">
@@ -205,7 +205,7 @@
     </div>
   </div>
 
-  <div class="well <%= 'fieldset_with_errors' if @publication.errors.keys.include?(:attachment_none) %>">
+  <div class="well">
     <div class="page-header"><h3>E. Attachments <%= quick_save %></h3></div>
 
     <div class="control-group">
