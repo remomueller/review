@@ -3,6 +3,7 @@
 ### Enhancements
 - Writing group members is no longer a required field
 - Removed `None` checkbox options that added unnecessary validations
+- Publication proposal file attachments are no longer required for validation
 
 ## 0.14.2 (April 1, 2013)
 
