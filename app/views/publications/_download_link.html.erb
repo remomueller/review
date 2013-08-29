@@ -1,6 +1,6 @@
 <span id="publication_<%= @attribute %>_container" style="<%= 'display:none' unless @publication.send(@attribute) %>">
   <% if @disabled.blank? %>
-    <%= file_field :publication, @attribute+'_attachment' %>
+    <%= file_field :publication, @attribute+'_attachment', class: 'form-control' %>
     <%= hidden_field :publication, @attribute+'_attachment_cache' %>
   <% else %>
 

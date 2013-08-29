@@ -6,8 +6,8 @@
     <div class="page-header"><h3>Review Publication</h3></div>
 
     <div class="form-group">
-      <label class="control-label">Approval Status</label>
-      <div class="controls radio">
+      <label class="col-md-2 control-label">Approval Status</label>
+      <div class="col-md-10 radio">
         <% UserPublicationReview::STATUS.each do |display, value| %>
           <%= radio_button :user_publication_review, :status, value, :checked => (@user_publication_review.status == value) %> <label><%= display %></label>
         <% end %>

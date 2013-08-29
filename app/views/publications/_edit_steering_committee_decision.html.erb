@@ -1,7 +1,7 @@
 <%= form_tag sc_approval_publication_path(@publication), method: :post, class: 'form-horizontal' do %>
   <div class="form-group">
-    <label class="control-label">Publication Status</label>
-    <div class="controls radio">
+    <label class="col-md-2 control-label">Publication Status</label>
+    <div class="col-md-10 radio">
       <% Publication::SC_STATUS.each do |display, value| %>
         <%= radio_button :publication, :status, value, :checked => (value == @publication.status) %> <label><%= display %></label>
       <% end %>
