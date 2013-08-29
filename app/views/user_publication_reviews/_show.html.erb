@@ -6,9 +6,11 @@
 
     <div class="form-group">
       <label class="col-md-2 control-label">Approval Status</label>
-      <div class="col-md-10 radio">
+      <div class="col-md-10">
         <% UserPublicationReview::STATUS.each do |display, value| %>
-          <%= radio_button :user_publication_review, :status, value, :checked => (@user_publication_review.status == value), disabled: 'disabled' %> <label><%= display %></label>
+          <div class="radio">
+            <label><%= radio_button :user_publication_review, :status, value, :checked => (@user_publication_review.status == value), disabled: 'disabled' %> <%= display %></label>
+          </div>
         <% end %>
       </div>
     </div>
@@ -16,7 +18,7 @@
     <div class="form-group">
       <%= label :user_publication_review, :comment, class: 'col-md-2 control-label' %>
       <div class="col-md-10">
-        <%= text_area :user_publication_review, :comment, rows: 7, style: "width:99%", disabled: 'disabled' %>
+        <%= text_area :user_publication_review, :comment, rows: 7, class: 'form-control', disabled: 'disabled' %>
       </div>
     </div>
 

@@ -7,9 +7,11 @@
 
     <div class="form-group">
       <label class="col-md-2 control-label">Approval Status</label>
-      <div class="col-md-10 radio">
+      <div class="col-md-10">
         <% UserPublicationReview::STATUS.each do |display, value| %>
-          <%= radio_button :user_publication_review, :status, value, :checked => (@user_publication_review.status == value) %> <label><%= display %></label>
+          <div class="radio">
+            <label><%= radio_button :user_publication_review, :status, value, :checked => (@user_publication_review.status == value) %> <%= display %></label>
+          </div>
         <% end %>
       </div>
     </div>
@@ -17,7 +19,7 @@
     <div class="form-group">
       <%= label :user_publication_review, :comment, class: 'col-md-2 control-label' %>
       <div class="col-md-10">
-        <%= text_area :user_publication_review, :comment, rows: 7, style: "width:99%" %>
+        <%= text_area :user_publication_review, :comment, rows: 7, class: 'form-control' %>
       </div>
     </div>
 
@@ -25,7 +27,7 @@
       <div class="form-group">
         <%= label :user_publication_review, :writing_group_nomination, class: 'col-md-2 control-label' %>
         <div class="col-md-10">
-          <%= text_field :user_publication_review, :writing_group_nomination, rows: 3, style: "width:99%", data: { pre: @user_publication_review.writing_group_nomination.to_s.split(',').collect{|u| { name: u, id: u }}.to_json } %>
+          <%= text_field :user_publication_review, :writing_group_nomination, rows: 3, class: 'form-control', data: { pre: @user_publication_review.writing_group_nomination.to_s.split(',').collect{|u| { name: u, id: u }}.to_json } %>
         </div>
       </div>
     <% end %>

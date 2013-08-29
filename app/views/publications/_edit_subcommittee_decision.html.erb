@@ -1,9 +1,11 @@
 <%= form_tag pp_approval_publication_path(@publication), method: :post, class: 'form-horizontal' do %>
   <div class="form-group">
     <label class="col-md-2 control-label">Publication Status</label>
-    <div class="col-md-10 radio">
+    <div class="col-md-10">
       <% Publication::PP_STATUS.each do |display, value| %>
-        <%= radio_button :publication, :status, value, :checked => (value == @publication.status) %> <label><%= display %></label>
+        <div class="radio">
+          <label><%= radio_button :publication, :status, value, :checked => (value == @publication.status) %> <%= display %></label>
+        </div>
       <% end %>
     </div>
   </div>
@@ -18,7 +20,7 @@
   <div class="form-group">
     <%= label :publication, :additional_ppcommittee_instructions, 'Additional Instructions to Email to Lead Author', class: 'col-md-2 control-label' %>
     <div class="col-md-10">
-      <%= text_area :publication, :additional_ppcommittee_instructions, rows: 7, style: "width:99%" %>
+      <%= text_area :publication, :additional_ppcommittee_instructions, rows: 7, class: 'form-control' %>
     </div>
   </div>
 

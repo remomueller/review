@@ -1,9 +1,11 @@
 <%= form_tag edit_steering_committee_decision_publication_path(@publication), method: :post, remote: true, class: 'form-horizontal' do %>
   <div class="form-group">
     <label class="col-md-2 control-label">Publication Status</label>
-    <div class="col-md-10 radio">
+    <div class="col-md-10">
       <% Publication::SC_STATUS.each do |display, value| %>
-        <%= radio_button :publication, :status, value, :checked => (value == @publication.status), disabled: 'disabled' %> <label><%= display %></label>
+        <div class="radio">
+          <label><%= radio_button :publication, :status, value, :checked => (value == @publication.status), disabled: 'disabled' %> <%= display %></label>
+        </div>
       <% end %>
     </div>
   </div>
@@ -11,7 +13,7 @@
   <div class="form-group">
     <%= label :publication, :manuscript_number, 'Manuscript Number', class: 'col-md-2 control-label' %>
     <div class="col-md-10">
-      <%= text_field :publication, :manuscript_number, disabled: 'disabled' %>
+      <%= text_field :publication, :manuscript_number, disabled: 'disabled', class: 'control-label' %>
     </div>
   </div>
 
