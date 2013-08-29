@@ -56,7 +56,7 @@
       <td>
         <%= link_to 'Edit', '#', class: 'btn btn-xs', data: { object: 'modal-show', target: "#publication_#{@publication.id}_popup" } %>
         <%= link_to (@publication.archived ? 'Unarchive' : 'Archive'), archive_publication_path(@publication, undo: @publication.archived), method: :post, remote: true, class: 'btn btn-xs' %>
-        <%= link_to 'Delete', @publication, method: :delete, remote: true, class: 'btn btn-xs btn-danger', data: { confirm: "Are you sure you want to delete Publication #{@publication.abbreviated_title_and_ms}?" } %>
+        <%= link_to 'Delete', @publication, method: :delete, remote: true, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Publication #{@publication.abbreviated_title_and_ms}?" } %>
 
         <%= render partial: 'publications/matrix_popup' %>
       </td>
