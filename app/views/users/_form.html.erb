@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1><%= @title %></h1>
+  <h1><%= link_to 'Users', users_path %> &middot; <%= @title %></h1>
 </div>
 
 <% url = @user.new_record? ? activate_users_path : user_path(@user) %>
@@ -20,44 +20,44 @@
   <div class="form-group">
     <%= f.label :first_name, class: 'col-md-2 control-label' %>
     <div class="col-md-10">
-      <%= f.text_field :first_name %>
+      <%= f.text_field :first_name, class: 'form-control' %>
     </div>
   </div>
 
   <div class="form-group">
     <%= f.label :last_name, class: 'col-md-2 control-label' %>
     <div class="col-md-10">
-      <%= f.text_field :last_name %>
+      <%= f.text_field :last_name, class: 'form-control' %>
     </div>
   </div>
 
   <div class="form-group">
     <%= f.label :status, class: 'col-md-2 control-label' %>
     <div class="col-md-10">
-      <%= f.select :status, User::STATUS %>
+      <%= f.select :status, User::STATUS, {}, class: 'form-control' %>
     </div>
   </div>
 
   <div class="form-group">
     <%= f.label :email, class: 'col-md-2 control-label' %>
     <div class="col-md-10">
-      <%= f.text_field :email %>
+      <%= f.text_field :email, class: 'form-control' %>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label">P&amp;P Committee</label>
-    <div class="controls checkbox">
-      <%= f.check_box :pp_committee %> <%= f.label :pp_committee, 'Member' %>
-      <%= f.check_box :pp_committee_secretary %> <%= f.label :pp_committee_secretary, 'Secretary' %>
+    <label class="col-md-2 control-label">P&amp;P Committee</label>
+    <div class="col-md-10">
+      <label class="checkbox-inline"><%= f.check_box :pp_committee %> Member</label>
+      <label class="checkbox-inline"><%= f.check_box :pp_committee_secretary %> Secretary</label>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label">Steering Committee</label>
-    <div class="controls checkbox">
-      <%= f.check_box :steering_committee %> <%= f.label :steering_committee, 'Member' %>
-      <%= f.check_box :steering_committee_secretary %> <%= f.label :steering_committee_secretary, 'Secretary' %>
+    <label class="col-md-2 control-label">Steering Committee</label>
+    <div class="col-md-10">
+      <label class="checkbox-inline"><%= f.check_box :steering_committee %> Member</label>
+      <label class="checkbox-inline"><%= f.check_box :steering_committee_secretary %> Secretary</label>
     </div>
   </div>
 
@@ -72,8 +72,10 @@
     </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.submit (@user.new_record? ? "Create User" : "Update User"), class: 'btn btn-primary' %>
-    <%= cancel %>
+  <div class="form-group">
+    <div class="col-md-10 col-md-offset-2">
+      <%= f.submit (@user.new_record? ? "Create User" : "Update User"), class: 'btn btn-primary' %>
+      <%= cancel %>
+    </div>
   </div>
 <% end %>
