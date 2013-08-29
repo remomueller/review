@@ -6,11 +6,11 @@
       <span id="user_<%= @user_publication_review.user_id %>_notified_<%= @committee %>" style="color:black">
         <% if @user_publication_review.reminder_sent_at %>
           <span class="muted">Reminder sent <%= simple_time(@user_publication_review.reminder_sent_at) %></span>
-          <%#= link_to 'Resend', send_reminder_publication_path(@publication, reviewer_id: @user_publication_review.user_id), method: :post, remote: true, class: 'btn btn-mini' %>
-          <%= link_to 'Resend', '#', class: 'btn btn-mini', data: { object: 'modal-show', target: "#send_email_#{@position}_modal" } %>
+          <%#= link_to 'Resend', send_reminder_publication_path(@publication, reviewer_id: @user_publication_review.user_id), method: :post, remote: true, class: 'btn btn-xs' %>
+          <%= link_to 'Resend', '#', class: 'btn btn-xs', data: { object: 'modal-show', target: "#send_email_#{@position}_modal" } %>
         <% else %>
-          <%#= link_to 'Email Reminder', send_reminder_publication_path(@publication, reviewer_id: @user_publication_review.user_id), method: :post, remote: true, class: 'btn btn-mini' %>
-          <%= link_to 'Email Reminder', '#', class: 'btn btn-primary btn-mini', data: { object: 'modal-show', target: "#send_email_#{@position}_modal" } %>
+          <%#= link_to 'Email Reminder', send_reminder_publication_path(@publication, reviewer_id: @user_publication_review.user_id), method: :post, remote: true, class: 'btn btn-xs' %>
+          <%= link_to 'Email Reminder', '#', class: 'btn btn-primary btn-xs', data: { object: 'modal-show', target: "#send_email_#{@position}_modal" } %>
         <% end %>
       </span>
       <%= render partial: 'user_publication_reviews/email_reminder_modal' %>

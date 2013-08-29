@@ -3,7 +3,7 @@
     <span id="publication_<%= @publication.id %>_tag_sc_link"><%= @committee = 'sc';  render partial: 'publications/tag_for_review' %></span></td>
   <td style="white-space:nowrap">
     <%= @publication.manuscript_number %>
-    <%= link_to 'Download', @publication.manuscript_url, target: '_blank', class: 'btn btn-mini' unless @publication.manuscript_url.blank? %>
+    <%= link_to 'Download', @publication.manuscript_url, target: '_blank', class: 'btn btn-xs' unless @publication.manuscript_url.blank? %>
   </td>
   <td><%= link_to @publication.abbreviated_title, @publication, title: @publication.full_title %></td>
   <td>
@@ -54,9 +54,9 @@
       <td></td>
     <% else %>
       <td>
-        <%= link_to 'Edit', '#', class: 'btn btn-mini', data: { object: 'modal-show', target: "#publication_#{@publication.id}_popup" } %>
-        <%= link_to (@publication.archived ? 'Unarchive' : 'Archive'), archive_publication_path(@publication, undo: @publication.archived), method: :post, remote: true, class: 'btn btn-mini' %>
-        <%= link_to 'Delete', @publication, method: :delete, remote: true, class: 'btn btn-mini btn-danger', data: { confirm: "Are you sure you want to delete Publication #{@publication.abbreviated_title_and_ms}?" } %>
+        <%= link_to 'Edit', '#', class: 'btn btn-xs', data: { object: 'modal-show', target: "#publication_#{@publication.id}_popup" } %>
+        <%= link_to (@publication.archived ? 'Unarchive' : 'Archive'), archive_publication_path(@publication, undo: @publication.archived), method: :post, remote: true, class: 'btn btn-xs' %>
+        <%= link_to 'Delete', @publication, method: :delete, remote: true, class: 'btn btn-xs btn-danger', data: { confirm: "Are you sure you want to delete Publication #{@publication.abbreviated_title_and_ms}?" } %>
 
         <%= render partial: 'publications/matrix_popup' %>
       </td>

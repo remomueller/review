@@ -9,7 +9,7 @@
 <div class="page-header">
   <h1>
     <%= @title %>
-    <%= link_to "Create Publication", new_publication_path, class: 'btn btn-primary btn-mini' %>
+    <%= link_to "Create Publication", new_publication_path, class: 'btn btn-primary btn-xs' %>
   </h1>
 </div>
 
@@ -20,13 +20,13 @@
   <%= hidden_field_tag :archived, @archived %>
   <div class="btn-group" data-toggle="buttons-radio">
     <% [['unarchived','unarchived'], ['archived','archived']].each do |label, value| %>
-      <button data-object="set-archived" data-value="<%= value %>" type="button" class="btn btn-default btn-mini <%= 'active' if @archived == value %>">
+      <button data-object="set-archived" data-value="<%= value %>" type="button" class="btn btn-default btn-xs <%= 'active' if @archived == value %>">
         <%= label.humanize %>
       </button>
     <% end %>
   </div>
 
-  <%= link_to "Export Matrix as PDF", print_publications_path(format: 'pdf'), target: '_blank', class: 'btn btn-mini btn-default' %>
+  <%= link_to "Export Matrix as PDF", print_publications_path(format: 'pdf'), target: '_blank', class: 'btn btn-xs btn-default' %>
 <% end %>
 
 <div id="publications"><center><%= image_tag "contour/ajax-loader.gif" %></center></div>
