@@ -9,14 +9,14 @@
   </div>
 
   <div class="control-group">
-    <%= label :publication, :manuscript_number, 'Manuscript Number', class: 'control-label' %>
+    <%= label :publication, :manuscript_number, 'Manuscript Number', class: 'col-md-2 control-label' %>
     <div class="controls">
       <%= text_field :publication, :manuscript_number, disabled: 'disabled' %>
     </div>
   </div>
 
   <div class="control-group">
-    <%= label :publication, :additional_ppcommittee_instructions, 'Additional Instructions to Email to Lead Author', class: 'control-label' %>
+    <%= label :publication, :additional_ppcommittee_instructions, 'Additional Instructions to Email to Lead Author', class: 'col-md-2 control-label' %>
     <div class="controls">
       <% if @publication.additional_ppcommittee_instructions.blank? %>
         <div class="muted">None</div>

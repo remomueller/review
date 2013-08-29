@@ -14,7 +14,7 @@
     </div>
 
     <div class="control-group">
-      <%= label :user_publication_review, :comment, class: 'control-label' %>
+      <%= label :user_publication_review, :comment, class: 'col-md-2 control-label' %>
       <div class="controls">
         <%= text_area :user_publication_review, :comment, rows: 7, style: "width:99%", disabled: 'disabled' %>
       </div>
@@ -22,7 +22,7 @@
 
     <% if current_user.steering_committee? %>
       <div class="control-group">
-        <%= label :user_publication_review, :writing_group_nomination, class: 'control-label' %>
+        <%= label :user_publication_review, :writing_group_nomination, class: 'col-md-2 control-label' %>
         <div class="controls">
           <ul>
             <% @user_publication_review.writing_group_nomination.to_s.split(',').each do |user_name| %>

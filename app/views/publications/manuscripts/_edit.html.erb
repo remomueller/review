@@ -1,6 +1,6 @@
 <%= form_tag upload_manuscript_publication_path(@publication), method: :post, multipart: true, id: 'manuscript_form', class: 'form-horizontal' do  %>
   <div class="control-group">
-    <%= label :publication, :manuscript, 'Upload Manuscript (PDF, Word)', class: 'control-label' %>
+    <%= label :publication, :manuscript, 'Upload Manuscript (PDF, Word)', class: 'col-md-2 control-label' %>
     <div class="controls">
       <%= file_field :publication, :manuscript %>
       <%= hidden_field :publication, 'manuscript_cache' %>

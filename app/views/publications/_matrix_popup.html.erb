@@ -7,28 +7,28 @@
   <%= form_for @publication, url: inline_update_publication_path(@publication), method: :post, remote: true, html: { class: 'form-horizontal' } do |f| %>
     <div class="modal-body">
       <div class="control-group">
-        <%= f.label :manuscript_number, nil, class: 'control-label' %>
+        <%= f.label :manuscript_number, nil, class: 'col-md-2 control-label' %>
         <div class="controls">
           <%= f.text_field :manuscript_number, style: "width:95%" %>
         </div>
       </div>
 
       <div class="control-group">
-        <%= f.label :user_id, 'Lead Author', class: 'control-label' %>
+        <%= f.label :user_id, 'Lead Author', class: 'col-md-2 control-label' %>
         <div class="controls">
           <%= f.select :user_id, [['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.reverse_name, u.id]} %>
         </div>
       </div>
 
       <div class="control-group">
-        <%= f.label :co_lead_author_id, 'Co-Lead Author', class: 'control-label' %>
+        <%= f.label :co_lead_author_id, 'Co-Lead Author', class: 'col-md-2 control-label' %>
         <div class="controls">
           <%= f.select :co_lead_author_id, [['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.reverse_name, u.id]} %>
         </div>
       </div>
 
       <div class="control-group">
-        <%= f.label :writing_group_members, 'Writing Group', class: 'control-label' %>
+        <%= f.label :writing_group_members, 'Writing Group', class: 'col-md-2 control-label' %>
         <div class="controls">
           <%= f.text_area :writing_group_members, rows: 7, style: "width:95%" %>
           <span class="help-block">
@@ -39,7 +39,7 @@
       </div>
 
       <div class="control-group">
-        <%= f.label :status, nil, class: 'control-label' %>
+        <%= f.label :status, nil, class: 'col-md-2 control-label' %>
         <div class="controls">
           <% if ['nominated', 'submitted', 'published'].include?(@publication.status) %>
             <%= f.select :status, Publication::FINAL_STATUS %>
@@ -51,21 +51,21 @@
       </div>
 
       <div class="control-group">
-        <%= f.label :dataset_requested_analyst, nil, class: 'control-label' %>
+        <%= f.label :dataset_requested_analyst, nil, class: 'col-md-2 control-label' %>
         <div class="controls">
           <%= f.text_field :dataset_requested_analyst, style: "width:95%" %>
         </div>
       </div>
 
       <div class="control-group">
-        <%= f.label :targeted_start_date, nil, class: 'control-label' %>
+        <%= f.label :targeted_start_date, nil, class: 'col-md-2 control-label' %>
         <div class="controls">
           <%= f.text_field :targeted_start_date, class: 'datepicker', value: @publication.targeted_start_date ? @publication.targeted_start_date.strftime('%m/%d/%Y') : '' %>
         </div>
       </div>
 
       <div class="control-group">
-        <%= f.label :secretary_notes, nil, class: 'control-label' %>
+        <%= f.label :secretary_notes, nil, class: 'col-md-2 control-label' %>
         <div class="controls">
           <%= f.text_area :secretary_notes, rows: 7, style: "width:95%" %>
         </div>

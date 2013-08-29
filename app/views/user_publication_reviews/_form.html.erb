@@ -15,7 +15,7 @@
     </div>
 
     <div class="control-group">
-      <%= label :user_publication_review, :comment, class: 'control-label' %>
+      <%= label :user_publication_review, :comment, class: 'col-md-2 control-label' %>
       <div class="controls">
         <%= text_area :user_publication_review, :comment, rows: 7, style: "width:99%" %>
       </div>
@@ -23,7 +23,7 @@
 
     <% if current_user.steering_committee? and ['approved', 'nominated', 'submitted', 'published'].include?(@user_publication_review.publication.status) %>
       <div class="control-group">
-        <%= label :user_publication_review, :writing_group_nomination, class: 'control-label' %>
+        <%= label :user_publication_review, :writing_group_nomination, class: 'col-md-2 control-label' %>
         <div class="controls">
           <%= text_field :user_publication_review, :writing_group_nomination, rows: 3, style: "width:99%", data: { pre: @user_publication_review.writing_group_nomination.to_s.split(',').collect{|u| { name: u, id: u }}.to_json } %>
         </div>

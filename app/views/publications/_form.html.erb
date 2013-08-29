@@ -34,7 +34,7 @@
 
   <div class="well">
     <div class="control-group">
-      <%= f.label :full_title, nil, class: 'control-label' %>
+      <%= f.label :full_title, nil, class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
             <%= f.text_field :full_title, style: "width:99%", disabled: disabled %>
@@ -45,7 +45,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :abbreviated_title, 'Abbreviated title', class: 'control-label' %>
+      <%= f.label :abbreviated_title, 'Abbreviated title', class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_field :abbreviated_title, style: "width:99%", disabled: disabled %>
@@ -58,7 +58,7 @@
 
   <% if disabled.blank? and current_user.secretary? %>
   <div class="well control-group">
-    <%= f.label :status, class: 'control-label' %>
+    <%= f.label :status, class: 'col-md-2 control-label' %>
     <div class="controls">
       <%= f.select :status, options_for_select(Publication::STATUS, @publication.status) %>
     </div>
@@ -86,7 +86,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :centers, '2. Center(s)', class: 'control-label' %>
+      <%= f.label :centers, '2. Center(s)', class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_field :centers, style: "width:99%", disabled: disabled %>
@@ -97,7 +97,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :proposal_submission_date, '3. Date this publication was submitted to CHAT DCC', class: 'control-label' %>
+      <%= f.label :proposal_submission_date, '3. Date this publication was submitted to CHAT DCC', class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_field :proposal_submission_date, class: 'datepicker', value: @publication.proposal_submission_date ? @publication.proposal_submission_date.strftime('%m/%d/%Y') : '', disabled: disabled %>
@@ -268,7 +268,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :co_lead_author, 'Co-Lead Author', class: 'control-label' %>
+      <%= f.label :co_lead_author, 'Co-Lead Author', class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.select :co_lead_author_id, options_for_select([['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.reverse_name, u.id]}, @publication.co_lead_author_id) %>
@@ -279,7 +279,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :writing_group_members, 'Writing Group Members', class: 'control-label' %>
+      <%= f.label :writing_group_members, 'Writing Group Members', class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_field :writing_group_members, style: "width:99%", disabled: disabled %>
@@ -290,7 +290,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :keywords, class: 'control-label' %>
+      <%= f.label :keywords, class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_field :keywords, style: "width:99%", disabled: disabled %>
@@ -301,7 +301,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :affiliation, class: 'control-label' %>
+      <%= f.label :affiliation, class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_field :affiliation, disabled: disabled, style: "width:99%" %>
@@ -312,7 +312,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :timeline, class: 'control-label' %>
+      <%= f.label :timeline, class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_area :timeline, rows: 7, style: "width:99%", disabled: disabled %>
@@ -323,7 +323,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :sponsoring_pi, 'Sponsoring PI', class: 'control-label' %>
+      <%= f.label :sponsoring_pi, 'Sponsoring PI', class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_field :sponsoring_pi, disabled: disabled, style: "width:99%" %>
@@ -334,7 +334,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :rationale, class: 'control-label' %>
+      <%= f.label :rationale, class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_area :rationale, rows: 7, style: "width:99%", disabled: disabled %>
@@ -345,7 +345,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :hypothesis, class: 'control-label' %>
+      <%= f.label :hypothesis, class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_area :hypothesis, rows: 7, style: "width:99%", disabled: disabled %>
@@ -356,7 +356,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :data, 'Data (Study Design, Population, Variables of Interest)', class: 'control-label' %>
+      <%= f.label :data, 'Data (Study Design, Population, Variables of Interest)', class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_area :data, rows: 7, style: "width:99%", disabled: disabled %>
@@ -367,7 +367,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :study_type, 'Type of Study', class: 'control-label' %>
+      <%= f.label :study_type, 'Type of Study', class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_field :study_type, disabled: disabled, style: "width:99%" %>
@@ -378,7 +378,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :target_journal, 'Target Journal', class: 'control-label' %>
+      <%= f.label :target_journal, 'Target Journal', class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_field :target_journal, disabled: disabled, style: "width:99%" %>
@@ -389,7 +389,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :analysis_responsibility, 'Analysis Responsibility', class: 'control-label' %>
+      <%= f.label :analysis_responsibility, 'Analysis Responsibility', class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_area :analysis_responsibility, rows: 7, style: "width:99%", disabled: disabled %>
@@ -400,7 +400,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :analysis_plan, 'Brief Analysis Plan', class: 'control-label' %>
+      <%= f.label :analysis_plan, 'Brief Analysis Plan', class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_area :analysis_plan, rows: 7, style: "width:99%", disabled: disabled %>
@@ -411,7 +411,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :summary_section, 'Summary Section', class: 'control-label' %>
+      <%= f.label :summary_section, 'Summary Section', class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_area :summary_section, rows: 7, style: "width:99%", disabled: disabled %>
@@ -422,7 +422,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :references, class: 'control-label' %>
+      <%= f.label :references, class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_area :references, rows: 7, style: "width:99%", disabled: disabled %>
@@ -433,7 +433,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :additional_comments, class: 'control-label' %>
+      <%= f.label :additional_comments, class: 'col-md-2 control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_area :additional_comments, rows: 7, style: "width:99%", disabled: disabled %>
