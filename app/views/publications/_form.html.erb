@@ -86,7 +86,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :centers, '2. Center(s):', class: 'control-label' %>
+      <%= f.label :centers, '2. Center(s)', class: 'control-label' %>
       <div class="controls">
         <% if disabled.blank? %>
           <%= f.text_field :centers, style: "width:99%", disabled: disabled %>
@@ -117,7 +117,7 @@
       <div class="controls radio">
         <%= f.radio_button(:publication_type, "PP", disabled: disabled) %> <%= label 'publication_publication_type', 'pp', 'CHAT primary or mainline paper (design or primary CHAT hypothesis)' %>
         <%= f.radio_button(:publication_type, "SP", disabled: disabled) %> <%= label 'publication_publication_type', 'sp', 'CHAT secondary paper (non-primary hypothesis of CHAT or with data collected at more than one but not all of the investigative centers)' %>
-        <%= f.radio_button(:publication_type, "AP", disabled: disabled) %> <%= label 'publication_publication_type', 'ap', 'Ancillary Paper (data collected only at one investigative center <em>specify ancillary study &amp; paper</em>):'.html_safe %>
+        <%= f.radio_button(:publication_type, "AP", disabled: disabled) %> <%= label 'publication_publication_type', 'ap', 'Ancillary Paper (data collected only at one investigative center <em>specify ancillary study &amp; paper</em>)'.html_safe %>
         <% if disabled.blank? %>
           <%= f.text_field :publication_type_specify, style: "width:99%", disabled: disabled %>
         <% else %>
@@ -133,13 +133,13 @@
     <div class="control-group">
       <label class="control-label">5. Does preparation of this publication require any DCC RESOURCES?</label>
       <div class="controls checkbox">
-        <%= f.check_box :dcc_resources_staff, disabled: disabled %> <%= f.label :dcc_resources_staff, 'Staff (specify):' %>
+        <%= f.check_box :dcc_resources_staff, disabled: disabled %> <%= f.label :dcc_resources_staff, 'Staff (specify)' %>
         <% if disabled.blank? %>
           <%= f.text_field :dcc_resources_staff_specify, style: "width:99%", disabled: disabled %>
         <% else %>
           <div class="disabled"><%= simple_format @publication.dcc_resources_staff_specify %></div>
         <% end %>
-        <%= f.check_box :dcc_resources_other, disabled: disabled %> <%= f.label :dcc_resources_other, 'Other (specify):' %>
+        <%= f.check_box :dcc_resources_other, disabled: disabled %> <%= f.label :dcc_resources_other, 'Other (specify)' %>
         <% if disabled.blank? %>
           <%= f.text_field :dcc_resources_other_specify, style: "width:99%", disabled: disabled %>
         <% else %>
@@ -160,7 +160,7 @@
         <% @attribute = 'chat_data_main_database'; @disabled = disabled %>
         <%= render partial: 'publications/download_link' %>
 
-        <%= f.check_box :chat_data_other, disabled: disabled, :onclick => "toggleAttachment('#publication_chat_data_other');" %> <%= f.label :chat_data_other, 'Other (<em>specify data and where the data are located</em>):'.html_safe %>
+        <%= f.check_box :chat_data_other, disabled: disabled, :onclick => "toggleAttachment('#publication_chat_data_other');" %> <%= f.label :chat_data_other, 'Other (<em>specify data and where the data are located</em>)'.html_safe %>
         <% @attribute = 'chat_data_other'; @disabled = disabled %>
         <%= render partial: 'publications/download_link' %>
 
@@ -183,7 +183,7 @@
         <%= f.check_box :manuscript_preparation_analysis_data, disabled: disabled %> <%= f.label :manuscript_preparation_analysis_data, 'New analysis of CHAT data by DCC staff' %>
         <%= f.check_box :manuscript_preparation_analysis_ancillary_data, disabled: disabled %> <%= f.label :manuscript_preparation_analysis_ancillary_data, 'New analysis of CHAT ancillary study data by DCC staff' %>
         <%= f.check_box :manuscript_analysis_review, disabled: disabled %> <%= f.label :manuscript_analysis_review, 'Review of distributed analysis of CHAT data by DCC staff' %>
-        <%= f.check_box :manuscript_preparation_other, disabled: disabled %> <%= f.label :manuscript_preparation_other, 'Other (<em>specify</em>):'.html_safe %>
+        <%= f.check_box :manuscript_preparation_other, disabled: disabled %> <%= f.label :manuscript_preparation_other, 'Other (<em>specify</em>)'.html_safe %>
         <% if disabled.blank? %>
           <%= f.text_field :manuscript_preparation_other_specify, style: "width:99%", disabled: disabled %>
         <% else %>
@@ -211,7 +211,7 @@
     <div class="control-group">
       <label class="control-label">9.  Attachments to this form</label>
       <div class="controls checkbox">
-        <%= f.check_box :attachment_chat_form, disabled: disabled, :onclick => "toggleAttachment('#publication_attachment_chat_form');" %> <%= f.label :attachment_chat_form, 'CHAT form with items marked to indicate variables intended for analysis:' %>
+        <%= f.check_box :attachment_chat_form, disabled: disabled, :onclick => "toggleAttachment('#publication_attachment_chat_form');" %> <%= f.label :attachment_chat_form, 'CHAT form with items marked to indicate variables intended for analysis' %>
         <% @attribute = 'attachment_chat_form'; @disabled = disabled %>
         <%= render partial: 'publications/download_link' %>
 
@@ -220,7 +220,7 @@
         <% else %>
           <div class="disabled"><%= simple_format @publication.attachment_chat_form_specify %></div>
         <% end %>
-        <%= f.check_box :attachment_chat_variables, disabled: disabled, :onclick => "toggleAttachment('#publication_attachment_chat_variables');" %> <%= f.label :attachment_chat_variables, 'List of CHAT sleep study variables intended for analysis:' %>
+        <%= f.check_box :attachment_chat_variables, disabled: disabled, :onclick => "toggleAttachment('#publication_attachment_chat_variables');" %> <%= f.label :attachment_chat_variables, 'List of CHAT sleep study variables intended for analysis' %>
         <% @attribute = 'attachment_chat_variables'; @disabled = disabled %>
         <%= render partial: 'publications/download_link' %>
 
@@ -229,7 +229,7 @@
         <% else %>
           <div class="disabled"><%= simple_format @publication.attachment_chat_variables_specify %></div>
         <% end %>
-        <%= f.check_box :attachment_ancillary_forms, disabled: disabled, :onclick => "toggleAttachment('#publication_attachment_ancillary_forms');" %> <%= f.label :attachment_ancillary_forms,'CHAT ancillary study forms with items marked to indicate variables intended for analysis:' %>
+        <%= f.check_box :attachment_ancillary_forms, disabled: disabled, :onclick => "toggleAttachment('#publication_attachment_ancillary_forms');" %> <%= f.label :attachment_ancillary_forms,'CHAT ancillary study forms with items marked to indicate variables intended for analysis' %>
         <% @attribute = 'attachment_ancillary_forms'; @disabled = disabled %>
         <%= render partial: 'publications/download_link' %>
 
@@ -238,7 +238,7 @@
         <% else %>
           <div class="disabled"><%= simple_format @publication.attachment_ancillary_forms_specify %></div>
         <% end %>
-        <%= f.check_box :attachment_other, disabled: disabled, :onclick => "toggleAttachment('#publication_attachment_other');" %> <%= f.label :attachment_other, 'Other (<em>specify</em>):'.html_safe %>
+        <%= f.check_box :attachment_other, disabled: disabled, :onclick => "toggleAttachment('#publication_attachment_other');" %> <%= f.label :attachment_other, 'Other (<em>specify</em>)'.html_safe %>
         <% @attribute = 'attachment_other'; @disabled = disabled %>
         <%= render partial: 'publications/download_link' %>
 
