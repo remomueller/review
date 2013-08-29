@@ -31,7 +31,6 @@
   <td><%= @publication.publication_type %> <%= @publication.publication_type_specify unless @publication.publication_type_specify.blank? %></td>
   <td style="white-space:nowrap">
     <%= display_status(@publication.status) %>
-    <div style="margin-top:4px"><%= @publication.human_status %></div>
   </td>
   <td><div style="padding-left:0;margin-bottom:0"><%= @publication.dataset_requested_analyst %></div></td>
   <td>
