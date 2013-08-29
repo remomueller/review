@@ -14,6 +14,8 @@
   <dt>Email</dt>
   <dd><%= @user.email %></dd>
 
+  <dt>User Avatar</dt>
+  <dd><%= image_tag @user.avatar_url, class: 'img-rounded' %></dd>
 
   <% if current_user.system_admin? %>
     <dt>Status</dt>
@@ -33,5 +35,20 @@
 
     <dt>System Admin</dt>
     <dd><%= check_box_tag :system, 'admin', @user.system_admin?, disabled: true %></dd>
+
+    <% if @user.authentications.size > 0 %>
+      <dt>Authentications</dt>
+      <dd>
+        <div style="margin-top:10px">
+          <% @user.authentications.each do |authentication| %>
+            <div class="authentication">
+              <%= image_tag "contour/#{authentication.provider}_32.png", height: "32px" %>
+              <div class="provider"><%= authentication.provider.titleize %></div>
+              <div class="uid"><%= authentication.uid %></div>
+            </div>
+          <% end %>
+        </div>
+      </dd>
+    <% end %>
   <% end %>
 </dl>
