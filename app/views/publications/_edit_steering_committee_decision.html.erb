@@ -18,7 +18,7 @@
   </div>
 
   <div class="form-group">
-    <div class="col-md-10 col-md-offset-2">
+    <div class="col-md-offset-2 col-md-10">
       <%= submit_tag (@publication.status == 'approved' ? 'Submit' : 'Update') + " Steering Committee Decision", class: 'btn btn-primary' %>
       <%= link_to 'Cancel', show_steering_committee_decision_publication_path(@publication), method: :post, remote: true, class: 'btn btn-default' unless @publication.status == 'approved' %>
     </div>

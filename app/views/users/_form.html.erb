@@ -62,7 +62,7 @@
   </div>
 
   <div class="form-group">
-    <div class="col-md-10 col-md-offset-2">
+    <div class="col-md-offset-2 col-md-10">
       <div class="checkbox">
         <label>
           <%= f.check_box :system_admin %>
@@ -73,7 +73,7 @@
   </div>
 
   <div class="form-group">
-    <div class="col-md-10 col-md-offset-2">
+    <div class="col-md-offset-2 col-md-10">
       <%= f.submit (@user.new_record? ? "Create User" : "Update User"), class: 'btn btn-primary' %>
       <%= cancel %>
     </div>

@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="form-group">
-    <div class="col-md-10 col-md-offset-2">
+    <div class="col-md-offset-2 col-md-10">
       <%= submit_tag (@publication.manuscript_url.blank? ? "Upload Manuscript" : "Replace Existing Manuscript"), class: 'btn btn-primary' %>
       <%= link_to 'Cancel', show_manuscript_publication_path(@publication), method: :post, remote: true, class: 'btn btn-default' unless @publication.manuscript_url.blank? %>
     </div>

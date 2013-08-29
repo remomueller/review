@@ -502,7 +502,7 @@
 
   <% if disabled.blank? %>
     <div class="form-group">
-      <div class="col-md-10 col-md-offset-2">
+      <div class="col-md-offset-2 col-md-10">
         <%= hidden_field_tag 'publish', '0' %>
         <% if current_user.secretary? %>
           <%= link_to "Save Publication", '#', data: { object: 'publication-secretary-save', target: "##{form_name}" }, class: 'btn btn-primary' %>

@@ -39,7 +39,7 @@
     <% end %>
 
     <div class="form-group">
-      <div class="col-md-10 col-md-offset-2">
+      <div class="col-md-offset-2 col-md-10">
         <% link_name = @user_publication_review.new_record? ? 'Create Review' : 'Edit Review' %>
         <%= submit_tag link_name, class: 'btn btn-default' %>
       </div>

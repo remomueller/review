@@ -33,7 +33,7 @@
     <% end %>
 
     <div class="form-group">
-      <div class="col-md-10 col-md-offset-2">
+      <div class="col-md-offset-2 col-md-10">
         <%= submit_tag (@user_publication_review.new_record? ? "Submit Review" : "Update Review"), class: 'btn btn-primary' %>
         <%= link_to 'Cancel', user_publication_review_path(@user_publication_review), remote: true, class: 'btn btn-default' unless @user_publication_review.new_record? %>
       </div>

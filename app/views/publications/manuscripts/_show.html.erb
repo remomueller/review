@@ -8,7 +8,7 @@
   <% end %>
 
   <div class="form-group">
-    <div class="col-md-10 col-md-offset-2">
+    <div class="col-md-offset-2 col-md-10">
       <% if current_user == @publication.user or current_user.secretary? %>
         <%= link_to 'Upload a Revised Manuscript', edit_manuscript_publication_path(@publication), method: :post, remote: true, class: 'btn btn-default' %>
       <% end %>
