@@ -62,9 +62,13 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :system_admin, class: 'col-md-2 control-label' %>
-    <div class="col-md-10">
-      <%= f.check_box :system_admin %>
+    <div class="col-md-10 col-md-offset-2">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :system_admin %>
+          System Admin
+        </label>
+      </div>
     </div>
   </div>
 

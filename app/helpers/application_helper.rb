@@ -56,4 +56,8 @@ module ApplicationHelper
     "<span #{'class="selected"' if order.split(',').flatten.include?(sort_field + ' DESC')}>#{display_name} #{ link_to('&raquo;'.html_safe, '#', data: { object: 'order', order: "#{sort_field} DESC", form: "##{search_form_id}" }, style: 'text-decoration:none')}</span>"
   end
 
+  def simple_check(checked)
+    checked ? '<span class="glyphicon glyphicon-ok"></span>'.html_safe : ''
+  end
+
 end

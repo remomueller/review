@@ -3,9 +3,9 @@
   <h1>
     <%= @title %>
     <% if current_user.system_admin? %>
-      <%= link_to "Edit User", edit_user_path(@user), class: 'btn btn-xs' %>
+      <%= link_to "Edit User", edit_user_path(@user), class: 'btn btn-xs btn-default' %>
       <%= link_to 'Delete User', @user, method: :delete, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete User #{@user.name}?" } unless current_user == @user %>
-      <%= link_to "View Users", users_path, class: 'btn btn-xs' %>
+      <%= link_to "View Users", users_path, class: 'btn btn-xs btn-default' %>
     <% end %>
   </h1>
 </div>
@@ -22,19 +22,19 @@
     <dd><%= @user.status %></dd>
 
     <dt>P&amp;P Member</dt>
-    <dd><%= check_box_tag :pp_committee, 'member', @user.pp_committee?, disabled: true %></dd>
+    <dd><%= simple_check @user.pp_committee? %></dd>
 
     <dt>P&amp;P Secretary</dt>
-    <dd><%= check_box_tag :pp_committee, 'secretary', @user.pp_committee_secretary?, disabled: true %></dd>
+    <dd><%= simple_check @user.pp_committee_secretary? %></dd>
 
     <dt>SC Member</dt>
-    <dd><%= check_box_tag :steering_committee, 'member', @user.steering_committee?, disabled: true %></dd>
+    <dd><%= simple_check @user.steering_committee? %></dd>
 
     <dt>SC Secretary</dt>
-    <dd><%= check_box_tag :steering_committee, 'secretary', @user.steering_committee_secretary?, disabled: true %></dd>
+    <dd><%= simple_check @user.steering_committee_secretary? %></dd>
 
     <dt>System Admin</dt>
-    <dd><%= check_box_tag :system, 'admin', @user.system_admin?, disabled: true %></dd>
+    <dd><%= simple_check @user.system_admin? %></dd>
 
     <% if @user.authentications.size > 0 %>
       <dt>Authentications</dt>

@@ -5,7 +5,7 @@
   <% else %>
 
     <% if @publication.send(@attribute+'_attachment') and @publication.send(@attribute+'_attachment_url') %>
-      <%= link_to @publication.send(@attribute+'_attachment_url').split('/').last, @publication.send(@attribute+'_attachment_url'), target: '_blank', class: 'btn btn-xs' %>
+      <%= link_to @publication.send(@attribute+'_attachment_url').split('/').last, @publication.send(@attribute+'_attachment_url'), target: '_blank', class: 'btn btn-xs btn-default' %>
       <%= number_to_human_size(@publication.send(@attribute+'_attachment').size) %>
     <% end %>
   <% end %>
