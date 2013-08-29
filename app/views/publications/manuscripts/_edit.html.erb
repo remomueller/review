@@ -2,12 +2,14 @@
   <div class="form-group">
     <%= label :publication, :manuscript, 'Upload Manuscript (PDF, Word)', class: 'col-md-2 control-label' %>
     <div class="col-md-10">
-      <%= file_field :publication, :manuscript %>
+      <%= file_field :publication, :manuscript, class: 'form-control' %>
       <%= hidden_field :publication, 'manuscript_cache' %>
     </div>
   </div>
-  <div class="form-actions">
-    <%= submit_tag (@publication.manuscript_url.blank? ? "Upload Manuscript" : "Replace Existing Manuscript"), class: 'btn btn-primary' %>
-    <%= link_to 'Cancel', show_manuscript_publication_path(@publication), method: :post, remote: true, class: 'btn btn-default' unless @publication.manuscript_url.blank? %>
+  <div class="form-group">
+    <div class="col-md-10 col-md-offset-2">
+      <%= submit_tag (@publication.manuscript_url.blank? ? "Upload Manuscript" : "Replace Existing Manuscript"), class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', show_manuscript_publication_path(@publication), method: :post, remote: true, class: 'btn btn-default' unless @publication.manuscript_url.blank? %>
+    </div>
   </div>
 <% end %>
