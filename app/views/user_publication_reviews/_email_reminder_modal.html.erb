@@ -1,42 +1,46 @@
-<div id="send_email_<%= @position %>_modal" class="modal" style="display:none">
-  <div class="modal-header">
-    Send Email:
-    <a class="close" data-dismiss="modal">×</a>
+<div class="modal fade" id="send_email_<%= @position %>_modal" style="display:none">
+  <div class="modal-dialog modal-wide-width">
+    <div class="modal-content">
+      <div class="modal-header">
+        Send Email:
+        <a class="close" data-dismiss="modal">×</a>
+      </div>
+      <div class="modal-body">
+        <%= form_tag send_reminder_publication_path(@publication, reviewer_id: @user_publication_review.user_id), remote: true, method: :post, id: "send_email_#{@position}_form", class: 'form-horizontal' do %>
+          <div class="form-group">
+            <%= label_tag :to, nil, class: 'col-md-2 control-label' %>
+            <div class="col-md-10">
+              <%= text_field_tag :to, @user_publication_review.user.email_with_name, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag :cc, nil, class: 'col-md-2 control-label' %>
+            <div class="col-md-10">
+              <%= text_field_tag :cc, current_user.email_with_name, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag :subject, nil, class: 'col-md-2 control-label' %>
+            <div class="col-md-10">
+              <%= text_field_tag :subject, "New Publication Awaiting Approval: #{@publication.abbreviated_title_and_ms}", class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag :body, nil, class: 'col-md-2 control-label' %>
+            <div class="col-md-10">
+              <%= text_area_tag :body, @user_publication_review.email_body_template(current_user), rows: 20, class: 'form-control' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="modal-footer">
+        <%= link_to 'Close', '#', class: 'btn btn-default', data: { dismiss: "modal" } %>
+        <%= link_to 'Send Email', '#', class: 'btn btn-primary', data: { target: "#send_email_#{@position}_form", object: 'submit' } %>
+      </div>
+    </div>
   </div>
-  <div class="modal-body">
-    <%= form_tag send_reminder_publication_path(@publication, reviewer_id: @user_publication_review.user_id), remote: true, method: :post, id: "send_email_#{@position}_form" do %>
-      <div class="form-group">
-        <%= label_tag :to, nil, class: 'col-md-2 control-label' %>
-        <div class="col-md-10">
-          <%= text_field_tag :to, @user_publication_review.user.email_with_name, style: 'width:95%' %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <%= label_tag :cc, nil, class: 'col-md-2 control-label' %>
-        <div class="col-md-10">
-          <%= text_field_tag :cc, current_user.email_with_name, style: 'width:95%' %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <%= label_tag :subject, nil, class: 'col-md-2 control-label' %>
-        <div class="col-md-10">
-          <%= text_field_tag :subject, "New Publication Awaiting Approval: #{@publication.abbreviated_title_and_ms}", style: 'width:95%' %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <%= label_tag :body, nil, class: 'col-md-2 control-label' %>
-        <div class="col-md-10">
-          <%= text_area_tag :body, @user_publication_review.email_body_template(current_user), rows: 20, style: 'width:95%' %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="modal-footer">
-    <%= link_to 'Close', '#', class: 'btn btn-default', data: { dismiss: "modal" } %>
-    <%= link_to 'Send Email', '#', class: 'btn btn-primary', data: { target: "#send_email_#{@position}_form", object: 'submit' } %>
-  </div>
- </div>
+</div>
