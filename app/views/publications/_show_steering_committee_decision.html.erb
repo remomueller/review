@@ -1,5 +1,5 @@
 <%= form_tag edit_steering_committee_decision_publication_path(@publication), method: :post, remote: true, class: 'form-horizontal' do %>
-  <div class="control-group">
+  <div class="form-group">
     <label class="control-label">Publication Status</label>
     <div class="controls radio">
       <% Publication::SC_STATUS.each do |display, value| %>
@@ -8,14 +8,14 @@
     </div>
   </div>
 
-  <div class="control-group">
+  <div class="form-group">
     <%= label :publication, :manuscript_number, 'Manuscript Number', class: 'col-md-2 control-label' %>
     <div class="col-md-10">
       <%= text_field :publication, :manuscript_number, disabled: 'disabled' %>
     </div>
   </div>
 
-  <div class="control-group">
+  <div class="form-group">
     <%= label :publication, :additional_sccommittee_instructions, 'Additional Instructions to Email to Lead Author', class: 'col-md-2 control-label' %>
     <div class="col-md-10">
       <% if @publication.additional_sccommittee_instructions.blank? %>

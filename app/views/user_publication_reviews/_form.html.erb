@@ -5,7 +5,7 @@
   <div class="well">
     <div class="page-header"><h3>Review Publication</h3></div>
 
-    <div class="control-group">
+    <div class="form-group">
       <label class="control-label">Approval Status</label>
       <div class="controls radio">
         <% UserPublicationReview::STATUS.each do |display, value| %>
@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="control-group">
+    <div class="form-group">
       <%= label :user_publication_review, :comment, class: 'col-md-2 control-label' %>
       <div class="col-md-10">
         <%= text_area :user_publication_review, :comment, rows: 7, style: "width:99%" %>
@@ -22,7 +22,7 @@
     </div>
 
     <% if current_user.steering_committee? and ['approved', 'nominated', 'submitted', 'published'].include?(@user_publication_review.publication.status) %>
-      <div class="control-group">
+      <div class="form-group">
         <%= label :user_publication_review, :writing_group_nomination, class: 'col-md-2 control-label' %>
         <div class="col-md-10">
           <%= text_field :user_publication_review, :writing_group_nomination, rows: 3, style: "width:99%", data: { pre: @user_publication_review.writing_group_nomination.to_s.split(',').collect{|u| { name: u, id: u }}.to_json } %>
