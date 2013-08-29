@@ -507,7 +507,7 @@
         <% if current_user.secretary? %>
           <%= link_to "Save Publication", '#', data: { object: 'publication-secretary-save', target: "##{form_name}" }, class: 'btn btn-primary' %>
         <% else %>
-          <%= link_to (@publication.new_record? ? "Save Draft of Publication" : "Update Draft of Publication"), '#', data: { object: 'publication-save', publish: '0', target: "##{form_name}" }, class: 'btn' %>
+          <%= link_to (@publication.new_record? ? "Save Draft of Publication" : "Update Draft of Publication"), '#', data: { object: 'publication-save', publish: '0', target: "##{form_name}" }, class: 'btn btn-default' %>
           <%= link_to "Submit Publication for Review", '#', data: { object: 'publication-save', publish: '1', target: "##{form_name}", assurance: true }, class: 'btn btn-primary' %>
         <% end %>
         <%= cancel %>
