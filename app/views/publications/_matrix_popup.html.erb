@@ -60,7 +60,7 @@
       <div class="form-group">
         <%= f.label :targeted_start_date, nil, class: 'col-md-2 control-label' %>
         <div class="col-md-10">
-          <%= f.text_field :targeted_start_date, class: 'datepicker', value: @publication.targeted_start_date ? @publication.targeted_start_date.strftime('%m/%d/%Y') : '' %>
+          <%= f.text_field :targeted_start_date, class: 'datepicker form-control', value: @publication.targeted_start_date ? @publication.targeted_start_date.strftime('%m/%d/%Y') : '' %>
         </div>
       </div>
 

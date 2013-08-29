@@ -100,7 +100,7 @@
       <%= f.label :proposal_submission_date, '3. Date this publication was submitted to CHAT DCC', class: 'col-md-2 control-label' %>
       <div class="col-md-10">
         <% if disabled.blank? %>
-          <%= f.text_field :proposal_submission_date, class: 'datepicker', value: @publication.proposal_submission_date ? @publication.proposal_submission_date.strftime('%m/%d/%Y') : '', disabled: disabled %>
+          <%= f.text_field :proposal_submission_date, class: 'datepicker form-control', value: @publication.proposal_submission_date ? @publication.proposal_submission_date.strftime('%m/%d/%Y') : '', disabled: disabled %>
         <% else %>
           <div class="disabled"><%= simple_format @publication.proposal_submission_date.to_s %></div>
         <% end %>
