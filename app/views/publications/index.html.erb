@@ -18,11 +18,12 @@
   <%= text_field_tag 'search', params[:search], class: 'form-control' %>
   <%= submit_tag 'Search', class: 'btn btn-primary' %>
   <%= hidden_field_tag :archived, @archived %>
-  <div class="btn-group" data-toggle="buttons-radio">
-    <% [['unarchived','unarchived'], ['archived','archived']].each do |label, value| %>
-      <button data-object="set-archived" data-value="<%= value %>" type="button" class="btn btn-default btn-xs <%= 'active' if @archived == value %>">
-        <%= label.humanize %>
-      </button>
+  <div class="btn-group" data-toggle="buttons">
+    <% [['Unarchived','unarchived'], ['Archived','archived']].each do |label, value| %>
+      <label class="btn btn-xs btn-default <%= 'active' if @archived == value %>" data-object="set-archived" data-value="<%= value %>">
+        <%= radio_button_tag "archive_status", value, @archived == value %>
+        <%= label %>
+      </label>
     <% end %>
   </div>
 
