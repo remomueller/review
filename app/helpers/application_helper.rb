@@ -32,6 +32,7 @@ module ApplicationHelper
   end
 
   def display_status(status)
+    result = ''
     case status when 'published'
       result = "<span class='label label-success'>Published</span>"
     when 'submitted'
