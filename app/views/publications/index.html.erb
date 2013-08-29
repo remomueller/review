@@ -1,4 +1,11 @@
 <% @title = "Publication Matrix" %>
+
+<div class="pull-right">
+  <%= image_tag 'contour/tag_green.png', alt: '' %> Marked for P&amp;P Committee Review<br />
+  <%= image_tag 'contour/tag_blue.png', alt: '' %> Marked for Steering Committee Review<br />
+  <%= image_tag 'contour/gentleface/lightbulb_16.png', alt: '' %> Mouse Over for Additional Information
+</div>
+
 <div class="page-header">
   <h1>
     <%= @title %>
@@ -6,26 +13,20 @@
   </h1>
 </div>
 
-<div style="float:right">
-  <%= image_tag 'contour/tag_green.png', alt: '' %> Marked for P&amp;P Committee Review<br />
-  <%= image_tag 'contour/tag_blue.png', alt: '' %> Marked for Steering Committee Review<br />
-  <%= image_tag 'contour/gentleface/lightbulb_16.png', alt: '' %> Mouse Over for Additional Information
-</div>
-
-<%= form_tag publications_path, method: :get, remote: true, id: "search_form", class: 'form-search', data: { object: 'form-load' } do %>
+<%= form_tag publications_path, method: :get, remote: true, id: "search_form", class: 'form-inline', data: { object: 'form-load' } do %>
   <%= hidden_field_tag :order, params[:order] %>
-  <%= text_field_tag 'search', params[:search], class: 'search-query' %>
+  <%= text_field_tag 'search', params[:search], class: 'form-control' %>
   <%= submit_tag 'Search', class: 'btn btn-primary' %>
   <%= hidden_field_tag :archived, @archived %>
   <div class="btn-group" data-toggle="buttons-radio">
     <% [['unarchived','unarchived'], ['archived','archived']].each do |label, value| %>
-      <button data-object="set-archived" data-value="<%= value %>" type="button" class="btn btn-mini <%= 'active' if @archived == value %>">
+      <button data-object="set-archived" data-value="<%= value %>" type="button" class="btn btn-default btn-mini <%= 'active' if @archived == value %>">
         <%= label.humanize %>
       </button>
     <% end %>
   </div>
 
-  <%= link_to "Export Matrix as PDF", print_publications_path(format: 'pdf'), target: '_blank', class: 'btn btn-mini' %>
+  <%= link_to "Export Matrix as PDF", print_publications_path(format: 'pdf'), target: '_blank', class: 'btn btn-mini btn-default' %>
 <% end %>
 
 <div id="publications"><center><%= image_tag "contour/ajax-loader.gif" %></center></div>
