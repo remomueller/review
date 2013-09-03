@@ -6,7 +6,7 @@
   - Gravatars added for users
   - Reorganized Menu
 - **Gem Changes**
-  - Updated to contour 2.1.0.beta17
+  - Updated to contour 2.1.0.rc
   - Updated to mysql 0.3.13
 
 ## 0.14.5 (July 9, 2013)
