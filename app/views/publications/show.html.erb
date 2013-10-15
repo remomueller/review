@@ -97,9 +97,9 @@
   <div class="well">
     <div class="page-header"><h3>Manuscript</h3></div>
     <div id="publication_<%= @publication.id %>_manuscript_container">
-      <% if @publication.manuscript_url.blank? and (current_user == @publication.user or current_user.secretary?) %>
+      <% if @publication.manuscript.url.blank? and (current_user == @publication.user or current_user.secretary?) %>
         <%= render partial: 'publications/manuscripts/edit' %>
-      <% elsif not @publication.manuscript_url.blank? %>
+      <% elsif not @publication.manuscript.url.blank? %>
         <%= render partial: 'publications/manuscripts/show' %>
       <% else %>
         The author has not uploaded any manuscripts.

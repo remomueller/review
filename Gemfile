@@ -11,7 +11,7 @@ gem 'eventmachine',         '~> 1.0.0',           platforms: [ :mswin, :mingw ]
 # Gems used by project
 gem 'contour',              '2.2.0.beta2'
 gem 'kaminari',             '~> 0.14.1'
-gem 'carrierwave',          '~> 0.7.1'
+gem 'carrierwave',          '~> 0.9.0'
 gem 'ruby-ntlm-namespace',  '~> 0.0.1'
 
 # Rails Defaults

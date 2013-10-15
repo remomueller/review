@@ -3,6 +3,7 @@
 ### Enhancements
 - **Gem Changes**
   - Updated to contour 2.2.0.beta2
+  - Updated to carrierwave 0.9.0
 
 ## 0.14.6 (September 3, 2013)
 

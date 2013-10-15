@@ -1,4 +1,5 @@
-<%= link_to @publication.manuscript_url.split('/').last, @publication.manuscript_url, target: '_blank', class: 'btn btn-default' %>
+<% full_url = "#{request.script_name}#{@publication.manuscript.url}" %>
+<%= link_to @publication.manuscript.url.split('/').last, full_url, target: '_blank', class: 'btn btn-default' %>
 
 <span class="muted">uploaded <%= simple_time(@publication.manuscript_uploaded_at) %></span>
 -- <%= number_to_human_size(@publication.manuscript.size) %>
