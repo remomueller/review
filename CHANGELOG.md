@@ -5,6 +5,9 @@
   - Updated to contour 2.2.0.beta2
   - Updated to carrierwave 0.9.0
 
+### Bug Fix
+- Updating a publication from the matrix view now correctly closes the popup, (by @susanredline)
+
 ## 0.14.6 (September 3, 2013)
 
 ### Enhancements
