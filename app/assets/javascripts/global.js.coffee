@@ -14,6 +14,15 @@
   else
     file_container.hide()
 
+@ready = () ->
+  contourReady()
+  window.$isDirty = false
+  msg = "You haven't saved your changes."
+  window.onbeforeunload = (el) -> return msg if window.$isDirty
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
+
 jQuery ->
   $(document)
     .on('mouseover', ".smudge", () -> $(this).attr('src', $(this).attr('src').replace(/(-(.*?))?.png/, '_g1.png')))
@@ -24,16 +33,7 @@ jQuery ->
       false
     )
 
-  window.$isDirty = false
-  msg = 'You haven\'t saved your changes.'
-
   $(document).on('change', ':input', () ->
     if $("#isdirty").val() == '1'
       window.$isDirty = true
-  )
-
-  $(document).ready( () ->
-    window.onbeforeunload = (el) ->
-      if window.$isDirty
-        return msg
   )
