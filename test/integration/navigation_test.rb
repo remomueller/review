@@ -41,7 +41,6 @@ class NavigationTest < ActionDispatch::IntegrationTest
 
     sign_in_as(@valid, "123456", "valid-2@example.com")
     assert_equal '/publications', path
-    assert_equal I18n.t('devise.sessions.signed_in'), flash[:notice]
   end
 
   test "valid user can login using authentication token" do
