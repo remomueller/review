@@ -143,6 +143,7 @@ class PublicationsController < ApplicationController
   end
 
   def index
+    flash.delete(:notice)
   	first_visit = params[:order].blank?
 
     publications_scope = current_user.all_viewable_publications
