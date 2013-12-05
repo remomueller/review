@@ -1,5 +1,8 @@
 ## 0.14.9
 
+### Enhancements
+- Use of Ruby 2.0.0-p353 is now recommended
+
 ## 0.14.8 (December 4, 2013)
 
 ### Enhancements
