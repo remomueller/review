@@ -3,6 +3,7 @@ require 'test_helper'
 SimpleCov.command_name "test:integration"
 
 class NavigationTest < ActionDispatch::IntegrationTest
+
   fixtures :users
 
   def setup
@@ -43,10 +44,4 @@ class NavigationTest < ActionDispatch::IntegrationTest
     assert_equal '/publications', path
   end
 
-  test "valid user can login using authentication token" do
-    get "/publications?auth_token=#{@valid.authentication_token}"
-    assert_equal '/publications', path
-    @valid.reload # Check if authentication token changed
-    assert_not_equal '12345678', @valid.authentication_token
-  end
 end

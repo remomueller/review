@@ -171,7 +171,7 @@ class PublicationsController < ApplicationController
 
 
 
-    @publications = publications_scope.page(params[:page]).per(10)
+    @publications = publications_scope.page(params[:page]).per( 40 )
   end
 
   # GET /publications/1

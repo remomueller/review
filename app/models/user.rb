@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :encryptable, :confirmable, :lockable and :omniauthable
   devise :database_authenticatable, :registerable, :timeoutable,
-         :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
+         :recoverable, :rememberable, :trackable, :validatable
 
   # Callbacks
   after_create :notify_system_admins
@@ -43,11 +43,6 @@ class User < ActiveRecord::Base
   # Overriding Devise built-in active? method
   def active_for_authentication?
     super and self.status == 'active' and not self.deleted?
-  end
-
-  def after_token_authentication
-    self.reset_authentication_token!
-    super
   end
 
   def destroy

@@ -13,21 +13,18 @@
   </h1>
 </div>
 
-<%= form_tag publications_path, method: :get, remote: true, id: "search_form", class: 'form-inline', data: { object: 'form-load' } do %>
+<%= form_tag publications_path, method: :get, class: 'form-inline' do %>
   <%= hidden_field_tag :order, params[:order] %>
   <%= text_field_tag 'search', params[:search], class: 'form-control' %>
-  <%= submit_tag 'Search', class: 'btn btn-primary' %>
+  <%= submit_tag 'Search', class: 'btn btn-primary', name: nil %>
+  <%= link_to 'Reset', publications_path, class: 'btn btn-default' %>
   <%= hidden_field_tag :archived, @archived %>
-  <div class="btn-group" data-toggle="buttons">
-    <% [['Unarchived','unarchived'], ['Archived','archived']].each do |label, value| %>
-      <label class="btn btn-xs btn-default <%= 'active' if @archived == value %>" data-object="set-archived" data-value="<%= value %>">
-        <%= radio_button_tag "archive_status", value, @archived == value %>
-        <%= label %>
-      </label>
-    <% end %>
+  <div class="btn-group">
+    <%= link_to 'Unarchived', url_for( params.merge( archived: 'unarchived' ) ), class: "btn btn-xs btn-default #{'active' if @archived == 'unarchived'}" %>
+    <%= link_to 'Archived', url_for( params.merge( archived: 'archived' ) ), class: "btn btn-xs btn-default #{'active' if @archived == 'archived'}" %>
   </div>
 
   <%= link_to "Export Matrix as PDF", print_publications_path(format: 'pdf'), target: '_blank', class: 'btn btn-xs btn-default' %>
 <% end %>
 
-<div id="publications"><center><%= image_tag "contour/ajax-loader.gif" %></center></div>
+<%= render partial: 'publications/publications' %>

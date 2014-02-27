@@ -1,4 +1,4 @@
-<%= render partial: 'layouts/per_page', locals: { type: 'users', count: @users.total_count } %>
+<%= render partial: 'contour/layouts/per_page', locals: { per_page: 40, object_count: @users.total_count } %>
 
 <table class="table table-striped">
   <thead>
@@ -11,16 +11,16 @@
       </tr>
     <% end %>
     <tr>
-      <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.last_name', 'Name', 'users_search') %></th>
-      <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.email', 'Email', 'users_search') %></th>
-      <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.current_sign_in_at', 'Recent Activity', 'users_search') %></th>
+      <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.last_name', 'Name') %></th>
+      <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.email', 'Email') %></th>
+      <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.current_sign_in_at', 'Recent Activity') %></th>
       <% if current_user.system_admin? %>
-        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.status', 'Status', 'users_search') %></th>
-        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.pp_committee', 'P&amp;P', 'users_search') %></th>
-        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.steering_committee', 'Steering', 'users_search') %></th>
-        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.pp_committee_secretary', 'P&amp;P', 'users_search') %></th>
-        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.steering_committee_secretary', 'Steering', 'users_search') %></th>
-        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.system_admin', 'System Admin', 'users_search') %></th>
+        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.status', 'Status') %></th>
+        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.pp_committee', 'P&amp;P') %></th>
+        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.steering_committee', 'Steering') %></th>
+        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.pp_committee_secretary', 'P&amp;P') %></th>
+        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.steering_committee_secretary', 'Steering') %></th>
+        <th style="white-space:nowrap"><%== sort_field_helper(@order, 'users.system_admin', 'System Admin') %></th>
         <th>Actions</th>
       <% end %>
     </tr>
