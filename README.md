@@ -1,10 +1,10 @@
 # CHAT Publications Manager
 
-[![Build Status](https://travis-ci.org/remomueller/slice.png?branch=master)](https://travis-ci.org/remomueller/slice)
-[![Dependency Status](https://gemnasium.com/remomueller/review.png)](https://gemnasium.com/remomueller/review)
+[![Build Status](https://travis-ci.org/remomueller/slice.svg?branch=master)](https://travis-ci.org/remomueller/slice)
+[![Dependency Status](https://gemnasium.com/remomueller/review.svg)](https://gemnasium.com/remomueller/review)
 [![Code Climate](https://codeclimate.com/github/remomueller/review.png)](https://codeclimate.com/github/remomueller/review)
 
-Easy management of publication proposals for publication committee, steering committee, and secretaries. Email reminders for committee members, printable PDF of Publication Matrix, easy filtering of publications available for review. Using Rails 4.0+ and Ruby 2.1+.
+Easy management of publication proposals for publication committee, steering committee, and secretaries. Email reminders for committee members, printable PDF of Publication Matrix, easy filtering of publications available for review. Using Rails 4.1+ and Ruby 2.1+.
 
 ## Installation
 

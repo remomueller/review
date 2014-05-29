@@ -2,6 +2,13 @@
 
 ### Enhancements
 - Use of Ruby 2.1.2 is now recommended
+- **Gem Changes**
+  - Updated to rails 4.1.1
+  - Updated to mysql2 0.3.16
+  - Updated to contour 2.5.0
+  - Updated to carrierwave 0.10.0
+  - Removed turn, and replaced with minitest and minitest-reporters
+  - Removed Windows-specific gems
 
 ## 0.14.11 (February 27, 2014)
 

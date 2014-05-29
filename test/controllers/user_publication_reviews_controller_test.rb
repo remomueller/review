@@ -7,7 +7,7 @@ class UserPublicationReviewsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new, format: 'js'
+    xhr :get, :new, format: 'js'
     assert_not_nil assigns(:user_publication_review)
     assert_template 'new'
   end
@@ -52,7 +52,7 @@ class UserPublicationReviewsControllerTest < ActionController::TestCase
   end
 
   test "should show user publication review" do
-    get :show, id: @user_publication_review.to_param, format: 'js'
+    xhr :get, :show, id: @user_publication_review.to_param, format: 'js'
     assert_not_nil assigns(:user_publication_review)
     assert_template 'show'
   end
@@ -64,7 +64,7 @@ class UserPublicationReviewsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @user_publication_review.to_param, format: 'js'
+    xhr :get, :edit, id: @user_publication_review.to_param, format: 'js'
     assert_not_nil assigns(:user_publication_review)
     assert_template 'new'
   end
