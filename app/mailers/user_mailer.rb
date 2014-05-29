@@ -40,7 +40,7 @@ class UserMailer < ActionMailer::Base
     end
     @email_to = @user.email
     mail(to: @user.email,
-         subject: "Publication Proposal for #{@publication.abbreviated_title_and_ms} has been #{@approval_status}",
+         subject: "Publication Proposal for #{@publication.abbreviated_title_and_ms} has been #{['approved', 'nominated'].include?(@publication.status) ? 'approved' : 'denied'}#{@approval_status}",
          reply_to: secretary.email)
   end
 
