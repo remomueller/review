@@ -1,28 +1,36 @@
-Hello <%= @secretary.first_name %>,<br />
+<%= render partial: 'email_header' %>
+
+Dear <%= @secretary.first_name %>,<br />
 <br />
 <%= @reviewer.name %> [<%= @reviewer.email %>] has created or updated a review for:<br />
 <br />
-&nbsp;&nbsp;<em><%= @publication.full_title_and_ms %></em><br />
+&nbsp;&nbsp;<strong><%= @publication.full_title_and_ms %></strong><br />
 <br />
-Please follow the link <%= link_to "#{SITE_URL}/publications/#{@publication.id}", "#{SITE_URL}/publications/#{@publication.id}" %> to see the review.<br />
+You can view the review here:<br />
+<br />
+<center><%= link_to "#{SITE_URL}/publications/#{@publication.id}", "#{SITE_URL}/publications/#{@publication.id}", style: "color: #428bca" %></center><br />
+<br />
+<strong>Reviewer's Approval Status:</strong><br />
+<br />
+&nbsp;&nbsp;
+<% case @user_publication_review.status when 'approved' %>
+<span style="padding:5px;background-color:#5cb85c;color:white">approved</span>
+<% when 'not approved' %>
+<span style="padding:5px;background-color:#d9534f;color:white">not approved</span>
+<% else %>
+  <%= @user_publication_review.status %>
+<% end %>
 <br />
 <br />
-Reviewer's Approval Status:<br />
-<br />
-&nbsp;&nbsp;<%= @user_publication_review.status %><br />
-<br />
-Comment:<br />
+<strong>Comment:</strong><br />
 <br />
 &nbsp;&nbsp;<%= @user_publication_review.comment %><br />
 <br />
-Writing Group Nomination:<br />
+<strong>Writing Group Nomination:</strong><br />
 <ul>
 <% @user_publication_review.writing_group_nomination.to_s.split(',').each do |user_name| %>
   <li><%= user_name %></li>
 <% end %>
 </ul>
-<br />
-<br />
-Thank you!<br />
-<br />
-<%= DEFAULT_APP_NAME %> System Mailer
+
+<%= render partial: 'email_footer' %>

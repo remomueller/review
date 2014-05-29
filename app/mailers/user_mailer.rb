@@ -5,6 +5,7 @@ class UserMailer < ActionMailer::Base
     setup_email
     @system_admin = system_admin
     @user = user
+    @email_to = system_admin.email
     mail(to: system_admin.email,
          subject: "#{user.name} Signed Up",
          reply_to: user.email)
@@ -17,6 +18,7 @@ class UserMailer < ActionMailer::Base
   def status_activated(user)
     setup_email
     @user = user
+    @email_to = user.email
     mail(to: user.email,
          subject: "#{user.name}'s Account Activated")
   end
@@ -28,14 +30,15 @@ class UserMailer < ActionMailer::Base
     @pp_committee = pp_committee
     @approval_status = ''
     if @publication.status == 'approved'
-      @approval_status = 'approved by the P&P Committee'
+      @approval_status = ' by the P&P Committee'
     elsif @publication.status == 'nominated'
-      @approval_status = 'approved by the Steering Committee'
+      @approval_status = ' by the Steering Committee'
     elsif @publication.status == 'not approved' and pp_committee
-      @approval_status = 'denied by the P&P Committee'
+      @approval_status = ' by the P&P Committee'
     elsif @publication.status == 'not approved' and not pp_committee
-      @approval_status = 'denied by the Steering Committee'
+      @approval_status = ' by the Steering Committee'
     end
+    @email_to = @user.email
     mail(to: @user.email,
          subject: "Publication Proposal for #{@publication.abbreviated_title_and_ms} has been #{@approval_status}",
          reply_to: secretary.email)
@@ -48,6 +51,7 @@ class UserMailer < ActionMailer::Base
     @reviewer = user_publication_review.user
     @publication = user_publication_review.publication
 
+    @email_to = secretary.email
     mail(to: secretary.email,
          subject: "#{@reviewer.name} has reviewed #{@publication.abbreviated_title_and_ms}",
          reply_to: @reviewer.email
@@ -57,7 +61,7 @@ class UserMailer < ActionMailer::Base
   protected
 
   def setup_email
-
+    attachments.inline['logo.png'] = File.read('app/assets/images/chat.png')
   end
 
 end

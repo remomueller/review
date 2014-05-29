@@ -1,17 +1,17 @@
-Hello <%= @user.first_name %>,
+Dear <%= @user.first_name %>,
 
-Your publication proposal <%= @publication.full_title_and_ms %> has been <%= @approval_status %>.
+Your publication proposal <%= @publication.full_title_and_ms %> has been <% if ['approved', 'nominated'].include?(@publication.status) %>approved<% else %>denied<% end %><%= @approval_status %>.
 
 <% if @publication.status == 'not approved' %>
-After reviewing the comments left by the committee, you can edit and resubmit your proposal here: 
+After reviewing the comments left by the committee, you can edit and resubmit your proposal here:
 <% else %>
 You can view the publication here:
 <% end %>
 
-  <%= "#{SITE_URL}/publications/#{@publication.id}" %>.
+  <%= "#{SITE_URL}/publications/#{@publication.id}" %>
 
 <% if @pp_committee %>
-P&amp;P Committee Comments:
+P&P Committee Comments:
 <% @publication.user_publication_reviews.each do |user_publication_review| %>
 <% unless user_publication_review.comment.blank? %>  <%= user_publication_review.comment %>
 <% end %>
