@@ -1,4 +1,4 @@
-## 0.14.12
+## 0.14.12 (May 29, 2014)
 
 ### Enhancements
 - **General Changes**
