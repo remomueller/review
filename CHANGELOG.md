@@ -1,4 +1,4 @@
-## 0.14.13
+## 0.14.13 (November 25, 2014)
 
 ### Enhancements
 - Updated Google Omniauth to no longer write to disk
