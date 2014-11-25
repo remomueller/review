@@ -46,7 +46,7 @@ class UserPublicationReview < ActiveRecord::Base
     unless self.changes[:comment].blank? and self.changes[:writing_group_nomination].blank? and self.changes[:status].blank?
       if self.publication and ['nominated', 'submitted', 'published'].include?(self.publication.status)
         User.sc_secretaries.each do |secretary|
-          UserMailer.review_updated(self, secretary).deliver if Rails.env.production?
+          UserMailer.review_updated(self, secretary).deliver_later if Rails.env.production?
         end
       end
     end

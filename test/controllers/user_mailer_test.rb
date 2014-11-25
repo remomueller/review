@@ -7,7 +7,7 @@ class UserMailerTest < ActionMailer::TestCase
     admin = users(:admin)
 
     # Send the email, then test that it got queued
-    email = UserMailer.notify_system_admin(admin, valid).deliver
+    email = UserMailer.notify_system_admin(admin, valid).deliver_now
     assert !ActionMailer::Base.deliveries.empty?
 
     # Test the body of the sent email contains what we expect it to
@@ -20,7 +20,7 @@ class UserMailerTest < ActionMailer::TestCase
     valid = users(:valid)
 
     # Send the email, then test that it got queued
-    email = UserMailer.status_activated(valid).deliver
+    email = UserMailer.status_activated(valid).deliver_now
     assert !ActionMailer::Base.deliveries.empty?
 
     # Test the body of the sent email contains what we expect it to
@@ -34,7 +34,7 @@ class UserMailerTest < ActionMailer::TestCase
     upr = user_publication_reviews(:one)
 
     # Send the email, then test that it got queued
-    email = UserMailer.review_updated(upr, secretary).deliver
+    email = UserMailer.review_updated(upr, secretary).deliver_now
     assert !ActionMailer::Base.deliveries.empty?
 
     # Test the body of the sent email contains what we expect it to
@@ -47,7 +47,7 @@ class UserMailerTest < ActionMailer::TestCase
     valid = users(:valid)
 
     # Send the email, then test that it got queued
-    email = UserMailer.publication_approval_reminder(valid, 'recipient@example.com', 'cc@example.com', 'New Publication Awaiting Approval', 'Body').deliver
+    email = UserMailer.publication_approval_reminder(valid, 'recipient@example.com', 'cc@example.com', 'New Publication Awaiting Approval', 'Body').deliver_now
     assert !ActionMailer::Base.deliveries.empty?
 
     # Test the body of the sent email contains what we expect it to
@@ -61,7 +61,7 @@ class UserMailerTest < ActionMailer::TestCase
     secretary = users(:pp_secretary)
     publication.status = 'approved'
 
-    email = UserMailer.publication_approval(publication, true, secretary).deliver
+    email = UserMailer.publication_approval(publication, true, secretary).deliver_now
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal [publication.user.email], email.to
@@ -74,7 +74,7 @@ class UserMailerTest < ActionMailer::TestCase
     secretary = users(:pp_secretary)
     publication.status = 'not approved'
 
-    email = UserMailer.publication_approval(publication, true, secretary).deliver
+    email = UserMailer.publication_approval(publication, true, secretary).deliver_now
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal [publication.user.email], email.to
@@ -87,7 +87,7 @@ class UserMailerTest < ActionMailer::TestCase
     secretary = users(:sc_secretary)
     publication.status = 'nominated'
 
-    email = UserMailer.publication_approval(publication, false, secretary).deliver
+    email = UserMailer.publication_approval(publication, false, secretary).deliver_now
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal [publication.user.email], email.to
@@ -100,7 +100,7 @@ class UserMailerTest < ActionMailer::TestCase
     secretary = users(:sc_secretary)
     publication.status = 'not approved'
 
-    email = UserMailer.publication_approval(publication, false, secretary).deliver
+    email = UserMailer.publication_approval(publication, false, secretary).deliver_now
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal [publication.user.email], email.to
