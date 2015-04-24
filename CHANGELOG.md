@@ -9,6 +9,7 @@
   - Updated to contour 3.0.0.beta1
   - Updated to rails 4.2.1
   - Updated to kaminari 0.16.3
+  - Updated to mysql2 0.3.18
 
 ## 0.14.14 (December 12, 2014)
 
