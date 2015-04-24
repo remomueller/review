@@ -8,6 +8,7 @@
   - Use Figaro to centralize application configuration
   - Updated to contour 3.0.0.beta1
   - Updated to rails 4.2.1
+  - Updated to kaminari 0.16.3
 
 ## 0.14.14 (December 12, 2014)
 
