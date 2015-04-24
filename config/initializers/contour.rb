@@ -33,7 +33,7 @@ Contour.setup do |config|
               { name: 'Logout', path: 'destroy_user_session_path' }]
     },
     {
-      name: 'Manual ', display: 'not_signed_in', path: 'ENV['website_url'] + \'/documents/CHAT Publications Manual.pdf\'', target: '_blank', position: 'left', image: 'contour/pdf.png', image_options: { style: 'vertical-align:middle' },
+      name: 'Manual ', display: 'not_signed_in', path: "'#{ENV['website_url']}/documents/CHAT Publications Manual.pdf'", target: '_blank', position: 'left', image: 'contour/pdf.png', image_options: { style: 'vertical-align:middle' },
       links: []
     },
     {
