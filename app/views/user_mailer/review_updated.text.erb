@@ -4,7 +4,7 @@ Dear <%= @secretary.first_name %>,
 
   <%= @publication.full_title_and_ms %>
 
-Please follow the link <%= "#{SITE_URL}/publications/#{@publication.id}" %> to see the review.
+Please follow the link <%= "#{ENV['website_url']}/publications/#{@publication.id}" %> to see the review.
 
 
 Reviewer's Approval Status:
@@ -23,4 +23,4 @@ Writing Group Nomination:
 
 Thank you!
 
-<%= DEFAULT_APP_NAME %> System Mailer
+<%= ENV['website_name'] %> System Mailer

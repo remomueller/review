@@ -11,7 +11,7 @@ You can view the publication here:
 <% end %>
 <br /><br />
 <center>
-<%= link_to "#{SITE_URL}/publications/#{@publication.id}", "#{SITE_URL}/publications/#{@publication.id}", style: "color: #428bca" %></center><br />
+<%= link_to "#{ENV['website_url']}/publications/#{@publication.id}", "#{ENV['website_url']}/publications/#{@publication.id}", style: "color: #428bca" %></center><br />
 <br />
 <% if @pp_committee %>
   <strong>P&amp;P Committee Comments:</strong><br />

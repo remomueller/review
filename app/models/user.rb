@@ -9,9 +9,6 @@ class User < ActiveRecord::Base
 
   STATUS = ["active", "denied", "inactive", "pending"].collect{|i| [i,i]}
 
-  # Concerns
-  include Contourable
-
   # Named Scopes
   scope :current, -> { where deleted: false }
   scope :status, lambda { |arg|  where( status: arg ) }
@@ -89,15 +86,6 @@ class User < ActiveRecord::Base
 
   def email_with_name
     "#{name} <#{email}>"
-  end
-
-  # Override of Contourable
-  def apply_omniauth(omniauth)
-    unless omniauth['info'].blank?
-      self.first_name = omniauth['info']['first_name'] if first_name.blank?
-      self.last_name = omniauth['info']['last_name'] if last_name.blank?
-    end
-    super
   end
 
   private

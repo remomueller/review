@@ -8,7 +8,7 @@ Dear <%= @secretary.first_name %>,<br />
 <br />
 You can view the review here:<br />
 <br />
-<center><%= link_to "#{SITE_URL}/publications/#{@publication.id}", "#{SITE_URL}/publications/#{@publication.id}", style: "color: #428bca" %></center><br />
+<center><%= link_to "#{ENV['website_url']}/publications/#{@publication.id}", "#{ENV['website_url']}/publications/#{@publication.id}", style: "color: #428bca" %></center><br />
 <br />
 <strong>Reviewer's Approval Status:</strong><br />
 <br />

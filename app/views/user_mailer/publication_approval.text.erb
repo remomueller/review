@@ -8,7 +8,7 @@ After reviewing the comments left by the committee, you can edit and resubmit yo
 You can view the publication here:
 <% end %>
 
-  <%= "#{SITE_URL}/publications/#{@publication.id}" %>
+  <%= "#{ENV['website_url']}/publications/#{@publication.id}" %>
 
 <% if @pp_committee %>
 P&P Committee Comments:
@@ -41,4 +41,4 @@ Additional Instructions:
 
 Thanks,
 
-<%= DEFAULT_APP_NAME %> System Mailer
+<%= ENV['website_name'] %> System Mailer

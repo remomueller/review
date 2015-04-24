@@ -2,7 +2,7 @@
 Contour.setup do |config|
 
   # Enter your application name here. The name will be displayed in the title of all pages, ex: AppName - PageTitle
-  config.application_name = DEFAULT_APP_NAME
+  config.application_name = ENV['website_name']
 
   # If you want to style your name using html you can do so here, ex: <b>App</b>Name
   config.application_name_html = '<span style="color:#D4002F">C</span><span style="color:#56DF00">H</span><span style="color:#D9DE00">A</span><span style="color:#23FFFF">T</span> <span style="color:#2F0C72">Publications</span>'
@@ -22,19 +22,18 @@ Contour.setup do |config|
       name: 'Sign Up', display: 'not_signed_in', path: 'new_user_registration_path', position: 'right'
     },
     {
-      name: 'image_tag(current_user.avatar_url(18, "blank"))+" "+current_user.name', eval: true, display: 'signed_in', path: 'authentications_path', position: 'right',
-      links: [{ name: "#{DEFAULT_APP_NAME} v#{Review::VERSION::STRING}", path: 'about_path' },
+      name: 'image_tag(current_user.avatar_url(18, "blank"))+" "+current_user.name', eval: true, display: 'signed_in', path: '#', position: 'right',
+      links: [{ name: "#{ENV['website_name']} v#{Review::VERSION::STRING}", path: 'about_path' },
               { divider: true },
               { header: 'Administrative', condition: 'current_user.system_admin?' },
               { name: 'Users', path: 'users_path', condition: 'current_user.system_admin?' },
               { divider: true, condition: 'current_user.system_admin?' },
               { header: 'current_user.email', eval: true },
-              { name: 'Authentications', path: 'authentications_path', condition: 'not PROVIDERS.blank?' },
               { divider: true },
               { name: 'Logout', path: 'destroy_user_session_path' }]
     },
     {
-      name: 'Manual ', display: 'not_signed_in', path: 'SITE_URL + \'/documents/CHAT Publications Manual.pdf\'', target: '_blank', position: 'left', image: 'contour/pdf.png', image_options: { style: 'vertical-align:middle' },
+      name: 'Manual ', display: 'not_signed_in', path: 'ENV['website_url'] + \'/documents/CHAT Publications Manual.pdf\'', target: '_blank', position: 'left', image: 'contour/pdf.png', image_options: { style: 'vertical-align:middle' },
       links: []
     },
     {

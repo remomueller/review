@@ -15,7 +15,7 @@
                   <td align="center" valign="top" style="border-collapse:collapse; background-color:#eff8ff">
                     <div style="color:#505050;font-family:Arial;font-size:14px;line-height:150%;text-align:left">
                       <p style="margin-right:0px;margin-bottom:15px;margin-left:0px;padding:0px;margin-top:0px!important">
-                        <center><%= image_tag attachments.inline['logo.png'].url, alt: DEFAULT_APP_NAME, border: '0', width:'320', height: '107' if attachments.inline['logo.png'] -%></center>
+                        <center><%= image_tag attachments.inline['logo.png'].url, alt: ENV['website_name'], border: '0', width:'320', height: '107' if attachments.inline['logo.png'] -%></center>
                       </p>
                     </div>
                   </td>

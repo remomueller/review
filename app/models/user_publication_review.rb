@@ -31,9 +31,9 @@ class UserPublicationReview < ActiveRecord::Base
       result << "\nA publication proposal was submitted #{self.publication.created_at.strftime("on %b %d, %Y at %I:%M %p")}.\n"
     end
     result << "  \n#{self.publication.full_title_and_ms}\n"
-    result << "\nPlease follow the link #{SITE_URL}/publications/#{self.publication.id} to approve or deny the proposal.\n"
+    result << "\nPlease follow the link #{ENV['website_url']}/publications/#{self.publication.id} to approve or deny the proposal.\n"
     result << "\nThank you!\n"
-    result << "\n#{DEFAULT_APP_NAME} System Mailer\n"
+    result << "\n#{ENV['website_name']} System Mailer\n"
     result
   end
 

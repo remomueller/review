@@ -1,7 +1,13 @@
 ## 0.14.15
 
 ### Enhancements
-- Use of Ruby 2.2.2 is now recommended
+**General Changes**
+  - Streamlined login system by removing alternate logins
+  - Use of Ruby 2.2.2 is now recommended
+- **Gem Changes**
+  - Use Figaro to centralize application configuration
+  - Updated to contour 3.0.0.beta1
+  - Updated to rails 4.2.1
 
 ## 0.14.14 (December 12, 2014)
 

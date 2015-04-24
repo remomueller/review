@@ -47,7 +47,7 @@ class Publication < ActiveRecord::Base
   belongs_to :co_lead_author, class_name: 'User'
 
   def publication_link
-    SITE_URL + "/publications/#{self.id}"
+    ENV['website_url'] + "/publications/#{self.id}"
   end
 
   def abbreviated_title_and_ms
@@ -170,11 +170,11 @@ class Publication < ActiveRecord::Base
     file_out.close()
 
     # Run twice to allow LaTeX to compile correctly (page numbers, etc)
-    `#{LATEX_LOCATION} -interaction=nonstopmode --jobname=#{jobname} --output-directory=#{output_folder} #{file_tex}`
-    `#{LATEX_LOCATION} -interaction=nonstopmode --jobname=#{jobname} --output-directory=#{output_folder} #{file_tex}`
+    `#{ENV['latex_location']} -interaction=nonstopmode --jobname=#{jobname} --output-directory=#{output_folder} #{file_tex}`
+    `#{ENV['latex_location']} -interaction=nonstopmode --jobname=#{jobname} --output-directory=#{output_folder} #{file_tex}`
 
     # Rails.logger.debug "----------------\n"
-    # Rails.logger.debug "#{LATEX_LOCATION} -interaction=nonstopmode --jobname=#{jobname} --output-directory=#{output_folder} #{file_tex}"
+    # Rails.logger.debug "#{ENV['latex_location']} -interaction=nonstopmode --jobname=#{jobname} --output-directory=#{output_folder} #{file_tex}"
 
     file_pdf_location = File.join('tmp', 'files', 'tex', "#{jobname}.pdf")
   end
