@@ -3,6 +3,7 @@
 ### Enhancements
 - **Gem Changes**
   - Updated to rails 4.2.4
+  - Updated to mysql2 0.3.20
 
 ## 0.14.15 (April 24, 2015)
 
