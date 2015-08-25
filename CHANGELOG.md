@@ -2,6 +2,7 @@
 
 ### Enhancements
 - **General Changes**
+  - Added turbolinks progress bar
   - Added a version page
 - **Gem Changes**
   - Use of Ruby 2.2.3 is now recommended
