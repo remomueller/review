@@ -2,6 +2,7 @@
 
 ### Enhancements
 - **Gem Changes**
+  - Use of Ruby 2.2.3 is now recommended
   - Updated to rails 4.2.4
   - Updated to mysql2 0.3.20
   - Updated to contour 3.0.1
