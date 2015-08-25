@@ -10,7 +10,7 @@ gem 'contour',              '~> 3.0.1'
 gem 'kaminari',             '~> 0.16.3'
 gem 'carrierwave',          '~> 0.10.0'
 gem 'ruby-ntlm-namespace',  '~> 0.0.1'
-gem 'figaro',               '~> 1.1.0'
+gem 'figaro',               '~> 1.1.1'
 
 # Rails Defaults
 gem 'coffee-rails',         '~> 4.1.0'
