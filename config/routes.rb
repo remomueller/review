@@ -35,7 +35,10 @@ Rails.application.routes.draw do
 
   resources :user_publication_reviews
 
-  get "/about" => "application#about", as: :about
+  scope module: 'application' do
+    get :about
+    get :version
+  end
 
   root to: "publications#index"
 

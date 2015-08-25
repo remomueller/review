@@ -1,6 +1,8 @@
 ## 0.14.16
 
 ### Enhancements
+- **General Changes**
+  - Added a version page
 - **Gem Changes**
   - Use of Ruby 2.2.3 is now recommended
   - Updated to rails 4.2.4
