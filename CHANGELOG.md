@@ -7,6 +7,7 @@
   - Updated to contour 3.0.1
   - Updated to figaro 1.1.1
   - Added web-console
+  - Added haml for new views
 
 ## 0.14.15 (April 24, 2015)
 
