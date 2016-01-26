@@ -20,28 +20,28 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   test "should show recent activity" do
-    assert recent_activity(nil).kind_of?(String)
-    assert recent_activity('').kind_of?(String)
-    assert recent_activity(Time.zone.now).kind_of?(String)
-    assert recent_activity(Time.zone.now - 12.hours).kind_of?(String)
-    assert recent_activity(Time.zone.now - 1.day).kind_of?(String)
-    assert recent_activity(Time.zone.now - 2.days).kind_of?(String)
-    assert recent_activity(Time.zone.now - 1.week).kind_of?(String)
-    assert recent_activity(Time.zone.now - 1.month).kind_of?(String)
-    assert recent_activity(Time.zone.now - 6.month).kind_of?(String)
-    assert recent_activity(Time.zone.now - 1.year).kind_of?(String)
-    assert recent_activity(Time.zone.now - 2.year).kind_of?(String)
+    assert recent_activity(nil).is_a?(String)
+    assert recent_activity('').is_a?(String)
+    assert recent_activity(Time.zone.now).is_a?(String)
+    assert recent_activity(Time.zone.now - 12.hours).is_a?(String)
+    assert recent_activity(Time.zone.now - 1.day).is_a?(String)
+    assert recent_activity(Time.zone.now - 2.days).is_a?(String)
+    assert recent_activity(Time.zone.now - 1.week).is_a?(String)
+    assert recent_activity(Time.zone.now - 1.month).is_a?(String)
+    assert recent_activity(Time.zone.now - 6.month).is_a?(String)
+    assert recent_activity(Time.zone.now - 1.year).is_a?(String)
+    assert recent_activity(Time.zone.now - 2.year).is_a?(String)
   end
 
   test "should display status" do
-    assert display_status(nil).kind_of?(String)
-    assert display_status('').kind_of?(String)
-    assert display_status('published').kind_of?(String)
-    assert display_status('submitted').kind_of?(String)
-    assert display_status('nominated').kind_of?(String)
-    assert display_status('approved').kind_of?(String)
-    assert display_status('proposed').kind_of?(String)
-    assert display_status('draft').kind_of?(String)
-    assert display_status('not approved').kind_of?(String)
+    assert display_status(nil).is_a?(String)
+    assert display_status('').is_a?(String)
+    assert display_status('published').is_a?(String)
+    assert display_status('submitted').is_a?(String)
+    assert display_status('nominated').is_a?(String)
+    assert display_status('approved').is_a?(String)
+    assert display_status('proposed').is_a?(String)
+    assert display_status('draft').is_a?(String)
+    assert display_status('not approved').is_a?(String)
   end
 end
