@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   def destroy
     update_column :deleted, true
     update_column :status, 'inactive'
-    update_column :updated_at, Time.now
+    update_column :updated_at, Time.zone.now
   end
 
   def secretary?

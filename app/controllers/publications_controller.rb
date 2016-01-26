@@ -44,7 +44,7 @@ class PublicationsController < ApplicationController
     if current_user.secretary? and @publication = Publication.current.find_by_id(params[:id]) and @reviewer = User.current.find_by_id(params[:reviewer_id])
       @user_publication_review = @reviewer.user_publication_reviews.find_by_publication_id(@publication.id)
       @user_publication_review = @reviewer.user_publication_reviews.create(publication_id: @publication.id) if @user_publication_review.blank?
-      @user_publication_review.update_column :reminder_sent_at, Time.now
+      @user_publication_review.update_column :reminder_sent_at, Time.zone.now
 
       UserMailer.publication_approval_reminder(current_user, params[:to], params[:cc], params[:subject], params[:body]).deliver_later if Rails.env.production?
     else
@@ -77,7 +77,7 @@ class PublicationsController < ApplicationController
       # # Remove any existing manuscripts!
       # @publication.remove_manuscript!
 
-      @publication.update manuscript: params[:publication][:manuscript], manuscript_uploaded_at: Time.now
+      @publication.update manuscript: params[:publication][:manuscript], manuscript_uploaded_at: Time.zone.now
 
       extension = params[:publication][:manuscript].original_filename.downcase.split('.').last
       message = ManuscriptUploader.new.extension_white_list.include?(extension) ? nil : "Not a valid document type: #{extension}"

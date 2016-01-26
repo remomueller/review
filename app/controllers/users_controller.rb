@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   # Post /users/activate.json
   def activate
     params[:user] ||= {}
-    params[:user][:password] = params[:user][:password_confirmation] = Digest::SHA1.hexdigest(Time.now.usec.to_s)[0..19] if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
+    params[:user][:password] = params[:user][:password_confirmation] = Digest::SHA1.hexdigest(Time.zone.now.usec.to_s)[0..19] if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
     @user = User.new(user_params)
     if @user.save
       UserMailer.status_activated(@user).deliver_later if Rails.env.production? and @user.status == 'active'
