@@ -43,12 +43,10 @@ Thank you!\n
   # after the steering committee secretary has marked it as SC Approved
   # then send the Steering Committee secretary an email with that review and link to publication.
   def notify_sc_secretary
-    unless changes[:comment].blank? && changes[:writing_group_nomination].blank? && changes[:status].blank?
-      if publication && %w(nominated submitted published).include?(publication.status)
-        User.sc_secretaries.each do |secretary|
-          UserMailer.review_updated(self, secretary).deliver_later if Rails.env.production?
-        end
-      end
+    return unless EMAILS_ENABLED && publication && %w(nominated submitted published).include?(publication.status)
+    return if changes[:comment].blank? && changes[:writing_group_nomination].blank? && changes[:status].blank?
+    User.sc_secretaries.each do |secretary|
+      UserMailer.review_updated(self, secretary).deliver_later
     end
   end
 end

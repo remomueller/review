@@ -127,8 +127,14 @@ class Publication < ActiveRecord::Base
       reviewers = (User.current.steering_committee_members | User.current.sc_secretaries)
     end
     reviewers.uniq.each do |reviewer|
-      upr = UserPublicationReview.new(user_id: reviewer.id, publication_id: self.id)
-      UserMailer.publication_approval_reminder(current_user, reviewer.email_with_name, nil, "New Publication Awaiting Approval: #{self.abbreviated_title_and_ms}", upr.email_body_template(current_user)).deliver_later if Rails.env.production?
+      upr = UserPublicationReview.new(user_id: reviewer.id, publication_id: id)
+      UserMailer.publication_approval_reminder(
+        current_user,
+        reviewer.email_with_name,
+        nil,
+        "New Publication Awaiting Approval: #{abbreviated_title_and_ms}",
+        upr.email_body_template(current_user)
+      ).deliver_later if EMAILS_ENABLED
     end
   end
 

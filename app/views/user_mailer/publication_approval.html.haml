@@ -1,0 +1,57 @@
+Dear
+= succeed ',' do
+  = @user.first_name
+%br
+%br
+Your publication proposal
+%strong= @publication.full_title_and_ms
+has been
+- if %w(approved nominated).include?(@publication.status)
+  %span{ style: 'padding:5px;background-color:#5cb85c;color:white' } approved
+- else
+  %span{ style: 'padding:5px;background-color:#d9534f;color:white' } denied
+
+= succeed '.' do
+  = @approval_status
+%br
+%br
+- if @publication.status == 'not approved'
+  After reviewing the comments left by the committee, you can edit and resubmit your proposal here:
+- else
+  You can view the publication here:
+%br
+%br
+%center
+  = link_to "#{ENV['website_url']}/publications/#{@publication.id}", "#{ENV['website_url']}/publications/#{@publication.id}", style: 'color: #428bca'
+%br
+%br
+- if @pp_committee
+  %strong
+    P&amp;P Committee Comments:
+  %br
+  - @publication.user_publication_reviews.each do |user_publication_review|
+    - unless user_publication_review.comment.blank?
+      %div= simple_format user_publication_review.comment
+  %br
+- else
+  %strong
+    Steering Committee Comments:
+  %br
+  - @publication.user_publication_reviews.each do |user_publication_review|
+    - unless user_publication_review.comment.blank?
+      %div= simple_format user_publication_review.comment
+  %br
+  %strong Steering Committee Nominations:
+  - @publication.user_publication_reviews.each do |user_publication_review|
+    %ul
+      - unless user_publication_review.writing_group_nomination.blank?
+        %li= user_publication_review.writing_group_nomination
+
+- if @pp_committee && @publication.additional_ppcommittee_instructions.present?
+  %strong Additional Instructions:
+  %br
+  %div= simple_format @publication.additional_ppcommittee_instructions
+- elsif !@pp_committee && @publication.additional_sccommittee_instructions.present?
+  %strong Additional Instructions:
+  %br
+  %div= simple_format @publication.additional_sccommittee_instructions

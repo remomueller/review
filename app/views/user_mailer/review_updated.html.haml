@@ -1,0 +1,46 @@
+Dear
+= succeed ',' do
+  = @secretary.first_name
+%br
+%br
+= @reviewer.name
+= surround '[', ']' do
+  = @reviewer.email
+has created or updated a review for:
+%br
+%br
+&nbsp;&nbsp;
+%strong= @publication.full_title_and_ms
+%br
+%br
+You can view the review here:
+%br
+%br
+%center
+  = link_to "#{ENV['website_url']}/publications/#{@publication.id}", "#{ENV['website_url']}/publications/#{@publication.id}", style: 'color: #428bca'
+%br
+%br
+%strong Reviewer's Approval Status:
+%br
+%br
+&nbsp;&nbsp;
+- case @user_publication_review.status when 'approved'
+  %span{ style: 'padding:5px;background-color:#5cb85c;color:white' } approved
+- when 'not approved'
+  %span{ style: 'padding:5px;background-color:#d9534f;color:white' } not approved
+- else
+  = @user_publication_review.status
+%br
+%br
+%strong Comment:
+%br
+%br
+&nbsp;&nbsp;
+= @user_publication_review.comment
+%br
+%br
+%strong Writing Group Nomination:
+%br
+%ul
+  - @user_publication_review.writing_group_nomination.to_s.split(',').each do |user_name|
+    %li= user_name

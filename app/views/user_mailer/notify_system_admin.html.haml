@@ -1,0 +1,17 @@
+Dear
+= succeed ',' do
+  = @system_admin.first_name
+%br
+%br
+= @user.name
+= surround '[', ']' do
+  = @user.email
+%span{ style: 'padding:5px;background-color:#f0ad4e;color:white' } signed up
+for an account.
+%br
+%br
+Click the following link to approve or deny the registration here:
+%br
+%br
+%center
+  = link_to "#{ENV['website_url']}/users/#{@user.id}/edit", "#{ENV['website_url']}/users/#{@user.id}/edit", style: 'color: #428bca'

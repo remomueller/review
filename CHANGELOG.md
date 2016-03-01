@@ -1,6 +1,8 @@
 ## 0.14.18
 
 ### Enhancements
+- **General Changes**
+  - Updated styling of default emails
 - **Gem Changes**
   - Updated to rails 4.2.5.2
   - Updated to mysql2 0.4.3

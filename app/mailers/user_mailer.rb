@@ -1,6 +1,7 @@
-class UserMailer < ActionMailer::Base
-  default from: "#{ENV['website_name']} <#{ActionMailer::Base.smtp_settings[:email]}>"
+# frozen_string_literal: true
 
+# Sends out application emails to users
+class UserMailer < ApplicationMailer
   def notify_system_admin(system_admin, user)
     setup_email
     @system_admin = system_admin
@@ -33,9 +34,9 @@ class UserMailer < ActionMailer::Base
       @approval_status = ' by the P&P Committee'
     elsif @publication.status == 'nominated'
       @approval_status = ' by the Steering Committee'
-    elsif @publication.status == 'not approved' and pp_committee
+    elsif @publication.status == 'not approved' && pp_committee
       @approval_status = ' by the P&P Committee'
-    elsif @publication.status == 'not approved' and not pp_committee
+    elsif @publication.status == 'not approved' && !pp_committee
       @approval_status = ' by the Steering Committee'
     end
     @email_to = @user.email
@@ -57,11 +58,4 @@ class UserMailer < ActionMailer::Base
          reply_to: @reviewer.email
     )
   end
-
-  protected
-
-  def setup_email
-    attachments.inline['logo.png'] = File.read('app/assets/images/chat.png')
-  end
-
 end

@@ -1,7 +1,7 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
+# Allows documents to be attached to publication proposal
 class ManuscriptUploader < CarrierWave::Uploader::Base
-
   # Include RMagick or ImageScience support:
   # include CarrierWave::RMagick
   # include CarrierWave::ImageScience
@@ -42,5 +42,4 @@ class ManuscriptUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
 end
