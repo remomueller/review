@@ -4,8 +4,8 @@ module Review
   module VERSION #:nodoc:
     MAJOR = 0
     MINOR = 14
-    TINY = 17
-    BUILD = nil # nil, "pre", "beta1", "beta2", "rc", "rc2"
+    TINY = 18
+    BUILD = 'pre' # nil, "pre", "beta1", "beta2", "rc", "rc2"
 
     STRING = [MAJOR, MINOR, TINY, BUILD].compact.join('.').freeze
   end
