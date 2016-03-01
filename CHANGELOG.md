@@ -2,6 +2,7 @@
 
 ### Enhancements
 - **Gem Changes**
+  - Updated to rails 4.2.5.2
   - Updated to mysql2 0.4.3
 
 ### Refactoring
