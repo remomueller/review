@@ -1,5 +1,9 @@
 ## 0.14.18
 
+### Enhancements
+- **Gem Changes**
+  - Updated to mysql2 0.4.3
+
 ### Refactoring
 - Updated files based on RuboCop recommendations
 
