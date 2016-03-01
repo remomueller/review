@@ -1,6 +1,6 @@
 <tr>
-  <td><span id="publication_<%= @publication.id %>_tag_pp_link"><%= @committee = 'pp'; render partial: 'publications/tag_for_review' %></span>
-    <span id="publication_<%= @publication.id %>_tag_sc_link"><%= @committee = 'sc';  render partial: 'publications/tag_for_review' %></span></td>
+  <td><span id="publication_<%= @publication.id %>_tag_pp_link"><%= @committee = 'pp'; render 'publications/tag_for_review' %></span>
+    <span id="publication_<%= @publication.id %>_tag_sc_link"><%= @committee = 'sc';  render 'publications/tag_for_review' %></span></td>
   <td style="white-space:nowrap">
     <%= @publication.manuscript_number %>
     <% unless @publication.manuscript.url.blank? %>
@@ -60,7 +60,7 @@
         <%= link_to (@publication.archived ? 'Unarchive' : 'Archive'), archive_publication_path(@publication, undo: @publication.archived), method: :post, remote: true, class: 'btn btn-xs btn-default' %>
         <%= link_to 'Delete', @publication, method: :delete, remote: true, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Publication #{@publication.abbreviated_title_and_ms}?" } %>
 
-        <%= render partial: 'publications/matrix_popup' %>
+        <%= render 'publications/matrix_popup' %>
       </td>
     <% end %>
   <% end %>

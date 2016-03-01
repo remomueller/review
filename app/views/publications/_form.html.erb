@@ -168,19 +168,19 @@
           <%= f.check_box :chat_data_main_forms, disabled: disabled, :onclick => "toggleAttachment('#publication_chat_data_main_forms');" %> <%= f.label :chat_data_main_forms, 'CHAT main forms database (<em>please attach copies of release forms with required items circled</em>)'.html_safe %>
         </div>
         <% @attribute = 'chat_data_main_forms'; @disabled = disabled %>
-        <%= render partial: 'publications/download_link' %>
+        <%= render 'publications/download_link' %>
 
         <div class="checkbox">
           <%= f.check_box :chat_data_main_database, disabled: disabled, :onclick => "toggleAttachment('#publication_chat_data_main_database');" %> <%= f.label :chat_data_main_database, 'CHAT main sleep study database (<em>please attach a list of data items</em>)'.html_safe %>
         </div>
         <% @attribute = 'chat_data_main_database'; @disabled = disabled %>
-        <%= render partial: 'publications/download_link' %>
+        <%= render 'publications/download_link' %>
 
         <div class="checkbox">
           <%= f.check_box :chat_data_other, disabled: disabled, :onclick => "toggleAttachment('#publication_chat_data_other');" %> <%= f.label :chat_data_other, 'Other (<em>specify data and where the data are located</em>)'.html_safe %>
         </div>
         <% @attribute = 'chat_data_other'; @disabled = disabled %>
-        <%= render partial: 'publications/download_link' %>
+        <%= render 'publications/download_link' %>
 
         <% if disabled.blank? %>
           <%= f.text_field :chat_data_other_specify, class: 'form-control', disabled: disabled %>
@@ -241,7 +241,7 @@
           <%= f.check_box :attachment_chat_form, disabled: disabled, :onclick => "toggleAttachment('#publication_attachment_chat_form');" %> <%= f.label :attachment_chat_form, 'CHAT form with items marked to indicate variables intended for analysis' %>
         </div>
         <% @attribute = 'attachment_chat_form'; @disabled = disabled %>
-        <%= render partial: 'publications/download_link' %>
+        <%= render 'publications/download_link' %>
 
         <% if disabled.blank? %>
           <%= f.text_field :attachment_chat_form_specify, class: 'form-control', disabled: disabled %>
@@ -252,7 +252,7 @@
           <%= f.check_box :attachment_chat_variables, disabled: disabled, :onclick => "toggleAttachment('#publication_attachment_chat_variables');" %> <%= f.label :attachment_chat_variables, 'List of CHAT sleep study variables intended for analysis' %>
         </div>
         <% @attribute = 'attachment_chat_variables'; @disabled = disabled %>
-        <%= render partial: 'publications/download_link' %>
+        <%= render 'publications/download_link' %>
 
         <% if disabled.blank? %>
           <%= f.text_field :attachment_chat_variables_specify, class: 'form-control', disabled: disabled %>
@@ -263,7 +263,7 @@
           <%= f.check_box :attachment_ancillary_forms, disabled: disabled, :onclick => "toggleAttachment('#publication_attachment_ancillary_forms');" %> <%= f.label :attachment_ancillary_forms,'CHAT ancillary study forms with items marked to indicate variables intended for analysis' %>
         </div>
         <% @attribute = 'attachment_ancillary_forms'; @disabled = disabled %>
-        <%= render partial: 'publications/download_link' %>
+        <%= render 'publications/download_link' %>
 
         <% if disabled.blank? %>
           <%= f.text_field :attachment_ancillary_forms_specify, class: 'form-control', disabled: disabled %>
@@ -274,7 +274,7 @@
           <%= f.check_box :attachment_other, disabled: disabled, :onclick => "toggleAttachment('#publication_attachment_other');" %> <%= f.label :attachment_other, 'Other (<em>specify</em>)'.html_safe %>
         </div>
         <% @attribute = 'attachment_other'; @disabled = disabled %>
-        <%= render partial: 'publications/download_link' %>
+        <%= render 'publications/download_link' %>
 
         <% if disabled.blank? %>
           <%= f.text_field :attachment_other_specify, class: 'form-control', disabled: disabled %>

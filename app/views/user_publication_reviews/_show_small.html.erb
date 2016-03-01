@@ -13,7 +13,7 @@
           <%= link_to 'Email Reminder', '#', class: 'btn btn-primary btn-xs', data: { object: 'modal-show', target: "#send_email_#{@position}_modal" } %>
         <% end %>
       </span>
-      <%= render partial: 'user_publication_reviews/email_reminder_modal' %>
+      <%= render 'user_publication_reviews/email_reminder_modal' %>
     </td>
     <td><%= link_to @user_publication_review.user.name, @user_publication_review.user %></td>
   </tr>

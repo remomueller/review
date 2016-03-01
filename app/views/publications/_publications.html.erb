@@ -1,4 +1,4 @@
-<%= render partial: 'contour/layouts/per_page', locals: { per_page: 40, object_count: @publications.total_count } %>
+<%= render 'contour/layouts/per_page', per_page: 40, object_count: @publications.total_count %>
 
 <table class="table"><col width="1px"/><col width="1px"/>
   <thead>
@@ -24,7 +24,7 @@
     <% @publications.each do |publication| %>
       <% @publication = publication %>
       <tbody id="publication_<%= @publication.id %>_container" class="<%= cycle('even-borderless', 'odd-borderless') %>">
-        <%= render partial: 'publications/inline_show' %>
+        <%= render 'publications/inline_show' %>
       </tbody>
     <% end %>
   <% else %>
