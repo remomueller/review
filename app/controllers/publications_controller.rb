@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Allow publications to be created, viewed, and discussed
 class PublicationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_viewable_publication, only: [ :show ]

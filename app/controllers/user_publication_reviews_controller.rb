@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Allows reviews to be made for publications
 class UserPublicationReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_upr, only: [ :show, :edit, :update, :destroy ]

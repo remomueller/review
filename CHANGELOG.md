@@ -1,5 +1,8 @@
 ## 0.14.18
 
+### Refactoring
+- Updated files based on RuboCop recommendations
+
 ## 0.14.17 (January 26, 2016)
 
 ### Enhancements

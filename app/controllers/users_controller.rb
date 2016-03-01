@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Allows user management by system admins
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_system_admin, only: [:new, :create, :edit, :update, :destroy]

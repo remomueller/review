@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
+# Unit tests for publication reviews
 class UserPublicationReviewTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
+  # test 'the truth' do
+  #   assert true
+  # end
 end

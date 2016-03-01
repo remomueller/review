@@ -1,5 +1,7 @@
-class UserMailerPreview < ActionMailer::Preview
+# frozen_string_literal: true
 
+# Allows emails to be viewed at /rails/mailers
+class UserMailerPreview < ActionMailer::Preview
   def notify_system_admin
     system_admin = User.current.first
     user = User.current.first
@@ -23,5 +25,4 @@ class UserMailerPreview < ActionMailer::Preview
     secretary = User.current.first
     UserMailer.review_updated(user_publication_review, secretary)
   end
-
 end
