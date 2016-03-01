@@ -116,7 +116,8 @@
   - Updated to carrierwave 0.9.0
 
 ### Bug Fix
-- Updating a publication from the matrix view now correctly closes the popup, (by @susanredline)
+- Updating a publication from the matrix view now correctly closes the popup,
+  (by @susanredline)
 
 ## 0.14.6 (September 3, 2013)
 
@@ -154,7 +155,8 @@
 ## 0.14.2 (April 1, 2013)
 
 ### Bug Fix
-- Fixed a bug that prevented publications from sending reminders to committee members
+- Fixed a bug that prevented publications from sending reminders to committee
+  members
 
 ## 0.14.1 (March 20, 2013)
 
@@ -201,25 +203,30 @@
 - Updated Rails to 3.2.10
 
 ### Bug Fix
-- User activation emails are no longer sent out when a user's status is changed from pending to inactive
+- User activation emails are no longer sent out when a user's status is changed
+  from pending to inactive
 
 ## 0.13.11 (November 27, 2012)
 
 ### Enhancements
 - Gem updates including Rails 3.2.9 and Ruby 1.9.3-p327
-- File upload descriptions are no longer required when uploading a file in Section C and Section E
+- File upload descriptions are no longer required when uploading a file in
+  Section C and Section E
 
 ## 0.13.10 (October 16, 2012)
 
 ### Bug Fix
-- Fixed a bug where a secretary could not view paper proposals that had no lead author (by SusanR)
+- Fixed a bug where a secretary could not view paper proposals that had no lead
+  author (by SusanR)
 
 ## 0.13.9 (October 8, 2012)
 
 ### Enhancements
 - Spreadsheets (xls, xlsx) added to valid file upload types
-- Validation errors are displayed at the top of the proposal when the proposal fails to submit
-- Full title and abbreviated title has been pulled to the top of the publication since these attributes are required for the quick save functionality
+- Validation errors are displayed at the top of the proposal when the proposal
+  fails to submit
+- Full title and abbreviated title has been pulled to the top of the publication
+  since these attributes are required for the quick save functionality
 
 ## 0.13.8 (October 5, 2012)
 
@@ -231,14 +238,17 @@
 ### Enhancements
 - Secretaries can delete publications
 - Secretaries can set the lead author for new and existing publications
-- Secretaries can customize publication review reminder emails for committee members
-- Unsaved changes while editing publications now asks the user if they want leave the page
+- Secretaries can customize publication review reminder emails for committee
+  members
+- Unsaved changes while editing publications now asks the user if they want
+  leave the page
 - Updated to Contour 1.1.0
 
 ## 0.13.6 (September 5, 2012)
 
 ### Bug Fix
-- Sorting publications on Publication Matrix now correctly sorts by the selected column (by SusanR)
+- Sorting publications on Publication Matrix now correctly sorts by the selected
+  column (by SusanR)
 
 ## 0.13.5 (August 13, 2012)
 
@@ -251,8 +261,10 @@
 - About page reformatted to include links to github and contact information
 
 ### Refactoring
-- Mass-assignment attr_accessible and params slicing implemented to leverage Rails 3.2.x configuration defaults
-- Consistent sorting and display of model counts used across all objects, (publications, users)
+- Mass-assignment attr_accessible and params slicing implemented to leverage
+  Rails 3.2.x configuration defaults
+- Consistent sorting and display of model counts used across all objects,
+  (publications, users)
 
 ### Testing
 - Use ActionDispatch for Integration tests instead of ActionController
@@ -261,7 +273,8 @@
 
 ### Enhancements
 - Update to Rails 3.2.6 and Contour 1.0.2
-- Links with confirm: now use data: { confirm: } to account for deprecations in Rails 4.0
+- Links with confirm: now use data: { confirm: } to account for deprecations in
+  Rails 4.0
 
 ## 0.13.3 (June 7, 2012)
 
@@ -309,7 +322,8 @@
 - Updated to Contour 0.9.0 and Rails 3.2.0.rc2
 
 ### Testing
-- TravisCI is now setup for continuous integration testing, [http://travis-ci.org/remomueller/review/builds](http://travis-ci.org/remomueller/review/builds)
+- TravisCI is now setup for continuous integration testing,
+  [http://travis-ci.org/remomueller/review/builds](http://travis-ci.org/remomueller/review/builds)
 
 ## 0.11.2 (November 30, 2011)
 
@@ -324,14 +338,19 @@
 ## 0.11.0 (November 23, 2011)
 
 ### Enhancements
-- Users can now see all publications on the publications matrix as long as they are not listed as 'draft' or 'not approved'
+- Users can now see all publications on the publications matrix as long as they
+  are not listed as 'draft' or 'not approved'
 - Secretaries can now directly modify existing publications
-- The Publication Timeline can now be viewed on the Publication Matrix by hovering over the additional information icon
-- Writing group proposed nominations and finalized nominations are now both displayed on the Publication Matrix
-- Secretaries can remove malformed nominations when editing a publication on the publication matrix
+- The Publication Timeline can now be viewed on the Publication Matrix by
+  hovering over the additional information icon
+- Writing group proposed nominations and finalized nominations are now both
+  displayed on the Publication Matrix
+- Secretaries can remove malformed nominations when editing a publication on the
+  publication matrix
 
 ### Bug Fix
-- Backspace no longer goes back in browser history when trying to remove a selected Writing Group Committee nomination
+- Backspace no longer goes back in browser history when trying to remove a
+  selected Writing Group Committee nomination
 
 ### Testing
 - Test coverage at 100%
@@ -339,12 +358,14 @@
 ## 0.10.3 (November 7, 2011)
 
 ### Bug Fix
-- Sending Email Reminders now correctly updates when the selected reviewer is on both the P&P committee and the Steering committee
+- Sending Email Reminders now correctly updates when the selected reviewer is on
+  both the P&P committee and the Steering committee
 
 ## 0.10.2 (November 7, 2011)
 
 ### Bug Fix
-- User Publication Reviews 'review updates' are no longer sent when the secretary hits "Send Reminder"
+- User Publication Reviews 'review updates' are no longer sent when the
+  secretary hits "Send Reminder"
 
 ## 0.10.1 (October 18, 2011)
 
@@ -356,7 +377,8 @@
 ### Enhancements
 - Update to Rails 3.1.1
 - Login instructions on the downloadable PDF have been updated
-- Quick save icon added to allow users to quick save a draft of a publication they are editing
+- Quick save icon added to allow users to quick save a draft of a publication
+  they are editing
 - Users can now add additional comments in Section E
 
 ## 0.9.2 (September 9, 2011)
@@ -377,40 +399,50 @@
 - **Writing Group Nomination Changes**
   - Tokenized when separated using commas
   - Parsed to show corresponding emails of users who are already in the system
-  - Users writing 'Me' will now get a drop down item that gives their full username
-- Steering committee secretaries are now notified if a review is created for a publication that has already been SC Approved
+  - Users writing 'Me' will now get a drop down item that gives their full
+    username
+- Steering committee secretaries are now notified if a review is created for a
+  publication that has already been SC Approved
 
 ## 0.8.1 (August 18, 2011)
 
 ### Enhancements
-- Menu bar now sticks to the top of the window when the user scrolls down the page
+- Menu bar now sticks to the top of the window when the user scrolls down the
+  page
 
 ## 0.8.0 (August 17, 2011)
 
 ### Enhancements
-- Remove the need for reviewers to click "Create Review" before being able to fill out a new review
-- The secretary can now email reminders and see when email reminders were sent to reviewers
-- Reviewers can now create and update reviews for a publication at any point after it has been proposed
+- Remove the need for reviewers to click "Create Review" before being able to
+  fill out a new review
+- The secretary can now email reminders and see when email reminders were sent
+  to reviewers
+- Reviewers can now create and update reviews for a publication at any point
+  after it has been proposed
 
 ### Testing
 - Integration tests added to check that
   - Valid users are forwarded to the correct url after login
   - Pending users aren't allowed to login
   - Deleted users aren't allowed to login
-- Functional tests now check that publication matrix is initially sorted based on the responsibility of the user
+- Functional tests now check that publication matrix is initially sorted based
+  on the responsibility of the user
 
 ### Bug Fix
-- Don't allow inactive or deleted users to login, caused by Devise updating active? to active_for_authentication?
+- Don't allow inactive or deleted users to login, caused by Devise updating
+  active? to active_for_authentication?
 
 ## 0.7.1 (August 15, 2011)
 
 ### Enhancements
-- Modified the authentication system so that it can authenticate correctly when behind a reverse proxy and within a firewall
+- Modified the authentication system so that it can authenticate correctly when
+  behind a reverse proxy and within a firewall
 
 ## 0.7.0 (August 5, 2011)
 
 ### Enhancements
-- Reviewers on the P&P committee and in the Steering committee are now presented a simpler interface for creating a review
+- Reviewers on the P&P committee and in the Steering committee are now presented
+  a simpler interface for creating a review
 - A link to the manual is now provided to document the login process
 - Update Rails to 3.1
 - Update Devise to 1.3.4 and Omniauth 0.2.6
@@ -421,11 +453,16 @@
 ## 0.6.0 (July 22, 2011)
 
 ### Enhancements
-- Manuscript Number is now included in Publication Approval emails and Publication Approval Reminder emails
-- Publications Index is now easier to sort by Marked for SC review and Marked for P&P review
-  - P&P committee members and secretaries will have Marked for P&P review filtered to top when they first load the page
-  - SC committee members and secretaries will have Marked for SC review filtered to top when they first load the page
-  - Members of both will have Marked for P&P at top followed by Marked for SC at top of page
+- Manuscript Number is now included in Publication Approval emails and
+  Publication Approval Reminder emails
+- Publications Index is now easier to sort by Marked for SC review and Marked
+  for P&P review
+  - P&P committee members and secretaries will have Marked for P&P review
+    filtered to top when they first load the page
+  - SC committee members and secretaries will have Marked for SC review filtered
+    to top when they first load the page
+  - Members of both will have Marked for P&P at top followed by Marked for SC at
+    top of page
 
 ### Test Coverage
 - Created initial test coverage for all unit and functional tests
