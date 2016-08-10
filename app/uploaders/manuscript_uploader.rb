@@ -2,10 +2,6 @@
 
 # Allows documents to be attached to publication proposal
 class ManuscriptUploader < CarrierWave::Uploader::Base
-  # Include RMagick or ImageScience support:
-  # include CarrierWave::RMagick
-  # include CarrierWave::ImageScience
-
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :s3
@@ -21,20 +17,14 @@ class ManuscriptUploader < CarrierWave::Uploader::Base
   #   "/assets/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  # Process files as they are uploaded:
-  # process :scale => [200, 300]
-  #
-  # def scale(width, height)
-  #   # do something
-  # end
-
-  # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process :scale => [50, 50]
-  # end
-
   # Add a white list of extensions which are allowed to be uploaded.
+  # TODO: Remove this function with carrierwave 1.0.0
   def extension_white_list
+    %w(doc docx pdf xls xlsx)
+  end
+
+  # TODO: This will replace the above function in carrierwave 1.0.0
+  def extension_whitelist
     %w(doc docx pdf xls xlsx)
   end
 

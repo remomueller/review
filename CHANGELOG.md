@@ -6,6 +6,7 @@
   - Updated to turbolinks 5
   - Updated to mysql2 0.4.4
   - Updated to kaminari 0.17.0
+  - Updated to carrierwave 0.11.2
   - Updated to devise 4.2.0
   - Removed dependency on contour
 
