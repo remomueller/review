@@ -2,7 +2,7 @@
 
 # The user class provides methods to scope resources in system that the user is
 # allowed to view and edit.
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :encryptable, :confirmable, :lockable and :omniauthable
   devise :database_authenticatable, :registerable, :timeoutable,
@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, presence: true
 
   # Model Relationships
-  has_many :comments, -> { where(deleted: false).order('created_at DESC') }
+  has_many :comments, -> { where(deleted: false).order('created_at desc') }
   has_many :publications, -> { where deleted: false }
   has_many :user_publication_reviews
 

@@ -56,7 +56,6 @@ exclude_paths:
 - test/**/*
 - "tmp/files/tex/needspace.sty"
 - vendor/**/*
-- ".codeclimate.yml"
 - "CHANGELOG.md"
 - "config.ru"
 - Gemfile

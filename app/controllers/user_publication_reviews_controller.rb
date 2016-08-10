@@ -19,7 +19,7 @@ class UserPublicationReviewsController < ApplicationController
     if @publication and @publication.reviewable?(current_user)
       render 'new'
     else
-      render nothing: true
+      head :ok
     end
   end
 
@@ -30,10 +30,10 @@ class UserPublicationReviewsController < ApplicationController
       if @publication and @publication.reviewable?(current_user) and @user_publication_review.update(upr_params) # @user_publication_review.save
         render 'show'
       else
-        render nothing: true
+        head :ok
       end
     else
-      render nothing: true
+      head :ok
     end
   end
 
@@ -42,7 +42,7 @@ class UserPublicationReviewsController < ApplicationController
     if @publication and @publication.reviewable?(current_user) and @user_publication_review.update(upr_params)
       render 'show'
     else
-      render nothing: true
+      head :ok
     end
   end
 

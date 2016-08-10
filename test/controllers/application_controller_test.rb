@@ -2,6 +2,7 @@
 
 require 'test_helper'
 
+# Test to assure public pages can be displayed.
 class ApplicationControllerTest < ActionController::TestCase
   test 'should get about' do
     get :about

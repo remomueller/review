@@ -3,16 +3,16 @@
 # Allow publications to be created, viewed, and discussed
 class PublicationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_viewable_publication, only: [ :show ]
-  before_action :set_editable_publication, only: [ :edit, :update, :destroy ]
-  before_action :redirect_without_publication, only: [ :show, :edit, :update, :destroy ]
+  before_action :find_viewable_publication_or_redirect, only: [:show]
+  before_action :find_editable_publication_or_redirect, only: [:edit, :update, :destroy]
 
   def archive
-    if current_user.secretary? and @publication = Publication.current.find_by_id(params[:id])
+    @publication = Publication.current.find_by_id(params[:id])
+    if current_user.secretary? && @publication
       @publication.update_column :archived, (params[:undo] != 'true')
       render 'inline_update'
     else
-      render nothing: true
+      head :ok
     end
   end
 
@@ -23,12 +23,12 @@ class PublicationsController < ApplicationController
 
     file_pdf_location = Publication.latex_file_location(current_user, @publications)
 
-    if File.exists?(file_pdf_location)
+    if File.exist?(file_pdf_location)
       File.open(file_pdf_location, 'r') do |file|
-        send_file file, filename: "publication_matrix.pdf", type: "application/pdf", disposition: "inline"
+        send_file file, filename: 'publication_matrix.pdf', type: 'application/pdf', disposition: 'inline'
       end
     else
-      render text: "PDF did not render in time. Please refresh the page."
+      render text: 'PDF did not render in time. Please refresh the page.'
     end
   end
 
@@ -39,7 +39,7 @@ class PublicationsController < ApplicationController
     elsif current_user.steering_committee_secretary? and params[:committee] == 'sc' and @publication = Publication.current.find_by_id(params[:id])
       @publication.update_column :tagged_for_sc_review, (params[:tagged] == '1')
     else
-      render nothing: true
+      head :ok
     end
   end
 
@@ -52,7 +52,7 @@ class PublicationsController < ApplicationController
       @user_publication_review.update_column :reminder_sent_at, Time.zone.now
       UserMailer.publication_approval_reminder(current_user, params[:to], params[:cc], params[:subject], params[:body].to_s).deliver_now if EMAILS_ENABLED
     else
-      render nothing: true
+      head :ok
     end
   end
 
@@ -61,7 +61,7 @@ class PublicationsController < ApplicationController
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status)
       render 'publications/manuscripts/edit_manuscript'
     else
-      render nothing: true
+      head :ok
     end
   end
 
@@ -70,7 +70,7 @@ class PublicationsController < ApplicationController
     if @publication and ['nominated', 'submitted', 'published'].include?(@publication.status)
       render 'publications/manuscripts/show_manuscript'
     else
-      render nothing: true
+      head :ok
     end
   end
 
@@ -94,7 +94,7 @@ class PublicationsController < ApplicationController
       # render 'publications/manuscripts/edit_manuscript'
     else
       redirect_to root_path
-      # render nothing: true
+      # head :ok
     end
   end
 
@@ -105,7 +105,7 @@ class PublicationsController < ApplicationController
       @publication.update remove_manuscript: true
       render 'publications/manuscripts/edit_manuscript'
     else
-      render nothing: true
+      head :ok
     end
   end
 
@@ -122,11 +122,11 @@ class PublicationsController < ApplicationController
   end
 
   def show_subcommittee_decision
-    render nothing: true unless current_user.pp_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
+    head :ok unless current_user.pp_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
 
   def edit_subcommittee_decision
-    render nothing: true unless current_user.pp_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
+    head :ok unless current_user.pp_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
 
   def sc_approval
@@ -141,47 +141,37 @@ class PublicationsController < ApplicationController
   end
 
   def show_steering_committee_decision
-    render nothing: true unless current_user.steering_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
+    head :ok unless current_user.steering_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
 
   def edit_steering_committee_decision
-    render nothing: true unless current_user.steering_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
+    head :ok unless current_user.steering_committee_secretary? and @publication = Publication.current.find_by_id(params[:id])
   end
 
   def index
     flash.delete(:notice)
   	first_visit = params[:order].blank?
-
     publications_scope = current_user.all_viewable_publications
-
     @archived = params[:archived] || 'unarchived'
     publications_scope = publications_scope.where(archived: (params[:archived] == 'archived'))
-
     @search_terms = params[:search].to_s.gsub(/[^0-9a-zA-Z]/, ' ').split(' ')
     @search_terms.each{|search_term| publications_scope = publications_scope.search(search_term) }
-
-
-    @order = scrub_order(Publication, params[:order], 'manuscript_number DESC')
-
+    @order = scrub_order(Publication, params[:order], 'manuscript_number desc')
     if first_visit
       if (current_user.pp_committee? or current_user.pp_committee_secretary?) and (current_user.steering_committee? or current_user.steering_committee_secretary?)
-        @order = ['publications.tagged_for_pp_review DESC', 'publications.tagged_for_sc_review DESC']
+        @order = ['publications.tagged_for_pp_review desc', 'publications.tagged_for_sc_review desc']
       elsif (current_user.pp_committee? or current_user.pp_committee_secretary?)
-        @order = 'publications.tagged_for_pp_review DESC'
+        @order = 'publications.tagged_for_pp_review desc'
       elsif (current_user.steering_committee? or current_user.steering_committee_secretary?)
-        @order = 'publications.tagged_for_sc_review DESC'
+        @order = 'publications.tagged_for_sc_review desc'
       end
     end
 
     publications_scope = publications_scope.order(@order)
-
-
-
-    @publications = publications_scope.page(params[:page]).per( 40 )
+    @publications = publications_scope.page(params[:page]).per(40)
   end
 
   # GET /publications/1
-  # GET /publications/1.json
   def show
   end
 
@@ -203,7 +193,7 @@ class PublicationsController < ApplicationController
 
       render 'inline_update'
     else
-      render nothing: true
+      head :ok
     end
   end
 
@@ -214,7 +204,7 @@ class PublicationsController < ApplicationController
       @publication.send_reminders(current_user) if params[:publish] == '1' and not current_user.secretary?
       if params[:publish] == '-1'
         flash[:notice] = "Publication draft was successfully quick saved."
-        render action: "new"
+        render :new
       else
         notice = ''
         if current_user.secretary?
@@ -226,7 +216,7 @@ class PublicationsController < ApplicationController
       end
     else
       flash[:alert] = "#{@publication.errors.count} error#{ 's' unless @publication.errors.count == 1} prohibited this publication from being saved." if @publication.errors.any?
-      render action: 'new'
+      render :new
     end
   end
 
@@ -237,7 +227,7 @@ class PublicationsController < ApplicationController
       @publication.send_reminders(current_user) if params[:publish] == '1' and not current_user.secretary?
       if params[:publish] == '-1'
         flash[:notice] = "Publication draft was successfully quick saved."
-        render action: "edit"
+        render :edit
       else
         notice = ''
         if current_user.secretary?
@@ -249,19 +239,18 @@ class PublicationsController < ApplicationController
       end
     else
       flash[:alert] = "#{@publication.errors.count} error#{ 's' unless @publication.errors.count == 1} prohibited this publication from being updated." if @publication.errors.any?
-      render action: "edit"
+      render :edit
     end
   end
 
   # DELETE /publications/1
-  # DELETE /publications/1.json
+  # DELETE /publications/1.js
   def destroy
     @publication.destroy
 
     respond_to do |format|
       format.html { redirect_to publications_path }
-      format.js { render 'destroy' }
-      format.json { head :no_content }
+      format.js
     end
   end
 
@@ -271,105 +260,106 @@ class PublicationsController < ApplicationController
       @publication.remove_nomination(params[:nomination])
       render 'committee_nominations'
     else
-      render nothing: true
+      head :ok
     end
   end
 
   private
 
-    def set_viewable_publication
-      @publication = current_user.all_viewable_publications.find_by_id(params[:id])
+  def find_viewable_publication_or_redirect
+    @publication = current_user.all_viewable_publications.find_by_id params[:id]
+    redirect_without_publication
+  end
+
+  def find_editable_publication_or_redirect
+    @publication = current_user.all_publications.find_by_id params[:id]
+    redirect_without_publication
+  end
+
+  def redirect_without_publication
+    empty_response_or_root_path(publications_path) unless @publication
+  end
+
+  def publication_params
+    params[:publication] ||= {}
+
+    params[:publication][:status] = (params[:publish] == '1') ? 'proposed' : 'draft' unless current_user.secretary?
+    params[:publication][:author_assurance_date] = Date.today if params[:publish] == '1'
+
+    [:proposal_submission_date].each do |date|
+      params[:publication][date] = parse_date(params[:publication][date])
     end
 
-    def set_editable_publication
-      @publication = current_user.all_publications.find_by_id(params[:id])
+    if current_user.secretary?
+      params.require(:publication).permit(
+        # Secretary Only
+        :user_id, :archived,
+        # Automatically added
+        :status, :author_assurance_date,
+        # Required to save draft
+        :full_title, :abbreviated_title,
+        # A. Administrative Information
+        :centers, :proposal_submission_date,
+        # B. Publication Information
+        :publication_type, :publication_type_specify,
+        # C. CHAT Resources
+        :dcc_resources_none, :dcc_resources_staff, :dcc_resources_staff_specify, :dcc_resources_other, :dcc_resources_other_specify,
+        :chat_data_none,
+        :chat_data_main_forms, :chat_data_main_forms_attachment, :chat_data_main_forms_attachment_cache,
+        :chat_data_main_database, :chat_data_main_database_attachment, :chat_data_main_database_attachment_cache,
+        :chat_data_other, :chat_data_other_attachment, :chat_data_other_attachment_cache,
+        :chat_data_other_specify,
+        # D. Data Analysis
+        :manuscript_preparation_none, :manuscript_preparation_analysis_data, :manuscript_preparation_analysis_ancillary_data, :manuscript_analysis_review, :manuscript_preparation_other, :manuscript_preparation_other_specify,
+        :proposed_analysis,
+        # E. Attachments
+        :attachment_none,
+        :attachment_chat_form, :attachment_chat_form_attachment, :attachment_chat_form_attachment_cache, :attachment_chat_form_specify,
+        :attachment_chat_variables, :attachment_chat_variables_attachment, :attachment_chat_variables_attachment_cache, :attachment_chat_variables_specify,
+        :attachment_ancillary_forms, :attachment_ancillary_forms_attachment, :attachment_ancillary_forms_attachment_cache, :attachment_ancillary_forms_specify,
+        :attachment_other, :attachment_other_attachment, :attachment_other_attachment_cache, :attachment_other_specify,
+        # 10. CHAT Publication Proposal Description
+        :co_lead_author_id, :writing_group_members, :keywords, :affiliation, :timeline,
+        :sponsoring_pi, :rationale, :hypothesis, :data, :study_type, :target_journal,
+        :analysis_responsibility, :analysis_plan, :summary_section, :references,
+        :additional_comments,
+        # F. Author assurance and sign off
+        :author_assurance
+      )
+    else
+      params.require(:publication).permit(
+        # Automatically added
+        :status, :author_assurance_date,
+        # Required to save draft
+        :full_title, :abbreviated_title,
+        # A. Administrative Information
+        :centers, :proposal_submission_date,
+        # B. Publication Information
+        :publication_type, :publication_type_specify,
+        # C. CHAT Resources
+        :dcc_resources_none, :dcc_resources_staff, :dcc_resources_staff_specify, :dcc_resources_other, :dcc_resources_other_specify,
+        :chat_data_none,
+        :chat_data_main_forms, :chat_data_main_forms_attachment, :chat_data_main_forms_attachment_cache,
+        :chat_data_main_database, :chat_data_main_database_attachment, :chat_data_main_database_attachment_cache,
+        :chat_data_other, :chat_data_other_attachment, :chat_data_other_attachment_cache,
+        :chat_data_other_specify,
+        # D. Data Analysis
+        :manuscript_preparation_none, :manuscript_preparation_analysis_data, :manuscript_preparation_analysis_ancillary_data, :manuscript_analysis_review, :manuscript_preparation_other, :manuscript_preparation_other_specify,
+        :proposed_analysis,
+        # E. Attachments
+        :attachment_none,
+        :attachment_chat_form, :attachment_chat_form_attachment, :attachment_chat_form_attachment_cache, :attachment_chat_form_specify,
+        :attachment_chat_variables, :attachment_chat_variables_attachment, :attachment_chat_variables_attachment_cache, :attachment_chat_variables_specify,
+        :attachment_ancillary_forms, :attachment_ancillary_forms_attachment, :attachment_ancillary_forms_attachment_cache, :attachment_ancillary_forms_specify,
+        :attachment_other, :attachment_other_attachment, :attachment_other_attachment_cache, :attachment_other_specify,
+        # 10. CHAT Publication Proposal Description
+        :co_lead_author_id, :writing_group_members, :keywords, :affiliation, :timeline,
+        :sponsoring_pi, :rationale, :hypothesis, :data, :study_type, :target_journal,
+        :analysis_responsibility, :analysis_plan, :summary_section, :references,
+        :additional_comments,
+        # F. Author assurance and sign off
+        :author_assurance
+      )
     end
-
-    def redirect_without_publication
-      empty_response_or_root_path(publications_path) unless @publication
-    end
-
-    def publication_params
-      params[:publication] ||= {}
-
-      params[:publication][:status] = (params[:publish] == '1') ? 'proposed' : 'draft' unless current_user.secretary?
-      params[:publication][:author_assurance_date] = Date.today if params[:publish] == '1'
-
-      [:proposal_submission_date].each do |date|
-        params[:publication][date] = parse_date(params[:publication][date])
-      end
-
-      if current_user.secretary?
-        params.require(:publication).permit(
-          # Secretary Only
-          :user_id, :archived,
-          # Automatically added
-          :status, :author_assurance_date,
-          # Required to save draft
-          :full_title, :abbreviated_title,
-          # A. Administrative Information
-          :centers, :proposal_submission_date,
-          # B. Publication Information
-          :publication_type, :publication_type_specify,
-          # C. CHAT Resources
-          :dcc_resources_none, :dcc_resources_staff, :dcc_resources_staff_specify, :dcc_resources_other, :dcc_resources_other_specify,
-          :chat_data_none,
-          :chat_data_main_forms, :chat_data_main_forms_attachment, :chat_data_main_forms_attachment_cache,
-          :chat_data_main_database, :chat_data_main_database_attachment, :chat_data_main_database_attachment_cache,
-          :chat_data_other, :chat_data_other_attachment, :chat_data_other_attachment_cache,
-          :chat_data_other_specify,
-          # D. Data Analysis
-          :manuscript_preparation_none, :manuscript_preparation_analysis_data, :manuscript_preparation_analysis_ancillary_data, :manuscript_analysis_review, :manuscript_preparation_other, :manuscript_preparation_other_specify,
-          :proposed_analysis,
-          # E. Attachments
-          :attachment_none,
-          :attachment_chat_form, :attachment_chat_form_attachment, :attachment_chat_form_attachment_cache, :attachment_chat_form_specify,
-          :attachment_chat_variables, :attachment_chat_variables_attachment, :attachment_chat_variables_attachment_cache, :attachment_chat_variables_specify,
-          :attachment_ancillary_forms, :attachment_ancillary_forms_attachment, :attachment_ancillary_forms_attachment_cache, :attachment_ancillary_forms_specify,
-          :attachment_other, :attachment_other_attachment, :attachment_other_attachment_cache, :attachment_other_specify,
-          # 10. CHAT Publication Proposal Description
-          :co_lead_author_id, :writing_group_members, :keywords, :affiliation, :timeline,
-          :sponsoring_pi, :rationale, :hypothesis, :data, :study_type, :target_journal,
-          :analysis_responsibility, :analysis_plan, :summary_section, :references,
-          :additional_comments,
-          # F. Author assurance and sign off
-          :author_assurance
-        )
-      else
-        params.require(:publication).permit(
-          # Automatically added
-          :status, :author_assurance_date,
-          # Required to save draft
-          :full_title, :abbreviated_title,
-          # A. Administrative Information
-          :centers, :proposal_submission_date,
-          # B. Publication Information
-          :publication_type, :publication_type_specify,
-          # C. CHAT Resources
-          :dcc_resources_none, :dcc_resources_staff, :dcc_resources_staff_specify, :dcc_resources_other, :dcc_resources_other_specify,
-          :chat_data_none,
-          :chat_data_main_forms, :chat_data_main_forms_attachment, :chat_data_main_forms_attachment_cache,
-          :chat_data_main_database, :chat_data_main_database_attachment, :chat_data_main_database_attachment_cache,
-          :chat_data_other, :chat_data_other_attachment, :chat_data_other_attachment_cache,
-          :chat_data_other_specify,
-          # D. Data Analysis
-          :manuscript_preparation_none, :manuscript_preparation_analysis_data, :manuscript_preparation_analysis_ancillary_data, :manuscript_analysis_review, :manuscript_preparation_other, :manuscript_preparation_other_specify,
-          :proposed_analysis,
-          # E. Attachments
-          :attachment_none,
-          :attachment_chat_form, :attachment_chat_form_attachment, :attachment_chat_form_attachment_cache, :attachment_chat_form_specify,
-          :attachment_chat_variables, :attachment_chat_variables_attachment, :attachment_chat_variables_attachment_cache, :attachment_chat_variables_specify,
-          :attachment_ancillary_forms, :attachment_ancillary_forms_attachment, :attachment_ancillary_forms_attachment_cache, :attachment_ancillary_forms_specify,
-          :attachment_other, :attachment_other_attachment, :attachment_other_attachment_cache, :attachment_other_specify,
-          # 10. CHAT Publication Proposal Description
-          :co_lead_author_id, :writing_group_members, :keywords, :affiliation, :timeline,
-          :sponsoring_pi, :rationale, :hypothesis, :data, :study_type, :target_journal,
-          :analysis_responsibility, :analysis_plan, :summary_section, :references,
-          :additional_comments,
-          # F. Author assurance and sign off
-          :author_assurance
-        )
-      end
-    end
-
+  end
 end

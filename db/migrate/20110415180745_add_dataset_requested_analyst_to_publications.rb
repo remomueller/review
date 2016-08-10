@@ -1,9 +1,5 @@
-class AddDatasetRequestedAnalystToPublications < ActiveRecord::Migration
-  def self.up
+class AddDatasetRequestedAnalystToPublications < ActiveRecord::Migration[4.2]
+  def change
     add_column :publications, :dataset_requested_analyst, :text
-  end
-
-  def self.down
-    remove_column :publications, :dataset_requested_analyst
   end
 end

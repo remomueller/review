@@ -1,9 +1,5 @@
-class PublicationTargetedStartDate < ActiveRecord::Migration
-  def self.up
+class PublicationTargetedStartDate < ActiveRecord::Migration[4.2]
+  def change
     add_column :publications, :targeted_start_date, :date
-  end
-
-  def self.down
-    remove_column :publications, :targeted_start_date
   end
 end

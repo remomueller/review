@@ -1,9 +1,5 @@
-class ManuscriptNumber < ActiveRecord::Migration
-  def self.up
+class ManuscriptNumber < ActiveRecord::Migration[4.2]
+  def change
     add_column :publications, :manuscript_number, :string
-  end
-
-  def self.down
-    remove_column :publications, :manuscript_number
   end
 end

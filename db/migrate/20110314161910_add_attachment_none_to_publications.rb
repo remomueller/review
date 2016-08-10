@@ -1,9 +1,5 @@
-class AddAttachmentNoneToPublications < ActiveRecord::Migration
-  def self.up
-    add_column :publications, :attachment_none, :boolean, :null => false, :default => false
-  end
-
-  def self.down
-    remove_column :publications, :attachment_none
+class AddAttachmentNoneToPublications < ActiveRecord::Migration[4.2]
+  def change
+    add_column :publications, :attachment_none, :boolean, null: false, default: false
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Defines how publications can be reviewed by committee members
-class UserPublicationReview < ActiveRecord::Base
+class UserPublicationReview < ApplicationRecord
   # attr_accessible :status, :comment, :writing_group_nomination, :publication_id
 
   STATUS = ['approved', 'not approved'].collect { |i| [i, i] }

@@ -22,8 +22,9 @@
   = link_to 'Reset', publications_path, class: 'btn btn-default'
   = hidden_field_tag :archived, @archived
   .btn-group
-    = link_to 'Unarchived', url_for( params.merge( archived: 'unarchived' ) ), class: "btn btn-xs btn-default #{'active' if @archived == 'unarchived'}"
-    = link_to 'Archived', url_for( params.merge( archived: 'archived' ) ), class: "btn btn-xs btn-default #{'active' if @archived == 'archived'}"
+    - url_params = params.permit!
+    = link_to 'Unarchived', url_for(url_params.merge(archived: 'unarchived')), class: "btn btn-xs btn-default #{'active' if @archived == 'unarchived'}"
+    = link_to 'Archived', url_for(url_params.merge(archived: 'archived')), class: "btn btn-xs btn-default #{'active' if @archived == 'archived'}"
   = link_to 'Export Matrix as PDF', print_publications_path(format: 'pdf'), target: '_blank', class: 'btn btn-xs btn-default'
 
 = render 'publications/publications'

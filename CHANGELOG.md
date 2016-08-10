@@ -5,6 +5,10 @@
   - Color style is now more similar to the PATS website
 - **Gem Changes**
   - Updated to Ruby 2.3.1
+  - Updated to rails 5.0.0
+  - Updated to coffee-rails 4.2
+  - Updated to jbuilder 2.5
+  - Updated to jquery-rails 4.1.1
   - Updated to simplecov 0.12.0
   - Updated to turbolinks 5
   - Updated to mysql2 0.4.4

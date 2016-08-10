@@ -4,7 +4,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_system_admin, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :find_user_or_redirect, only: [:show, :edit, :update, :destroy]
 
   def index
     unless current_user.system_admin? or params[:format] == 'json'
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       return
     end
 
-    @order = scrub_order(User, params[:order], 'users.current_sign_in_at DESC')
+    @order = scrub_order(User, params[:order], 'users.current_sign_in_at desc')
     @users = User.current.search(params[:search] || params[:q]).order(@order).page(params[:page]).per( 40 )
 
     respond_to do |format|
@@ -23,50 +23,44 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /users/1
   def show
   end
 
+  # GET /users/new
   def new
     @user = User.new
   end
 
+  # GET /users/1/edit
   def edit
   end
 
-  # # This is in registrations_controller.rb
-  # def create
-  # end
-
-  # Post /users/activate.json
+  # POST /users/activate
   def activate
     params[:user] ||= {}
     params[:user][:password] = params[:user][:password_confirmation] = Digest::SHA1.hexdigest(Time.zone.now.usec.to_s)[0..19] if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
     @user = User.new(user_params)
     if @user.save
       UserMailer.status_activated(@user).deliver_now if EMAILS_ENABLED && @user.status == 'active'
-
-      respond_to do |format|
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, only: [:id, :first_name, :last_name, :email, :status], status: :created, location: @user }
-      end
+      redirect_to @user, notice: 'User was successfully created.'
     else
-      respond_to do |format|
-        format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+      render :new
     end
   end
 
+  # PATCH /users/1
   def update
     original_status = @user.status
     if @user.update(user_params)
       UserMailer.status_activated(@user).deliver_now if EMAILS_ENABLED && original_status != @user.status && @user.status == 'active'
       redirect_to @user, notice: 'User was successfully updated.'
     else
-      render action: 'edit'
+      render :edit
     end
   end
 
+  # DELETE /users/1
   def destroy
     @user.destroy
     redirect_to users_path, notice: 'User was successfully deleted.'
@@ -74,8 +68,8 @@ class UsersController < ApplicationController
 
   private
 
-  def set_user
-    @user = User.current.find_by_id(params[:id])
+  def find_user_or_redirect
+    @user = User.current.find_by_id params[:id]
     redirect_without_user
   end
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Encapsulates submitted publication proposals
-class Publication < ActiveRecord::Base
+class Publication < ApplicationRecord
   STATUS = [["Not Approved", "not approved"], ["Draft", "draft"], ["Proposed", "proposed"], ["P&P Approved", "approved"],
             ["SC Approved", "nominated"], ["Submitted", "submitted"], ["Published", "published"]]
 
@@ -24,7 +24,7 @@ class Publication < ActiveRecord::Base
   scope :current, -> { where deleted: false }
   scope :status, -> (arg) { where status: arg }
   scope :search, -> (arg) { where('LOWER(manuscript_number) LIKE ? or LOWER(full_title) LIKE ? or LOWER(abbreviated_title) LIKE ? or user_id in (SELECT users.id FROM users WHERE LOWER(users.last_name) LIKE ? or LOWER(users.first_name) LIKE ?) or co_lead_author_id in (SELECT users.id FROM users WHERE LOWER(users.last_name) LIKE ? or LOWER(users.first_name) LIKE ?)', arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%')) }
-  scope :with_user_or_status, lambda { |*args|  where( "publications.user_id = ? or publications.status IN (?)", args.first, args[1] ) }
+  scope :with_user_or_status, -> (*args) { where "publications.user_id = ? or publications.status IN (?)", args.first, args[1] }
 
   # Model Validation
   validates :full_title, :abbreviated_title, presence: true
