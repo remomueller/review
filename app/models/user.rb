@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Callbacks
-  after_create :notify_system_admins
+  after_commit :notify_system_admins, on: :create
 
   STATUS = %w(active denied inactive pending).collect { |i| [i, i] }
 
