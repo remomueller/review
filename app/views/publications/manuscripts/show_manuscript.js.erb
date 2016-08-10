@@ -1,1 +1,1 @@
-$("#publication_<%= @publication.id %>_manuscript_container").html("<%= escape_javascript(render("publications/manuscripts/show")) %>");
+$("#publication_<%= @publication.id %>_manuscript_container").html("<%=j render 'publications/manuscripts/show' %>");

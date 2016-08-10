@@ -1,0 +1,84 @@
+%tr
+  %td
+    %span{ id: "publication_#{@publication.id}_tag_pp_link" }= @committee = 'pp'; render 'publications/tag_for_review'
+    %span{ id: "publication_#{@publication.id}_tag_sc_link" }= @committee = 'sc';  render 'publications/tag_for_review'
+  %td.nowrap
+    = @publication.manuscript_number
+    - if @publication.manuscript.url.present?
+      - full_url = "#{request.script_name}#{@publication.manuscript.url}"
+      = link_to 'Download', full_url, target: '_blank', class: 'btn btn-xs btn-default'
+  %td= link_to @publication.abbreviated_title, @publication, title: @publication.full_title
+  %td
+    - if @publication.user
+      %span.nowrap
+        %b Lead Author:
+        = link_to @publication.user.name, @publication.user
+    - else
+      %span.text-muted.nowrap No Lead Author
+    %br
+    - if @publication.co_lead_author
+      %span.nowrap
+        %b Co-Lead Author:
+        = link_to @publication.co_lead_author.name, @publication.co_lead_author
+      %br
+    - unless @publication.all_nominations.size == 0
+      %br
+        %b
+          Writing Group
+          = surround '(', '):' do
+            = @publication.finalized_nominations.size
+            of
+            = @publication.all_nominations.size
+        = image_tag 'contour/gentleface/lightbulb_16.png', style: 'vertical-align:text-bottom;cursor:pointer', class: 'smudge', data: { toggle: 'popover', trigger: 'hover', html: 'true', title: "#{@publication.manuscript_number} Writing Group Nominations:", content: "#{simple_format("<ul>" + @publication.all_nominations.collect{|nom| @publication.finalized_nominations.include?(nom) ? "<li><b>#{nom}</b></li>" : "<li class='quiet'><del>#{nom}</del></li>"}.join + "</ul><br />Key:<ul><li><b>Selected</b></li><li class='quiet'><del>Not Selected</del></li></ul>")}", container: 'body', placement: 'right' }
+        %br
+        = @publication.finalized_nominations.join(', ')
+  %td
+    = @publication.publication_type
+    = @publication.publication_type_specify if @publication.publication_type_specify.present?
+  %td.nowrap
+    = display_status(@publication.status)
+  %td
+    %div{ style: 'padding-left:0; margin-bottom:0;' }= @publication.dataset_requested_analyst
+  %td
+    - if @publication.targeted_start_date
+      = @publication.targeted_start_date_pretty
+      %br
+    - if @publication.timeline.present?
+      = image_tag 'contour/gentleface/lightbulb_16.png', style: 'vertical-align:text-bottom;cursor:pointer', class: 'smudge', data: { toggle: 'popover', trigger: 'hover', html: 'true', title: "#{@publication.manuscript_number} Timeline:", content: "#{simple_format @publication.timeline}", container: 'body', placement: 'left' }
+  - if current_user.secretary?
+    %td
+    - unless ['draft'].include?(@publication.status)
+      = link_to 'Edit', '#', class: 'btn btn-xs btn-default', data: { object: 'modal-show', target: "#publication_#{@publication.id}_popup" }
+      = link_to (@publication.archived ? 'Unarchive' : 'Archive'), archive_publication_path(@publication, undo: @publication.archived), method: :post, remote: true, class: 'btn btn-xs btn-default'
+      = link_to 'Delete', @publication, method: :delete, remote: true, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Publication #{@publication.abbreviated_title_and_ms}?" }
+      = render 'publications/matrix_popup'
+
+- if @print
+  %tr
+    %td
+    %td{ colspan: current_user.secretary? ? 9 : 8 }
+      %strong Timeline:
+      = simple_format @publication.timeline
+
+%tr{ style: "border-bottom: 2px solid #777" }
+  %td
+  %td{ colspan: current_user.secretary? ? 9 : 8 }
+    - if @publication.status != 'published'
+      %span.text-muted
+        %strong Action Items:
+        - case @publication.status when 'draft'
+          Author has not submitted publication.
+        - when 'not approved'
+          Author needs to resubmit after reviewing committee comments.
+        - when 'proposed'
+          P&amp;P Committee needs to review.
+        - when 'approved'
+          Steering Committee needs to review and nominate.
+        - when 'nominated'
+          Author needs to submit paper to journal.
+        - when 'submitted'
+          Waiting for publication in journal.
+      %br
+    - if @publication.secretary_notes.present? && (current_user.secretary? || current_user.committee_member?)
+      %strong Secretary Notes:
+      = @publication.secretary_notes

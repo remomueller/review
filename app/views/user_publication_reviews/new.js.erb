@@ -1,4 +1,4 @@
-$("#publication_review_box_user_<%= current_user.id %>").html("<%= escape_javascript(render("user_publication_reviews/form")) %>");
+$("#publication_review_box_user_<%= current_user.id %>").html("<%=j render 'user_publication_reviews/form' %>");
 
 $('#user_publication_review_writing_group_nomination').tokenInput(root_url + 'users.json',{
       crossDomain: false,

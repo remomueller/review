@@ -1,2 +1,3 @@
 $("#publication_<%= @publication.id %>_popup").modal('hide');
-$("#publication_<%= @publication.id %>_container").html("<%= escape_javascript(render("publications/inline_show")) %>");
+$("#publication_<%= @publication.id %>_container").html("<%=j render 'publications/inline_show' %>");
+$('[data-toggle="popover"]').popover();
