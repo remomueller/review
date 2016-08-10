@@ -2,6 +2,7 @@
 
 ### Enhancements
 - **Gem Changes**
+  - Updated to Ruby 2.3.1
   - Updated to simplecov 0.12.0
   - Updated to turbolinks 5
   - Updated to mysql2 0.4.4
