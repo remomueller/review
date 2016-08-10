@@ -1,0 +1,29 @@
+- @title = 'Publication Matrix'
+
+.pull-right
+  = image_tag 'contour/tag_green.png', alt: ''
+  Marked for P&amp;P Committee Review
+  %br
+  = image_tag 'contour/tag_blue.png', alt: ''
+  Marked for Steering Committee Review
+  %br
+  = image_tag 'contour/gentleface/lightbulb_16.png', alt: ''
+  Mouse Over for Additional Information
+
+.page-header
+  %h1
+    = @title
+    = link_to 'Create Publication', new_publication_path, class: 'btn btn-primary btn-xs'
+
+= form_tag publications_path, method: :get, class: 'form-inline' do
+  = hidden_field_tag :order, params[:order]
+  = text_field_tag 'search', params[:search], class: 'form-control'
+  = submit_tag 'Search', class: 'btn btn-primary', name: nil
+  = link_to 'Reset', publications_path, class: 'btn btn-default'
+  = hidden_field_tag :archived, @archived
+  .btn-group
+    = link_to 'Unarchived', url_for( params.merge( archived: 'unarchived' ) ), class: "btn btn-xs btn-default #{'active' if @archived == 'unarchived'}"
+    = link_to 'Archived', url_for( params.merge( archived: 'archived' ) ), class: "btn btn-xs btn-default #{'active' if @archived == 'archived'}"
+  = link_to 'Export Matrix as PDF', print_publications_path(format: 'pdf'), target: '_blank', class: 'btn btn-xs btn-default'
+
+= render 'publications/publications'

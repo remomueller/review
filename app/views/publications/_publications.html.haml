@@ -3,19 +3,18 @@
 %table.table
   %col{ width: '1px' }
   %col{ width: '1px' }
+  %col{ width: '1px' }
   %thead
     %tr
-      %th.nowrap
-        = sort_field_helper_desc_only(@order, 'publications.tagged_for_pp_review', 'P&P')
-        %br
-        = sort_field_helper_desc_only(@order, 'publications.tagged_for_sc_review', 'SC')
-      %th.nowrap= sort_field_helper(@order, 'publications.manuscript_number', 'MS#')
-      %th.nowrap= sort_field_helper(@order, 'publications.abbreviated_title', 'Abbreviated Title')
+      = th_sort_field_rev @order, 'publications.tagged_for_pp_review', 'P&P', extra_class: 'nowrap'
+      = th_sort_field_rev @order, 'publications.tagged_for_sc_review', 'SC', extra_class: 'nowrap'
+      = th_sort_field @order, 'publications.manuscript_number', 'MS#', extra_class: 'nowrap'
+      = th_sort_field @order, 'publications.abbreviated_title', 'Abbreviated Title', extra_class: 'nowrap'
       %th Lead Author and Writing Committee
-      %th= sort_field_helper(@order, 'publications.publication_type', 'Paper Type')
-      %th.nowrap= sort_field_helper(@order, 'publications.status', 'Status')
+      = th_sort_field @order, 'publications.publication_type', 'Paper Type', extra_class: 'nowrap'
+      = th_sort_field @order, 'publications.status', 'Status', extra_class: 'nowrap'
       %th Dataset Requested Analyst
-      %th= sort_field_helper(@order, 'publications.targeted_start_date', 'Targeted Start Date')
+      = th_sort_field @order, 'publications.targeted_start_date', 'Targeted Start Date', extra_class: 'nowrap'
       - if current_user.secretary?
         %th Actions
 
@@ -26,7 +25,7 @@
         = render 'publications/inline_show'
   - else
     %tr
-      %td.center.text-muted{ colspan: (current_user.secretary? ? 9 : 8), class: cycle('odd', 'even') }
+      %td.center.text-muted{ colspan: (current_user.secretary? ? 10 : 9), class: cycle('odd', 'even') }
         No Publications Found Matching Your Search Criteria
 
 .center= paginate @publications, theme: 'bootstrap'

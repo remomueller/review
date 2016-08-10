@@ -2,6 +2,11 @@
 
 # Provides general application helper methods for HAML views
 module ApplicationHelper
+  def cancel
+    url = URI.parse(request.referer.to_s).path.blank? ? root_path : URI.parse(request.referer.to_s).path
+    link_to 'Cancel', url, class: 'btn btn-default'
+  end
+
   def cancel_mini
     url = URI.parse(request.referer.to_s).path.blank? ? root_path : URI.parse(request.referer.to_s).path
     link_to 'Cancel', url, class: 'btn btn-xs btn-default'
@@ -56,8 +61,34 @@ module ApplicationHelper
     result.html_safe
   end
 
-  def sort_field_helper_desc_only(order, sort_field, display_name, search_form_id  = 'search_form')
-    "<span #{'class="selected"' if order.split(',').flatten.include?(sort_field + ' DESC')}>#{display_name} #{ link_to('&raquo;'.html_safe, '#', data: { object: 'order', order: "#{sort_field} DESC", form: "##{search_form_id}" }, style: 'text-decoration:none')}</span>".html_safe
+  def th_sort_field_rev(order, sort_field, display_name, extra_class: '')
+    sort_params = params.permit(:search)
+    sort_field_order = (order == "#{sort_field} desc" || order == "#{sort_field} desc nulls last") ? sort_field : "#{sort_field} desc"
+    if order == sort_field
+      selected_class = 'sort-selected'
+    elsif order == "#{sort_field} desc nulls last" || order == "#{sort_field} desc"
+      selected_class = 'sort-selected'
+    end
+    content_tag(:th, class: [selected_class, extra_class]) do
+      link_to url_for(sort_params.merge(order: sort_field_order)), style: 'text-decoration:none' do
+        display_name.to_s.html_safe
+      end
+    end.html_safe
+  end
+
+  def th_sort_field(order, sort_field, display_name, extra_class: '')
+    sort_params = params.permit(:search)
+    sort_field_order = (order == sort_field) ? "#{sort_field} desc" : sort_field
+    if order == sort_field
+      selected_class = 'sort-selected'
+    elsif order == "#{sort_field} desc nulls last" || order == "#{sort_field} desc"
+      selected_class = 'sort-selected'
+    end
+    content_tag(:th, class: [selected_class, extra_class]) do
+      link_to url_for(sort_params.merge(order: sort_field_order)), style: 'text-decoration:none' do
+        display_name.to_s.html_safe
+      end
+    end.html_safe
   end
 
   def simple_check(checked)

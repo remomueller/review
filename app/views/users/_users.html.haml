@@ -9,16 +9,16 @@
         %th.center{ colspan: 2 } Secretary
         %th{ colspan: 3 }
     %tr
-      %th.nowrap= sort_field_helper(@order, 'users.last_name', 'Name')
-      %th.nowrap= sort_field_helper(@order, 'users.email', 'Email')
-      %th.nowrap= sort_field_helper(@order, 'users.current_sign_in_at', 'Recent Activity')
+      = th_sort_field @order, 'users.last_name', 'Name', extra_class: 'nowrap'
+      = th_sort_field @order, 'users.email', 'Email', extra_class: 'nowrap'
+      = th_sort_field @order, 'users.current_sign_in_at', 'Recent Activity', extra_class: 'nowrap'
       - if current_user.system_admin?
-        %th.nowrap= sort_field_helper(@order, 'users.status', 'Status')
-        %th.nowrap= sort_field_helper(@order, 'users.pp_committee', 'P&amp;P')
-        %th.nowrap= sort_field_helper(@order, 'users.steering_committee', 'Steering')
-        %th.nowrap= sort_field_helper(@order, 'users.pp_committee_secretary', 'P&amp;P')
-        %th.nowrap= sort_field_helper(@order, 'users.steering_committee_secretary', 'Steering')
-        %th.nowrap= sort_field_helper(@order, 'users.system_admin', 'System Admin')
+        = th_sort_field @order, 'users.status', 'Status', extra_class: 'nowrap'
+        = th_sort_field @order, 'users.pp_committee', 'P&amp;P', extra_class: 'nowrap center'
+        = th_sort_field @order, 'users.steering_committee', 'Steering', extra_class: 'nowrap center'
+        = th_sort_field @order, 'users.pp_committee_secretary', 'P&amp;P', extra_class: 'nowrap center'
+        = th_sort_field @order, 'users.steering_committee_secretary', 'Steering', extra_class: 'nowrap center'
+        = th_sort_field @order, 'users.system_admin', 'System Admin', extra_class: 'nowrap center'
         %th Actions
 
   - @users.each do |user|

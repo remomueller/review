@@ -18,15 +18,18 @@
   val = $(element_id).val()
   $(element_id).focus().val('').val(val)
 
+@extensionsReady = ->
+  datepickerReady()
+  tooltipsReady()
+  popoversReady()
 
 @ready = () ->
-  contourReady()
   publicationsReady()
   window.$isDirty = false
   msg = "You haven't saved your changes."
   window.onbeforeunload = (el) -> return msg if window.$isDirty
   setFocusToField("#search")
-  $('[data-toggle="popover"]').popover()
+  extensionsReady()
 
 $(document).ready(ready)
 $(document)

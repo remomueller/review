@@ -8,7 +8,8 @@ gem 'rails',                '4.2.5.2'
 gem 'mysql2',               '0.4.4'
 
 # Gems used by project
-gem 'contour',              '~> 3.0.1'
+gem 'devise',               '~> 4.2.0'
+gem 'bootstrap-sass',       '~> 3.3.7'
 gem 'kaminari',             '~> 0.17.0'
 gem 'carrierwave',          '~> 0.10.0'
 gem 'ruby-ntlm-namespace',  '~> 0.0.1'

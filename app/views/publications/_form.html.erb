@@ -21,7 +21,7 @@
 <%= form_for @publication, html: { class: 'form-horizontal', enctype: "multipart/form-data" } do |f| %>
 
   <% if disabled.blank? and @publication.errors.any? %>
-    <div id="error_explanation" class="bs-callout bs-callout-danger">
+    <div id="error_explanation" class="callout callout-danger">
       <h4><%= pluralize(@publication.errors.count, "error") %> prohibited this publication from being saved</h4>
 
       <ul>
