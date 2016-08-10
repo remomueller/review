@@ -1,0 +1,10 @@
+= form_tag upload_manuscript_publication_path(@publication), method: :post, multipart: true, id: 'manuscript_form', class: 'form-horizontal' do
+  .form-group
+    = label :publication, :manuscript, 'Upload Manuscript (PDF, Word)', class: 'col-md-2 control-label'
+    .col-md-10
+      = file_field :publication, :manuscript, class: 'form-control'
+      = hidden_field :publication, 'manuscript_cache'
+  .form-group
+    .col-md-offset-2.col-md-10
+      = submit_tag (@publication.manuscript.url.blank? ? "Upload Manuscript" : "Replace Existing Manuscript"), class: 'btn btn-primary'
+      = link_to 'Cancel', show_manuscript_publication_path(@publication), method: :post, remote: true, class: 'btn btn-default' unless @publication.manuscript.url.blank?
