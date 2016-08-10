@@ -1,7 +1,5 @@
 @import 'contour';
 @import 'custom';
-@import 'token-input-facebook-1.6.0';
-
 
 // // App Mixins
 // @import 'mixins/all';
@@ -9,8 +7,8 @@
 // Components
 @import 'components/all';
 
-// // Extensions
-// @import 'extensions/all';
+// Extensions
+@import 'extensions/all';
 
 // // Fixes
 // @import 'fixes/all';
