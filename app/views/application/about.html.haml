@@ -1,0 +1,44 @@
+- @title = "About #{ENV['website_name']}"
+
+%h1.about-title= @title
+%p.about-tagline
+  Visit our
+  = link_to 'online community', 'https://sleepepi.partners.org'
+  or contact us
+  = succeed '.' do
+    = mail_to ENV['support_email'], 'via email', subject: "#{ENV['website_name']} Question"
+
+%p.about-signup= link_to 'Sign Me Up', new_user_registration_path, class: 'btn btn-primary btn-lg'
+
+%p.about-description
+  = ENV['website_name']
+  is a
+  = link_to 'free to use*', 'https://github.com/remomueller/review/blob/master/LICENSE', rel: 'tooltip', data: { title: 'Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License' }
+  and
+  = link_to 'open source', 'https://github.com/remomueller/review', rel: 'tooltip', data: { title: 'Source code freely available on GitHub' }
+  web application used to create and track publication proposals for the CHAT study.
+
+.row.col-buffer
+  .col-md-4
+    %h2.about-title Publication Matrix
+    %ul
+      %li Discuss and view publication proposals.
+      %li Download existing manuscripts.
+      %li Flag proposals for committee review.
+  .col-md-4
+    %h2.about-title New Proposals
+    %ul
+      %li Fill out a new publication proposal for committee review.
+      %li Receive feedback from committee members.
+      %li Collaborate with the proposal writing group.
+  .col-md-4
+    %h2.about-title Committee Members
+    %ul
+      %li Receive alerts for new publication proposals.
+      %li Approve or deny a new proposal with comments and writing group nominations.
+      %li View other committee members feedback and view uploaded proposal attachments.
+
+%p.text-muted.about-footer
+  = ENV['website_name']
+  Version
+  = link_to Review::VERSION::STRING, 'https://github.com/remomueller/review'
