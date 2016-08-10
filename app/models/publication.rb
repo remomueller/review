@@ -134,7 +134,7 @@ class Publication < ActiveRecord::Base
         nil,
         "New Publication Awaiting Approval: #{abbreviated_title_and_ms}",
         upr.email_body_template(current_user)
-      ).deliver_later if EMAILS_ENABLED
+      ).deliver_now if EMAILS_ENABLED
     end
   end
 

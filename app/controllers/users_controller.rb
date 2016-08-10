@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     params[:user][:password] = params[:user][:password_confirmation] = Digest::SHA1.hexdigest(Time.zone.now.usec.to_s)[0..19] if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
     @user = User.new(user_params)
     if @user.save
-      UserMailer.status_activated(@user).deliver_later if EMAILS_ENABLED && @user.status == 'active'
+      UserMailer.status_activated(@user).deliver_now if EMAILS_ENABLED && @user.status == 'active'
 
       respond_to do |format|
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   def update
     original_status = @user.status
     if @user.update(user_params)
-      UserMailer.status_activated(@user).deliver_later if EMAILS_ENABLED && original_status != @user.status && @user.status == 'active'
+      UserMailer.status_activated(@user).deliver_now if EMAILS_ENABLED && original_status != @user.status && @user.status == 'active'
       redirect_to @user, notice: 'User was successfully updated.'
     else
       render action: 'edit'

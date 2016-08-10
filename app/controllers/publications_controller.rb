@@ -50,7 +50,7 @@ class PublicationsController < ApplicationController
       @user_publication_review = @reviewer.user_publication_reviews.find_by_publication_id(@publication.id)
       @user_publication_review = @reviewer.user_publication_reviews.create(publication_id: @publication.id) if @user_publication_review.blank?
       @user_publication_review.update_column :reminder_sent_at, Time.zone.now
-      UserMailer.publication_approval_reminder(current_user, params[:to], params[:cc], params[:subject], params[:body].to_s).deliver_later if EMAILS_ENABLED
+      UserMailer.publication_approval_reminder(current_user, params[:to], params[:cc], params[:subject], params[:body].to_s).deliver_now if EMAILS_ENABLED
     else
       render nothing: true
     end
@@ -113,7 +113,7 @@ class PublicationsController < ApplicationController
     @publication = Publication.current.find_by_id(params[:id])
     if @publication && current_user.pp_committee_secretary? && params[:publication]
       @publication.update(params.require(:publication).permit(:status, :manuscript_number, :additional_ppcommittee_instructions))
-      UserMailer.publication_approval(@publication, true, current_user).deliver_later if @publication.status != 'proposed' && @publication.user && EMAILS_ENABLED
+      UserMailer.publication_approval(@publication, true, current_user).deliver_now if @publication.status != 'proposed' && @publication.user && EMAILS_ENABLED
       @publication.send_reminders(current_user) if @publication.status == 'approved'
       redirect_to @publication
     else
@@ -133,7 +133,7 @@ class PublicationsController < ApplicationController
     @publication = Publication.current.find_by_id(params[:id])
     if @publication && current_user.steering_committee_secretary? && params[:publication]
       @publication.update(params.require(:publication).permit(:status, :additional_sccommittee_instructions))
-      UserMailer.publication_approval(@publication, false, current_user).deliver_later if @publication.status != 'approved' && @publication.user && EMAILS_ENABLED
+      UserMailer.publication_approval(@publication, false, current_user).deliver_now if @publication.status != 'approved' && @publication.user && EMAILS_ENABLED
       redirect_to @publication
     else
       redirect_to root_path

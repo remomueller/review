@@ -91,7 +91,7 @@ class User < ActiveRecord::Base
   def notify_system_admins
     return unless EMAILS_ENABLED
     User.current.system_admins.each do |system_admin|
-      UserMailer.notify_system_admin(system_admin, self).deliver_later
+      UserMailer.notify_system_admin(system_admin, self).deliver_now
     end
   end
 end

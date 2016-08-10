@@ -46,7 +46,7 @@ Thank you!\n
     return unless EMAILS_ENABLED && publication && %w(nominated submitted published).include?(publication.status)
     return if changes[:comment].blank? && changes[:writing_group_nomination].blank? && changes[:status].blank?
     User.sc_secretaries.each do |secretary|
-      UserMailer.review_updated(self, secretary).deliver_later
+      UserMailer.review_updated(self, secretary).deliver_now
     end
   end
 end
