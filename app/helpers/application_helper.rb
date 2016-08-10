@@ -57,7 +57,7 @@ module ApplicationHelper
   end
 
   def sort_field_helper_desc_only(order, sort_field, display_name, search_form_id  = 'search_form')
-    "<span #{'class="selected"' if order.split(',').flatten.include?(sort_field + ' DESC')}>#{display_name} #{ link_to('&raquo;'.html_safe, '#', data: { object: 'order', order: "#{sort_field} DESC", form: "##{search_form_id}" }, style: 'text-decoration:none')}</span>"
+    "<span #{'class="selected"' if order.split(',').flatten.include?(sort_field + ' DESC')}>#{display_name} #{ link_to('&raquo;'.html_safe, '#', data: { object: 'order', order: "#{sort_field} DESC", form: "##{search_form_id}" }, style: 'text-decoration:none')}</span>".html_safe
   end
 
   def simple_check(checked)

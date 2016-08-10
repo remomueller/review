@@ -1,0 +1,9 @@
+- @title = "Edit: #{@publication.full_title}"
+.page-header
+  .center
+    %h2= @publication.full_title
+    %small.text-muted
+      Editing
+    = cancel_mini
+
+= render 'form'

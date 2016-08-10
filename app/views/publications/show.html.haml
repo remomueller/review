@@ -1,0 +1,104 @@
+- @title = @publication.full_title
+.page-header
+  .center
+    %h2= @title
+    - if @publication.editable?(current_user)
+      = link_to 'Edit Publication', edit_publication_path(@publication), class: 'btn btn-xs btn-default'
+      = link_to 'Delete Publication', @publication, method: :delete, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Publication #{@publication.abbreviated_title_and_ms}?" }
+
+%dl.dl-horizontal
+  %dt Status
+  %dd
+    = display_status(@publication.status)
+    %br
+
+- if @publication.reviewable?(current_user)
+  - @user = current_user
+  - @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id)
+  - @user_publication_review = @user.user_publication_reviews.new(publication_id: @publication.id) if @user_publication_review.blank?
+  %div{ id: "publication_review_box_user_#{@user.id}" }
+    - if @user_publication_review.status == nil
+      = render 'user_publication_reviews/form'
+    - else
+      = render 'user_publication_reviews/show'
+
+- if current_user.committee_member? || current_user.secretary?
+  %ul#myTab.nav.nav-tabs{ style: 'margin-bottom:0;' }
+    %li.active
+      %a{ href: "#pp_review" } P&amp;P Committee Reviews
+    %li
+      %a{ href: "#sc_review" } Steering Committee Reviews
+
+  .tab-content
+    #pp_review.tab-pane.well.active
+      %table.table.table-condensed
+        %tbody
+          - User.current.pp_committee_members.order('last_name, first_name').each do |user|
+            - @user = user
+            - @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id)
+            - @user_publication_review = @user.user_publication_reviews.new(publication_id: @publication.id) if @user_publication_review.blank?
+            - @committee = 'pp'
+            = render 'user_publication_reviews/show_small'
+    #sc_review.tab-pane.well
+      %table.table.table-condensed
+        %tbody
+          - User.current.steering_committee_members.order('last_name, first_name').each do |user|
+            - @user = user
+            - @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id)
+            - @user_publication_review = @user.user_publication_reviews.new(publication_id: @publication.id) if @user_publication_review.blank?
+            - @committee = 'sc'
+            = render 'user_publication_reviews/show_small'
+
+- if ['approved', 'nominated'].include?(@publication.status) && current_user.steering_committee_secretary?
+  .well
+    .page-header
+      %h3 Steering Committee Decision
+    #steering_committee_decision_box
+      - if @publication.status == 'approved'
+        = render 'publications/edit_steering_committee_decision'
+      - else
+        = render 'publications/show_steering_committee_decision'
+
+- if ['proposed', 'not approved', 'approved'].include?(@publication.status) && current_user.pp_committee_secretary?
+  .well
+    .page-header
+      %h3 P&amp;P Committee Decision
+    #subcommittee_decision_box
+      - if @publication.status == 'proposed'
+        = render 'publications/edit_subcommittee_decision'
+      - else
+        = render 'publications/show_subcommittee_decision'
+
+- if ['nominated', 'submitted', 'published'].include?(@publication.status)
+  .well
+    .page-header
+      %h3 Manuscript
+    %div{ id: "publication_#{@publication.id}_manuscript_container" }
+      - if @publication.manuscript.url.blank? && (current_user == @publication.user || current_user.secretary?)
+        = render 'publications/manuscripts/edit'
+      - elsif @publication.manuscript.url.present?
+        = render 'publications/manuscripts/show'
+      - else
+        The author has not uploaded any manuscripts.
+
+- if current_user == @publication.user && ['nominated'].include?(@publication.status)
+  .well
+    .page-header
+      %h3 Steering Committee Reviewer Comments and Nominations
+    - @publication.user_publication_reviews.each do |user_publication_review|
+      - unless user_publication_review.comment.blank?
+        %div= user_publication_review.comment
+      - unless user_publication_review.writing_group_nomination.blank?
+        %div
+          Nomination:
+          = user_publication_review.writing_group_nomination
+
+- if current_user == @publication.user and ['approved', 'not approved'].include?(@publication.status)
+  .well
+    .page-header
+      %h3 Publications and Presentations Sub Committee Reviewer Comments
+    - @publication.user_publication_reviews.each do |user_publication_review|
+      - unless user_publication_review.comment.blank?
+        %div= simple_format user_publication_review.comment
+
+= render 'publications/form', disabled: 'disabled'

@@ -5,6 +5,7 @@
   - Updated to simplecov 0.12.0
   - Updated to turbolinks 5
   - Updated to mysql2 0.4.4
+  - Updated to kaminari 0.17.0
 
 ## 0.14.18 (March 1, 2016)
 
