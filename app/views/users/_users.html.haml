@@ -27,7 +27,10 @@
         = image_tag user.avatar_url(18), style: 'vertical-align:text-bottom'
         = link_to user.name, user
       %td= user.email
-      %td= recent_activity user.current_sign_in_at
+      %td
+        - if user.current_sign_in_at
+          = time_ago_in_words user.current_sign_in_at
+          ago
       - if current_user.system_admin?
         %td= user.status
         %td.center= check_box_tag 'user', 'pp_committee', user.pp_committee?, disabled: true

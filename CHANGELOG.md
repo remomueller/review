@@ -1,6 +1,8 @@
 ## 0.15.0
 
 ### Enhancements
+- **General Changes**
+  - Color style is now more similar to the PATS website
 - **Gem Changes**
   - Updated to Ruby 2.3.1
   - Updated to simplecov 0.12.0

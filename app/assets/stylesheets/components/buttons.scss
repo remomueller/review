@@ -1,5 +1,22 @@
 // Buttons
 
+.btn-primary-dark {
+  background-color: $purple-color;
+  border: 1px solid darken($purple-color, 6.5%);
+  color: $purple;
+}
+
+.btn-primary-dark:hover,
+.btn-primary-dark:focus,
+.btn-primary-dark:active,
+.btn-primary-dark.active,
+.btn-primary-dark.disabled,
+.btn-primary-dark[disabled] {
+  background-color: darken($purple-color, 6.5%);
+  border: 1px solid darken($purple-color, 6.5%);
+  color: $brand-white;
+}
+
 .btn-danger-inverse {
   background-color: $body-bg;
   border: 1px solid $btn-danger-border;

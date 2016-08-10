@@ -12,23 +12,6 @@ module ApplicationHelper
     link_to 'Cancel', url, class: 'btn btn-xs btn-default'
   end
 
-  # Prints out '6 hours ago, Yesterday, 2 weeks ago, 5 months ago, 1 year ago'
-  def recent_activity(past_time)
-    return '' unless past_time.is_a?(Time)
-    time_ago_in_words(past_time)
-    seconds_ago = (Time.zone.now - past_time)
-    color = if seconds_ago < 60.minutes then '#6DD1EC'
-            elsif seconds_ago < 1.day then '#ADDD1E'
-            elsif seconds_ago < 2.days then '#CEDC34'
-            elsif seconds_ago < 1.week then '#CEDC34'
-            elsif seconds_ago < 1.month then '#DCAA24'
-            elsif seconds_ago < 1.year then '#C2692A'
-            else '#AA2D2F'
-            end
-    "<span style='color:#{color};font-weight:bold;font-variant:small-caps;\
-    '>#{time_ago_in_words(past_time)} ago</span>".html_safe
-  end
-
   def simple_time(past_time)
     return '' if past_time.blank?
     if past_time.to_date == Time.zone.today

@@ -14,11 +14,11 @@
 
       - if current_user
         %form.navbar-form.navbar-right.hidden-xs
-          = link_to destroy_user_session_path, class: 'btn btn-default' do
+          = link_to destroy_user_session_path, class: 'btn btn-primary-dark' do
             Logout
       - else
         %form.navbar-form.navbar-right.hidden-xs
-          = link_to 'Sign in', new_user_session_path, class: 'btn btn-default'
+          = link_to 'Sign in', new_user_session_path, class: 'btn btn-primary-dark'
 
       - if current_user
         %ul.nav.navbar-nav.navbar-right
@@ -35,7 +35,7 @@
           - if current_user.system_admin?
             %li.visible-xs= link_to 'Users', users_path
         %form.navbar-form.navbar-right.visible-xs
-          = link_to 'Logout', destroy_user_session_path, class: 'btn btn-default'
+          = link_to 'Logout', destroy_user_session_path, class: 'btn btn-primary-dark'
       - else
         %form.navbar-form.navbar-right.visible-xs
-          = link_to 'Sign in', new_user_session_path, class: 'btn btn-default'
+          = link_to 'Sign in', new_user_session_path, class: 'btn btn-primary-dark'

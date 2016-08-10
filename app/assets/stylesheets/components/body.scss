@@ -10,7 +10,20 @@ body {
   padding-top: $header-height;
 }
 
+.brand-background {
+  background-color: $purple;
+}
+
+::selection {
+  background-color: $purple;
+  color: $purple-color;
+}
+
 .body-content {
   padding-bottom: 20px;
   padding-top: 20px;
+}
+
+:focus {
+  outline-color: $purple !important;
 }
