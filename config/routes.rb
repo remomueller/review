@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root 'publications#index'
+
   resources :publications do
     collection do
       get :search
@@ -40,6 +42,4 @@ Rails.application.routes.draw do
     get :about
     get :version
   end
-
-  root to: 'publications#index'
 end
