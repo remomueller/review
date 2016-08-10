@@ -35,10 +35,8 @@
   %td
     = @publication.publication_type
     = @publication.publication_type_specify if @publication.publication_type_specify.present?
-  %td.nowrap
-    = display_status(@publication.status)
-  %td
-    %div{ style: 'padding-left:0; margin-bottom:0;' }= @publication.dataset_requested_analyst
+  %td.nowrap= display_status @publication.status
+  %td= @publication.dataset_requested_analyst
   %td
     - if @publication.targeted_start_date
       = @publication.targeted_start_date_pretty
@@ -46,12 +44,12 @@
     - if @publication.timeline.present?
       = image_tag 'contour/gentleface/lightbulb_16.png', style: 'vertical-align:text-bottom;cursor:pointer', class: 'smudge', data: { toggle: 'popover', trigger: 'hover', html: 'true', title: "#{@publication.manuscript_number} Timeline:", content: "#{simple_format @publication.timeline}", container: 'body', placement: 'left' }
   - if current_user.secretary?
-    %td
-    - unless ['draft'].include?(@publication.status)
-      = link_to 'Edit', '#', class: 'btn btn-xs btn-default', data: { object: 'modal-show', target: "#publication_#{@publication.id}_popup" }
-      = link_to (@publication.archived ? 'Unarchive' : 'Archive'), archive_publication_path(@publication, undo: @publication.archived), method: :post, remote: true, class: 'btn btn-xs btn-default'
-      = link_to 'Delete', @publication, method: :delete, remote: true, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Publication #{@publication.abbreviated_title_and_ms}?" }
-      = render 'publications/matrix_popup'
+    %td.nowrap
+      - unless ['draft'].include?(@publication.status)
+        = link_to 'Edit', '#', class: 'btn btn-xs btn-default', data: { object: 'modal-show', target: "#publication_#{@publication.id}_popup" }
+        = link_to (@publication.archived ? 'Unarchive' : 'Archive'), archive_publication_path(@publication, undo: @publication.archived), method: :post, remote: true, class: 'btn btn-xs btn-default'
+        = link_to 'Delete', @publication, method: :delete, remote: true, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Publication #{@publication.abbreviated_title_and_ms}?" }
+        = render 'publications/matrix_popup'
 
 - if @print
   %tr
