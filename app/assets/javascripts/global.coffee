@@ -26,7 +26,6 @@
   msg = "You haven't saved your changes."
   window.onbeforeunload = (el) -> return msg if window.$isDirty
   setFocusToField("#search")
-  Turbolinks.enableProgressBar()
 
 $(document).ready(ready)
 $(document)

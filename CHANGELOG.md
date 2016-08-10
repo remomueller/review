@@ -3,6 +3,7 @@
 ### Enhancements
 - **Gem Changes**
   - Updated to simplecov 0.12.0
+  - Updated to turbolinks 5
 
 ## 0.14.18 (March 1, 2016)
 
