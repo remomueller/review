@@ -11,10 +11,10 @@
       = th_sort_field @order, 'publications.manuscript_number', 'MS#', extra_class: 'nowrap'
       = th_sort_field @order, 'publications.abbreviated_title', 'Abbreviated Title', extra_class: 'nowrap'
       %th Lead Author and Writing Committee
-      = th_sort_field @order, 'publications.publication_type', 'Paper Type', extra_class: 'nowrap'
+      = th_sort_field @order, 'publications.publication_type', 'Paper Type'
       = th_sort_field @order, 'publications.status', 'Status', extra_class: 'nowrap'
       %th Dataset Requested Analyst
-      = th_sort_field @order, 'publications.targeted_start_date', 'Targeted Start Date', extra_class: 'nowrap'
+      = th_sort_field @order, 'publications.targeted_start_date', 'Targeted Start Date'
       - if current_user.secretary?
         %th Actions
 
