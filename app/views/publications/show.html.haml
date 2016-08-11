@@ -30,7 +30,7 @@
       %a{ href: "#sc_review" } Steering Committee Reviews
 
   .tab-content
-    #pp_review.tab-pane.well.active
+    #pp_review.tab-pane.active{ style: 'border-bottom: 1px solid #ddd;border-left: 1px solid #ddd;border-right: 1px solid #ddd;margin-bottom: 40px;' }
       %table.table.table-condensed
         %tbody
           - User.current.pp_committee_members.order('last_name, first_name').each do |user|
@@ -39,7 +39,7 @@
             - @user_publication_review = @user.user_publication_reviews.new(publication_id: @publication.id) if @user_publication_review.blank?
             - @committee = 'pp'
             = render 'user_publication_reviews/show_small'
-    #sc_review.tab-pane.well
+    #sc_review.tab-pane{ style: 'border-bottom: 1px solid #ddd;border-left: 1px solid #ddd;border-right: 1px solid #ddd;margin-bottom: 40px;' }
       %table.table.table-condensed
         %tbody
           - User.current.steering_committee_members.order('last_name, first_name').each do |user|
@@ -93,7 +93,7 @@
           Nomination:
           = user_publication_review.writing_group_nomination
 
-- if current_user == @publication.user and ['approved', 'not approved'].include?(@publication.status)
+- if current_user == @publication.user && ['approved', 'not approved'].include?(@publication.status)
   .well
     .page-header
       %h3 Publications and Presentations Sub Committee Reviewer Comments

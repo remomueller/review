@@ -39,8 +39,11 @@ class Publication < ApplicationRecord
 
   validates :publication_type_specify, presence: true, if: [:should_validate_publication_type?, :no_longer_draft?]
 
-  validates :dcc_resources_staff_specify, :dcc_resources_other_specify,
+  validates :dcc_resources_staff_specify,
             presence: true, if: [:should_validate_dcc_resources_staff_specify?, :no_longer_draft?]
+
+  validates :dcc_resources_other_specify,
+            presence: true, if: [:should_validate_dcc_resources_other_specify?, :no_longer_draft?]
 
   validates :manuscript_preparation_other_specify,
             presence: true, if: [:should_validate_manuscript_preparation_other_specify?, :no_longer_draft?]

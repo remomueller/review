@@ -1,0 +1,33 @@
+- if @user_publication_review.status.nil? && ((@user_publication_review.user.pp_committee? && current_user.pp_committee_secretary?) || (@user_publication_review.user.steering_committee? && current_user.steering_committee_secretary?))
+  %tr{ style: 'border-bottom:1px solid #eee;' }
+    %td.nowrap
+      - @position = "publication_#{@publication.id}_user_#{@user_publication_review.user_id}_#{@committee}"
+      %span{ id: "user_#{@user_publication_review.user_id}_notified_#{@committee}", style: 'color:black' }
+        - if @user_publication_review.reminder_sent_at
+          %span.text-muted
+            Reminder sent
+            = simple_time @user_publication_review.reminder_sent_at
+          = link_to 'Resend', '#', class: 'btn btn-xs btn-default', data: { object: 'modal-show', target: "#send_email_#{@position}_modal" }
+        - else
+          = link_to 'Email Reminder', '#', class: 'btn btn-primary btn-xs', data: { object: 'modal-show', target: "#send_email_#{@position}_modal" }
+      = render 'user_publication_reviews/email_reminder_modal'
+    %td= link_to @user_publication_review.user.name, @user_publication_review.user
+- elsif !@user_publication_review.status.nil?
+  %tr
+    %td.nowrap
+      %strong
+        %span{ style: "color:#{@user_publication_review.status == 'approved' ? 'green' : 'red'};" }= @user_publication_review.status
+    %td
+      = link_to @user_publication_review.user.name, @user_publication_review.user
+      = simple_time @user_publication_review.updated_at
+  - if @user_publication_review.comment.present?
+    %tr
+      %td
+      %td
+        %em= simple_format @user_publication_review.comment
+  - unless @user_publication_review.writing_group_nomination.blank?
+    %tr{ style: 'border-bottom:1px solid #eee;' }
+      %td
+      %td
+        %b Nomination
+        %em= simple_format @user_publication_review.writing_group_nomination

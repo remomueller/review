@@ -2,17 +2,16 @@
 
 - if disabled.blank?
   .well
-    %h3 Quick Save
     %dl.dl-horizontal
       %dt
-        = image_tag 'contour/save.png', alt: '', title: 'Quick Save', style: 'vertical-align:text-bottom'
+        %span.glyphicon.glyphicon-floppy-disk.save-file
         Quick Save
       %dd
         While you are composing your publication make sure to occasionally click
         the
         %strong Quick Save
         icon
-        = image_tag 'contour/save.png', alt: '', title: 'Quick Save', style: 'vertical-align:text-bottom'
+        %span.glyphicon.glyphicon-floppy-disk.save-file
         in the section header.
 
       %dt
@@ -27,7 +26,7 @@
 = hidden_field_tag 'isdirty', '1' if disabled.blank?
 
 - form_name = @publication.new_record? ? 'new_publication' : "edit_publication_#{@publication.id}"
-- quick_save = disabled.blank? ? link_to(image_tag('contour/save.png', alt: '', title: 'Quick Save', style: 'vertical-align:text-bottom'), '#', data: { object: 'publication-save', publish: '-1', target: "##{form_name}" }) : ''
+- quick_save = disabled.blank? ? link_to('<span class="glyphicon glyphicon-floppy-disk save-file" title="Quick Save"></span>'.html_safe, '#', data: { object: 'publication-save', publish: '-1', target: "##{form_name}" }) : ''
 = form_for @publication, html: { class: 'form-horizontal', multipart: true } do |f|
   - if disabled.blank? and @publication.errors.any?
     .callout.callout-danger
@@ -56,18 +55,18 @@
         - else
           .disabled= simple_format @publication.abbreviated_title
 
-  - if disabled.blank? && current_user.secretary?
-    .well
+    - if disabled.blank? && current_user.secretary?
       .form-group
         = f.label :status, class: 'col-md-2 control-label'
         .col-md-10
           = f.select :status, options_for_select(Publication::STATUS, @publication.status), {}, class: 'form-control'
 
+
+  .page-header
+    %h3
+      A. Administrative Information
+      = quick_save
   .well
-    .page-header
-      %h3
-        A. Administrative Information
-        = quick_save
     .form-group
       %label.col-md-2.control-label 1. Lead Author
       .col-md-10
@@ -94,12 +93,12 @@
         - else
           .disabled= simple_format @publication.proposal_submission_date.to_s
 
-  .well
-    .page-header
-      %h3
-        B. Publication Information
-        = quick_save
 
+  .page-header
+    %h3
+      B. Publication Information
+      = quick_save
+  .well
     .form-group{ class: "#{'error' if @publication.errors.keys.include?(:publication_type)}" }
       %label.col-md-2.control-label 4. Type of publication
       .col-md-10
@@ -117,12 +116,11 @@
         - else
           .disabled= simple_format @publication.publication_type_specify
 
+  .page-header
+    %h3
+      C. CHAT Resources
+      = quick_save
   .well
-    .page-header
-      %h3
-        C. CHAT Resources
-        = quick_save
-
     .form-group
       %label.col-md-2.control-label
         5. Does preparation of this publication require any DCC RESOURCES?
@@ -171,12 +169,11 @@
           .disabled= simple_format @publication.chat_data_other_specify
         %span.help-block Check all that apply
 
+  .page-header
+    %h3
+      D. Data Analysis
+      = quick_save
   .well
-    .page-header
-      %h3
-        D. Data Analysis
-        = quick_save
-
     .form-group
       %label.col-md-2.control-label
         7. Which of the following is required for preparation of this manuscript?
@@ -207,12 +204,11 @@
         - else
           .disabled= simple_format @publication.proposed_analysis
 
+  .page-header
+    %h3
+      E. Attachments
+      = quick_save
   .well
-    .page-header
-      %h3
-        E. Attachments
-        = quick_save
-
     .form-group
       %label.col-md-2.control-label
         9. Attachments to this form
@@ -260,7 +256,7 @@
         %span.help-block Check all that apply
 
     %a{ name: 'section_e10' }
-    %p
+    %label.control-label
       10.  CHAT Publication Proposal Description
 
     .form-group
@@ -400,10 +396,10 @@
         - else
           .disabled= simple_format @publication.additional_comments
 
-  .well
-    .page-header
-      %h3 F. Author assurance and sign off
+  .page-header
+    %h3 F. Author assurance and sign off
 
+  .well
     %ul
       %li
         I understand that any manuscripts resulting from this effort must be
