@@ -1,3 +1,11 @@
+@toggleAttachment = (element_id) ->
+  checkbox_element = $(element_id)
+  file_container = $("#{element_id}_container")
+  if checkbox_element.is(':checked')
+    file_container.show()
+  else
+    file_container.hide()
+
 @publicationsReady = ->
   $('#user_publication_review_writing_group_nomination').tokenInput(root_url + 'users.json',
     crossDomain: false
@@ -37,4 +45,7 @@ $(document)
       window.$isDirty = false
       $($(this).data('target')).submit()
       false
+  )
+  .on('click', '[data-object~="toggle-attachment"]', ->
+    toggleAttachment($(this).data('target'))
   )

@@ -6,14 +6,6 @@
     return false
   true
 
-@toggleAttachment = (element_id) ->
-  checkbox_element = $(element_id)
-  file_container = $(element_id + '_container')
-  if checkbox_element.is(':checked')
-    file_container.show()
-  else
-    file_container.hide()
-
 @setFocusToField = (element_id) ->
   val = $(element_id).val()
   $(element_id).focus().val('').val(val)
