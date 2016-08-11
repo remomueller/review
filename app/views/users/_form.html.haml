@@ -1,0 +1,64 @@
+- url = @user.new_record? ? activate_users_path : user_path(@user)
+- method = @user.new_record? ? :post : :patch
+= form_for(@user, url: url, method: method, html: { class: 'form-horizontal' }) do |f|
+  - if @user.errors.any?
+    .callout.callout-danger
+      %h4
+        = pluralize @user.errors.count, 'error'
+        prohibited this user from being saved
+
+      %ul
+        - @user.errors.full_messages.each do |message|
+          %li= message
+
+  .form-group
+    = f.label :first_name, class: 'col-md-2 control-label'
+    .col-md-10
+      = f.text_field :first_name, class: 'form-control'
+
+  .form-group
+    = f.label :last_name, class: 'col-md-2 control-label'
+    .col-md-10
+      = f.text_field :last_name, class: 'form-control'
+
+  .form-group
+    = f.label :email, class: 'col-md-2 control-label'
+    .col-md-10
+      = f.text_field :email, class: 'form-control'
+
+  .form-group
+    = f.label :status, class: 'col-md-2 control-label'
+    .col-md-10
+      = f.select :status, User::STATUS, {}, class: 'form-control'
+
+  .form-group
+    %label.col-md-2.control-label P&amp;P Committee
+    .col-md-10
+      %label.checkbox-inline
+        = f.check_box :pp_committee
+        Member
+      %label.checkbox-inline
+        = f.check_box :pp_committee_secretary
+        Secretary
+
+  .form-group
+    %label.col-md-2.control-label Steering Committee
+    .col-md-10
+      %label.checkbox-inline
+        = f.check_box :steering_committee
+        Member
+      %label.checkbox-inline
+        = f.check_box :steering_committee_secretary
+        Secretary
+
+  .form-group
+    .col-md-offset-2.col-md-10
+      .checkbox
+        %label
+          = f.check_box :system_admin
+          System Admin
+
+  .form-group
+    .col-md-offset-2.col-md-10
+      = f.submit (@user.new_record? ? 'Create User' : 'Update User'), class: 'btn btn-primary'
+      = link_to 'Cancel', (@user.new_record? ? users_path : @user), class: 'btn btn-default'

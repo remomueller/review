@@ -1,0 +1,10 @@
+- @title = "Edit User: #{@user.name_was}"
+
+.page-header
+  %h1
+    = link_to 'Users', users_path
+    &middot;
+    = link_to @user.name_was, @user
+    &middot; Edit
+
+= render 'form'

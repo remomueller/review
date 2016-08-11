@@ -31,23 +31,15 @@
 
   .tab-content
     #pp_review.tab-pane.active{ style: 'border-bottom: 1px solid #ddd;border-left: 1px solid #ddd;border-right: 1px solid #ddd;margin-bottom: 40px;' }
-      %table.table.table-condensed
-        %tbody
-          - User.current.pp_committee_members.order('last_name, first_name').each do |user|
-            - @user = user
-            - @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id)
-            - @user_publication_review = @user.user_publication_reviews.new(publication_id: @publication.id) if @user_publication_review.blank?
-            - @committee = 'pp'
-            = render 'user_publication_reviews/show_small'
+      %table.table.table-borderless.tbody-stripe{ style: 'margin-bottom: 0' }
+        %col{ width: '150px' }
+        - User.current.pp_committee_members.order('last_name, first_name').each do |user|
+          %tbody= render 'user_publication_reviews/show_small', user: user, committee: 'pp'
     #sc_review.tab-pane{ style: 'border-bottom: 1px solid #ddd;border-left: 1px solid #ddd;border-right: 1px solid #ddd;margin-bottom: 40px;' }
-      %table.table.table-condensed
-        %tbody
-          - User.current.steering_committee_members.order('last_name, first_name').each do |user|
-            - @user = user
-            - @user_publication_review = @user.user_publication_reviews.find_by_publication_id(@publication.id)
-            - @user_publication_review = @user.user_publication_reviews.new(publication_id: @publication.id) if @user_publication_review.blank?
-            - @committee = 'sc'
-            = render 'user_publication_reviews/show_small'
+      %table.table.table-borderless.tbody-stripe{ style: 'margin-bottom: 0' }
+        %col{ width: '150px' }
+        - User.current.steering_committee_members.order('last_name, first_name').each do |user|
+          %tbody= render 'user_publication_reviews/show_small', user: user, committee: 'sc'
 
 - if ['approved', 'nominated'].include?(@publication.status) && current_user.steering_committee_secretary?
   .well

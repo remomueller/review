@@ -78,6 +78,10 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def name_was
+    "#{first_name_was} #{last_name_was}"
+  end
+
   def reverse_name
     "#{last_name}, #{first_name}"
   end

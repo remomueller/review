@@ -3,7 +3,7 @@
 %table.table.table-striped
   %thead
     - if current_user.system_admin?
-      %tr
+      %tr.hidden-xs
         %th{ colspan: 4 }
         %th.center{ colspan: 2 } Member
         %th.center{ colspan: 2 } Secretary
@@ -14,11 +14,11 @@
       = th_sort_field @order, 'users.current_sign_in_at', 'Recent Activity', extra_class: 'nowrap'
       - if current_user.system_admin?
         = th_sort_field @order, 'users.status', 'Status', extra_class: 'nowrap'
-        = th_sort_field @order, 'users.pp_committee', 'P&amp;P', extra_class: 'nowrap center'
-        = th_sort_field @order, 'users.steering_committee', 'Steering', extra_class: 'nowrap center'
-        = th_sort_field @order, 'users.pp_committee_secretary', 'P&amp;P', extra_class: 'nowrap center'
-        = th_sort_field @order, 'users.steering_committee_secretary', 'Steering', extra_class: 'nowrap center'
-        = th_sort_field @order, 'users.system_admin', 'System Admin', extra_class: 'nowrap center'
+        = th_sort_field @order, 'users.pp_committee', 'P&amp;P', extra_class: 'nowrap center hidden-xs'
+        = th_sort_field @order, 'users.steering_committee', 'Steering', extra_class: 'nowrap center hidden-xs'
+        = th_sort_field @order, 'users.pp_committee_secretary', 'P&amp;P', extra_class: 'nowrap center hidden-xs'
+        = th_sort_field @order, 'users.steering_committee_secretary', 'Steering', extra_class: 'nowrap center hidden-xs'
+        = th_sort_field @order, 'users.system_admin', 'System Admin', extra_class: 'nowrap center hidden-xs'
         %th Actions
 
   - @users.each do |user|
@@ -33,12 +33,12 @@
           ago
       - if current_user.system_admin?
         %td= user.status
-        %td.center= check_box_tag 'user', 'pp_committee', user.pp_committee?, disabled: true
-        %td.center= check_box_tag 'user', 'steering_committee', user.steering_committee?, disabled: true
-        %td.center= check_box_tag 'user', 'pp_committee_secretary', user.pp_committee_secretary?, disabled: true
-        %td.center= check_box_tag 'user', 'steering_committee_secretary', user.steering_committee_secretary?, disabled: true
-        %td.center= check_box_tag 'user', 'system_admin', user.system_admin?, disabled: true
-        %td
+        %td.center.hidden-xs= check_box_tag 'user', 'pp_committee', user.pp_committee?, disabled: true
+        %td.center.hidden-xs= check_box_tag 'user', 'steering_committee', user.steering_committee?, disabled: true
+        %td.center.hidden-xs= check_box_tag 'user', 'pp_committee_secretary', user.pp_committee_secretary?, disabled: true
+        %td.center.hidden-xs= check_box_tag 'user', 'steering_committee_secretary', user.steering_committee_secretary?, disabled: true
+        %td.center.hidden-xs= check_box_tag 'user', 'system_admin', user.system_admin?, disabled: true
+        %td.nowrap
           = link_to 'Edit', edit_user_path(user), class: 'btn btn-xs btn-default'
           = link_to 'Delete', user, method: :delete, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete User #{user.name}?" } unless current_user == user
 
