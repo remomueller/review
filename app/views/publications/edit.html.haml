@@ -1,9 +1,9 @@
-- @title = "Edit: #{@publication.full_title}"
+- @title = "Edit: #{@publication.full_title_was}"
 .page-header
   .center
-    %h2= @publication.full_title
+    %h2= @publication.full_title_was
     %small.text-muted
       Editing
-    = cancel_mini
+    = link_to 'Cancel', @publication, class: 'btn btn-xs btn-default'
 
 = render 'form'

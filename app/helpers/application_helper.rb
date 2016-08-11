@@ -7,11 +7,6 @@ module ApplicationHelper
     link_to 'Cancel', url, class: 'btn btn-default'
   end
 
-  def cancel_mini
-    url = URI.parse(request.referer.to_s).path.blank? ? root_path : URI.parse(request.referer.to_s).path
-    link_to 'Cancel', url, class: 'btn btn-xs btn-default'
-  end
-
   def simple_time(past_time)
     return '' if past_time.blank?
     if past_time.to_date == Time.zone.today

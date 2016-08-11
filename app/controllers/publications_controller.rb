@@ -226,7 +226,6 @@ class PublicationsController < ApplicationController
     if @publication.update(publication_params)
       @publication.send_reminders(current_user) if params[:publish] == '1' and not current_user.secretary?
       if params[:publish] == '-1'
-        flash[:notice] = "Publication draft was successfully quick saved."
         render :edit
       else
         notice = ''
@@ -238,7 +237,6 @@ class PublicationsController < ApplicationController
         redirect_to(@publication, notice: notice)
       end
     else
-      flash[:alert] = "#{@publication.errors.count} error#{ 's' unless @publication.errors.count == 1} prohibited this publication from being updated." if @publication.errors.any?
       render :edit
     end
   end
