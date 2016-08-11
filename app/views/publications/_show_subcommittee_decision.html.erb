@@ -21,7 +21,7 @@
     <%= label :publication, :additional_ppcommittee_instructions, 'Additional Instructions to Email to Lead Author', class: 'col-md-2 control-label' %>
     <div class="col-md-10">
       <% if @publication.additional_ppcommittee_instructions.blank? %>
-        <div class="muted">None</div>
+        <div class="text-muted">None</div>
       <% else %>
         <div class="disabled"><%= @publication.additional_ppcommittee_instructions %></div>
       <% end %>

@@ -1,6 +1,6 @@
 <% @position = "publication_#{@publication.id}_user_#{@user_publication_review.user_id}_pp" %>
 $("#send_email_<%= @position %>_modal").modal('hide')
-$("#user_<%= @reviewer.id %>_notified_pp").html('<span class="muted">Reminder sent <%= simple_time(@user_publication_review.reminder_sent_at) %></span> <%= link_to 'Resend', '#', class: 'btn btn-xs btn-default', data: { object: 'modal-show', target: "#send_email_#{@position}_modal" } %>');
+$("#user_<%= @reviewer.id %>_notified_pp").html('<span class="text-muted">Reminder sent <%= simple_time(@user_publication_review.reminder_sent_at) %></span> <%= link_to 'Resend', '#', class: 'btn btn-xs btn-default', data: { object: 'modal-show', target: "#send_email_#{@position}_modal" } %>');
 <% @position = "publication_#{@publication.id}_user_#{@user_publication_review.user_id}_sc" %>
 $("#send_email_<%= @position %>_modal").modal('hide')
-$("#user_<%= @reviewer.id %>_notified_sc").html('<span class="muted">Reminder sent <%= simple_time(@user_publication_review.reminder_sent_at) %></span> <%= link_to 'Resend', '#', class: 'btn btn-xs btn-default', data: { object: 'modal-show', target: "#send_email_#{@position}_modal" } %>');
+$("#user_<%= @reviewer.id %>_notified_sc").html('<span class="text-muted">Reminder sent <%= simple_time(@user_publication_review.reminder_sent_at) %></span> <%= link_to 'Resend', '#', class: 'btn btn-xs btn-default', data: { object: 'modal-show', target: "#send_email_#{@position}_modal" } %>');
