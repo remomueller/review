@@ -16,7 +16,6 @@ class PublicationsController < ApplicationController
     end
   end
 
-  # def print_latex
   def print
     @order = 'manuscript_number desc'
     @publications = current_user.all_viewable_publications.order(@order).page(1).per(-1)

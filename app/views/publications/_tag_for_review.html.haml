@@ -1,0 +1,7 @@
+- if @committee == 'pp'
+  - (icon, title, tagged) = @publication.tagged_for_pp_review? ? ['green', 'Marked for P&P Committee Review', '0'] : ['neutral', 'Mark for P&P Committee Review', '1']
+- elsif @committee == 'sc'
+  - (icon, title, tagged) = @publication.tagged_for_sc_review? ? ['blue', 'Marked for Steering Committee Review', '0'] : ['neutral', 'Mark for Steering Committee Review', '1']
+
+- if (@committee == 'pp' && (current_user.pp_committee_secretary? || @publication.tagged_for_pp_review?)) || (@committee == 'sc' && (current_user.steering_committee_secretary? || @publication.tagged_for_sc_review?))
+  = link_to_if ((current_user.pp_committee_secretary? && @committee == 'pp') || (current_user.steering_committee_secretary? && @committee == 'sc')), image_tag("contour/tag_#{icon}.png", alt: '', title: title), tag_for_review_publication_path(@publication, tagged: tagged, committee: @committee), remote: true, method: :post

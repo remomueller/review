@@ -3,6 +3,7 @@
 ### Enhancements
 - **General Changes**
   - Color style is now more similar to the PATS website
+  - Improved user interface for submitting and reviewing publications
 - **Gem Changes**
   - Updated to Ruby 2.3.1
   - Updated to rails 5.0.0

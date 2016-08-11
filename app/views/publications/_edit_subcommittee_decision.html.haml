@@ -1,0 +1,24 @@
+= form_tag pp_approval_publication_path(@publication), method: :post, class: 'form-horizontal' do
+  .form-group
+    %label.col-md-2.control-label Publication Status
+    .col-md-10
+      - Publication::PP_STATUS.each do |display, value|
+        .radio
+          %label
+            = radio_button :publication, :status, value, checked: (value == @publication.status)
+            = display
+
+  .form-group
+    = label :publication, :manuscript_number, 'Manuscript Number', class: 'col-md-2 control-label'
+    .col-md-10
+      = text_field :publication, :manuscript_number, class: 'form-control'
+
+  .form-group
+    = label :publication, :additional_ppcommittee_instructions, 'Additional Instructions to Email to Lead Author', class: 'col-md-2 control-label'
+    .col-md-10
+      = text_area :publication, :additional_ppcommittee_instructions, rows: 7, class: 'form-control'
+
+  .form-group
+    .col-md-offset-2.col-md-10
+      = submit_tag (@publication.status == 'proposed' ? 'Submit' : 'Update') + ' Subcommittee Decision', class: 'btn btn-primary'
+      = link_to 'Cancel', show_subcommittee_decision_publication_path(@publication), method: :post, remote: true, class: 'btn btn-default' unless @publication.status == 'proposed'

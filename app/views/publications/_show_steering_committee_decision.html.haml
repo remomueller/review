@@ -1,0 +1,33 @@
+= form_tag edit_steering_committee_decision_publication_path(@publication), method: :post, remote: true, class: 'form-horizontal' do
+  .form-group
+    %label.col-md-2.control-label Publication Status
+    .col-md-10
+      - Publication::SC_STATUS.each do |display, value|
+        .radio
+          %label
+            = radio_button :publication, :status, value, checked: (value == @publication.status), disabled: 'disabled'
+            = display
+
+  .form-group
+    = label :publication, :manuscript_number, 'Manuscript Number', class: 'col-md-2 control-label'
+    .col-md-10
+      = text_field :publication, :manuscript_number, disabled: 'disabled', class: 'form-control'
+
+  .form-group
+    = label :publication, :additional_sccommittee_instructions, 'Additional Instructions to Email to Lead Author', class: 'col-md-2 control-label'
+    .col-md-10
+      - if @publication.additional_sccommittee_instructions.blank?
+        .text-muted None
+      - else
+        .disabled= @publication.additional_sccommittee_instructions
+
+  .form-group
+    .col-md-offset-2.col-md-10
+      = link_to 'Preview Email', '#', data: { object: 'toggle', target: '#sc_email' }, class: 'btn btn-default'
+      = submit_tag 'Edit Steering Committee Decision', class: 'btn btn-default'
+
+#sc_email{ style: 'display:none' }
+  - if @publication.user
+    %pre= UserMailer.publication_approval(@publication, false, current_user).text_part.to_s.split('7bit')[1]
+  - else
+    %strong No email will be sent since the publication does not have a lead author!

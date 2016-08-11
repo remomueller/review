@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     collection do
       get :search
       get :print
-      get :print_latex
     end
     member do
       post :pp_approval

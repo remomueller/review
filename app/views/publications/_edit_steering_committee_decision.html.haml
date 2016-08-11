@@ -1,0 +1,19 @@
+= form_tag sc_approval_publication_path(@publication), method: :post, class: 'form-horizontal' do
+  .form-group
+    %label.col-md-2.control-label Publication Status
+    .col-md-10
+      - Publication::SC_STATUS.each do |display, value|
+        .radio
+          %label
+            = radio_button :publication, :status, value, checked: (value == @publication.status)
+            = display
+
+  .form-group
+    = label :publication, :additional_sccommittee_instructions, 'Additional Instructions to Email to Lead Author', class: 'col-md-2 control-label'
+    .col-md-10
+      = text_area :publication, :additional_sccommittee_instructions, rows: 7, class: 'form-control'
+
+  .form-group
+    .col-md-offset-2.col-md-10
+      = submit_tag (@publication.status == 'approved' ? 'Submit' : 'Update') + ' Steering Committee Decision', class: 'btn btn-primary'
+      = link_to 'Cancel', show_steering_committee_decision_publication_path(@publication), method: :post, remote: true, class: 'btn btn-default' unless @publication.status == 'approved'

@@ -1,0 +1,59 @@
+.modal{ id: "publication_#{@publication.id}_popup", style: 'display:none' }
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %a.close{ data: { object: 'modal-hide', target: "#publication_#{@publication.id}_popup", form_target: "#edit_publication_#{@publication.id}" } } &times;
+        %b= @publication.abbreviated_title_and_ms
+
+      = form_for @publication, url: inline_update_publication_path(@publication), method: :post, remote: true, html: { class: 'form-horizontal' } do |f|
+        .modal-body
+          .form-group
+            = f.label :manuscript_number, nil, class: 'col-md-2 control-label'
+            .col-md-10
+              = f.text_field :manuscript_number, class: 'form-control'
+
+          .form-group
+            = f.label :user_id, 'Lead Author', class: 'col-md-2 control-label'
+            .col-md-10
+              = f.select :user_id, [['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.reverse_name, u.id]}, {}, class: 'form-control'
+
+          .form-group
+            = f.label :co_lead_author_id, 'Co-Lead Author', class: 'col-md-2 control-label'
+            .col-md-10
+              = f.select :co_lead_author_id, [['---', nil]] + User.current.order('last_name, first_name').collect{|u| [u.reverse_name, u.id]}, {}, class: 'form-control'
+
+          .form-group
+            = f.label :writing_group_members, 'Writing Group', class: 'col-md-2 control-label'
+            .col-md-10
+              = f.text_area :writing_group_members, rows: 7, class: 'form-control'
+              %span.help-block
+                %span.text-muted Committee Nominations
+                %p= render 'publications/committee_nominations'
+
+          .form-group
+            = f.label :status, nil, class: 'col-md-2 control-label'
+            .col-md-10
+              - if ['nominated', 'submitted', 'published'].include?(@publication.status)
+                = f.select :status, Publication::FINAL_STATUS, {}, class: 'form-control'
+              - else
+                = @publication.human_status
+                = f.hidden_field :status
+
+          .form-group
+            = f.label :dataset_requested_analyst, nil, class: 'col-md-2 control-label'
+            .col-md-10
+              = f.text_field :dataset_requested_analyst, class: 'form-control'
+
+          .form-group
+            = f.label :targeted_start_date, nil, class: 'col-md-2 control-label'
+            .col-md-10
+              = f.text_field :targeted_start_date, class: 'datepicker form-control', value: @publication.targeted_start_date ? @publication.targeted_start_date.strftime('%m/%d/%Y') : ''
+
+          .form-group
+            = f.label :secretary_notes, nil, class: 'col-md-2 control-label'
+            .col-md-10
+              = f.text_area :secretary_notes, rows: 7, class: 'form-control'
+
+      .modal-footer
+        = link_to 'Cancel', '#', class: 'btn btn-default', data: { object: 'modal-hide', target: "#publication_#{@publication.id}_popup", form_target: "#edit_publication_#{@publication.id}" }
+        = link_to 'Update Publication', '#', class: 'btn btn-primary', data: { object: 'submit', target: "#edit_publication_#{@publication.id}" }
