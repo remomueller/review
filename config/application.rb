@@ -28,7 +28,7 @@ module Review
     # Run "rails time:zones" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Eastern Time (US & Canada)'
 
-    # Overwrite Rails errors to use Twitter/Contour CSS classes
+    # Overwrite Rails errors to use Bootstrap CSS classes
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
       "<span class=\"has-error\">#{html_tag}</span>".html_safe
     end
