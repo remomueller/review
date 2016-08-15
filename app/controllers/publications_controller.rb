@@ -27,7 +27,7 @@ class PublicationsController < ApplicationController
         send_file file, filename: 'publication_matrix.pdf', type: 'application/pdf', disposition: 'inline'
       end
     else
-      render text: 'PDF did not render in time. Please refresh the page.'
+      render plain: 'PDF did not render in time. Please refresh the page.'
     end
   end
 
