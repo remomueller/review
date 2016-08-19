@@ -1,4 +1,4 @@
-## 0.15.1
+## 0.15.1 (August 19, 2016)
 
 ### Bug Fix
 - Fixed a bug that prevented forms from being submitted due to CSRF origin check
