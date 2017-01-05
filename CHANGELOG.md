@@ -1,6 +1,8 @@
 ## 0.16.0
 
 ## Enhancements
+- **General Changes**
+  - Reduced number of alerts and messages from devise during login and logout
 - **Gem Changes**
   - Updated to Ruby 2.4.0
   - Updated to rails 5.0.1

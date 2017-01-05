@@ -16,7 +16,7 @@ class DeviseMailerTest < ActionMailer::TestCase
     valid = users(:valid)
     mail = Devise::Mailer.unlock_instructions(valid, 'faketoken')
     assert_equal [valid.email], mail.to
-    assert_equal 'Unlock Instructions', mail.subject
+    assert_equal 'Unlock instructions', mail.subject
     assert_match(%r{#{ENV['website_url']}/unlock\?unlock_token=faketoken}, mail.body.encoded)
   end
 end
