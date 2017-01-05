@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'rails',                '5.0.1'
 
 # Database Adapter
-gem 'mysql2',               '0.4.4'
+gem 'mysql2',               '0.4.5'
 
 # Gems used by project
 gem 'devise',               '~> 4.2.0'

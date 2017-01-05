@@ -8,6 +8,7 @@
   - Updated to rails 5.0.1
   - Updated to jquery-rails 4.2.2
   - Updated to carrierwave 1.0.0
+  - Updated to mysql2 0.4.5
 
 ## 0.15.1 (August 19, 2016)
 
