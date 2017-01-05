@@ -83,7 +83,7 @@ class PublicationsController < ApplicationController
       @publication.update manuscript: params[:publication][:manuscript], manuscript_uploaded_at: Time.zone.now
 
       extension = params[:publication][:manuscript].original_filename.downcase.split('.').last
-      message = ManuscriptUploader.new.extension_white_list.include?(extension) ? nil : "Not a valid document type: #{extension}"
+      message = ManuscriptUploader.new.extension_whitelist.include?(extension) ? nil : "Not a valid document type: #{extension}"
       flash[:notice] = 'Manuscript was successfully uploaded.' if message.blank?
 
       redirect_to @publication, alert: message
