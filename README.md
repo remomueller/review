@@ -60,6 +60,6 @@ All done!
 - Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 - Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-## Copyright [![Creative Commons 3.0](http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png)](http://creativecommons.org/licenses/by-nc-sa/3.0)
+## License
 
-Copyright (c) 2016 Remo Mueller. See [LICENSE](https://github.com/remomueller/review/blob/master/LICENSE) for further details.
+CHAT Publications Manager is released under the [MIT License](http://www.opensource.org/licenses/MIT).
